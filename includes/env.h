@@ -4,4 +4,6 @@
 
 # include "minishell.h"
 
+char	**ft_env(char **envp);
+
 #endif

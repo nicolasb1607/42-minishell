@@ -1,13 +1,22 @@
 #include "./includes/minishell.h"
 
-int main(int ac, char **av)
+int main(int ac, char **av, char **envp)
 {
+	char **dupenv;
+	int i = 0;
 
 	(void)ac;
 	(void)av;
-	while(1)
+	// while(1)
+	// {
+	dupenv = ft_env(envp);
+	while (dupenv[i])
 	{
-		ft_prompt();
+		printf("%s\n", dupenv[i]);
+		i++;
 	}
+	
+
+	// }
 	return (0);
 }

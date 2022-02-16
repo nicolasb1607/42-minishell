@@ -10,6 +10,8 @@ INCLUDESRL = /usr/local/opt/readline/include/
 
 SRCS = ./main.c \
 	./srcs/prompt.c \
+	./srcs/pwd.c \
+	./srcs/env.c \
 
 OBJS = ${SRCS:.c=.o}
 
