@@ -4,8 +4,7 @@ char	*ft_pwd(void)
 {
 	char	*line;
 
-	line = getenv("PWD");
-
-	printf("Return : %s\n", line);
+	line = NULL;
+	line = getcwd(line, 2048);
 	return (line);
 }
