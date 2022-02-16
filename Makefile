@@ -10,18 +10,20 @@ INCLUDESRL = /usr/local/opt/readline/include/
 
 SRCS = ./main.c \
 	./srcs/prompt.c \
-	./srcs/pwd.c \
-	./srcs/env.c \
+	./srcs/builtins/pwd.c \
+	./srcs/builtins/env.c \
 
 OBJS = ${SRCS:.c=.o}
 
+
 all : MAKELIBFT $(EXEC)
 
-.o : .c
-	$(CC) $(CFLAGS) -c -L $(LIBFT) -L $(RL) $^ -I $(INCLUDES) -I $(INCLUDESRL) -lft -lreadline
 
 $(EXEC) : $(OBJS)
 	$(CC) $(CFLAGS) -L $(LIBFT) -L $(RL) $^ -o $(EXEC) -I $(INCLUDES) -I $(INCLUDESRL) -lft -lreadline 
+
+.c.o:
+	$(CC) $(CFLAGS)  -L $(LIBFT) -L $(RL) -c $^ -o $@ -I $(INCLUDES) -I $(INCLUDESRL) -lft -lreadline
 
 MAKELIBFT : 
 	make -C $(LIBFT)

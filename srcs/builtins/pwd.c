@@ -1,4 +1,4 @@
-#include "../includes/pwd.h"
+#include "pwd.h"
 
 char	*ft_pwd(void)
 {

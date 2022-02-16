@@ -1,4 +1,4 @@
-#include "../includes/env.h"
+#include "env.h"
 
 char	**ft_env(char **envp)
 {

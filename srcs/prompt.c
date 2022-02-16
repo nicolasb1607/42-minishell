@@ -1,5 +1,4 @@
-#include "../includes/minishell.h"
-#include "../includes/prompt.h"
+#include "prompt.h"
 /*
 TO DO : 
 
