@@ -1,6 +1,13 @@
-#include "minishell.h"
+#include "./includes/minishell.h"
 
 int main(int ac, char **av)
 {
-	ft_echo(ac, av);
+
+	(void)ac;
+	(void)av;
+	while(1)
+	{
+		ft_prompt();
+	}
+	return (0);
 }

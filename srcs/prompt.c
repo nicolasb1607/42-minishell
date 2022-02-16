@@ -1,5 +1,5 @@
+#include "../includes/minishell.h"
 #include "../includes/prompt.h"
-
 /*
 TO DO : 
 
@@ -12,3 +12,12 @@ TO DO :
 
 - Once the excution is done, it starts again and put a prompt
 */
+char	*ft_prompt(void)
+{
+	char	*ret_line;
+
+	ret_line = readline("Minishell > ");
+
+	printf("Return : %s\n", ret_line);
+	return (ret_line);
+}

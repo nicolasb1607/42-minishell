@@ -4,4 +4,9 @@
 
 # include "minishell.h"
 
+
+
+char	*ft_prompt(void);
+
+
 #endif
