@@ -56,12 +56,11 @@ OBJS_SRCS = ${SRCS:.c=.o}
 
 all : $(EXEC)
 
-.o : .c
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
-
-
 $(EXEC) : $(OBJS_SRCS)
 		ar rcs $(EXEC) $(OBJS_SRCS)
+
+.c.o :
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
 
 clean :
 	rm -f $(OBJS_SRCS)

@@ -4,6 +4,7 @@
 
 # include "minishell.h"
 
-char	*ft_pwd(void);
+void	ft_pwd(void);
+
 
 #endif

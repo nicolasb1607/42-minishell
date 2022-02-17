@@ -7,6 +7,7 @@ RL = /usr/local/opt/readline/lib
 
 INCLUDES = ./includes/
 INCLUDESRL = /usr/local/opt/readline/include/
+INCLUDESLIBFT = ./libft/
 
 SRCS = ./main.c \
 	./srcs/prompt.c \
@@ -21,10 +22,10 @@ all : MAKELIBFT $(EXEC)
 
 
 $(EXEC) : $(OBJS)
-	$(CC) $(CFLAGS) -L $(LIBFT) -L $(RL) $^ -o $(EXEC) -I $(INCLUDES) -I $(INCLUDESRL) -lft -lreadline 
+	$(CC) $(CFLAGS) -L $(LIBFT) -L $(RL) $^ -o $(EXEC) -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT) -lft -lreadline 
 
 .c.o:
-	$(CC) $(CFLAGS)  -L $(LIBFT) -L $(RL) -c $^ -o $@ -I $(INCLUDES) -I $(INCLUDESRL) -lft -lreadline
+	$(CC) $(CFLAGS)  -L $(LIBFT) -L $(RL) -c $^ -o $@ -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT) -lft -lreadline
 
 MAKELIBFT : 
 	make -C $(LIBFT)

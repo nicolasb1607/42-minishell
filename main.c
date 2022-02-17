@@ -6,19 +6,14 @@ int main(int ac, char **av, char **envp)
 	(void)av;
 
 	char	**dupenv;
-	char	*currdir;
 
 	dupenv = ft_dupenv(envp);	
 	ft_putchar('\n');
-	currdir = ft_pwd();
-		printf("%s\n", currdir);
+	ft_pwd();
+	ft_cd("../yolo", dupenv);
+	ft_pwd();
 
 	ft_cd("../yolo", dupenv);
-	currdir = ft_pwd();
-		printf("%s\n", currdir);
-
-	ft_cd("../yolo", dupenv);
-	currdir = ft_pwd();
-		printf("%s\n", currdir);
+	ft_pwd();
 	return (0);
 }
