@@ -1,4 +1,4 @@
-#include "../includes/echo.h"
+#include "echo.h"
 
 #include <stdio.h>
 

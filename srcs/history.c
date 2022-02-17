@@ -1,4 +1,4 @@
-#include "../includes/history.h"
+#include "history.h"
 
 /*
 TO DO :
