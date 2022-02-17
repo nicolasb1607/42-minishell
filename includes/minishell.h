@@ -7,6 +7,7 @@
 # include "prompt.h"
 # include "pwd.h"
 # include "env.h"
+# include "cd.h"
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>

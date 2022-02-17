@@ -1,8 +1,8 @@
 #include "env.h"
 
-char	**ft_env(char **envp)
+char	**ft_dupenv(char **envp)
 {
-	int i;
+		int i;
 	char **dupenv;
 
 	i = 0;
@@ -18,4 +18,17 @@ char	**ft_env(char **envp)
 		i++;
 	}
 	return (dupenv);
+}
+
+void	ft_env(char **dupenv)
+{
+	int i;
+	
+	i = 0;
+	while (dupenv[i])
+	{
+		ft_putstr(dupenv[i]);
+		ft_putchar('\n');
+		i++;
+	}
 }

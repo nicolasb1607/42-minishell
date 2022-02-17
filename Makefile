@@ -12,6 +12,7 @@ SRCS = ./main.c \
 	./srcs/prompt.c \
 	./srcs/builtins/pwd.c \
 	./srcs/builtins/env.c \
+	./srcs/builtins/cd.c \
 
 OBJS = ${SRCS:.c=.o}
 
