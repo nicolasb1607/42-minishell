@@ -8,15 +8,17 @@ int main(int ac, char **av, char **envp)
 	char	**dupenv;
 	char	*currdir;
 
-	dupenv = ft_dupenv(envp);
-	ft_env(dupenv);
-	
+	dupenv = ft_dupenv(envp);	
 	ft_putchar('\n');
 	currdir = ft_pwd();
 		printf("%s\n", currdir);
 
-	ft_cd("../", dupenv);
+	ft_cd("../yolo", dupenv);
+	currdir = ft_pwd();
+		printf("%s\n", currdir);
 
-	ft_env(dupenv);
+	ft_cd("../yolo", dupenv);
+	currdir = ft_pwd();
+		printf("%s\n", currdir);
 	return (0);
 }

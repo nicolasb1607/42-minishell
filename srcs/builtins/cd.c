@@ -1,27 +1,45 @@
 #include "cd.h"
 
+#define NO_ACCESS "no such file or directory\n"
+
+static void	maj_old_pwd(char **dupenv, char *curr_dir)
+{
+	int		i;
+	char	*old_dir;
+
+	old_dir = malloc(sizeof(char) * 8);
+	if (!old_dir)
+		return ;
+	old_dir = "OLDPWD=";
+	i = 0;
+	while (dupenv[i] && ft_strncmp(dupenv[i], "OLDPWD=", 7) != 0)
+		i++;
+	old_dir = ft_strjoin(old_dir, curr_dir);
+	dupenv[i] = old_dir;
+}
+
 void	ft_cd(char *path_name, char **dupenv)
 {
-	char	*dir;
+	char	*curr_dir;
 	char	*new_wd;
 	int		i;
-	int		len_cwd;
 
-	i = 0;
-	chdir(path_name);
-	dir = NULL;
-	dir = getcwd(dir, 2048);
-	len_cwd = ft_strlen(dir);
-	new_wd = malloc(sizeof(char) * (len_cwd + 5));
+	curr_dir = NULL;
+	curr_dir = getcwd(curr_dir, 2048);
+	maj_old_pwd(dupenv, curr_dir);
+	if (chdir(path_name) == -1)
+	{
+		ft_putstr(NO_ACCESS);
+		return ;
+	}
+	curr_dir = getcwd(curr_dir, 2048);
+	new_wd = malloc(sizeof(char) * 5);
 	if (!new_wd)
 		return ;
 	new_wd = "PWD=";
+	i = 0;
 	while (dupenv[i] && ft_strncmp(dupenv[i], "PWD=", 4) != 0)
-	{
-		printf("val i = %d\n", i);
 		i++;
-	}
-
-	new_wd = ft_strjoin(new_wd, dir);
+	new_wd = ft_strjoin(new_wd, curr_dir);
 	dupenv[i] = new_wd;
 }
