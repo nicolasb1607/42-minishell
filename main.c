@@ -4,16 +4,16 @@ int main(int ac, char **av, char **envp)
 {
 	(void)ac;
 	(void)av;
+	t_data data;
 
-	char	**dupenv;
+	signal(SIGINT, handle_ctrlc);
 
-	dupenv = ft_dupenv(envp);	
-	ft_putchar('\n');
+	data.env = ft_dupenv(envp);	
 	ft_pwd();
-	ft_cd("../yolo", dupenv);
+	ft_cd("../yolo", data.env);
 	ft_pwd();
 
-	ft_cd("../yolo", dupenv);
+	ft_cd("../yolo", data.env);
 	ft_pwd();
 	return (0);
 }

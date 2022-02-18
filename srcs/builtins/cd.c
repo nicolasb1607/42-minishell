@@ -16,6 +16,7 @@ static void	maj_old_pwd(char **dupenv, char *curr_dir)
 		i++;
 	old_dir = ft_strjoin(old_dir, curr_dir);
 	dupenv[i] = old_dir;
+	free(curr_dir);
 }
 
 void	ft_cd(char *path_name, char **dupenv)
@@ -42,4 +43,5 @@ void	ft_cd(char *path_name, char **dupenv)
 		i++;
 	new_wd = ft_strjoin(new_wd, curr_dir);
 	dupenv[i] = new_wd;
+	free(curr_dir);
 }
