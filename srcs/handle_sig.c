@@ -11,23 +11,23 @@ static void	free_env(t_data *data)
 		i++;
 	}
 	free(data->env);
-
 }
 
-void	handle_ctrlc(t_data *data)
+void	handle_sig(int signum, siginfo_t *si_signo , void * data)
 {
-	if(data->env)
+	(void)si_signo;
+	if(signum == SIGINT && data->env)
 		free_env(data->env);
 }
 
-// void	handle_ctrld(void)
-// {
+// // void	handle_ctrld(void)
+// // {
  
-// }
+// // }
 
-// void	handle_ctrlbslash(void)
-// {
+// // void	handle_ctrlbslash(void)
+// // {
 
-// }
+// // }
 
 

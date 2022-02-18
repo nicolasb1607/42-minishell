@@ -5,8 +5,9 @@ int main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	t_data data;
-
-	signal(SIGINT, handle_ctrlc);
+	struct sigaction sa;
+	sa.sa_sigaction = handle_sig;
+	sa.sa_flags = SA_SIGINFO;
 
 	data.env = ft_dupenv(envp);	
 	ft_pwd();
