@@ -1,12 +1,5 @@
 #include "unset.h"
 
-
-/*
- - la variable demandee existe elle ? 
-	--> Si oui, la supprimer de l environnement
-	--> Non, display une erreur "la variable n existe pas"
-*/
-
 void	free_tab(char **tab)
 {
 	int	i;
@@ -26,18 +19,13 @@ int	is_existing(char *varenv, char **dupenv)
 	int	lentoequal;
 
 	i = 0;
-	
 	while (dupenv[i])
 	{
 		lentoequal = 0;
 		while (dupenv[i][lentoequal] && dupenv[i][lentoequal] != '=')
 			lentoequal++;
-		printf("value of lentoequal = %d\n", lentoequal);
 		if(ft_strncmp(dupenv[i], varenv, lentoequal) == 0)
-		{
-			printf("IS EXISTING \n");
 			return (1);
-		}
 		i++;
 	}
 	return (0);

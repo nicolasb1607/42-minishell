@@ -7,6 +7,8 @@ static void	maj_old_pwd(char **dupenv, char *curr_dir)
 	int		i;
 	char	*old_dir;
 
+	if(is_existing("OLDPWD", dupenv) == 0)
+		return ;
 	old_dir = malloc(sizeof(char) * 8);
 	if (!old_dir)
 		return ;
@@ -27,13 +29,20 @@ void	ft_cd(char *path_name, char **dupenv)
 
 	curr_dir = NULL;
 	curr_dir = getcwd(curr_dir, 2048);
+	if(!curr_dir)
+		return ;
 	maj_old_pwd(dupenv, curr_dir);
 	if (chdir(path_name) == -1)
 	{
 		ft_putstr(NO_ACCESS);
 		return ;
 	}
+	if(is_existing("PWD", dupenv) == 0)
+		return ;
+	curr_dir = NULL;
 	curr_dir = getcwd(curr_dir, 2048);
+	if(!curr_dir)
+		return ;
 	new_wd = malloc(sizeof(char) * 5);
 	if (!new_wd)
 		return ;

@@ -6,5 +6,7 @@
 
 int	is_existing(char *varenv, char **dupenv);
 char	**ft_unset(char *varenv, char **dupenv);
+void	free_tab(char **tab);
+
 
 #endif
