@@ -14,6 +14,7 @@ SRCS = ./main.c \
 	./srcs/builtins/pwd.c \
 	./srcs/builtins/env.c \
 	./srcs/builtins/cd.c \
+	./srcs/builtins/unset.c \
 
 OBJS = ${SRCS:.c=.o}
 
@@ -22,10 +23,10 @@ all : MAKELIBFT $(EXEC)
 
 
 $(EXEC) : $(OBJS)
-	$(CC) $(CFLAGS) -L $(LIBFT) -L $(RL) $^ -o $(EXEC) -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT) -lft -lreadline 
+	$(CC) $(CFLAGS) -L $(LIBFT) -L $(RL) $^ -o $(EXEC) -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT) -lft -lreadline -g3
 
 .c.o:
-	$(CC) $(CFLAGS)  -L $(LIBFT) -L $(RL) -c $^ -o $@ -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT) -lft -lreadline
+	$(CC) $(CFLAGS)  -L $(LIBFT) -L $(RL) -c $^ -o $@ -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT) -lft -lreadline -g3
 
 MAKELIBFT : 
 	make -C $(LIBFT)

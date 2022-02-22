@@ -17,6 +17,7 @@ char	**ft_dupenv(char **envp)
 		dupenv[i] = ft_strdup(envp[i]);
 		i++;
 	}
+	dupenv[i] = NULL; 
 	return (dupenv);
 }
 

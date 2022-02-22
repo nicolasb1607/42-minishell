@@ -13,10 +13,12 @@ typedef struct s_data
 # include "pwd.h"
 # include "env.h"
 # include "cd.h"
-# include "handle_sig.h"
+# include "unset.h"
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+# include <errno.h>
 
 
 #endif
