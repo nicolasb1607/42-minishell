@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:37:34 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/02/23 16:13:16 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/02/23 16:18:44 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_lstrev(t_list **alst);
-void	ft_dlstdelone(t_dlist *lst, void(*del)(void*));
+void	ft_dlstdelone(t_dlist *lst, void (*del)(void*));
+void	ft_dlstiter(t_dlist *lst, void (*f)(void *));
 
 #endif
