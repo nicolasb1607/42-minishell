@@ -2,10 +2,10 @@
 
 # define MINISHELL_H
 
-typedef struct s_data
+typedef struct s_test
 {
 	char	**env;
-}			t_data;
+}			t_test;
 
 # include "libft.h"
 # include <stdlib.h>
