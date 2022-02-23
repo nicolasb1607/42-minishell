@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/02/23 16:20:24 by nburat-d          #+#    #+#              #
+#    Updated: 2022/02/23 16:21:50 by nburat-d         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 EXEC = libft.a
@@ -51,6 +63,12 @@ SRCS = ./ft_atoi.c \
 	./ft_lstiter.c \
 	./ft_lstmap.c \
 	./ft_is_int.c \
+	./ft_dlstadd_back.c \
+	./ft_dlstadd_front.c \
+	./ft_dlstclear.c \
+	./ft_dlstlast.c \
+	./ft_dlstnew.c \
+	./ft_dlstsize.c \
 
 INCLUDES = ./
 OBJS_SRCS = ${SRCS:.c=.o}
