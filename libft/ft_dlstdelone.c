@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_dlstdelone.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/28 17:31:13 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/02/23 14:15:29 by ngobert          ###   ########.fr       */
+/*   Created: 2022/02/23 16:16:40 by nburat-d          #+#    #+#             */
+/*   Updated: 2022/02/23 16:17:45 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*Libère la mémoire de l’élément passé en argument
-en utilisant la fonction del puis avec free(3). La
-mémoire de next ne doit pas être free.
-
-#1. L’élement à free
-#2. L’adresse de la fonction permettant de
-supprimer le contenu de l’élement.*/
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
+void	ft_dlstdelone(t_dlist *lst, void (*del)(void*))
 {
+	t_dlist	*tmp;
+
+	tmp = lst;
 	if (lst != NULL && del != NULL)
 	{
+		lst->next->prev = tmp->prev;
+		lst->prev->next = tmp->next;
 		(*del)(lst->content);
 		free(lst);
 	}

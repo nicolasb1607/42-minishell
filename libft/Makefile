@@ -6,7 +6,7 @@
 #    By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 16:20:24 by nburat-d          #+#    #+#              #
-#    Updated: 2022/02/23 16:21:50 by nburat-d         ###   ########.fr        #
+#    Updated: 2022/02/23 16:26:43 by nburat-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,8 @@ SRCS = ./ft_atoi.c \
 	./ft_dlstlast.c \
 	./ft_dlstnew.c \
 	./ft_dlstsize.c \
+	./ft_dlstdelone.c \
+	./ft_dlstiter.c \
 
 INCLUDES = ./
 OBJS_SRCS = ${SRCS:.c=.o}
