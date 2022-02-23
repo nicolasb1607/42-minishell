@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_dlstadd_back.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 17:29:40 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/02/23 14:15:07 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:43:16 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 de la liste.
 #2. L’adresse du pointeur vers l’élément à rajouter
 à la liste.*/
-void	ft_lstadd_back(t_list **alst, t_list *new)
+void	ft_dlstadd_back(t_dlist **alst, t_dlist *new)
 {
-	t_list	*last;
+	t_dlist	*last;
 
 	if (!*alst)
 	{
@@ -31,5 +31,6 @@ void	ft_lstadd_back(t_list **alst, t_list *new)
 	{
 		last = ft_lstlast(*alst);
 		last->next = new;
-	}
+		new->prev = last;
+	}	
 }

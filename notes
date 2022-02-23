@@ -6,7 +6,7 @@
 Funcs lib a modifier :
 	- delone Na
 	- iter Na
-	- addback/front Na
-	- size Ni
-	- new Ni
-	- last Ni
+	- addback/front Ni
+	- size Ni done
+	- new Ni done 
+	- last Ni done 

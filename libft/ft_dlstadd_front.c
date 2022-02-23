@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_dlstadd_front.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/28 17:29:40 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/02/23 14:15:07 by nburat-d         ###   ########.fr       */
+/*   Created: 2021/10/28 16:46:27 by nburat-d          #+#    #+#             */
+/*   Updated: 2022/02/23 14:23:56 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*Ajoute l’élément new à la fin de la liste.
+/*Ajoute l’élément ’new’ au début de la liste.
 
 #1. L’adresse du pointeur vers le premier élément
 de la liste.
 #2. L’adresse du pointeur vers l’élément à rajouter
 à la liste.*/
-void	ft_lstadd_back(t_list **alst, t_list *new)
+void	ft_dlstadd_front(t_dlist **alst, t_dlist *new)
 {
-	t_list	*last;
-
-	if (!*alst)
+	if (new != NULL)
 	{
+		new->next = *alst;
 		*alst = new;
-		return ;
-	}
-	if (*alst != NULL && new != NULL)
-	{
-		last = ft_lstlast(*alst);
-		last->next = new;
 	}
 }

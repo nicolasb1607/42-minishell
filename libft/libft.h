@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:37:34 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/02/22 13:57:18 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:43:27 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }				t_list;
+
+typedef struct s_dlist
+{
+	void	*content;
+	struct s_dlist *prev;
+	struct s_dlist *next;
+}				t_dlist;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -73,5 +80,11 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_lstrev(t_list **alst);
+void	ft_dlstadd_back(t_dlist **alst, t_dlist *new);
+void	ft_dlstadd_front(t_dlist **alst, t_dlist *new);
+t_dlist	*ft_dlstlast(t_dlist *lst);
+t_dlist	*ft_dlstnew(void *content);
+int		ft_dlstsize(t_dlist *lst);
+void	ft_dlstclear(t_dlist **lst, void (*del)(void*));
 
 #endif

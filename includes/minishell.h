@@ -14,6 +14,7 @@ typedef struct s_test
 # include "env.h"
 # include "cd.h"
 # include "unset.h"
+# include "pipe.h"
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>

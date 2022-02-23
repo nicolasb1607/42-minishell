@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_dlstclear.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 17:32:49 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/02/23 14:35:28 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:36:37 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ Enfin, le pointeur initial doit être mis à NULL.
 #1. L’adresse du pointeur vers un élément.
 #2. L’adresse de la fonction permettant de
 supprimer le contenu d’un élément.*/
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	ft_dlstclear(t_dlist **lst, void (*del)(void*))
 {
-	t_list	*current;
+	t_dlist	*current;
 
 	current = NULL;
 	while (*lst != NULL)
