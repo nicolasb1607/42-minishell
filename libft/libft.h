@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:37:34 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/02/23 14:42:09 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/02/23 16:13:16 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
-}				t_list;
+}					t_list;
 
 typedef struct s_dlist
 {
 	void			*content;
 	struct s_dlist	*prev;
 	struct s_dlist	*next;
-}				t_nlist;
+}					t_dlist;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -37,7 +37,7 @@ int		ft_isascii(int c);
 int		ft_is_int(char *str);
 int		ft_isprint(int c);
 size_t	ft_strlen(const char *s);
-int	ft_tablen(char **tab);
+int		ft_tablen(char **tab);
 void	*ft_memset(void *s, int c, size_t n);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
@@ -80,5 +80,6 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_lstrev(t_list **alst);
+void	ft_dlstdelone(t_dlist *lst, void(*del)(void*));
 
 #endif
