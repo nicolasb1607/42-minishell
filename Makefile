@@ -14,6 +14,13 @@ SRCS = ./main.c \
 	./srcs/builtins/pwd.c \
 	./srcs/builtins/env.c \
 	./srcs/builtins/cd.c \
+	./srcs/pipe/pipex.c \
+	./srcs/pipe/pipe.c \
+	./srcs/pipe/run_first.c \
+	./srcs/pipe/run_mid.c \
+	./srcs/pipe/run_last.c \
+	./srcs/pipe/utils.c \
+	./srcs/pipe/more_utils.c \
 
 OBJS = ${SRCS:.c=.o}
 

@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.c                                             :+:      :+:    :+:   */
+/*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 13:29:04 by ngobert           #+#    #+#             */
-/*   Updated: 2022/02/23 13:09:04 by ngobert          ###   ########.fr       */
+/*   Created: 2022/02/18 14:07:20 by ngobert           #+#    #+#             */
+/*   Updated: 2022/02/23 13:08:51 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipe.h"
 
-void	pipe_creator(t_data *data)
+t_data	get_args(int argc, char **argv, char **envp)
 {
-	int	i;
+	t_data	tmp;
 
-	i = 0;
-	data->pipe = malloc(sizeof(int *) * (data->nb_cmd - 1));
-	if (data->pipe == NULL)
-		ft_error("Allocation Error");
-	while (i < (data->nb_cmd - 1))
-	{
-		data->pipe[i] = malloc(sizeof(int) * 2);
-		if (data->pipe[i] == NULL)
-			ft_error("Allocation Error");
-		pipe(data->pipe[i]);
-		i++;
-	}
+	tmp.argc = argc;
+	tmp.argv = argv;
+	tmp.envp = envp;
+	tmp.infile = 0;
+	tmp.outfile = 0;
+	return (tmp);
+}
+
+void	ft_error(const char *str)
+{
+	perror(str);
+	exit(EXIT_FAILURE);
 }

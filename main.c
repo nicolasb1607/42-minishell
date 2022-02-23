@@ -10,10 +10,10 @@ int main(int ac, char **av, char **envp)
 	dupenv = ft_dupenv(envp);	
 	ft_putchar('\n');
 	ft_pwd();
-	ft_cd("../yolo", dupenv);
+	ft_cd("../", dupenv);
 	ft_pwd();
 
-	ft_cd("../yolo", dupenv);
+	ft_cd("../", dupenv);
 	ft_pwd();
 	return (0);
 }
