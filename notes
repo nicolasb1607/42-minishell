@@ -1,0 +1,4 @@
+- Migrer les funcs (cd, unset, export et env) sous listes chainees.
+- Changer des funcs de la lib pour que ca fonctionne avec double chained lists
+- Lexer (plus tard)
+- ... la suite
