@@ -2,3 +2,11 @@
 - Changer des funcs de la lib pour que ca fonctionne avec double chained lists
 - Lexer (plus tard)
 - ... la suite
+
+Funcs lib a modifier :
+	- delone Na
+	- iter Na
+	- addback/front Na
+	- size Ni
+	- new Ni
+	- last Ni
