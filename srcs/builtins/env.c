@@ -1,36 +1,29 @@
 #include "env.h"
 
-char	**ft_dupenv(char **envp)
+t_dlist	*ft_dupenv(t_dlist *lst, char **envp)
 {
-	int i;
-	char **dupenv;
+	int		i;
+	t_dlist	*new;
 
 	i = 0;
 	while (envp[i])
-		i++;
-	dupenv = malloc(sizeof(char *) * (i + 1));
-	if (!dupenv)
-		return (NULL);
-	i = 0;
-	while (envp[i])
 	{
-		dupenv[i] = ft_strdup(envp[i]);
+		new = ft_dlstnew(ft_strdup(envp[i]));
+		ft_dlstadd_back(&lst, new);
 		i++;
 	}
-	dupenv[i] = NULL; 
-	return (dupenv);
+	return (lst);
 }
 
-void	ft_env(char **dupenv)
+void	ft_env(t_dlist **dupenv)
 {
-	int i;
-	
-	i = 0;
+	t_dlist	*curr;
 
-	while (dupenv[i])
+	curr = *dupenv;
+	while (curr != NULL)
 	{
-		ft_putstr(dupenv[i]);
+		ft_putstr(curr->content);
 		ft_putchar('\n');
-		i++;
+		curr = curr->next;
 	}
 }

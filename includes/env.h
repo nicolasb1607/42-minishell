@@ -4,7 +4,9 @@
 
 # include "minishell.h"
 
-char	**ft_dupenv(char **envp);
-void	ft_env(char **dupenv);
+t_dlist *ft_dupenv(t_dlist *lst, char **envp);
+void	ft_env(t_dlist **dupenv);
+
+
 
 #endif
