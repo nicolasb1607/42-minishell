@@ -23,9 +23,9 @@ int main(int ac, char **av, char **envp)
 		printf("The value already exist\n");
 	else
 		printf("The value is not in the env\n");
-
-	ft_cd("../", mshell.head_env);
-	ft_cd("../", mshell.head_env);
+	
+	ft_unset("PWD", mshell.head_env);
+	ft_unset("OLDPWD", mshell.head_env);
 	ft_env(mshell.head_env);
 	
 	return (0);

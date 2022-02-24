@@ -33,26 +33,24 @@ int	is_existing(char *varenv, t_dlist **dupenv)
 	return (0);
 }
 
-// char	**ft_unset(char *varenv, char **dupenv)
-// {
-// 	int		i;
-// 	int		j;
-// 	char	**newenv;
+void	ft_unset(char *varenv, t_dlist **dupenv)
+{
+	t_dlist *curr; 
+	char	*content;
 
-// 	if(is_existing(varenv, dupenv) == 0)
-// 		return (dupenv);
-// 	newenv = malloc(sizeof(char *) * ft_tablen(dupenv));
-// 	if (!newenv)
-// 		return (NULL);
-// 	i = 0;
-// 	j = 0;
-// 	while(dupenv[i])
-// 	{
-// 		if (ft_strncmp(dupenv[i], varenv, ft_strlen(varenv)) != 0)
-// 			newenv[j++] = ft_strdup(dupenv[i]);
-// 		i++;
-// 	}
-// 	newenv[j] = NULL;
-// 	free_tab(dupenv);
-// 	return (newenv);
-// }
+	curr = *dupenv;
+	content = curr->content;
+	if (is_existing(varenv, dupenv) == 0)
+		return ;
+	while (curr)
+	{
+		if (ft_strncmp(content, varenv, ft_strlen(varenv)) == 0)
+		{
+			ft_dlstdelone(curr, free);
+			return ;
+		}
+		curr = curr->next;
+		content = curr->content;
+	}
+	
+}
