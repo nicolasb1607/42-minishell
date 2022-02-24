@@ -15,11 +15,11 @@
 
 int	is_existing(char *varenv, t_dlist **dupenv)
 {
-	int	lentoequal;
-	char *content;
-	t_dlist *curr;
+	int		lentoequal;
+	char	*content;
+	t_dlist	*curr;
 
-	curr = *dupenv;	
+	curr = *dupenv;
 	while (curr)
 	{
 		content = curr->content;
@@ -27,15 +27,15 @@ int	is_existing(char *varenv, t_dlist **dupenv)
 		while (content[lentoequal] && content[lentoequal] != '=')
 			lentoequal++;
 		if (ft_strncmp(content, varenv, lentoequal) == 0)
-			return(1);
-		curr = curr->next;	
+			return (1);
+		curr = curr->next;
 	}
 	return (0);
 }
 
 void	ft_unset(char *varenv, t_dlist **dupenv)
 {
-	t_dlist *curr; 
+	t_dlist	*curr;
 	char	*content;
 
 	curr = *dupenv;
@@ -52,5 +52,4 @@ void	ft_unset(char *varenv, t_dlist **dupenv)
 		curr = curr->next;
 		content = curr->content;
 	}
-	
 }

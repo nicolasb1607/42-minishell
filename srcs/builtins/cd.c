@@ -9,7 +9,7 @@ static void	maj_old_pwd(t_dlist **dupenv, char *curr_dir)
 
 	curr = *dupenv;
 	content = curr->content;
-	if(is_existing("OLDPWD", dupenv) == 0)
+	if (is_existing("OLDPWD", dupenv) == 0)
 		return ;
 	while (curr && ft_strncmp(content, "OLDPWD=", 7) != 0)
 	{
@@ -31,7 +31,7 @@ void	ft_cd(char *path_name, t_dlist **dupenv)
 	content = curr->content;
 	curr_dir = NULL;
 	curr_dir = getcwd(curr_dir, 2048);
-	if(!curr_dir)
+	if (!curr_dir)
 		return ;
 	maj_old_pwd(dupenv, curr_dir);
 	if (chdir(path_name) == -1)
@@ -39,11 +39,11 @@ void	ft_cd(char *path_name, t_dlist **dupenv)
 		ft_putstr(NO_ACCESS);
 		return ;
 	}
-	if(is_existing("PWD", dupenv) == 0)
+	if (is_existing("PWD", dupenv) == 0)
 		return ;
 	curr_dir = NULL;
 	curr_dir = getcwd(curr_dir, 2048);
-	if(!curr_dir)
+	if (!curr_dir)
 		return ;
 	while (curr && ft_strncmp(content, "PWD=", 4) != 0)
 	{
@@ -51,6 +51,6 @@ void	ft_cd(char *path_name, t_dlist **dupenv)
 		content = curr->content;
 	}
 	content = ft_strjoin("PWD=", curr_dir);
-	free(curr->content); 
+	free(curr->content);
 	curr->content = content;
 }	
