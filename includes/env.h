@@ -7,6 +7,4 @@
 t_dlist *ft_dupenv(t_dlist *lst, char **envp);
 void	ft_env(t_dlist **dupenv);
 
-
-
 #endif
