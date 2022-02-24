@@ -2,8 +2,6 @@
 
 # define MINISHELL_H
 
-
-
 # include "libft.h"
 # include <stdlib.h>
 # include "prompt.h"
@@ -16,7 +14,12 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-# include <errno.h>
+typedef struct s_minishell
+{
+	t_dlist	*env;
+	t_dlist	**head_env;
+}	t_minishell ;
+
 
 
 #endif
