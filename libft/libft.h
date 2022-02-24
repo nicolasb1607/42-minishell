@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:37:34 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/02/24 12:36:49 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/02/24 13:18:18 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_list
 typedef struct s_dlist
 {
 	void			*content;
-	bool			is_set;
 	struct s_dlist	*prev;
 	struct s_dlist	*next;
 }					t_dlist;

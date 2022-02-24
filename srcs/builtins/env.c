@@ -9,7 +9,6 @@ t_dlist	*ft_dupenv(t_dlist *lst, char **envp)
 	while (envp[i])
 	{
 		new = ft_dlstnew(ft_strdup(envp[i]));
-		new->is_set = 1;
 		ft_dlstadd_back(&lst, new);
 		i++;
 	}
