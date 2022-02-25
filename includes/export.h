@@ -4,4 +4,6 @@
 
 # include "minishell.h"
 
+char	*get_var(char *varnvalue);
+
 #endif

@@ -9,6 +9,7 @@
 # include "env.h"
 # include "cd.h"
 # include "unset.h"
+# include "export.h"
 # include "pipe.h"
 # include <stdio.h>
 # include <readline/readline.h>

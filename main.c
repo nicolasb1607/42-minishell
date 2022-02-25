@@ -18,15 +18,7 @@ int main(int ac, char **av, char **envp)
 	printf("-----------------------------------------------\n");
 	printf("-----------------------------------------------\n");
 	
-	
-	if (is_existing("PW", mshell.head_env) == 1)
-		printf("The value already exist\n");
-	else
-		printf("The value is not in the env\n");
-	
-	ft_unset("PWD", mshell.head_env);
-	ft_unset("OLDPWD", mshell.head_env);
-	ft_env(mshell.head_env);
-	
+	get_var("YOLO=ESTCEQUECAFONCTIONNE?");
+		
 	return (0);
 }
