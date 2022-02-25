@@ -18,7 +18,8 @@ int main(int ac, char **av, char **envp)
 	printf("-----------------------------------------------\n");
 	printf("-----------------------------------------------\n");
 	
-	get_var("YOLO=ESTCEQUECAFONCTIONNE?");
-		
+	ft_export("PWONCTIONNEOUPAS", mshell.head_env);
+
+	ft_env(mshell.head_env);		
 	return (0);
 }

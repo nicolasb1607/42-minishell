@@ -1,6 +1,5 @@
 #include "export.h"
 
-
 char	*get_var(char *varnvalue)
 {
 	char	*varexport;
@@ -18,8 +17,27 @@ char	*get_var(char *varnvalue)
 
 void	ft_export(char *varnvalue, t_dlist **dupenv)
 {
-	char *varexport;
+	char	*varexport;
+	t_dlist	*curr;
+	t_dlist	*new;
 
 	varexport = get_var(varnvalue);
-	if (is_existing(varexport, dupenv) == 
+	if (!varexport)
+		return ;
+	if (is_existing(varexport, dupenv) == 1)
+	{
+		curr = *dupenv;
+		while (curr)
+		{
+			if (ft_strncmp(curr->content, varexport, ft_strlen(varexport)) == 0)
+			{
+				free(curr->content);
+				curr->content = ft_strdup(varnvalue);
+				return ;
+			}
+			curr = curr->next;
+		}
+	}
+	new = ft_dlstnew(ft_strdup(varnvalue));
+	ft_dlstadd_back(dupenv, new);
 }
