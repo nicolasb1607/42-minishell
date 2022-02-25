@@ -4,8 +4,8 @@
 
 # include "minishell.h"
 
-int	is_existing(char *varenv, char **dupenv);
-char	**ft_unset(char *varenv, char **dupenv);
+int	is_existing(char *varenv, t_dlist **dupenv);
+void	ft_unset(char *varenv, t_dlist **dupenv);
 void	free_tab(char **tab);
 
 
