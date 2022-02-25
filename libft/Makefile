@@ -6,7 +6,7 @@
 #    By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 16:20:24 by nburat-d          #+#    #+#              #
-#    Updated: 2022/02/23 16:26:43 by nburat-d         ###   ########.fr        #
+#    Updated: 2022/02/25 14:00:49 by nburat-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS = ./ft_atoi.c \
 	./ft_isascii.c \
 	./ft_isdigit.c \
 	./ft_isprint.c \
+	./ft_containchar.c \
 	./ft_memchr.c \
 	./ft_memcmp.c \
 	./ft_memcpy.c \
@@ -30,6 +31,7 @@ SRCS = ./ft_atoi.c \
 	./ft_strdup.c \
 	./ft_strlcat.c \
 	./ft_strlcpy.c \
+	./ft_strncpy.c \
 	./ft_strlen.c \
 	./ft_tablen.c \
 	./ft_strcmp.c \

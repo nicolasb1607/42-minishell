@@ -6,14 +6,13 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:37:34 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/02/24 13:18:18 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/02/25 14:00:15 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stdbool.h>
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -37,6 +36,7 @@ int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_is_int(char *str);
 int		ft_isprint(int c);
+int	ft_containchar(char c, char *str);
 size_t	ft_strlen(const char *s);
 int		ft_tablen(char **tab);
 void	*ft_memset(void *s, int c, size_t n);
@@ -44,6 +44,7 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+char	*ft_strncpy(char *str, int n);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
