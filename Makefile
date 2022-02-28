@@ -18,12 +18,16 @@ SRCS = ./main.c \
 	./srcs/builtins/export.c \
 	./srcs/pipe/pipex.c \
 	./srcs/pipe/pipe.c \
-	./srcs/lexer.c \
 	./srcs/pipe/run_first.c \
 	./srcs/pipe/run_mid.c \
 	./srcs/pipe/run_last.c \
 	./srcs/pipe/utils.c \
 	./srcs/pipe/more_utils.c \
+	./srcs/lexer/lexer.c \
+	./srcs/utils/tab_to_list.c \
+	./srcs/utils/ft_tlstnew.c \
+	./srcs/utils/ft_tlstadd_back.c \
+	./srcs/utils/ft_tlstlast.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -35,7 +39,7 @@ $(EXEC) : $(OBJS)
 	$(CC) $(CFLAGS) -L $(LIBFT) -L $(RL) $^ -o $(EXEC) -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT) -lft -lreadline -g
 
 .c.o:
-	$(CC) $(CFLAGS)  -L $(LIBFT) -L $(RL) -c $^ -o $@ -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT) -lft -lreadline -g
+	$(CC) $(CFLAGS) -L $(LIBFT) -L $(RL) -c $^ -o $@ -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT) -lft -lreadline -g
 
 MAKELIBFT : 
 	make -C $(LIBFT)

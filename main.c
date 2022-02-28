@@ -23,9 +23,16 @@ int main(int ac, char **av, char **envp)
 
 	// ft_env(mshell.head_env);		
 
-	if (check_lexer("hlelogidf\"d\'rfhrh\"") == 1)
-		printf("OK \n");
-	else
-		printf("MErde\n");
-	return (0);
+	char	str[] = "sdfjs kjsdfkjs jksdfkjsd   sdkjsfd queue ds,fsd jhsdfkj";
+	char	**tab;
+	t_token	*tok;
+
+	tok = NULL;
+	tab = ft_split(str, ' ');
+	tok = tab_to_list(tab, tok);
+	while (tok)
+	{
+		printf("%s\n", tok->content);
+		tok = tok->next;
+	}
 }

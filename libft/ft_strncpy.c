@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:10:32 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/02/25 13:55:52 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/02/28 15:56:03 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strncpy(char *str, int n)
 {
 	int		i;
 	char	*cpy;
-	
+
 	i = 0;
 	cpy = malloc(sizeof(char) * (n + 1));
 	if (!cpy)

@@ -6,5 +6,4 @@
 
 int	check_lexer(char *str);
 
-
 #endif
