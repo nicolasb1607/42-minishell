@@ -11,6 +11,7 @@
 # include "unset.h"
 # include "export.h"
 # include "pipe.h"
+# include "lexer.h"
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>

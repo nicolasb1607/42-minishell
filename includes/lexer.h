@@ -4,4 +4,7 @@
 
 # include "minishell.h"
 
+int	check_lexer(char *str);
+
+
 #endif

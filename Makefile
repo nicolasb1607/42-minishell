@@ -18,6 +18,7 @@ SRCS = ./main.c \
 	./srcs/builtins/export.c \
 	./srcs/pipe/pipex.c \
 	./srcs/pipe/pipe.c \
+	./srcs/lexer.c \
 	./srcs/pipe/run_first.c \
 	./srcs/pipe/run_mid.c \
 	./srcs/pipe/run_last.c \
