@@ -1,23 +1,40 @@
 #include "lexer.h"
 
-int	check_lexer(char *str)
-{
-	int nbr_squote; 
-	int nbr_dquote;
-	int	i; 
 
-	nbr_squote = 0;
-	nbr_dquote = 0;
-	i = -1;
-	while (str[++i])
+int	look_for_next_quote(char *str, char q, int *i)
+{
+	while (str[*i])
 	{
-		if (str[i] == '\'')
-			nbr_squote++;
-		if (str[i] == '\"')
-			nbr_dquote++;
+		if (str[*i] == q)
+			return (1);
+		*i = *i + 1;
 	}
-	if (nbr_squote % 2 == 0 && nbr_dquote % 2 == 0) 
-		return (1);
-	return (0);	
+	return (0);
 }
 
+int	check_quote(char *str)
+{
+	char	quote;
+	int		i;
+	int		ret_check;
+
+	ret_check = 0;
+	i = 0;
+	while(str[i])
+	{
+		if (str[i] == '\"')
+		{
+			quote = (i++, '\"');
+			ret_check = look_for_next_quote(str, quote, &i);
+		}
+		else if (str[i] == '\'')
+		{
+			quote = (i++, '\'');
+			ret_check = look_for_next_quote(str, quote, &i);
+		}
+		i++;
+	}
+	if (ret_check == 0)
+		return (0);
+	return (1);	
+}

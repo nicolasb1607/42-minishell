@@ -23,16 +23,12 @@ int main(int ac, char **av, char **envp)
 
 	// ft_env(mshell.head_env);		
 
-	char	str[] = "sdfjs kjsdfkjs jksdfkjsd   sdkjsfd queue ds,fsd jhsdfkj";
-	char	**tab;
-	t_token	*tok;
+	char	str[] = "sdfjs kjsdf\'kjs jksd\'fkjsdsdkjsfd que\'ue ds,fsd \'jhsdfkj";
 
-	tok = NULL;
-	tab = ft_split(str, ' ');
-	tok = tab_to_list(tab, tok);
-	while (tok)
-	{
-		printf("%s\n", tok->content);
-		tok = tok->next;
-	}
+	if (check_quote(str) == 0)
+		printf("Wrong fromat\n");
+	else 
+		printf("Putain ca marche\n");
+	
+	return (0);
 }

@@ -26,12 +26,12 @@ typedef enum s_quotes
 typedef	struct s_command
 {
 	char	*command;
-};
+}			t_command;
 
 typedef	struct s_lex
 {
 	t_quotes		quotes;
-	t_token			token;
+	//t_token			token;
 	struct s_lex	*next;
 	struct s_lex	*prev;
 }					t_lex;
