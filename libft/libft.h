@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:37:34 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/02/25 16:54:43 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/01 18:03:39 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ int		ft_dlstsize(t_dlist *lst);
 void	ft_dlstclear(t_dlist **lst, void (*del)(void*));
 void	ft_dlstdelone(t_dlist *lst, void (*del)(void*));
 void	ft_dlstiter(t_dlist *lst, void (*f)(void *));
+char	*ft_charjoin(char *str, char c);
 
 #endif

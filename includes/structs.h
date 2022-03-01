@@ -23,6 +23,20 @@ typedef enum s_quotes
 	DQUOTES = '\"',
 }	t_quotes;
 
+typedef struct s_token
+{
+	char	*content; 
+	int		*type; 
+}			t_token;
+
+typedef	enum s_spe
+{
+	PIPE = '|',
+	R_DIR = '>',
+	L_DIR = '<',
+	ARG,
+}			t_spe;
+
 typedef	struct s_command
 {
 	char	*command;
@@ -30,11 +44,15 @@ typedef	struct s_command
 
 typedef	struct s_lex
 {
-	t_quotes		quotes;
-	//t_token			token;
+	void	*token;
 	struct s_lex	*next;
 	struct s_lex	*prev;
 }					t_lex;
+
+
+
+
+
 
 typedef struct s_minishell
 {
@@ -43,12 +61,6 @@ typedef struct s_minishell
 	t_dlist	**head_env;
 }	t_minishell ;
 
-typedef	enum s_token
-{
-	PIPE = '|',
-	R_DIR = '>',
-	L_DIR = '<',
-}			t_token;
 
 
 #endif

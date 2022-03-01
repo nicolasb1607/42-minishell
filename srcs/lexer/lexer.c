@@ -38,3 +38,23 @@ int	check_quote(char *str)
 		return (0);
 	return (1);	
 }
+
+int	is_known_type(char c, char ***typetok)
+{
+	
+}
+
+t_dlist	*tokenize(char *str, t_dlist *lexlst)
+{
+	int	i; 
+	t_dlist *new;
+	t_token tok;
+
+	i = 0; 
+	while (str[i])
+	{
+		is_known_type();
+	}
+
+	return (lexlst);
+}
