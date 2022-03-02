@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/02 17:00:14 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:46:48 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # define DIGIT "0123456789"
 # define ALPHA "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# define T_STRING "T_STRING"
 # define T_PIPE "T_PIPE"
 # define T_SQUOTE "T_SQUOTE"
 # define T_DQUOTE "T_DQUOTE"
@@ -40,7 +41,8 @@
 typedef struct s_token
 {
 	char	*content; 
-	char	*type; 
+	char	*type;
+	char	*quote; 
 }			t_token;
 
 typedef struct s_lexer

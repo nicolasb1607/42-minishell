@@ -66,6 +66,13 @@ void	init_lexer(t_lexer *lexer, char *str)
 	lexer->current_char = 0;
 }
 
+void	init_token(t_token *token)
+{
+	token->content = NULL;
+	token->type = NULL;
+	token->quote = NULL;
+}
+
 void 	advance(t_lexer *lexer)
 {
 	char *str;
@@ -76,14 +83,78 @@ void 	advance(t_lexer *lexer)
 		lexer->current_char = str[lexer->pos];
 }
 
+void	assign_toks(t_token *token, char *content, char *type)
+{
+	token->content = content;
+	token->type = type;
+}
+
+void	make_quote_string(t_token *token, t_lexer *lexer)
+{
+	char tquote;
+	tquote = lexer->current_char;
+	advance(lexer);
+	while (lexer->current_char != tquote)
+	{
+		token->content = ft_charjoin(token->content, lexer->current_char);
+		advance(lexer);
+	}
+	token->type = T_STRING;
+	if (tquote == '\"')
+		token->quote = T_DQUOTE;
+	else
+		token->quote = T_SQUOTE;
+} 
+
+void	make_string(t_token *token, t_lexer *lexer)
+{
+	while (ft_containchar(lexer->current_char, ALPHA) == 1)
+	{
+		token->content = ft_charjoin(token->content, lexer->current_char);
+		advance(lexer);
+	}
+	token->type = T_STRING;
+}
 
 t_token	make_token(t_lexer *lexer)
 {
 	t_token token;
 
-	
+	init_token(&token);
 
+	while (lexer->current_char)
+	{
+		if (lexer->current_char == '\"')
+			make_quote_string(&token, lexer);
+		else if (lexer->current_char == '\'')
+			make_quote_string(&token, lexer);
+		else if (ft_containchar(lexer->current_char, ALPHA) == 1)
+			make_string(&token, lexer);
+		else if (lexer->current_char == '>')
+		{
+			if (lexer->text[lexer->pos + 1] == '>')
+			{
+				assign_toks(&token, ">>", T_DR_DIR);
+				advance(lexer);
+			}
+			else
+				assign_toks(&token, ">", T_R_DIR);
+		}
+		else if (lexer->current_char == '<')
+		{
+			if (lexer->text[lexer->pos + 1] == '<')
+			{
+				assign_toks(&token, "<<", T_DL_DIR);
+				advance(lexer);
+			}
+			else 
+				assign_toks(&token, "<", T_L_DIR);
+		}
+		else if (lexer->current_char == '|')
+			assign_toks(&token, "|", T_PIPE);
+		else if (lexer->current_char == '$')
+			//expand()
+		advance(lexer);
+	}
 	return (token);
 }
-
-
