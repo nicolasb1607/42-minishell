@@ -39,22 +39,51 @@ int	check_quote(char *str)
 	return (1);	
 }
 
-int	is_known_type(char c, char ***typetok)
+
+/*
+
+TO OD : 
+
+--------------TOKEN-------------------------------
+- Creation d une structure TOKEN (Type et value)
+// - Creation fonction initialisation d un token, qui va assigner le type et la valeur 
+
+
+-------------LEXER-------------------------------
+- Creation d une structure LEXER (text, position, current char)
+- Creation d un fonction d initialisation du lexe, qui va simplement attribuer la str que lon doit analyser, la pos a -1 et le current_char a 0.
+- Creation d une fonction pour advance qui incremente la position du lexer ainsi que le current char en fonction de la position
+
+
+- Creation d une fonction make_tokens qui prend en parametre le lexer
+
+*/
+
+void	init_lexer(t_lexer *lexer, char *str)
 {
+	lexer->text = str;
+	lexer->pos = -1;
+	lexer->current_char = 0;
+}
+
+void 	advance(t_lexer *lexer)
+{
+	char *str;
+
+	lexer->pos += 1;
+	str = lexer->text;
+	if (str[lexer->pos])
+		lexer->current_char = str[lexer->pos];
+}
+
+
+t_token	make_token(t_lexer *lexer)
+{
+	t_token token;
+
 	
+
+	return (token);
 }
 
-t_dlist	*tokenize(char *str, t_dlist *lexlst)
-{
-	int	i; 
-	t_dlist *new;
-	t_token tok;
 
-	i = 0; 
-	while (str[i])
-	{
-		is_known_type();
-	}
-
-	return (lexlst);
-}
