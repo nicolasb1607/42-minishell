@@ -5,12 +5,12 @@ int main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	(void) envp;
-	// t_minishell mshell;
+	t_minishell mshell;
 
 
-	// mshell.env = NULL;
-	// mshell.env = ft_dupenv(mshell.env, envp);
-	// mshell.head_env = &mshell.env;
+	mshell.env = NULL;
+	mshell.env = ft_dupenv(mshell.env, envp);
+	mshell.head_env = &mshell.env;
 	// ft_env(mshell.head_env);
 
 	// printf("-----------------------------------------------\n");
@@ -23,12 +23,8 @@ int main(int ac, char **av, char **envp)
 
 	// ft_env(mshell.head_env);		
 
-	char	str[] = "sdfjs kjsdf\'kjs jksd\'fkjsdsdkjsfd que\'ue ds,fsd \'jhsdfkj";
+	char	*str = "USER";
 
-	if (check_quote(str) == 0)
-		printf("Wrong fromat\n");
-	else 
-		printf("Putain ca marche\n");
-	
+	printf("%s\n", look_for_varenv_value(str, mshell.head_env));
 	return (0);
 }

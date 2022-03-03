@@ -12,19 +12,20 @@
 
 #include "lexer.h"
 
-int	ft_isenv(char c)
+int ft_isenv(char c)
 {
 	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
 		return (1);
 	else if (c >= '0' && c <= '9')
 		return (1);
-	else if (c == '_');
+	else if (c == '_')
+		return (1);
 	return (0);
 }
 
-int	is_valid_varenv(char *str)
+int is_valid_varenv(char *str)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	if (ft_isdigit(str[i++]) == 1)
@@ -38,45 +39,53 @@ int	is_valid_varenv(char *str)
 	return (1);
 }
 
-char *look_for_varenv_value(char *varenv, char **env)
+char *look_for_varenv_value(char *varenv, t_dlist **env)
 {
-	char	*val;
-	char	*subval;
-	int		i;
+	char *val;
+	char *subval;
+	int i;
+	t_dlist *curr;
 
+	curr = *env;
 	i = -1;
-	while (env[++i])
+	subval = NULL;
+	if (is_existing(varenv, env) == 1)
 	{
-		val = ft_strnstr(env[i], varenv, ft_strlen(env[i]));
-		if (!val)
-			return (NULL);
+		while (curr)
+		{
+			if(ft_strncmp(get_var(curr->content), varenv, ft_strlen(get_var(curr->content))) == 0)
+			{
+				val = curr->content;
+				break;
+			}
+			curr = curr->next;
+		}
+		i = 0;
+		while (val[i] != '=')
+			i++;
+		subval = ft_substr(val, i + 1, ft_strlen(val) - i);
+		free(val);
 	}
-	i = 0;
-	while (val[i] != '=')
-		i++;
-	subval = ft_substr(val, i, ft_strlen(val) - (i + 1));
-	free(val);
 	return (subval);
 }
 
+// char	*expand( t_lexer *lexer, t_minishell *mshell)
+// {
+// 	int	i;
+// 	char *varenv;
+// 	char *varvalue;
 
-char	*expand( t_lexer *lexer, t_minishell *mshell)
-{
-	int	i;
-	char *varenv;
-	char *varvalue;
-	
-	varenv = NULL;
-	i = 1;
-	while(lexer->text[lexer->pos + i] && lexer->text[lexer->pos + i] != ' ')
-	{
-		varenv = ft_charjoin(varenv, lexer->text[lexer->pos + i]);
-		i++;
-	}
-	if(is_valid_varenv(varenv) == 1)
-	{
-		varvalue = look_for_varenv_value(varenv, mshell->env);
-	}
-	free(varenv);
-	return (varvalue);
-}
+// 	varenv = NULL;
+// 	i = 1;
+// 	while(lexer->text[lexer->pos + i] && lexer->text[lexer->pos + i] != ' ')
+// 	{
+// 		varenv = ft_charjoin(varenv, lexer->text[lexer->pos + i]);
+// 		i++;
+// 	}
+// 	if(is_valid_varenv(varenv) == 1)
+// 	{
+// 		varvalue = look_for_varenv_value(varenv, mshell->head_env);
+// 	}
+// 	free(varenv);
+// 	return (varvalue);
+// }
