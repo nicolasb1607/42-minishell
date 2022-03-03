@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:37:34 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/01 18:52:49 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/03 11:52:18 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
+int		ft_isupper(char c);
+int		ft_islower(char c);
 int		ft_is_int(char *str);
 int		ft_isprint(int c);
 int	ft_containchar(char c, char *str);
@@ -91,5 +93,6 @@ void	ft_dlstclear(t_dlist **lst, void (*del)(void*));
 void	ft_dlstdelone(t_dlist *lst, void (*del)(void*));
 void	ft_dlstiter(t_dlist *lst, void (*f)(void *));
 char	*ft_charjoin(char *str, char c);
+
 
 #endif

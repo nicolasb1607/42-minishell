@@ -2,6 +2,7 @@
 	"files.associations": {
 		"*.c": "c",
 		"echo.h": "c",
-		"handle_sig.h": "c"
+		"handle_sig.h": "c",
+		"lexer.h": "c"
 	}
 }

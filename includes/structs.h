@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/02 17:46:48 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/03 11:34:17 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "minishell.h"
 
 # define DIGIT "0123456789"
-# define ALPHA "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# define ALPHA "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$"
 # define T_STRING "T_STRING"
 # define T_PIPE "T_PIPE"
 # define T_SQUOTE "T_SQUOTE"
@@ -30,7 +30,6 @@
 # define T_EQUAL "T_EQUAL"
 # define T_MULTI "T_MULTI"
 # define T_SLASH "T_SLASH"
-# define T_DOLLAR "T_DOLLAR" 
 # define T_PERCENT "T_PERCENT" 
 # define T_RPAREN "T_RPAREN"
 # define T_LPAREN "T_LPAREN"

@@ -6,7 +6,7 @@
 #    By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 16:20:24 by nburat-d          #+#    #+#              #
-#    Updated: 2022/03/01 18:03:00 by nburat-d         ###   ########.fr        #
+#    Updated: 2022/03/03 11:52:19 by nburat-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ SRCS = ./ft_atoi.c \
 	./ft_isascii.c \
 	./ft_isdigit.c \
 	./ft_isprint.c \
+	./ft_islower.c \
+	./ft_isupper.c \
 	./ft_containchar.c \
 	./ft_memchr.c \
 	./ft_memcmp.c \
@@ -74,6 +76,8 @@ SRCS = ./ft_atoi.c \
 	./ft_dlstdelone.c \
 	./ft_dlstiter.c \
 	ft_charjoin.c \
+	ft_islower.c \
+	ft_isupper.c \
 
 INCLUDES = ./
 OBJS_SRCS = ${SRCS:.c=.o}

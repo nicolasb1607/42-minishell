@@ -1,5 +1,15 @@
 #include "export.h"
 
+
+/* TODO : 
+
+- Ne pas oublier de check si la variable que l on souhaite creer correspond aux standards 
+du nommage des variable d environnement a savoir 
+		- Seulement Des ALphanum et des UNDERSCORE
+		- Ne doit pas commencer par un digit 
+
+*/
+
 char	*get_var(char *varnvalue)
 {
 	char	*varexport;

@@ -94,20 +94,25 @@ void	make_quote_string(t_token *token, t_lexer *lexer)
 	char tquote;
 	tquote = lexer->current_char;
 	advance(lexer);
+	if (tquote == '\"')
+		token->quote = T_DQUOTE;
+	else
+		token->quote = T_SQUOTE;
+	// check expand si current char $
 	while (lexer->current_char != tquote)
 	{
 		token->content = ft_charjoin(token->content, lexer->current_char);
 		advance(lexer);
 	}
 	token->type = T_STRING;
-	if (tquote == '\"')
-		token->quote = T_DQUOTE;
-	else
-		token->quote = T_SQUOTE;
 } 
 
 void	make_string(t_token *token, t_lexer *lexer)
 {
+
+	// est ce que le currentchar == $ ? 
+	// si oui expand 
+	// si non tu t en baleck
 	while (ft_containchar(lexer->current_char, ALPHA) == 1)
 	{
 		token->content = ft_charjoin(token->content, lexer->current_char);
@@ -152,9 +157,13 @@ t_token	make_token(t_lexer *lexer)
 		}
 		else if (lexer->current_char == '|')
 			assign_toks(&token, "|", T_PIPE);
-		else if (lexer->current_char == '$')
-			//expand()
 		advance(lexer);
 	}
 	return (token);
 }
+
+// Expand
+
+// Cas ou il est tout seul
+// Cas ou il est entre deux Simple quotes (le plus simple)
+// Cas ou il est entre deux double quotes
