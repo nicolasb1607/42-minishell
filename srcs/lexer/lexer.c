@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/03 17:21:43 by nburat-d          #+#    #+#             */
+/*   Updated: 2022/03/03 17:31:12 by nburat-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lexer.h"
 
 
@@ -89,7 +101,7 @@ void	assign_toks(t_token *token, char *content, char *type)
 	token->type = type;
 }
 
-void	make_quote_string(t_token *token, t_lexer *lexer)
+void	make_quote_string(t_token *token, t_lexer *lexer, t_minishell *mshell)
 {
 	char tquote;
 	tquote = lexer->current_char;
@@ -98,7 +110,8 @@ void	make_quote_string(t_token *token, t_lexer *lexer)
 		token->quote = T_DQUOTE;
 	else
 		token->quote = T_SQUOTE;
-	// check expand si current char $
+	if (lexer->current_char == '$')
+		token->content = expand(lexer, mshell);	
 	while (lexer->current_char != tquote)
 	{
 		token->content = ft_charjoin(token->content, lexer->current_char);
@@ -107,12 +120,15 @@ void	make_quote_string(t_token *token, t_lexer *lexer)
 	token->type = T_STRING;
 } 
 
-void	make_string(t_token *token, t_lexer *lexer)
+void	make_string(t_token *token, t_lexer *lexer, t_minishell *mshell)
 {
 
 	// est ce que le currentchar == $ ? 
 	// si oui expand 
 	// si non tu t en baleck
+
+	if(lexer->current_char == '$')
+		token->content = expand(lexer, mshell);
 	while (ft_containchar(lexer->current_char, ALPHA) == 1)
 	{
 		token->content = ft_charjoin(token->content, lexer->current_char);

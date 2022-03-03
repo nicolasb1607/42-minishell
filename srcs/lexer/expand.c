@@ -67,23 +67,26 @@ char *look_for_varenv_value(char *varenv, t_dlist **env)
 	return (subval);
 }
 
-// char	*expand( t_lexer *lexer, t_minishell *mshell)
-// {
-// 	int	i;
-// 	char *varenv;
-// 	char *varvalue;
+char	*expand(t_lexer *lexer, t_minishell *mshell)
+{
+	int	i;
+	char *varenv;
+	char *varvalue;
 
-// 	varenv = NULL;
-// 	i = 1;
-// 	while(lexer->text[lexer->pos + i] && lexer->text[lexer->pos + i] != ' ')
-// 	{
-// 		varenv = ft_charjoin(varenv, lexer->text[lexer->pos + i]);
-// 		i++;
-// 	}
-// 	if(is_valid_varenv(varenv) == 1)
-// 	{
-// 		varvalue = look_for_varenv_value(varenv, mshell->head_env);
-// 	}
-// 	free(varenv);
-// 	return (varvalue);
-// }
+	varenv = NULL;
+	i = 1;
+	while(lexer->text[lexer->pos + i] && lexer->text[lexer->pos + i] != ' ')
+	{
+		varenv = ft_charjoin(varenv, lexer->text[lexer->pos + i]);
+		i++;
+	}
+	if(is_valid_varenv(varenv) == 1)
+	{
+		varvalue = look_for_varenv_value(varenv, mshell->head_env);
+	}
+	i = ft_strlen(varenv) + 1;
+	while (i-- != 0)
+		advance(lexer);
+	free(varenv);
+	return (varvalue);
+}
