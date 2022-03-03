@@ -23,8 +23,11 @@ int main(int ac, char **av, char **envp)
 
 	// ft_env(mshell.head_env);		
 
-	char	*str = "USER";
+	char	*str = "XDG_SESSION_CLASS";
 
-	printf("%s\n", look_for_varenv_value(str, mshell.head_env));
+	if (look_for_varenv_value(str, mshell.head_env) == NULL)
+		printf("doesnt exist\n");
+	else
+		printf("%s\n", look_for_varenv_value(str, mshell.head_env));
 	return (0);
 }

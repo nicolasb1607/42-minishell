@@ -48,24 +48,22 @@ char *look_for_varenv_value(char *varenv, t_dlist **env)
 
 	curr = *env;
 	i = -1;
-	subval = NULL;
-	if (is_existing(varenv, env) == 1)
+	while (curr)
 	{
-		while (curr)
+		if (ft_strncmp(get_var(curr->content), varenv, ft_strlen(varenv)) == 0 
+				&& ft_strlen(varenv) == ft_strlen(get_var(curr->content)))
 		{
-			if(ft_strncmp(get_var(curr->content), varenv, ft_strlen(get_var(curr->content))) == 0)
-			{
-				val = curr->content;
-				break;
-			}
-			curr = curr->next;
+			val = curr->content;
+			break;
 		}
-		i = 0;
-		while (val[i] != '=')
-			i++;
-		subval = ft_substr(val, i + 1, ft_strlen(val) - i);
-		free(val);
+		curr = curr->next;
 	}
+	i = 0;
+	while (val[i] != '=')
+		i++;
+	subval = ft_substr(val, i + 1, ft_strlen(val) - i);
+	if(ft_strlen(subval) == 0)
+		return(free(subval), NULL);
 	return (subval);
 }
 
