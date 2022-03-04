@@ -14,7 +14,7 @@ int main(int ac, char **av, char **envp)
 	mshell.head_env = &mshell.env;
 	
 
-	char	*str = "Salut \"$PWD test dquote\" qq6ch   780 derriere";
+	char	*str = "Salut  \"$PWD test\' dquote\" qq6ch 780 derriere ";
 
 	tlist = init_tlist(str, tlist, &mshell);
 

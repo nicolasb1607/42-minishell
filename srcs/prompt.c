@@ -11,12 +11,12 @@ TO DO :
 
 - Once the excution is done, it starts again and put a prompt
 */
-char	*ft_prompt(void)
-{
-	char	*ret_line;
+// char	*ft_prompt(void)
+// {
+// 	char	*ret_line;
 
-	ret_line = readline("Minishell > ");
+// 	ret_line = readline("Minsdfsdfsdfishell > ");
 
-	printf("Return : %s\n", ret_line);
-	return (ret_line);
-}
+// 	printf("Return : %s\n", ret_line);
+// 	return (ret_line);
+// }

@@ -8,6 +8,7 @@ void	ft_printtoklst(t_tlist *tlist)
 	while (curr)
 	{
 		ft_putstr(curr->token->content);
+		ft_putchar('\n');
 		curr = curr->next;	
 	}
 }
