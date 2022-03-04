@@ -123,7 +123,8 @@ void make_string(t_token *token, t_lexer *lexer, t_minishell *mshell)
 {
 	if (lexer->current_char == '$')
 		token->content = expand(lexer, mshell);
-	while (ft_containchar(lexer->current_char, ALPHA) == 1)
+	while (ft_containchar(lexer->current_char, ALPHA) == 1 
+			|| ft_containchar(lexer->current_char, DIGIT) == 1)
 	{
 		token->content = ft_charjoin(token->content, lexer->current_char);
 		advance(lexer);
@@ -135,13 +136,15 @@ t_token make_token(t_lexer *lexer, t_minishell *mshell)
 {
 	t_token token;
 
+	
 	init_token(&token);
 
 	if (lexer->current_char == '\"')
 		make_quote_string(&token, lexer, mshell);
 	else if (lexer->current_char == '\'')
 		make_quote_string(&token, lexer, mshell);
-	else if (ft_containchar(lexer->current_char, ALPHA) == 1)
+	else if (ft_containchar(lexer->current_char, ALPHA) == 1 
+			|| ft_containchar(lexer->current_char, DIGIT) == 1)
 		make_string(&token, lexer, mshell);
 	else if (lexer->current_char == '>')
 	{
@@ -179,6 +182,8 @@ t_tlist *init_tlist(char *str,t_tlist *tlist, t_minishell *mshell)
 	advance(&lexer);
 	while (lexer.current_char)
 	{
+		while (lexer.current_char == ' ')
+			advance(&lexer);
 		token = make_token(&lexer, mshell);
 		printf("%s\n", token.content);
 		new = ft_tlstnew(&token);
