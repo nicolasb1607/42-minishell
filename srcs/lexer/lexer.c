@@ -143,6 +143,8 @@ t_token make_token(t_lexer *lexer, t_minishell *mshell)
 
 	init_token(&token);
 
+	if (lexer->current_char == 0)
+		token.content = NULL;
 	if (lexer->current_char == '\"')
 		make_quote_string(&token, lexer, mshell);
 	else if (lexer->current_char == '\'')
@@ -173,10 +175,12 @@ t_token make_token(t_lexer *lexer, t_minishell *mshell)
 		assign_toks(&token, "|", T_PIPE);
 	if (lexer->current_char != 0)
 		advance(lexer);
-	;
 	return (token);
 }
 
+
+
+// Probleme de pointeur sur le token 
 t_tlist *init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
 {
 	t_tlist *new;
@@ -189,13 +193,9 @@ t_tlist *init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
 	{
 		while (lexer.current_char == ' ')
 			advance(&lexer);
-		if (lexer.current_char != 0)
-		{
-			token = make_token(&lexer, mshell);
-			printf("%s\n", token.content);
-			new = ft_tlstnew(&token);
-			ft_tlstadd_back(&tlist, new);
-		}
+		token = make_token(&lexer, mshell);
+		new = ft_tlstnew(&token);
+		ft_tlstadd_back(&tlist, new);
 	}
 	return (tlist);
 }
