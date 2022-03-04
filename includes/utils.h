@@ -3,9 +3,12 @@
 
 #include "minishell.h"
 
-t_token	*ft_tlstnew(char *content);
-t_token	*tab_to_list(char **tab, t_token *head);
-void	ft_tlstadd_back(t_token **alst, t_token *new);
-t_token	*ft_tlstlast(t_token *lst);
+t_tlist	*ft_tlstnew(t_token *token);
+t_tlist	*tab_to_list(char **tab, t_tlist *head);
+char	**list_to_tab(t_tlist *alst);
+void	ft_tlstadd_back(t_tlist **alst, t_tlist *new);
+t_tlist	*ft_tlstlast(t_tlist *lst);
+int		ft_tlstsize(t_tlist *lst);
+void	ft_printtoklst(t_tlist *tlist);
 
 #endif

@@ -1,16 +1,36 @@
 #include "utils.h"
 
-t_token	*tab_to_list(char **tab, t_token *head)
-{
-	int	i;
-	t_token *new;
+// t_tlist	*tab_to_list(char **tab, t_tlist *head)
+// {
+// 	int	i;
+// 	t_tlist *new;
 	
-	i = 0;
-	while (tab[i])
+// 	i = 0;
+// 	while (tab[i])
+// 	{
+// 		new = ft_tlstnew(ft_strdup(tab[i]));
+// 		ft_tlstadd_back(&head, new);
+// 		i++;
+// 	}
+// 	return (head);
+// }
+
+char	**list_to_tab(t_tlist *alst)
+{
+	char	**tmp;
+	int		size;
+	int		i;
+	t_tlist	*curr;
+
+	i = -1;
+	curr = alst;
+	size = ft_tlstsize(curr);
+	tmp = malloc(sizeof(char *) * (size + 1));
+	while (++i < size)
 	{
-		new = ft_tlstnew(ft_strdup(tab[i]));
-		ft_tlstadd_back(&head, new);
-		i++;
+		tmp[i] = ft_strdup(curr->token->content);
+		curr = curr->next;
 	}
-	return (head);
+	tmp[i] = ft_strdup("");
+	return (tmp);
 }

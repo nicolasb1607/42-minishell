@@ -1,8 +1,8 @@
 #include "utils.h"
 
-void	ft_tlstadd_back(t_token **alst, t_token *new)
+void	ft_tlstadd_back(t_tlist **alst, t_tlist *new)
 {
-	t_token	*last;
+	t_tlist	*last;
 
 	if (!*alst)
 	{
@@ -13,5 +13,6 @@ void	ft_tlstadd_back(t_token **alst, t_token *new)
 	{
 		last = ft_tlstlast(*alst);
 		last->next = new;
+		new->prev = last;
 	}
 }

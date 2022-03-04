@@ -6,14 +6,13 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 17:21:43 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/03 17:31:12 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/04 12:02:555 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-
-int	look_for_next_quote(char *str, char q, int *i)
+int look_for_next_quote(char *str, char q, int *i)
 {
 	while (str[*i])
 	{
@@ -24,15 +23,15 @@ int	look_for_next_quote(char *str, char q, int *i)
 	return (0);
 }
 
-int	check_quote(char *str)
+int check_quote(char *str)
 {
-	char	quote;
-	int		i;
-	int		ret_check;
+	char quote;
+	int i;
+	int ret_check;
 
 	ret_check = 0;
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == '\"')
 		{
@@ -48,17 +47,16 @@ int	check_quote(char *str)
 	}
 	if (ret_check == 0)
 		return (0);
-	return (1);	
+	return (1);
 }
-
 
 /*
 
-TO OD : 
+TO OD :
 
 --------------TOKEN-------------------------------
 - Creation d une structure TOKEN (Type et value)
-// - Creation fonction initialisation d un token, qui va assigner le type et la valeur 
+// - Creation fonction initialisation d un token, qui va assigner le type et la valeur
 
 
 -------------LEXER-------------------------------
@@ -71,21 +69,21 @@ TO OD :
 
 */
 
-void	init_lexer(t_lexer *lexer, char *str)
+void init_lexer(t_lexer *lexer, char *str)
 {
 	lexer->text = str;
 	lexer->pos = -1;
 	lexer->current_char = 0;
 }
 
-void	init_token(t_token *token)
+void init_token(t_token *token)
 {
 	token->content = NULL;
 	token->type = NULL;
 	token->quote = NULL;
 }
 
-void 	advance(t_lexer *lexer)
+void advance(t_lexer *lexer)
 {
 	char *str;
 
@@ -95,13 +93,13 @@ void 	advance(t_lexer *lexer)
 		lexer->current_char = str[lexer->pos];
 }
 
-void	assign_toks(t_token *token, char *content, char *type)
+void assign_toks(t_token *token, char *content, char *type)
 {
 	token->content = content;
 	token->type = type;
 }
 
-void	make_quote_string(t_token *token, t_lexer *lexer, t_minishell *mshell)
+void make_quote_string(t_token *token, t_lexer *lexer, t_minishell *mshell)
 {
 	char tquote;
 	tquote = lexer->current_char;
@@ -111,23 +109,19 @@ void	make_quote_string(t_token *token, t_lexer *lexer, t_minishell *mshell)
 	else
 		token->quote = T_SQUOTE;
 	if (lexer->current_char == '$')
-		token->content = expand(lexer, mshell);	
+		token->content = expand(lexer, mshell);
 	while (lexer->current_char != tquote)
 	{
 		token->content = ft_charjoin(token->content, lexer->current_char);
 		advance(lexer);
 	}
+	advance(lexer);
 	token->type = T_STRING;
-} 
+}
 
-void	make_string(t_token *token, t_lexer *lexer, t_minishell *mshell)
+void make_string(t_token *token, t_lexer *lexer, t_minishell *mshell)
 {
-
-	// est ce que le currentchar == $ ? 
-	// si oui expand 
-	// si non tu t en baleck
-
-	if(lexer->current_char == '$')
+	if (lexer->current_char == '$')
 		token->content = expand(lexer, mshell);
 	while (ft_containchar(lexer->current_char, ALPHA) == 1)
 	{
@@ -137,49 +131,58 @@ void	make_string(t_token *token, t_lexer *lexer, t_minishell *mshell)
 	token->type = T_STRING;
 }
 
-t_token	make_token(t_lexer *lexer)
+t_token make_token(t_lexer *lexer, t_minishell *mshell)
 {
 	t_token token;
 
 	init_token(&token);
 
-	while (lexer->current_char)
+	if (lexer->current_char == '\"')
+		make_quote_string(&token, lexer, mshell);
+	else if (lexer->current_char == '\'')
+		make_quote_string(&token, lexer, mshell);
+	else if (ft_containchar(lexer->current_char, ALPHA) == 1)
+		make_string(&token, lexer, mshell);
+	else if (lexer->current_char == '>')
 	{
-		if (lexer->current_char == '\"')
-			make_quote_string(&token, lexer);
-		else if (lexer->current_char == '\'')
-			make_quote_string(&token, lexer);
-		else if (ft_containchar(lexer->current_char, ALPHA) == 1)
-			make_string(&token, lexer);
-		else if (lexer->current_char == '>')
+		if (lexer->text[lexer->pos + 1] == '>')
 		{
-			if (lexer->text[lexer->pos + 1] == '>')
-			{
-				assign_toks(&token, ">>", T_DR_DIR);
-				advance(lexer);
-			}
-			else
-				assign_toks(&token, ">", T_R_DIR);
+			assign_toks(&token, ">>", T_DR_DIR);
+			advance(lexer);
 		}
-		else if (lexer->current_char == '<')
-		{
-			if (lexer->text[lexer->pos + 1] == '<')
-			{
-				assign_toks(&token, "<<", T_DL_DIR);
-				advance(lexer);
-			}
-			else 
-				assign_toks(&token, "<", T_L_DIR);
-		}
-		else if (lexer->current_char == '|')
-			assign_toks(&token, "|", T_PIPE);
-		advance(lexer);
+		else
+			assign_toks(&token, ">", T_R_DIR);
 	}
+	else if (lexer->current_char == '<')
+	{
+		if (lexer->text[lexer->pos + 1] == '<')
+		{
+			assign_toks(&token, "<<", T_DL_DIR);
+			advance(lexer);
+		}
+		else
+			assign_toks(&token, "<", T_L_DIR);
+	}
+	else if (lexer->current_char == '|')
+		assign_toks(&token, "|", T_PIPE);
+	advance(lexer);
 	return (token);
 }
 
-// Expand
+t_tlist *init_tlist(char *str,t_tlist *tlist, t_minishell *mshell)
+{
+	t_tlist *new;
+	t_token token;
+	t_lexer lexer;
 
-// Cas ou il est tout seul
-// Cas ou il est entre deux Simple quotes (le plus simple)
-// Cas ou il est entre deux double quotes
+	init_lexer(&lexer, str);
+	advance(&lexer);
+	while (lexer.current_char)
+	{
+		token = make_token(&lexer, mshell);
+		printf("%s\n", token.content);
+		new = ft_tlstnew(&token);
+		ft_tlstadd_back(&tlist, new);
+	}
+	return (tlist);
+}

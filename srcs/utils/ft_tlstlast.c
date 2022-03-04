@@ -1,8 +1,8 @@
 #include "utils.h"
 
-t_token	*ft_tlstlast(t_token *lst)
+t_tlist	*ft_tlstlast(t_tlist *lst)
 {
-	t_token	*current;
+	t_tlist	*current;
 
 	current = lst;
 	if (current == NULL)

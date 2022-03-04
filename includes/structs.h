@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/03 11:34:17 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/04 11:40:26 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ typedef struct s_lexer
 	int		pos;
 	char	current_char;
 }			t_lexer;
+
+typedef struct s_tlist
+{
+	t_token			*token; 
+	struct s_tlist	*prev;
+	struct s_tlist	*next;
+}					t_tlist;
 
 typedef	struct s_command
 {

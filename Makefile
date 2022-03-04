@@ -25,10 +25,12 @@ SRCS = ./main.c \
 	./srcs/pipe/more_utils.c \
 	./srcs/lexer/lexer.c \
 	./srcs/lexer/expand.c \
-	#./srcs/utils/tab_to_list.c \
-	#./srcs/utils/ft_tlstnew.c \
-	#./srcs/utils/ft_tlstadd_back.c \
-	#./srcs/utils/ft_tlstlast.c
+	./srcs/utils/tab_to_list.c \
+	./srcs/utils/ft_tlstnew.c \
+	./srcs/utils/ft_tlstadd_back.c \
+	./srcs/utils/ft_tlstlast.c \
+	./srcs/utils/ft_printtoklst.c \
+	./srcs/utils/ft_tlstsize.c \
 
 OBJS = ${SRCS:.c=.o}
 
