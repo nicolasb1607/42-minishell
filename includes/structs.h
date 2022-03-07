@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/04 11:40:26 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/07 09:44:53 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct s_token
 	char	*type;
 	char	*quote; 
 }			t_token;
-
 typedef struct s_lexer
 {
 	char	*text;

@@ -36,6 +36,7 @@ int is_valid_varenv(char *str)
 			return (0);
 		i++;
 	}
+	printf("Au revoir ligne 26 expand.\n");
 	return (1);
 }
 
@@ -58,9 +59,11 @@ char *look_for_varenv_value(char *varenv, t_dlist **env)
 		}
 		curr = curr->next;
 	}
+	printf("Au revoir ligne 43 expand.c]n");
 	i = 0;
 	while (val[i] != '=')
 		i++;
+	printf("Au revoir ligne 64 expand.c\n");
 	subval = ft_substr(val, i + 1, ft_strlen(val) - i);
 	if(ft_strlen(subval) == 0)
 		return(free(subval), NULL);
@@ -77,7 +80,8 @@ char	*expand(t_lexer *lexer, t_minishell *mshell)
 	i = 1;
 	while(lexer->text[lexer->pos + i] && lexer->text[lexer->pos + i] != ' ')
 	{
-		varenv = ft_charjoin(varenv, lexer->text[lexer->pos + i]);
+		if (lexer->text[lexer->pos + i] != '\"')
+			varenv = ft_charjoin(varenv, lexer->text[lexer->pos + i]);
 		i++;
 	}
 	if(is_valid_varenv(varenv) == 1)
@@ -85,8 +89,11 @@ char	*expand(t_lexer *lexer, t_minishell *mshell)
 		varvalue = look_for_varenv_value(varenv, mshell->head_env);
 	}
 	i = ft_strlen(varenv) + 1;
-	while (i-- != 0)
+	while (i > 0)
+	{
 		advance(lexer);
+		i--;
+	}
 	free(varenv);
 	return (varvalue);
 }

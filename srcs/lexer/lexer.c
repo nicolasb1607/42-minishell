@@ -20,6 +20,7 @@ int look_for_next_quote(char *str, char q, int *i)
 			return (1);
 		*i = *i + 1;
 	}
+	printf("Au revoir ligne 17\n");
 	return (0);
 }
 
@@ -45,11 +46,11 @@ int check_quote(char *str)
 		}
 		i++;
 	}
+	printf("Au revoir ligne 34 lexer.c");
 	if (ret_check == 0)
 		return (0);
 	return (1);
 }
-
 /*
 
 TO OD :
@@ -76,11 +77,17 @@ void init_lexer(t_lexer *lexer, char *str)
 	lexer->current_char = 0;
 }
 
-void init_token(t_token *token)
+t_token *init_token(void)
 {
+	t_token *token;
+
+	token = malloc(sizeof(t_token));
+	if(!token)
+		return (NULL);
 	token->content = NULL;
 	token->type = NULL;
 	token->quote = NULL;
+	return (token);	
 }
 
 void advance(t_lexer *lexer)
@@ -93,7 +100,7 @@ void advance(t_lexer *lexer)
 		lexer->current_char = str[lexer->pos];
 	else
 	{
-		printf("end of string\n");
+		printf("end of string\n"); // A conserver 
 		lexer->current_char = 0;
 	}
 }
@@ -104,98 +111,105 @@ void assign_toks(t_token *token, char *content, char *type)
 	token->type = type;
 }
 
-void make_quote_string(t_token *token, t_lexer *lexer, t_minishell *mshell)
+void make_quote_string(t_token *token, t_lexer *lexer)
 {
 	char tquote;
-	tquote = lexer->current_char;
 
-	advance(lexer);
+	tquote = lexer->current_char;
 	if (tquote == '\"')
 		token->quote = T_DQUOTE;
 	else
 		token->quote = T_SQUOTE;
-	if (lexer->current_char == '$' && ft_strncmp(token->quote, T_DQUOTE, 4) == 0)
-		token->content = expand(lexer, mshell);
+	advance(lexer);
 	while (lexer->current_char != tquote)
 	{
-		token->content = ft_charjoin(token->content, lexer->current_char);
-		advance(lexer);
+			token->content = ft_charjoin(token->content, lexer->current_char);
+			advance(lexer);
 	}
+	printf("Au revoir ligne 124\n");
 	token->type = T_STRING;
 	advance(lexer);
 }
 
-void make_string(t_token *token, t_lexer *lexer, t_minishell *mshell)
+void make_string(t_token *token, t_lexer *lexer)
 {
-	if (lexer->current_char == '$')
-		token->content = expand(lexer, mshell);
 	while ((ft_containchar(lexer->current_char, ALPHA) == 1 || ft_containchar(lexer->current_char, DIGIT) == 1))
 	{
 		token->content = ft_charjoin(token->content, lexer->current_char);
 		advance(lexer);
 	}
+	printf("Au revoir ligne 135\n");
 	token->type = T_STRING;
 }
 
-t_token make_token(t_lexer *lexer, t_minishell *mshell)
+/*
+	- Gerer les whitespaces 
+/home/nicolas/Documents/github/minishellD
+780
+
+	- Gerer le fait d afficher un dollars si rien derriere 
+*/
+
+t_token *make_token(t_lexer *lexer)
 {
-	t_token token;
+	t_token *token;
 
-	init_token(&token);
-
-	if (lexer->current_char == '\"')
-		make_quote_string(&token, lexer, mshell);
+	token = init_token();
+	printf("Debut make token\n");
+	if (lexer->current_char == 0)
+		token->content = NULL;
+	if (lexer->current_char == '\"' && lexer->pos < (int) ft_strlen(lexer->text))
+		make_quote_string(token, lexer);
 	else if (lexer->current_char == '\'')
-		make_quote_string(&token, lexer, mshell);
+		make_quote_string(token, lexer);
 	else if (ft_containchar(lexer->current_char, ALPHA) == 1 || ft_containchar(lexer->current_char, DIGIT) == 1)
-		make_string(&token, lexer, mshell);
+		make_string(token, lexer);
 	else if (lexer->current_char == '>')
 	{
 		if (lexer->text[lexer->pos + 1] == '>')
 		{
-			assign_toks(&token, ">>", T_DR_DIR);
+			assign_toks(token, ">>", T_DR_DIR);
 			advance(lexer);
 		}
 		else
-			assign_toks(&token, ">", T_R_DIR);
+			assign_toks(token, ">", T_R_DIR);
 	}
 	else if (lexer->current_char == '<')
 	{
 		if (lexer->text[lexer->pos + 1] == '<')
 		{
-			assign_toks(&token, "<<", T_DL_DIR);
+			assign_toks(token, "<<", T_DL_DIR);
 			advance(lexer);
 		}
 		else
-			assign_toks(&token, "<", T_L_DIR);
+			assign_toks(token, "<", T_L_DIR);
 	}
 	else if (lexer->current_char == '|')
-		assign_toks(&token, "|", T_PIPE);
+		assign_toks(token, "|", T_PIPE);
 	if (lexer->current_char != 0)
 		advance(lexer);
-	;
+	printf("end of make token\n");
 	return (token);
 }
 
-t_tlist *init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
+t_tlist *init_tlist(char *str, t_tlist *tlist)
 {
 	t_tlist *new;
-	t_token token;
+	
 	t_lexer lexer;
 
 	init_lexer(&lexer, str);
 	advance(&lexer);
 	while (lexer.current_char != 0)
 	{
+		printf("initlist\n ");
 		while (lexer.current_char == ' ')
 			advance(&lexer);
-		if (lexer.current_char != 0)
-		{
-			token = make_token(&lexer, mshell);
-			printf("%s\n", token.content);
-			new = ft_tlstnew(&token);
-			ft_tlstadd_back(&tlist, new);
-		}
+		printf("Au revoir ligne 205\n");
+		new = ft_tlstnew(make_token(&lexer));
+		printf("after make token = %s\n", new->token->content);
+		ft_tlstadd_back(&tlist, new);
 	}
+	printf("Au revoir ligne 202\n");
 	return (tlist);
 }
