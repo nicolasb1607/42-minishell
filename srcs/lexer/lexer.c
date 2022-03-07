@@ -209,6 +209,7 @@ t_tlist *init_tlist(char *str, t_tlist *tlist)
 		new = ft_tlstnew(make_token(&lexer));
 		printf("after make token = %s\n", new->token->content);
 		ft_tlstadd_back(&tlist, new);
+		printf("apres l ajout a la liste \n");
 	}
 	printf("Au revoir ligne 202\n");
 	return (tlist);
