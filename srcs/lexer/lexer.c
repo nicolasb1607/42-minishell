@@ -76,11 +76,17 @@ void init_lexer(t_lexer *lexer, char *str)
 	lexer->current_char = 0;
 }
 
-void init_token(t_token *token)
+t_token *init_token(void)
 {
+	t_token *token;
+
+	token = malloc(sizeof(t_token));
+	if(!token)
+		return (NULL);
 	token->content = NULL;
 	token->type = NULL;
 	token->quote = NULL;
+	return (token);	
 }
 
 void advance(t_lexer *lexer)
@@ -137,54 +143,52 @@ void make_string(t_token *token, t_lexer *lexer, t_minishell *mshell)
 	token->type = T_STRING;
 }
 
-t_token make_token(t_lexer *lexer, t_minishell *mshell)
+t_token *make_token(t_lexer *lexer, t_minishell *mshell)
 {
-	t_token token;
+	t_token *token;
 
-	init_token(&token);
+	token = init_token();
 
 	if (lexer->current_char == 0)
-		token.content = NULL;
+		token->content = NULL;
 	if (lexer->current_char == '\"')
-		make_quote_string(&token, lexer, mshell);
+		make_quote_string(token, lexer, mshell);
 	else if (lexer->current_char == '\'')
-		make_quote_string(&token, lexer, mshell);
+		make_quote_string(token, lexer, mshell);
 	else if (ft_containchar(lexer->current_char, ALPHA) == 1 || ft_containchar(lexer->current_char, DIGIT) == 1)
-		make_string(&token, lexer, mshell);
+		make_string(token, lexer, mshell);
 	else if (lexer->current_char == '>')
 	{
 		if (lexer->text[lexer->pos + 1] == '>')
 		{
-			assign_toks(&token, ">>", T_DR_DIR);
+			assign_toks(token, ">>", T_DR_DIR);
 			advance(lexer);
 		}
 		else
-			assign_toks(&token, ">", T_R_DIR);
+			assign_toks(token, ">", T_R_DIR);
 	}
 	else if (lexer->current_char == '<')
 	{
 		if (lexer->text[lexer->pos + 1] == '<')
 		{
-			assign_toks(&token, "<<", T_DL_DIR);
+			assign_toks(token, "<<", T_DL_DIR);
 			advance(lexer);
 		}
 		else
-			assign_toks(&token, "<", T_L_DIR);
+			assign_toks(token, "<", T_L_DIR);
 	}
 	else if (lexer->current_char == '|')
-		assign_toks(&token, "|", T_PIPE);
+		assign_toks(token, "|", T_PIPE);
 	if (lexer->current_char != 0)
 		advance(lexer);
 	return (token);
 }
 
-
-
 // Probleme de pointeur sur le token 
 t_tlist *init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
 {
 	t_tlist *new;
-	t_token token;
+	
 	t_lexer lexer;
 
 	init_lexer(&lexer, str);
@@ -193,8 +197,7 @@ t_tlist *init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
 	{
 		while (lexer.current_char == ' ')
 			advance(&lexer);
-		token = make_token(&lexer, mshell);
-		new = ft_tlstnew(&token);
+		new = ft_tlstnew(make_token(&lexer, mshell));
 		ft_tlstadd_back(&tlist, new);
 	}
 	return (tlist);
