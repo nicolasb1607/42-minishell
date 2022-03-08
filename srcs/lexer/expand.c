@@ -50,13 +50,14 @@ char *look_for_varenv_value(char *varenv, t_dlist **env)
 	i = -1;
 	while (curr)
 	{
-		if (ft_strncmp(get_var(curr->content), varenv, ft_strlen(varenv)) == 0 
-				&& ft_strlen(varenv) == ft_strlen(get_var(curr->content)))
+		if (ft_strncmp(get_var(curr->content), varenv, ft_strlen(varenv)) == 0 && ft_strlen(varenv) == ft_strlen(get_var(curr->content)))
 		{
 			val = curr->content;
 			break;
 		}
 		curr = curr->next;
+		if (!curr)
+			return (NULL);
 	}
 	i = 0;
 	while (val[i] != '=')
@@ -71,6 +72,7 @@ char *expand(t_token *token, int i, t_minishell *mshell)
 {
 	char *varenv;
 	char *varvalue;
+
 	varenv = NULL;
 	i++;
 	// printf("AVANT PREMIER WHILE\n");
@@ -81,9 +83,7 @@ char *expand(t_token *token, int i, t_minishell *mshell)
 	}
 	// printf("APRES PREMIER WHILE\n");
 	if (is_valid_varenv(varenv) == 1)
-	{
 		varvalue = look_for_varenv_value(varenv, mshell->head_env);
-	}
 	free(varenv);
 	return (varvalue);
 }
@@ -118,7 +118,7 @@ int lenvarenv(char *str, int i)
 		j++;
 		i++;
 	}
-	//printf("lenvarenv = %d\n", j);
+	// printf("lenvarenv = %d\n", j);
 	return (j);
 }
 
@@ -132,17 +132,21 @@ void expandtok(t_token *token, t_minishell *mshell)
 	expandedstr = NULL;
 	if (token->quote != NULL && ft_strncmp(token->quote, T_SQUOTE, 5) == 1)
 		return;
-	//printf("apres strncmp %s \n", token->content);
+	// printf("apres strncmp %s \n", token->content);
 	while (token->content[i])
 	{
 		if (token->content[i] == '$')
 		{
 			ret_expand = expand(token, i, mshell);
-			//printf("Apres expand  = %s\n", ret_expand);
-			expandedstr = ft_strjoin(expandedstr, ret_expand);
-			//printf("lenvarevnv = %d\n", lenvarenv(token->content, i));
-			//printf("Value expandedstr = %s\n", expandedstr);
+			if (ret_expand)
+			{
+				expandedstr = ft_strjoin(expandedstr, ret_expand);
+				printf("Apres le join\n");
+				printf("lenvarevnv = %d\n", lenvarenv(token->content, i));
+				printf("Value expandedstr = %s\n", expandedstr);
+			}
 			i = i + lenvarenv(token->content, i);
+		
 		}
 		if (token->content[i])
 			expandedstr = ft_charjoin(expandedstr, token->content[i]);

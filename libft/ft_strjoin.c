@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:38:47 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/07 16:01:25 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/08 17:09:03 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		j;
 
 	i = -1;
-	j = -1;
+	j = -1;	
 	if (!s1)
 		s1 = ft_strdup(""); 
 	catlen = ft_strlen(s1) + ft_strlen(s2);
