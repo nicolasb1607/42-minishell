@@ -13,7 +13,7 @@ int main(int ac, char **av, char **envp)
 	mshell.env = ft_dupenv(mshell.env, envp);
 	mshell.head_env = &mshell.env;
 
-	char	*str = "test >>> pr"; // <- fais le truc bizarre
+	char	*str = " \"sdf$PWD\" | grep nicolas test.c >>"; // <- fais le truc bizarre
 	// char	*str = "Salut qq6ch \"$USER \" 780 derriere yolo test test prout"; // <- quand on ajoute un espace apres ca segfault pas mais ne vas pas chercher nicolas
 	// char	*str = "Salut qq6ch \"$USER                                    \" 780 derriere yolo test test prout"; // etrange
 	// char	*str = "Salut qq6ch \" $USER \" 780 derriere yolo test test prout"; // <- marche mais garde les espace ( avant et apres )
@@ -25,7 +25,7 @@ int main(int ac, char **av, char **envp)
 	/*  */
 
 
-	tlist = init_tlist(str, tlist);
+	tlist = init_tlist(str, tlist, &mshell);
 
 	ft_printtoklst(tlist);
 

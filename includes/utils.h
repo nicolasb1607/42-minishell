@@ -10,5 +10,6 @@ void	ft_tlstadd_back(t_tlist **alst, t_tlist *new);
 t_tlist	*ft_tlstlast(t_tlist *lst);
 int		ft_tlstsize(t_tlist *lst);
 void	ft_printtoklst(t_tlist *tlist);
+void	ft_tlstiter(t_tlist *lst, t_minishell *mshell, void (*f)(t_token *, t_minishell *));
 
 #endif

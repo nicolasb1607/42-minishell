@@ -17,7 +17,8 @@ t_token *make_token(t_lexer *lexer);
 int		ft_isenv(char c);
 int		is_valid_varenv(char *str);
 char	*look_for_varenv_value(char *varenv, t_dlist **env);
-char	*expand( t_lexer *lexer, t_minishell *mshell);
-t_tlist *init_tlist(char *str, t_tlist *tlist);
+char	*expand(t_token *token, t_minishell *mshell);
+void	expandtok(t_token *token, t_minishell *mshell);
+t_tlist *init_tlist(char *str, t_tlist *tlist, t_minishell *mshell);
 
 #endif
