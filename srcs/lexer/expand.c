@@ -67,14 +67,12 @@ char *look_for_varenv_value(char *varenv, t_dlist **env)
 	return (subval);
 }
 
-char *expand(t_token *token, t_minishell *mshell)
+char *expand(t_token *token, int i, t_minishell *mshell)
 {
-	int i;
 	char *varenv;
 	char *varvalue;
-
 	varenv = NULL;
-	i = 1;
+	i++;
 	// printf("AVANT PREMIER WHILE\n");
 	while (token->content[i] && token->content[i] != ' ' && token->content[i] != '\'')
 	{
@@ -139,11 +137,11 @@ void expandtok(t_token *token, t_minishell *mshell)
 	{
 		if (token->content[i] == '$')
 		{
-			ret_expand = expand(token, mshell);
+			ret_expand = expand(token, i, mshell);
 			//printf("Apres expand  = %s\n", ret_expand);
 			expandedstr = ft_strjoin(expandedstr, ret_expand);
 			//printf("lenvarevnv = %d\n", lenvarenv(token->content, i));
-			//printf("Value expandedstr = %s\n", expandedstr); 
+			//printf("Value expandedstr = %s\n", expandedstr);
 			i = i + lenvarenv(token->content, i);
 		}
 		if (token->content[i])
