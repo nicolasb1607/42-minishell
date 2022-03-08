@@ -128,7 +128,6 @@ void make_quote_string(t_token *token, t_lexer *lexer)
 	}
 	printf("Au revoir ligne 124\n");
 	token->type = T_STRING;
-	advance(lexer);
 }
 
 void make_string(t_token *token, t_lexer *lexer)
