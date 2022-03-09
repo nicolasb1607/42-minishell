@@ -108,11 +108,11 @@ void expandtok(t_token *token, t_minishell *mshell)
 
 	i = 0;
 	expandedstr = NULL;
-	if (token->quote != NULL && ft_strncmp(token->quote, T_SQUOTE, 5) == 1)
-		return;
+	if (token->quote != NULL && ft_strncmp(token->quote, T_SQUOTE, 5) == 0)
+		return ;
 	while (token->content[i])
 	{
-		if (token->content[i] == '$')
+		if (token->content[i] == '$' && ft_isenv(token->content[i + 1]) == 1)
 		{
 			ret_expand = expand(token, i, mshell);
 			if (ret_expand)

@@ -10,6 +10,7 @@ int	ft_tlstsize(t_tlist *lst)
 	while (current != NULL)
 	{
 		size++;
+		printf("%d\n", size);
 		current = current->next;
 	}
 	return (size);

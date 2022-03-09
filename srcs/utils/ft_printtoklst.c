@@ -15,3 +15,4 @@ void	ft_printtoklst(t_tlist *tlist)
 		curr = curr->next;
 	}
 }
+

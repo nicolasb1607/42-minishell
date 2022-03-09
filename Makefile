@@ -1,6 +1,8 @@
 CC= gcc
-CFLAGS= -Wall -Wextra -Werror
+SAN= -fsanitize=address
+CFLAGS= -Wall -Wextra -Werror ##$(SAN)
 EXEC= minishell
+
 
 LIBFT = ./libft/
 RL = /usr/local/opt/readline/lib
@@ -40,10 +42,10 @@ all : MAKELIBFT $(EXEC)
 
 
 $(EXEC) : $(OBJS)
-	$(CC) $(CFLAGS) -L $(LIBFT) -L $(RL) $^ -o $(EXEC) -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT) -lft -lreadline -g
+	$(CC) $(CFLAGS)  -L $(LIBFT) -L $(RL) $^ -o $(EXEC) -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT) -lft -lreadline -g
 
 .c.o:
-	$(CC) $(CFLAGS) -L $(LIBFT) -L $(RL) -c $^ -o $@ -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT) -lft -lreadline -g
+	$(CC) $(CFLAGS)  -L $(LIBFT) -L $(RL) -c $^ -o $@ -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT) -lft -lreadline -g
 
 MAKELIBFT : 
 	make -C $(LIBFT)

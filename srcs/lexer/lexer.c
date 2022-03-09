@@ -31,6 +31,8 @@ int check_quote(char *str)
 
 	ret_check = 0;
 	i = 0;
+	if (!ft_containchar('\"', str) || !ft_containchar('\'', str) )
+		return (1);
 	while (str[i])
 	{
 		if (str[i] == '\"')
@@ -192,18 +194,24 @@ t_token *make_token(t_lexer *lexer)
 t_tlist *init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
 {
 	t_tlist *new;
-
+	t_token *token;
 	t_lexer lexer;
-
+	
+	if (check_quote(str) == 0)
+		return (NULL);
 	init_lexer(&lexer, str);
 	advance(&lexer);
 	while (lexer.current_char != 0)
 	{
 		while (lexer.current_char == ' ')
 			advance(&lexer);
-		new = ft_tlstnew(make_token(&lexer));
+		token = make_token(&lexer);
+		if(!token->content)
+			break ;
+		new = ft_tlstnew(token);
 		ft_tlstadd_back(&tlist, new);
 	}
+	//ft_tlstsize(tlist);
 	ft_tlstiter(tlist, mshell, expandtok);
 	return (tlist);
 }
