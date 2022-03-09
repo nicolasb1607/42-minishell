@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:37:34 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/03 11:52:18 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/09 16:12:09 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		ft_isupper(char c);
 int		ft_islower(char c);
 int		ft_is_int(char *str);
 int		ft_isprint(int c);
+int		ft_iswhitespace(char c);
 int	ft_containchar(char c, char *str);
 size_t	ft_strlen(const char *s);
 int		ft_tablen(char **tab);

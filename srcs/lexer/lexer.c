@@ -203,7 +203,7 @@ t_tlist *init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
 	advance(&lexer);
 	while (lexer.current_char != 0)
 	{
-		while (lexer.current_char == ' ')
+		while (ft_iswhitespace(lexer.current_char) == 1)
 			advance(&lexer);
 		token = make_token(&lexer);
 		if(!token->content)

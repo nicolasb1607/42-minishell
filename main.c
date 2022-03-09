@@ -13,7 +13,7 @@ int main(int ac, char **av, char **envp)
 	mshell.env = ft_dupenv(mshell.env, envp);
 	mshell.head_env = &mshell.env;
 
-	char	*str = "echo -n test ||| grgr >>>>>>>>>>>>>>>>>>>>> helo < oui |><"; 
+	char	*str = "   \t   \" tes\t de batard * \""; 
 	
 
 	tlist = init_tlist(str, tlist, &mshell);
