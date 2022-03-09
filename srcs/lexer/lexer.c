@@ -51,24 +51,6 @@ int check_quote(char *str)
 		return (0);
 	return (1);
 }
-/*
-
-TO OD :
-
---------------TOKEN-------------------------------
-- Creation d une structure TOKEN (Type et value)
-// - Creation fonction initialisation d un token, qui va assigner le type et la valeur
-
-
--------------LEXER-------------------------------
-- Creation d une structure LEXER (text, position, current char)
-- Creation d un fonction d initialisation du lexe, qui va simplement attribuer la str que lon doit analyser, la pos a -1 et le current_char a 0.
-- Creation d une fonction pour advance qui incremente la position du lexer ainsi que le current char en fonction de la position
-
-
-- Creation d une fonction make_tokens qui prend en parametre le lexer
-
-*/
 
 void init_lexer(t_lexer *lexer, char *str)
 {
@@ -120,8 +102,6 @@ void make_quote_string(t_token *token, t_lexer *lexer)
 	advance(lexer);
 	while (lexer->current_char != tquote)
 	{
-		// if (lexer->current_char == '$' && ft_strncmp(token->quote, T_DQUOTE, 5))
-		// 	token->content = ft_strjoin(token->content, expand(lexer, mshell));
 		token->content = ft_charjoin(token->content, lexer->current_char);
 		advance(lexer);
 	}
@@ -131,8 +111,6 @@ void make_quote_string(t_token *token, t_lexer *lexer)
 
 void make_string(t_token *token, t_lexer *lexer)
 {
-	// if (lexer->current_char == '$')
-	// 	expand(lexer, mshell);
 	while (ft_isascii(lexer->current_char) == 1 && ft_iswhitespace(lexer->current_char) == 0)
 	{
 		token->content = ft_charjoin(token->content, lexer->current_char);
@@ -140,14 +118,6 @@ void make_string(t_token *token, t_lexer *lexer)
 	}
 	token->type = T_STRING;
 }
-
-/*
-	- Gerer les whitespaces
-/home/nicolas/Documents/github/minishellD
-780
-
-	- Gerer le fait d afficher un dollars si rien derriere
-*/
 
 t_token *make_token(t_lexer *lexer)
 {
@@ -160,8 +130,6 @@ t_token *make_token(t_lexer *lexer)
 		make_quote_string(token, lexer);
 	else if (lexer->current_char == '\'')
 		make_quote_string(token, lexer);
-	// else if (ft_containchar(lexer->current_char, ALPHA) == 1 || ft_containchar(lexer->current_char, DIGIT) == 1)
-	// 	make_string(token, lexer);
 	else if (lexer->current_char == '>')
 	{
 		if (lexer->text[lexer->pos + 1] == '>')
@@ -186,8 +154,6 @@ t_token *make_token(t_lexer *lexer)
 		assign_toks(token, "|", T_PIPE);
 	else if (ft_isascii(lexer->current_char) == 1 && ft_iswhitespace(lexer->current_char) == 0)
 		make_string(token, lexer);
-	// else if (lexer->current_char == '$')
-	// 	assign_toks(token, "$", T_DOLLAR);
 	if (lexer->current_char != 0)
 		advance(lexer);
 	return (token);
@@ -213,7 +179,6 @@ t_tlist *init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
 		new = ft_tlstnew(token);
 		ft_tlstadd_back(&tlist, new);
 	}
-	//ft_tlstsize(tlist);
 	ft_tlstiter(tlist, mshell, expandtok);
 	return (tlist);
 }
