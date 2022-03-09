@@ -133,7 +133,7 @@ void make_string(t_token *token, t_lexer *lexer)
 {
 	// if (lexer->current_char == '$')
 	// 	expand(lexer, mshell);
-	while ((ft_containchar(lexer->current_char, ALPHA) == 1 || ft_containchar(lexer->current_char, DIGIT) == 1))
+	while (ft_isascii(lexer->current_char) == 1 && ft_iswhitespace(lexer->current_char) == 0)
 	{
 		token->content = ft_charjoin(token->content, lexer->current_char);
 		advance(lexer);
@@ -160,8 +160,8 @@ t_token *make_token(t_lexer *lexer)
 		make_quote_string(token, lexer);
 	else if (lexer->current_char == '\'')
 		make_quote_string(token, lexer);
-	else if (ft_containchar(lexer->current_char, ALPHA) == 1 || ft_containchar(lexer->current_char, DIGIT) == 1)
-		make_string(token, lexer);
+	// else if (ft_containchar(lexer->current_char, ALPHA) == 1 || ft_containchar(lexer->current_char, DIGIT) == 1)
+	// 	make_string(token, lexer);
 	else if (lexer->current_char == '>')
 	{
 		if (lexer->text[lexer->pos + 1] == '>')
@@ -184,8 +184,10 @@ t_token *make_token(t_lexer *lexer)
 	}
 	else if (lexer->current_char == '|')
 		assign_toks(token, "|", T_PIPE);
-	else if (lexer->current_char == '$')
-		assign_toks(token, "$", T_DOLLAR);
+	else if (ft_isascii(lexer->current_char) == 1 && ft_iswhitespace(lexer->current_char) == 0)
+		make_string(token, lexer);
+	// else if (lexer->current_char == '$')
+	// 	assign_toks(token, "$", T_DOLLAR);
 	if (lexer->current_char != 0)
 		advance(lexer);
 	return (token);
