@@ -119,18 +119,9 @@ void make_string(t_token *token, t_lexer *lexer)
 	token->type = T_STRING;
 }
 
-t_token *make_token(t_lexer *lexer)
+void	tok_operation(t_token *token, t_lexer *lexer)
 {
-	t_token *token;
-
-	token = init_token();
-	if (lexer->current_char == 0)
-		token->content = NULL;
-	if (lexer->current_char == '\"' && lexer->pos < (int)ft_strlen(lexer->text))
-		make_quote_string(token, lexer);
-	else if (lexer->current_char == '\'')
-		make_quote_string(token, lexer);
-	else if (lexer->current_char == '>')
+	if (lexer->current_char == '>')
 	{
 		if (lexer->text[lexer->pos + 1] == '>')
 		{
@@ -152,6 +143,21 @@ t_token *make_token(t_lexer *lexer)
 	}
 	else if (lexer->current_char == '|')
 		assign_toks(token, "|", T_PIPE);
+}
+
+t_token *make_token(t_lexer *lexer)
+{
+	t_token *token;
+
+	token = init_token();
+	if (lexer->current_char == 0)
+		token->content = NULL;
+	if (lexer->current_char == '\"' && lexer->pos < (int)ft_strlen(lexer->text))
+		make_quote_string(token, lexer);
+	else if (lexer->current_char == '\'')
+		make_quote_string(token, lexer);
+	else if (ft_containchar(lexer->current_char, ">|<") == 1 )
+		tok_operation(token, lexer);
 	else if (ft_isascii(lexer->current_char) == 1 && ft_iswhitespace(lexer->current_char) == 0)
 		make_string(token, lexer);
 	if (lexer->current_char != 0)
