@@ -7,8 +7,11 @@ void	ft_printtoklst(t_tlist *tlist)
 	curr = tlist;
 	while (curr)
 	{
-		ft_putstr(curr->token->content);
-		ft_putchar('\n');
-		curr = curr->next;	
+		if (curr->token->content)
+		{
+			ft_putstr(curr->token->content);
+			ft_putchar('\n');
+		}
+		curr = curr->next;
 	}
 }
