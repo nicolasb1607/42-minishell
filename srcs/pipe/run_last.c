@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_last.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 18:56:06 by ngobert           #+#    #+#             */
-/*   Updated: 2022/02/23 13:09:11 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/09 17:41:46 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	run_last(t_data *data)
 	char	**paths;
 	char	**cmd;
 	char	*bin;
-	
+
 	cmd = ft_split(data->argv[data->argc - 2], ' ');
 	paths = get_paths(data);
 	bin = get_bin(cmd[0], paths);

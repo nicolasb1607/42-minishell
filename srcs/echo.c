@@ -1,12 +1,22 @@
-#include "echo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 18:22:09 by nburat-d          #+#    #+#             */
+/*   Updated: 2022/03/09 18:24:09 by nburat-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
+#include "echo.h"
 
 void	ft_echo(int ac, char **argv)
 {
 	int	i;
-	int trlnl;
-	int len;
+	int	trlnl;
+	int	len;
 
 	i = 1;
 	trlnl = 0;
@@ -19,10 +29,10 @@ void	ft_echo(int ac, char **argv)
 	while (i < ac)
 	{
 		ft_putstr(argv[i]);
-		if(i == (ac - 1) && trlnl == 1)
+		if (i == (ac - 1) && trlnl == 1)
 		{
 			len = ft_strlen(argv[i]);
-			if (ft_strcmp(&argv[i][len - 1],"\n") != 0)
+			if (ft_strcmp(&argv[i][len - 1], "\n") != 0)
 				ft_putchar('%');
 		}
 		i++;

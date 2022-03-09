@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 18:01:53 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/01 18:52:45 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/09 17:25:41 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*char_to_str(char c)
 {
 	char	*str;
-	
+
 	str = malloc(sizeof(char) * 2);
 	if (!str)
 		return (NULL);
@@ -28,7 +28,7 @@ char	*ft_charjoin(char *str, char c)
 {
 	char	*new;
 	int		i;
-	
+
 	i = 0;
 	if (!c)
 		return (NULL);

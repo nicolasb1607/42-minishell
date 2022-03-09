@@ -1,21 +1,13 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_sig.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 18:22:54 by nburat-d          #+#    #+#             */
+/*   Updated: 2022/03/09 18:22:55 by nburat-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "handle_sig.h"
-
-
-// void	handle_sig(int signum)
-// {
-// 	(void)si_signo;
-// 	if(signum == SIGINT && data->env)
-// 		free_env(data->env);
-// }
-
-// // // void	handle_ctrld(void)
-// // // {
- 
-// // // }
-
-// // // void	handle_ctrlbslash(void)
-// // // {
-
-// // // }
-
-

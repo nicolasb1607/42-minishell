@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:42 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/09 17:06:43 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/09 17:50:11 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_printtoklst(t_tlist *tlist)
 {
-	t_tlist *curr;
+	t_tlist	*curr;
 
 	curr = tlist;
 	while (curr)
@@ -29,4 +29,3 @@ void	ft_printtoklst(t_tlist *tlist)
 		curr = curr->next;
 	}
 }
-

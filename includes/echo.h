@@ -1,10 +1,20 @@
-#ifndef ECHO_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 17:31:08 by nburat-d          #+#    #+#             */
+/*   Updated: 2022/03/09 17:34:14 by nburat-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#ifndef ECHO_H
 # define ECHO_H
 
-#include "minishell.h"
+# include "minishell.h"
 
 void	ft_echo(int ac, char **argv);
-
 
 #endif

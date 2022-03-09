@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_first.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:30:38 by ngobert           #+#    #+#             */
-/*   Updated: 2022/02/23 13:09:09 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/09 17:44:03 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,10 @@ void	run_first(t_data *data)
 	char	**paths;
 	char	**cmd;
 	char	*bin;
-	
+
 	data->child[0] = fork();
-	if(data->child[0] < 0)
-	{
+	if (data->child[0] < 0)
 		ft_error("Fork error");
-	}
 	else if (data->child[0] == 0)
 	{
 		cmd = (ft_split(data->argv[2], ' '));

@@ -1,9 +1,21 @@
-#include "export.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 17:37:12 by nburat-d          #+#    #+#             */
+/*   Updated: 2022/03/09 17:38:57 by nburat-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "export.h"
 
 /* TODO : 
 
-- Ne pas oublier de check si la variable que l on souhaite creer correspond aux standards 
+- Ne pas oublier de check si la variable que l on souhaite creer 
+	correspond aux standards 
 du nommage des variable d environnement a savoir 
 		- Seulement Des ALphanum et des UNDERSCORE
 		- Ne doit pas commencer par un digit 

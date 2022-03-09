@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 09:54:48 by ngobert           #+#    #+#             */
-/*   Updated: 2022/02/23 13:11:38 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/09 17:43:01 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	ft_pipex(t_data *data, int argc)
 		i++;
 	}
 	run_last(data);
-	//wait_childs(data);
 }
+	//wait_childs(data); <- apres le run_last
 
 void	pipes(int argc, char **argv, char **envp)
 {

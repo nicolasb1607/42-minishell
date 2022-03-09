@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/09 16:22:23 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/09 17:30:57 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@
 # define T_LBRACK "T_LBRACK"
 # define T_DOLLAR "T_DOLLAR"
 
-
 typedef struct s_token
 {
-	char	*content; 
+	char	*content;
 	char	*type;
-	char	*quote; 
+	char	*quote;
 }			t_token;
+
 typedef struct s_lexer
 {
 	char	*text;
@@ -53,12 +53,12 @@ typedef struct s_lexer
 
 typedef struct s_tlist
 {
-	t_token			*token; 
+	t_token			*token;
 	struct s_tlist	*prev;
 	struct s_tlist	*next;
 }					t_tlist;
 
-typedef	struct s_command
+typedef struct s_command
 {
 	char	*command;
 }			t_command;
@@ -68,6 +68,6 @@ typedef struct s_minishell
 	t_lexer	*lexer;
 	t_dlist	*env;
 	t_dlist	**head_env;
-}	t_minishell ;
+}			t_minishell;
 
 #endif

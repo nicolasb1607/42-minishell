@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_mid.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:29:12 by ngobert           #+#    #+#             */
-/*   Updated: 2022/02/23 13:09:13 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/09 17:42:03 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	run_mid(t_data *data, int i)
 	char	**paths;
 	char	**cmd;
 	char	*bin;
-	
+
 	data->child[i] = fork();
 	if (data->child[i] < 0)
 		ft_error("Forking error");
