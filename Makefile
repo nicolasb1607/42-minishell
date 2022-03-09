@@ -26,7 +26,10 @@ SRCS = ./main.c \
 	./srcs/pipe/utils.c \
 	./srcs/pipe/more_utils.c \
 	./srcs/lexer/lexer.c \
-	./srcs/lexer/expand.c \
+	./srcs/lexer/init_lexer.c \
+	./srcs/lexer/lexer_utils.c \
+	./srcs/lexer/expand_p1.c \
+	./srcs/lexer/expand_p2.c \
 	./srcs/utils/tab_to_list.c \
 	./srcs/utils/ft_tlstnew.c \
 	./srcs/utils/ft_tlstadd_back.c \
