@@ -9,6 +9,8 @@ void	ft_printtoklst(t_tlist *tlist)
 	{
 		if (curr->token->content)
 		{
+			ft_putstr(curr->token->type);
+			ft_putchar('\t');
 			ft_putstr(curr->token->content);
 			ft_putchar('\n');
 		}
