@@ -19,7 +19,7 @@ int main(int ac, char **av, char **envp)
 
 
 
-	char	*str = "\'echo \' | ||||||||| merde"; 
+	char	*str = "\'echo \' -n yoyy '$USER'  | merde"; 
 	
 
 	tlist = init_tlist(str, tlist, &mshell);
@@ -29,6 +29,8 @@ int main(int ac, char **av, char **envp)
 	printf ("----------------------------------------\n");
 
 	parser(tlist);
+
+	ft_echo(tlist);
 
 	return (0);
 }

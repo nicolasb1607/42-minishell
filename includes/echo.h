@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:31:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/09 17:34:14 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/11 15:00:35 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,5 @@
 
 # include "minishell.h"
 
-void	ft_echo(int ac, char **argv);
-
+void	ft_echo(t_tlist *tlst);
 #endif
