@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:31:41 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/09 17:31:42 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/11 14:23:27 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ char	*look_for_varenv_value(char *varenv, t_dlist **env);
 char	*expand(t_token *token, int i, t_minishell *mshell);
 void	expandtok(t_token *token, t_minishell *mshell);
 t_tlist	*init_tlist(char *str, t_tlist *tlist, t_minishell *mshell);
+//void	ft_error(char *str);
+int		parser(t_tlist *lst);
 
 #endif

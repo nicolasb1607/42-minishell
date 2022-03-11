@@ -37,6 +37,7 @@ SRCS = ./main.c \
 	./srcs/utils/ft_printtoklst.c \
 	./srcs/utils/ft_tlstsize.c \
 	./srcs/utils/ft_tlstiter.c \
+	./srcs/parser/parser.c \
 
 OBJS = ${SRCS:.c=.o}
 
