@@ -19,7 +19,7 @@ int main(int ac, char **av, char **envp)
 
 
 
-	char	*str = "\" echo | \" merde"; 
+	char	*str = "\'echo \' | ||||||||| merde"; 
 	
 
 	tlist = init_tlist(str, tlist, &mshell);
