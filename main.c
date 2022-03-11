@@ -16,10 +16,7 @@ int main(int ac, char **av, char **envp)
 	// ft_cd("yolo", mshell.head_env);
 	// ft_env(mshell.head_env);
 	
-
-
-
-	char	*str = "\'echo \' -n yoyy '$USER'  | merde"; 
+	char	*str = "ls > fichier"; 
 	
 
 	tlist = init_tlist(str, tlist, &mshell);

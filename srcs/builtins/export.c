@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:12 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/09 17:38:57 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/11 15:38:59 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 du nommage des variable d environnement a savoir 
 		- Seulement Des ALphanum et des UNDERSCORE
 		- Ne doit pas commencer par un digit 
+		- Gerer plusieur variables et les variable dans les quotes 
 
 */
 
