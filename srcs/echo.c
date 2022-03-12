@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:22:09 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/11 16:06:35 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/12 13:13:06 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,19 @@ int	__is_valid_option(t_tlist *tlst)
 				return(0);
 			i++;
 		}
+		return (1);
 	}
-	return (1);
+	return(0);
 }
 
-void	skip_option(t_tlist *tlist)
-{
-	while ()
-	{
-		/* code */
-	}
+// void	skip_option(t_tlist *tlist)
+// {
+// 	while ()
+// 	{
+// 		/* code */
+// 	}
 	
-}
+// }
 
 void	ft_echo(t_tlist *tlst)
 {
@@ -52,7 +53,8 @@ void	ft_echo(t_tlist *tlst)
 	curr = tlst->next;
 	nl_opt = 0;
 	printf("curr token = %s\n", curr->token->content);
-	if (ft_strncmp(curr->token->content, "-n", ft_strlen(curr->token->content)) == 0)
+
+	while (__is_valid_option(curr) == 1)
 	{
 		printf("MAJ de nl_opt\n");
 		nl_opt = 1;
