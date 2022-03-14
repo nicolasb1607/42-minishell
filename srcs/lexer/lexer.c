@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 17:21:43 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/14 13:44:48 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/14 18:43:51 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	make_string(t_token *token, t_lexer *lexer)
 		}
 		if (lexer->current_char == '\'' || lexer->current_char == '\"')
 		{
-			printf("un pas en arriere\n");
 			token->space_after = 0;
 			recul(lexer);
 			break;
