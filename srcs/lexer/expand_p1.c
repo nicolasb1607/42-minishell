@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_p1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:02 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/14 12:03:14 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/14 18:34:43 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	is_valid_varenv(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);	
 	if (ft_isdigit(str[i++]) == 1)
 		return (0);
 	while (str[i])
