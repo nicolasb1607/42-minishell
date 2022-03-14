@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:31:56 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/09 17:31:58 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/14 13:59:33 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 # include "minishell.h"
 
-char	*get_var(char *varnvalue);
-void	ft_export(char *varnvalue, t_dlist **dupenv);
+char	*get_var(t_tlist *tlst);
+void	ft_export(t_tlist *tlst, t_dlist **dup_env);
+
 
 #endif
