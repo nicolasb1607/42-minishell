@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 17:21:43 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/14 11:59:04 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/14 13:44:48 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	make_quote_string(t_token *token, t_lexer *lexer)
 		token->content = ft_charjoin(token->content, lexer->current_char);
 		advance(lexer);
 	}
+	if (lexer->text[lexer->pos + 1] && lexer->text[lexer->pos + 1] != ' ')
+		token->space_after = 0;
 	token->type = T_STRING;
 }
 
@@ -63,13 +65,13 @@ void	make_string(t_token *token, t_lexer *lexer)
 		advance(lexer);
 		if (ft_containchar(lexer->text[lexer->pos + 1], "<>|") == 1 )
 		{	
-			printf("lexer current char = %c\n", lexer->current_char);
 			token->content = ft_charjoin(token->content, lexer->current_char);
 			break ;
 		}
 		if (lexer->current_char == '\'' || lexer->current_char == '\"')
 		{
 			printf("un pas en arriere\n");
+			token->space_after = 0;
 			recul(lexer);
 			break;
 		}

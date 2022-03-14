@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:22:09 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/12 13:19:04 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/14 13:45:24 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_echo(t_tlist *tlst)
 	while (curr && __is_type(curr, T_STRING))
 	{
 		ft_putstr(curr->token->content);
-		if (curr->next)
+		if (curr->next && curr->token->space_after == 1)
 			ft_putchar(' ');
 		curr = curr->next;
 	}

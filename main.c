@@ -16,7 +16,7 @@ int main(int ac, char **av, char **envp)
 	// ft_cd("yolo", mshell.head_env);
 	// ft_env(mshell.head_env);
 	
-	char	*str = "export nathan=\"$USER\" "; 
+	char	*str = "echo ryrrugr \"$USER\"   gugouet"; 
 	
 
 	tlist = init_tlist(str, tlist, &mshell);
@@ -27,7 +27,7 @@ int main(int ac, char **av, char **envp)
 
 	parser(tlist);
 
-	// ft_export(tlist);
+	ft_echo(tlist);
 
 	return (0);
 }

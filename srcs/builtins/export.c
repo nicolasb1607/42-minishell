@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:12 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/11 15:38:59 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/14 13:27:49 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,38 @@ char	*get_var(char *varnvalue)
 	return (varexport);
 }
 
-void	ft_export(char *varnvalue, t_dlist **dupenv)
-{
-	char	*varexport;
-	t_dlist	*curr;
-	t_dlist	*new;
+// void	ft_export(t_tlist *tlst, t_dlist **dup_env)
+// {
+// 	char	*varexport;
 
-	varexport = get_var(varnvalue);
-	if (!varexport)
-		return ;
-	if (is_existing(varexport, dupenv) == 1)
-	{
-		curr = *dupenv;
-		while (curr)
-		{
-			if (ft_strncmp(curr->content, varexport, ft_strlen(varexport)) == 0)
-			{
-				free(curr->content);
-				curr->content = ft_strdup(varnvalue);
-				return ;
-			}
-			curr = curr->next;
-		}
-	}
-	new = ft_dlstnew(ft_strdup(varnvalue));
-	ft_dlstadd_back(dupenv, new);
-}
+// 	varexport = get_var()
+// }
+
+
+
+// void	ft_export(char *varnvalue, t_dlist **dupenv)
+// {
+// 	char	*varexport;
+// 	t_dlist	*curr;
+// 	t_dlist	*new;
+
+// 	varexport = get_var(varnvalue);
+// 	if (!varexport)
+// 		return ;
+// 	if (is_existing(varexport, dupenv) == 1)
+// 	{
+// 		curr = *dupenv;
+// 		while (curr)
+// 		{
+// 			if (ft_strncmp(curr->content, varexport, ft_strlen(varexport)) == 0)
+// 			{
+// 				free(curr->content);
+// 				curr->content = ft_strdup(varnvalue);
+// 				return ;
+// 			}
+// 			curr = curr->next;
+// 		}
+// 	}
+// 	new = ft_dlstnew(ft_strdup(varnvalue));
+// 	ft_dlstadd_back(dupenv, new);
+// }

@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:42 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/14 11:18:48 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/14 13:30:46 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	ft_printtoklst(t_tlist *tlist)
 			{
 				ft_putstr(curr->token->quote);
 				ft_putchar('\t');
-				ft_putchar('\n');
 			}
 			ft_putchar('\n');
 		}
