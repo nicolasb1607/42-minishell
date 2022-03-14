@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:12 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/14 18:39:38 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/14 18:52:50 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void ft_export(t_tlist *tlst, t_dlist **dup_env)
 		{
 			while (currenv)
 			{
-				if (ft_strncmp(currenv->content, varexport, ft_strlen(varexport)) == 0)
+				if (ft_strncmp(currenv->content, varexport, ft_strlen(get_var(currenv->content))) == 0)
 				{
 					free(currenv->content);
 					currenv->content = ft_strdup(currtok->token->content);
@@ -87,7 +87,7 @@ void ft_export(t_tlist *tlst, t_dlist **dup_env)
 		{
 			while (currenv)
 			{
-				if (ft_strncmp(currenv->content, varexport, ft_strlen(varexport)) == 0)
+				if (ft_strncmp(currenv->content, varexport, ft_strlen(get_var(currenv->content))) == 0)
 				{
 					free(currenv->content);
 					currenv->content = ft_strjoin(currtok->token->content, currtok->next->token->content);
