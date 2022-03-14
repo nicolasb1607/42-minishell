@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 17:21:43 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/09 17:10:06 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/14 10:40:09 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ void	make_string(t_token *token, t_lexer *lexer)
 	{
 		token->content = ft_charjoin(token->content, lexer->current_char);
 		advance(lexer);
+		if (ft_containchar(lexer->text[lexer->pos + 1], "<>|") == 1)
+		{
+			token->content = ft_charjoin(token->content, lexer->current_char);
+			break ;
+		}
 	}
 	token->type = T_STRING;
 }
