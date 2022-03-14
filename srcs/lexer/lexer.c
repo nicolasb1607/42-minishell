@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 17:21:43 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/14 10:40:09 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/14 11:59:04 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,18 @@ void	advance(t_lexer *lexer)
 	char	*str;
 
 	lexer->pos += 1;
+	str = lexer->text;
+	if (str[lexer->pos])
+		lexer->current_char = str[lexer->pos];
+	else
+		lexer->current_char = 0;
+}
+
+void	recul(t_lexer *lexer)
+{
+	char	*str;
+
+	lexer->pos = lexer->pos - 1;
 	str = lexer->text;
 	if (str[lexer->pos])
 		lexer->current_char = str[lexer->pos];
@@ -45,14 +57,21 @@ void	make_quote_string(t_token *token, t_lexer *lexer)
 void	make_string(t_token *token, t_lexer *lexer)
 {
 	while (ft_isascii(lexer->current_char) == 1
-		&& ft_iswhitespace(lexer->current_char) == 0)
+		&& ft_iswhitespace(lexer->current_char) == 0 )
 	{
 		token->content = ft_charjoin(token->content, lexer->current_char);
 		advance(lexer);
-		if (ft_containchar(lexer->text[lexer->pos + 1], "<>|") == 1)
-		{
+		if (ft_containchar(lexer->text[lexer->pos + 1], "<>|") == 1 )
+		{	
+			printf("lexer current char = %c\n", lexer->current_char);
 			token->content = ft_charjoin(token->content, lexer->current_char);
 			break ;
+		}
+		if (lexer->current_char == '\'' || lexer->current_char == '\"')
+		{
+			printf("un pas en arriere\n");
+			recul(lexer);
+			break;
 		}
 	}
 	token->type = T_STRING;
