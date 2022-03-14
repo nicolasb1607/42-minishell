@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:12 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/14 17:57:01 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/14 18:22:29 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ void ft_export(t_tlist *tlst, t_dlist **dup_env)
 	currtok = tlst->next;
 	currenv = *dup_env;
 	varexport = get_var(currtok->token->content);
+	printf("varexport = %s\n", varexport);
 	if (is_valid_varenv(varexport) == 1)
 	{
+		printf("Is a valid varenv\n");
 		if (check_equal(currtok->token->content, tlst) == 1 && is_existing(varexport, dup_env) == 1)
 		{
 			while (currenv)
@@ -78,20 +80,23 @@ void ft_export(t_tlist *tlst, t_dlist **dup_env)
 				currenv = currenv->next;
 			}
 		}
-		if (check_equal(currtok->token->content, tlst) == 1 && is_existing(varexport, dup_env) == 0)
+		else if (check_equal(currtok->token->content, tlst) == 1 && is_existing(varexport, dup_env) == 0)
 		{	
 			printf("coco\n");
-			new = ft_dlstnew(tlst->token->content);
+			new = ft_dlstnew(ft_strdup(currtok->token->content));
+			printf("new content = %s\n", (char *)new->content);
 			ft_dlstadd_back(dup_env, new);
 		}
 		// if (check_equal(currtok->token->content, tlst) == 2 && is_existing(varexport, dup_env) == 1)
 		// {
 			
 		// }
-		// if (check_equal(currtok->token->content, tlst) == 2 && is_existing(varexport, dup_env) == 0)
-		// {
-		// 	return ;
-		// }
+		else if (check_equal(currtok->token->content, tlst) == 2 && is_existing(varexport, dup_env) == 0)
+		{
+			new = ft_dlstnew(ft_strjoin(currtok->token->content, currtok->next->token->content));
+			ft_dlstadd_back(dup_env, new);
+			return ;
+		}
 		// if (check_equal(currtok->token->content, tlst) == 0)
 	}
 }

@@ -16,7 +16,7 @@ int main(int ac, char **av, char **envp)
 	// ft_cd("yolo", mshell.head_env);
 	ft_env(mshell.head_env);
 	
-	char	*str = "$USER"; 
+	char	*str = "export yolo=\'$PWD\'"; 
 	
 
 
@@ -29,7 +29,7 @@ int main(int ac, char **av, char **envp)
 	parser(tlist);
 
 	ft_export(tlist, mshell.head_env);
-	//ft_env(mshell.head_env);
+	ft_env(mshell.head_env);
 
 	return (0);
 }
