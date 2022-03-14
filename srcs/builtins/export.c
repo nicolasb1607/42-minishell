@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:12 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/14 18:34:03 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/14 18:39:38 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,8 @@ void ft_export(t_tlist *tlst, t_dlist **dup_env)
 	currtok = tlst->next;
 	currenv = *dup_env;
 	varexport = get_var(currtok->token->content);
-	printf("ici segf %s\n", varexport);
 	if (is_valid_varenv(varexport) == 1)
 	{
-			printf("apres isvalid\n");
-
 		if (check_equal(currtok->token->content, tlst) == 1 && is_existing(varexport, dup_env) == 1)
 		{
 			while (currenv)
