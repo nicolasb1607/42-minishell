@@ -28,7 +28,7 @@ int main(int ac, char **av, char **envp)
 
 	parser(tlist);
 
-	// ft_export(tlist, mshell.head_env);
+	ft_export(tlist, mshell.head_env);
 	//ft_env(mshell.head_env);
 
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:12 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/14 15:34:47 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/14 17:57:01 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ du nommage des variable d environnement a savoir
 
 */
 
-char *get_var(t_tlist *tlst)
+char *get_var(char *varenval)
 {
 	char *varexport;
 	int i;
 
 	varexport = NULL;
 	i = 0;
-	if (ft_containchar('=', tlst->token->content) == 0)
+	if (ft_containchar('=', varenval) == 0)
 		return (NULL);
-	while (tlst->token->content[i] && tlst->token->content[i] != '=')
+	while (varenval[i] && varenval[i] != '=')
 		i++;
-	varexport = ft_strncpy(tlst->token->content, i);
+	varexport = ft_strncpy(varenval, i);
 	return (varexport);
 }
 
@@ -62,7 +62,7 @@ void ft_export(t_tlist *tlst, t_dlist **dup_env)
 
 	currtok = tlst->next;
 	currenv = *dup_env;
-	varexport = get_var(currtok);
+	varexport = get_var(currtok->token->content);
 	if (is_valid_varenv(varexport) == 1)
 	{
 		if (check_equal(currtok->token->content, tlst) == 1 && is_existing(varexport, dup_env) == 1)
