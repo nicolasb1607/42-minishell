@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:12 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/14 19:57:35 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/15 15:52:10 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ du nommage des variable d environnement a savoir
 
 */
 
-char	*get_var(char *varenval)
+char *get_var(char *varenval)
 {
-	char	*varexport;
-	int		i;
+	char *varexport;
+	int i;
 
 	varexport = NULL;
 	i = 0;
@@ -38,9 +38,9 @@ char	*get_var(char *varenval)
 	return (varexport);
 }
 
-int	check_equal(char *str, t_tlist *tlst)
+int check_equal(char *str, t_tlist *tlst)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (str[i] != '=')
@@ -53,66 +53,78 @@ int	check_equal(char *str, t_tlist *tlst)
 		return (0);
 }
 
-void	ft_export(t_tlist *tlst, t_dlist **dup_env)
+/*
+On doit checker si tous les arguments sont valid avant meme de rajouter 
+la premier variable a l environnement
+
+*/
+// int is_all_var_valid(t_tlist *tlst)
+// {
+// 	int is_valid;
+// }
+
+void ft_export(t_tlist *tlst, t_dlist **dup_env)
 {
-	char	*varexport;
-	t_tlist	*currtok;
-	t_dlist	*currenv;
-	t_dlist	*new;
+	char *varexport;
+	t_tlist *currtok;
+	t_dlist *currenv;
+	t_dlist *new;
 
 	currtok = tlst->next;
 	currenv = *dup_env;
+
+	
 	varexport = get_var(currtok->token->content);
-	//printf("varexport = %s\n", varexport);
-	if (is_valid_varenv(varexport) == 1)
-	{
-		//printf("is a valid var\n");
-		if (check_equal(currtok->token->content, tlst) == 1
-			&& is_existing(varexport, dup_env) == 1)
+		//printf("varexport = %s\n", varexport);
+		if (is_valid_varenv(varexport) == 1 && ft_containchar('=', currtok->token->content))
 		{
-			while (currenv)
+			printf("is a valid var\n");
+			if (check_equal(currtok->token->content, tlst) == 1 && is_existing(varexport, dup_env) == 1)
 			{
-				if (ft_strncmp(currenv->content, varexport,
-						ft_strlen(get_var(currenv->content))) == 0)
+				while (currenv)
 				{
-					free(currenv->content);
-					currenv->content = ft_strdup(currtok->token->content);
-					return ;
+					if (ft_strncmp(currenv->content, varexport,
+								   ft_strlen(get_var(currenv->content))) == 0)
+					{
+						free(currenv->content);
+						currenv->content = ft_strdup(currtok->token->content);
+						return ;
+					}
+					currenv = currenv->next;
 				}
-				currenv = currenv->next;
+			}
+			else if (check_equal(currtok->token->content, tlst) == 1 && is_existing(varexport, dup_env) == 0)
+			{
+				new = ft_dlstnew(ft_strdup(currtok->token->content));
+				ft_dlstadd_back(dup_env, new);
+			}
+			if (check_equal(currtok->token->content, tlst) == 2 && is_existing(varexport, dup_env) == 1)
+			{
+				while (currenv)
+				{
+					if (ft_strncmp(currenv->content, varexport,
+								   ft_strlen(get_var(currenv->content))) == 0)
+					{
+						free(currenv->content);
+						currenv->content = ft_strjoin(currtok->token->content,
+													  currtok->next->token->content);
+						return ;
+					}
+					currenv = currenv->next;
+				}
+			}
+			else if (check_equal(currtok->token->content, tlst) == 2 && is_existing(varexport, dup_env) == 0)
+			{
+				new = ft_dlstnew(ft_strjoin(currtok->token->content,
+											currtok->next->token->content));
+				ft_dlstadd_back(dup_env, new);
+				return ;
+			}
+			if (check_equal(currtok->token->content, tlst) == 0)
+			{
+				new = ft_dlstnew(ft_strdup(currtok->token->content));
+				ft_dlstadd_back(dup_env, new);
+				return ;
 			}
 		}
-		else if (check_equal(currtok->token->content, tlst) == 1
-			&& is_existing(varexport, dup_env) == 0)
-		{	
-			new = ft_dlstnew(ft_strdup(currtok->token->content));
-			ft_dlstadd_back(dup_env, new);
-		}
-		if (check_equal(currtok->token->content, tlst) == 2
-			&& is_existing(varexport, dup_env) == 1)
-		{
-			while (currenv)
-			{
-				if (ft_strncmp(currenv->content, varexport,
-						ft_strlen(get_var(currenv->content))) == 0)
-				{
-					free(currenv->content);
-					currenv->content = ft_strjoin(currtok->token->content,
-							currtok->next->token->content);
-					return ;
-				}
-				currenv = currenv->next;
-			}
-		}
-		else if (check_equal(currtok->token->content, tlst) == 2
-			&& is_existing(varexport, dup_env) == 0)
-		{
-			new = ft_dlstnew(ft_strjoin(currtok->token->content,
-						currtok->next->token->content));
-			ft_dlstadd_back(dup_env, new);
-			return ;
-		}
-		if (check_equal(currtok->token->content, tlst) == 0)
-			return ;
 	}
-}
