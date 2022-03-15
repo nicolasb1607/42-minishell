@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:03 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/09 17:37:04 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/15 12:12:12 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	is_existing(char *varenv, t_dlist **dupenv)
 		lentoequal = 0;
 		while (content[lentoequal] && content[lentoequal] != '=')
 			lentoequal++;
+		if(lentoequal < (int) ft_strlen(varenv))
+			lentoequal = ft_strlen(varenv);
 		if (ft_strncmp(content, varenv, lentoequal) == 0)
 			return (1);
 		curr = curr->next;
