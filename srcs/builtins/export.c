@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:12 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/15 17:09:53 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/15 18:44:05 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ du nommage des variable d environnement a savoir
 
 */
 
-char *get_var(char *varenval)
+char	*get_var(char *varenval)
 {
-	char *varexport;
-	int i;
+	char	*varexport;
+	int		i;
 
 	varexport = NULL;
 	i = 0;
@@ -38,9 +38,9 @@ char *get_var(char *varenval)
 	return (varexport);
 }
 
-int check_equal(char *str, t_tlist *tlst)
+int	check_equal(char *str, t_tlist *tlst)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '=')
@@ -58,32 +58,63 @@ On doit checker si tous les arguments sont valid avant meme de rajouter
 la premier variable a l environnement
 
 */
-// int is_all_var_valid(t_tlist *tlst)
-// {
-// 	int is_valid;
-// }
-
-int ft_export(t_tlist *tlst, t_dlist **dup_env)
+int is_all_var_valid(t_tlist *tlst)
 {
-	char *varexport;
-	t_dlist *currenv;
-	t_dlist *new;
+	t_tlist *curr;
+
+	curr = tlst->next;
+	while (curr)
+	{
+		if(is_valid_varenv(get_var(curr->token->content)) == 1)
+		{
+			if(check_equal(curr->token->content, curr) == 1 && curr->next)
+			{
+				printf("premier\n");
+				curr = curr->next;
+			}
+			else if(check_equal(curr->token->content, curr) == 2 && curr->next && curr->next->next)
+			{
+				printf("Deuxieme\n");
+				curr = curr->next->next;
+
+			}
+			else if(check_equal(curr->token->content, curr) == 0)
+			{
+				printf("Troisieme\n");
+				curr = curr->next;
+			}
+			else
+				return (1);
+		}
+		else
+			return (0);
+	}
+	return (1);
+}
+
+int	ft_export(t_tlist *tlst, t_dlist **dup_env)
+{
+	char	*varexport;
+	t_dlist	*currenv;
+	t_dlist	*new;
 
 	currenv = *dup_env;
 	if (!tlst)
-		return (0);	
+		return (0);
 	varexport = get_var(tlst->token->content);
 	printf("varexport = %s\n", varexport);
-	if (is_valid_varenv(varexport) == 1 && ft_containchar('=', tlst->token->content))
+	if (is_valid_varenv(varexport) == 1
+		&& ft_containchar('=', tlst->token->content))
 	{
 		printf("is a valid var\n");
-		if (check_equal(tlst->token->content, tlst) == 1 && is_existing(varexport, dup_env) == 1)
+		if (check_equal(tlst->token->content, tlst) == 1
+			&& is_existing(varexport, dup_env) == 1)
 		{
 			printf("Premiere condition \n");
 			while (currenv)
 			{
 				if (ft_strncmp(currenv->content, varexport,
-							   ft_strlen(get_var(currenv->content))) == 0)
+						ft_strlen(get_var(currenv->content))) == 0)
 				{
 					free(currenv->content);
 					currenv->content = ft_strdup(tlst->token->content);
@@ -92,34 +123,37 @@ int ft_export(t_tlist *tlst, t_dlist **dup_env)
 				currenv = currenv->next;
 			}
 		}
-		else if (check_equal(tlst->token->content, tlst) == 1 && is_existing(varexport, dup_env) == 0)
+		else if (check_equal(tlst->token->content, tlst) == 1
+			&& is_existing(varexport, dup_env) == 0)
 		{
 			printf("Deuxieme condition \n");
 			new = ft_dlstnew(ft_strdup(tlst->token->content));
 			ft_dlstadd_back(dup_env, new);
 			return (1);
 		}
-		else if (check_equal(tlst->token->content, tlst) == 2 && is_existing(varexport, dup_env) == 1)
+		else if (check_equal(tlst->token->content, tlst) == 2
+			&& is_existing(varexport, dup_env) == 1)
 		{
 			printf("Troisieme condition \n");
 			while (currenv)
 			{
 				if (ft_strncmp(currenv->content, varexport,
-							   ft_strlen(get_var(currenv->content))) == 0)
+						   ft_strlen(get_var(currenv->content))) == 0)
 				{
 					free(currenv->content);
 					currenv->content = ft_strjoin(tlst->token->content,
-												  tlst->next->token->content);
+							tlst->next->token->content);
 					return (2);
 				}
 				currenv = currenv->next;
 			}
 		}
-		else if (check_equal(tlst->token->content, tlst) == 2 && is_existing(varexport, dup_env) == 0)
+		else if (check_equal(tlst->token->content, tlst) == 2
+			&& is_existing(varexport, dup_env) == 0)
 		{
 			printf("Quatrieme condition \n");
 			new = ft_dlstnew(ft_strjoin(tlst->token->content,
-										tlst->next->token->content));
+						tlst->next->token->content));
 			ft_dlstadd_back(dup_env, new);
 			return (2);
 		}
@@ -134,14 +168,15 @@ int ft_export(t_tlist *tlst, t_dlist **dup_env)
 	return (0);
 }
 
-void loop_export(t_tlist *tlst, t_dlist **dup_env)
+void	loop_export(t_tlist *tlst, t_dlist **dup_env)
 {
-	t_tlist *currtok;
-	int i;
+	t_tlist	*currtok;
+	int		i;
 
+	if(!is_all_var_valid(tlst))
+		return ;
 	currtok = tlst->next;
 	i = ft_export(currtok, dup_env);
-	printf("return export = %d\n", i);
 	while (currtok)
 	{
 		if (i == 1 && currtok->next)
@@ -152,7 +187,6 @@ void loop_export(t_tlist *tlst, t_dlist **dup_env)
 		else if (i == 2 && currtok->next && currtok->next->next)
 		{
 			currtok = currtok->next->next;
-			printf("ret export dans loop = %d\n", ft_export(currtok, dup_env));
 		}
 		else
 			break ;
