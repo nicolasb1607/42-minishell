@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:07:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/09 17:12:35 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/15 17:25:14 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	expandtok(t_token *token, t_minishell *mshell)
 		return ;
 	while (token->content[i])
 	{
+		printf("token avtn expand = %s\n", token->content);
 		if (token->content[i] == '$' && ft_isenv(token->content[i + 1]) == 1)
 		{
 			ret_expand = expand(token, i, mshell);
