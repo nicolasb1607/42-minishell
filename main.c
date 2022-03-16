@@ -16,7 +16,7 @@ int main(int ac, char **av, char **envp)
 	// ft_cd("yolo", mshell.head_env);
 	//ft_env(mshell.head_env);
 	
-	char	*str = "export tetststssts=$PWD     OLDPWD=$CAMMARCHE  deuxiemetestf=\'yoyo\'"; 
+	char	*str = "unset  TEST PWD"; 
 	
 	tlist = init_tlist(str, tlist, &mshell);
 
@@ -26,8 +26,7 @@ int main(int ac, char **av, char **envp)
 
 	parser(tlist);
 
-	//ft_export(tlist, mshell.head_env);
-	loop_export(tlist, mshell.head_env);
+	loop_unset(tlist, mshell.head_env);
 	ft_env(mshell.head_env);
 
 	return (0);

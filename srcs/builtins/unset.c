@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:03 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/15 17:41:19 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/16 11:504 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@
 // 	free(tab);
 // }
 
+/*
+
+TODO :
+	- Gerer les multiples variable a unset sur une ligne de cmd
+	- 
+
+*/
 int	is_existing(char *varenv, t_dlist **dupenv)
 {
 	int		lentoequal;
@@ -65,5 +72,17 @@ void	ft_unset(char *varenv, t_dlist **dupenv)
 		}
 		curr = curr->next;
 		content = curr->content;
+	}
+}
+
+void	loop_unset(t_tlist *tlst, t_dlist **dupenv)
+{
+	t_tlist	*currtok;
+
+	currtok = tlst->next;
+	while (currtok)
+	{
+		ft_unset(currtok->token->content, dupenv);
+		currtok = currtok->next;
 	}
 }
