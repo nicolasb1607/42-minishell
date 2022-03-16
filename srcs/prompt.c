@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:23:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/09 18:24:25 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/16 12:51:51 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@ TO DO :
 
 - Once the excution is done, it starts again and put a prompt
 */
-// char	*ft_prompt(void)
-// {
-// 	char	*ret_line;
+char	*ft_prompt(void)
+{
+	char	*ret_line;
 
-// 	ret_line = readline("Minsdfsdfsdfishell > ");
-
-// 	printf("Return : %s\n", ret_line);
-// 	return (ret_line);
-// }
+	ret_line = readline("Minsdfsdfsdfishell > ");
+	return (ret_line);
+}

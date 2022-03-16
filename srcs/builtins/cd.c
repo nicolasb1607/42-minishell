@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:39:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/09 18:20:48 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/16 13:34:36 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,3 +70,8 @@ void	*ft_cd(char *path_name, t_dlist **dupenv)
 	curr->content = content;
 	return (NULL);
 }	
+
+void	launch_cd(t_tlist *tlst, t_dlist **dupenv)
+{
+	ft_cd(tlst->next->token->content, dupenv);
+}

@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.h                                               :+:      :+:    :+:   */
+/*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 17:31:31 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/16 13:35:09 by nburat-d         ###   ########.fr       */
+/*   Created: 2022/03/16 13:04:05 by nburat-d          #+#    #+#             */
+/*   Updated: 2022/03/16 13:27:47 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CD_H
+#include "minishell.h"
 
-# define CD_H
+void	init_ft(t_tlist *tlst)
+{
+	char	*currcont;
+	pid_t	pi;
 
-# include "minishell.h"
+	currcont = tlst->token->content;
+	
+	if (ft_strcmp(currcont, "echo") == 0)
+		ft_echo(tlst);
 
-void	*ft_cd(char *path_name, t_dlist **dupenv);
-void	launch_cd(t_tlist *tlst, t_dlist **dupenv);
-
-#endif
+	else
+	{
+		pi = fork();
+		if (pi == 0)
+			execve();
+	}
+}
