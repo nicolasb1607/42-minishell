@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:22:09 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/16 11:31:07 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/16 15:47:05 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_echo(t_tlist *tlst)
 
 	curr = tlst->next;
 	nl_opt = 0;
-	while (__is_valid_option(curr) == 1)
+	while (curr && __is_valid_option(curr) == 1)
 	{
 		nl_opt = 1;
 		curr = curr->next;

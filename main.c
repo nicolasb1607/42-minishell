@@ -9,19 +9,33 @@ int main(int ac, char **av, char **envp)
 	t_tlist *tlist;
 	char *ret;
 
-
 	tlist = NULL;
 	mshell.env = NULL;
 	mshell.env = ft_dupenv(mshell.env, envp);
 	mshell.head_env = &mshell.env;
 
-	// char *str = "cd ../";
+	// char *str = "echo Oui alor";
 
 	// tlist = init_tlist(str, tlist, &mshell);
 
-	// launch_cd(tlist, mshell.head_env);
+	// parser(tlist);
 
-	// ft_env(mshell.head_env);
+	// init_ft(tlist, mshell.head_env);
+
+	// printf("premier free du main\n");
+
+	// free_tlist(&tlist);
+
+	// str = "ote test";
+
+	// tlist = init_tlist(str, tlist, &mshell);
+
+	// parser(tlist);
+
+	// init_ft(tlist, mshell.head_env);
+
+	// printf("deuxieme free du main\n");
+	// free_tlist(&tlist);
 
 	while (1)
 	{
@@ -31,10 +45,10 @@ int main(int ac, char **av, char **envp)
 
 		parser(tlist);
 
+		ft_printtoklst(tlist);
 		init_ft(tlist, mshell.head_env);
 
-		free_tlist(tlist);
-		//ft_printtoklst(tlist);
+		free_tlist(&tlist);
 	}
 	return (0);
 }
