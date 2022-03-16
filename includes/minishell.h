@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:31:35 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/16 11:54:20 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/16 14:42:09 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "utils.h"
+# include "init_ft.h"
+# include "free.h"
 
 #endif

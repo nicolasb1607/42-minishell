@@ -40,6 +40,9 @@ SRCS = ./main.c \
 	./srcs/utils/ft_tlstiter.c \
 	./srcs/parser/parser.c \
 	./srcs/echo.c \
+	./srcs/init_ft.c \
+	./srcs/free.c \
+
 
 OBJS = ${SRCS:.c=.o}
 
