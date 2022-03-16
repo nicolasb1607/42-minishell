@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:02 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/15 18:36:33 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/16 10:44:36 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ int is_valid_varenv(char *str)
 	while (str[i])
 	{
 		if (ft_isenv(str[i]) == 0)
+		{
+			ft_putstr(str);
+			ft_putstr (" is not a valid variable\n");
 			return (0);
+		}
 		i++;
 	}
 	return (1);
