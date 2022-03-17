@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 17:21:43 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/16 16:45:23 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/17 10:54:02 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,22 @@ void	make_quote_string(t_token *token, t_lexer *lexer)
 		token->quote = T_DQUOTE;
 	else
 		token->quote = T_SQUOTE;
-	advance(lexer);
-	while (lexer->current_char != tquote)
+	if(lexer->text[lexer->pos + 1] == tquote)
 	{
-		printf("dans la boucle");
-		token->content = ft_charjoin(token->content, lexer->current_char);
+		token->content = malloc(sizeof(char));
+		token->content = "\0";
 		advance(lexer);
 	}
-	// if (lexer->current_char == tquote)
-	// {
-	// 	printf("current char = %c\n", lexer->current_char);
-	// 	token->content = NULL;
-	// 	advance(lexer);
-	// }
+	else
+	{
+		advance(lexer);
+		while (lexer->current_char != tquote)
+		{
+			printf("dans la boucle = %c\n", lexer->current_char);
+			token->content = ft_charjoin(token->content, lexer->current_char);
+			advance(lexer);
+		}
+	}
 	if (lexer->text[lexer->pos + 1] && lexer->text[lexer->pos + 1] != ' ')
 		token->space_after = 0;
 	token->type = T_STRING;
@@ -123,16 +126,9 @@ t_token	*make_token(t_lexer *lexer)
 	token = init_token();
 	if (lexer->current_char == 0)
 		token->content = NULL;
-	// if ((lexer->current_char == '\'' && lexer->text[lexer->pos + 1] != '\'') || (lexer->current_char == '\"' && lexer->text[lexer->pos + 1] != '\"'))
-	// {
-	// 	printf("JE PASSE PAR LA NOUVELLE CONDITOON\n");
-	// 	advance(lexer);
-	// 	advance(lexer);
-	// 	return (token);
-	// }
-	if (lexer->current_char == '\"' && lexer->text[lexer->pos + 1] != '\"' && lexer->pos < (int)ft_strlen(lexer->text))
+	if (lexer->current_char == '\"' && lexer->pos < (int)ft_strlen(lexer->text))
 		make_quote_string(token, lexer);
-	else if (lexer->current_char == '\'' && lexer->text[lexer->pos + 1] != '\'')
+	else if (lexer->current_char == '\'')
 		make_quote_string(token, lexer);
 	else if (ft_containchar(lexer->current_char, ">|<") == 1 )
 		tok_operation(token, lexer);
