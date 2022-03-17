@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:17 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/14 17:56:33 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/17 11:15:47 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_tlist	*init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
 		new = ft_tlstnew(token);
 		ft_tlstadd_back(&tlist, new);
 	}
+	//(void) mshell;
 	ft_tlstiter(tlist, mshell, expandtok);
 	return (tlist);
 }

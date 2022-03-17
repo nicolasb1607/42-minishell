@@ -14,7 +14,7 @@ int main(int ac, char **av, char **envp)
 	mshell.env = ft_dupenv(mshell.env, envp);
 	mshell.head_env = &mshell.env;
 
-	char *str = "echo - \"\"x n test";
+	char *str = "echo -\"$USER\"x n test";
  
 	tlist = init_tlist(str, tlist, &mshell);
 
@@ -22,7 +22,7 @@ int main(int ac, char **av, char **envp)
 	
 	parser(tlist);
 
-	//init_ft(tlist, mshell.head_env);
+	init_ft(tlist, mshell.head_env);
 
 	//printf("premier free du main\n");
 
