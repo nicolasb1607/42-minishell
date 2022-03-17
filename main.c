@@ -16,7 +16,7 @@ int main(int ac, char **av, char **envp)
 
 	// char *str = "e$a";
  
-	// tlist = init_tlist(str, tlist, &mshell);
+	//tlist = init_tlist(str, tlist, &mshell);
 
 	// ft_printtoklst(tlist);
 	
@@ -46,6 +46,7 @@ int main(int ac, char **av, char **envp)
 		{
 			tlist = init_tlist(ret, tlist, &mshell);
 			parser(tlist);
+			ft_printtoklst(tlist);
 			init_ft(tlist, mshell.head_env);
 			free_tlist(&tlist);
 		}

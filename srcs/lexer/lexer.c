@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 17:21:43 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/17 12:00:22 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/17 15:13:46 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ void	make_quote_string(t_token *token, t_lexer *lexer)
 
 void	make_string(t_token *token, t_lexer *lexer)
 {
+	int	i;
+
+	i = 0;
 	while (ft_isascii(lexer->current_char) == 1
 		&& ft_iswhitespace(lexer->current_char) == 0 )
 	{
@@ -80,13 +83,16 @@ void	make_string(t_token *token, t_lexer *lexer)
 		if ((lexer->current_char == '\'' && lexer->text[lexer->pos + 1] != '\'') || (lexer->current_char == '\"' && lexer->text[lexer->pos + 1] != '\"'))
 		{
 			token->space_after = 0;
-			recul(lexer);
+			//recul(lexer);
 			break;
 		}
 		else if ((lexer->current_char == '\'' && lexer->text[lexer->pos + 1] == '\'') || (lexer->current_char == '\"' && lexer->text[lexer->pos + 1] == '\"'))
 		{
-			advance(lexer);
-			advance(lexer);
+			while (lexer->current_char == '\'' || lexer->current_char == '\"')
+				i += (advance(lexer), 1);
+			printf("value i = %d\n", i);
+			if (i % 2 != 0)
+				ft_error("quote error");
 		}
 	}
 	token->type = T_STRING;
