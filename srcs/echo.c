@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:22:09 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/16 15:47:05 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:36:24 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	__is_valid_option(t_tlist *tlst)
 {
 	int	i;
 
-	if (tlst->token->content[0] == '-')
+	if (tlst->token->content[0] == '-' && ft_containchar('n', tlst->token->content) == 1)
 	{
 		i = 1;
 		while (tlst->token->content[i])
@@ -37,6 +37,8 @@ void	ft_echo(t_tlist *tlst)
 
 	curr = tlst->next;
 	nl_opt = 0;
+	if (curr && curr->token->content[0] == '-' && ft_strlen(curr->token->content) == 1)
+		curr = curr->next;	
 	while (curr && __is_valid_option(curr) == 1)
 	{
 		nl_opt = 1;

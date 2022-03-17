@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 17:21:43 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/17 11:21:33 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/17 12:00:22 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	make_quote_string(t_token *token, t_lexer *lexer)
 		token->quote = T_SQUOTE;
 	if(lexer->text[lexer->pos + 1] == tquote)
 	{
-		printf("Mais est-ce que je passe par la ?\n"); 
 		token->content = malloc(sizeof(char));
 		token->content = "\0";
 		advance(lexer);
@@ -57,7 +56,6 @@ void	make_quote_string(t_token *token, t_lexer *lexer)
 		advance(lexer);
 		while (lexer->current_char != tquote)
 		{
-			printf("dans la boucle = %c\n", lexer->current_char);
 			token->content = ft_charjoin(token->content, lexer->current_char);
 			advance(lexer);
 		}
