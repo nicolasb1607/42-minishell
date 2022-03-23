@@ -6,11 +6,14 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:55 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/17 15:24:41 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/23 11:03:45 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+
+// int	is_there_next_quote(char *str, char q, int i)
+
 
 int	look_for_next_quote(char *str, char q, int *i)
 {
@@ -31,7 +34,7 @@ int	check_quote(char *str)
 
 	ret_check = 0;
 	i = 0;
-	if (!ft_containchar('\"', str) || !ft_containchar('\'', str))
+	if (!ft_containchar('\"', str) && !ft_containchar('\'', str))
 		return (1);
 	while (str[i])
 	{
@@ -52,25 +55,25 @@ int	check_quote(char *str)
 	return (1);
 }
 
-int	check_cool(char *str, char c)
-{
+// int	check_cool(char *str, char c)
+// {
 	
-}
+// }
 
-int	check_quote_v2(char *str)
-{
-	char	s;
-	char	d;
+// int	check_quote_v2(char *str)
+// {
+// 	char	s;
+// 	char	d;
 
-	s = 0;
-	d = 0;
-	if (!ft_containchar('\"', str) || ft_containchar('\'', str))
-		return (1);
-	if (check_cool(str, '\'') == 0)
-		return (0);
-	else if (check_cool(str, '\'') == 0)
-		return (0);
-}
+// 	s = 0;
+// 	d = 0;
+// 	if (!ft_containchar('\"', str) || ft_containchar('\'', str))
+// 		return (1);
+// 	if (check_cool(str, '\'') == 0)
+// 		return (0);
+// 	else if (check_cool(str, '\'') == 0)
+// 		return (0);
+// }
 
 void	init_lexer(t_lexer *lexer, char *str)
 {
