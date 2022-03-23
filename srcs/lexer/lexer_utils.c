@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:55 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/23 15:35:40 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/23 17:07:54 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,6 @@ int	check_quote(char *str)
 	}
 	return (1);
 }
-
-// int	check_cool(char *str, char c)
-// {
-	
-// }
-
-// int	check_quote_v2(char *str)
-// {
-// 	char	s;
-// 	char	d;
-
-// 	s = 0;
-// 	d = 0;
-// 	if (!ft_containchar('\"', str) || ft_containchar('\'', str))
-// 		return (1);
-// 	if (check_cool(str, '\'') == 0)
-// 		return (0);
-// 	else if (check_cool(str, '\'') == 0)
-// 		return (0);
-// }
 
 void	init_lexer(t_lexer *lexer, char *str)
 {

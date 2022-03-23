@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:31:35 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/16 14:42:09 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/23 17:41:07 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include "cd.h"
 # include "unset.h"
 # include "export.h"
-# include "echo.h"
 # include "pipe.h"
 # include "lexer.h"
 # include <stdio.h>
@@ -32,5 +31,6 @@
 # include "utils.h"
 # include "init_ft.h"
 # include "free.h"
+# include "echo.h"
 
 #endif

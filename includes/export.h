@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:31:56 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/16 11:25:44 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/23 77:332:5:55 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "minishell.h"
 
 char	*get_var(char *varenval);
-int	check_equal(char *str, t_tlist *tlst);
+int		check_equal(char *str, t_tlist *tlst);
 int	is_all_var_valid(t_tlist *tlst);
 int	export_loop1(t_tlist *tlst, t_dlist *currenv, char *varexport);
 int	export_loop2(t_tlist *tlst, t_dlist *currenv, char *varexport);

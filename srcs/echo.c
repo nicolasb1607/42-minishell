@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:22:09 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/17 14:36:24 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:39:555 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,35 @@ int	__is_valid_option(t_tlist *tlst)
 	return (0);
 }
 
+void	print_rest_tok(char *str, t_tlist *tlst)
+{
+	int	i;
+	char **splitted_tok;
+
+	i = 0;
+	splitted_tok = ft_split(str, ' ');
+
+	while (splitted_tok[i])
+	{
+		printf("splittedtok = %s\n", splitted_tok[i]);
+		i++;
+	}
+	
+	i = ft_tablen(splitted_tok);
+	printf("i = %d\n", i);
+	while (i > 1)
+	{
+		ft_tlstaddpos(tlst, splitted_tok[i], 2);
+		i--;
+	}
+}
+
 void	ft_echo(t_tlist *tlst)
 {
 	t_tlist	*curr;
 	int		nl_opt;
 
+	print_rest_tok(tlst->token->content, tlst);
 	curr = tlst->next;
 	nl_opt = 0;
 	if (curr && curr->token->content[0] == '-' && ft_strlen(curr->token->content) == 1)
