@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 17:21:43 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/17 15:13:46 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/23 13:05:25 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	make_string(t_token *token, t_lexer *lexer)
 		if ((lexer->current_char == '\'' && lexer->text[lexer->pos + 1] != '\'') || (lexer->current_char == '\"' && lexer->text[lexer->pos + 1] != '\"'))
 		{
 			token->space_after = 0;
-			//recul(lexer);
 			break;
 		}
 		else if ((lexer->current_char == '\'' && lexer->text[lexer->pos + 1] == '\'') || (lexer->current_char == '\"' && lexer->text[lexer->pos + 1] == '\"'))
@@ -96,6 +95,8 @@ void	make_string(t_token *token, t_lexer *lexer)
 		}
 	}
 	token->type = T_STRING;
+	if (lexer->current_char == '\"' || lexer->current_char == '\'')
+		recul(lexer);
 }
 
 void	tok_operation(t_token *token, t_lexer *lexer)
