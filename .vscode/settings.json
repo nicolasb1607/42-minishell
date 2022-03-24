@@ -5,6 +5,7 @@
 		"handle_sig.h": "c",
 		"lexer.h": "c",
 		"minishell.h": "c",
-		"ranges": "c"
+		"ranges": "c",
+		"utils.h": "c"
 	}
 }

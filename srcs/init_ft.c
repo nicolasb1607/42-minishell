@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:38:48 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/24 10:38:57 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/24 14:52:20 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 void	init_ft(t_tlist *tlst,  t_dlist **dupenv)
 {
 	char	*currcont;
-	// pid_t	pi;
+	pid_t	pi;
+	char	**lsltab;
+	char	**env;
 
 	currcont = tlst->token->content;
 	if (ft_strcmp(currcont, "echo") == 0)
@@ -34,8 +36,11 @@ void	init_ft(t_tlist *tlst,  t_dlist **dupenv)
 	// 	ft_echo(tlst);
 	// else
 	// {
+	// 	lsltab = tlist_to_tab(tlst);
+	// 	env = dlist_to_tab(*dupenv);
 	// 	pi = fork();
 	// 	if (pi == 0)
-	// 		execve();
+		
+	// 		execve(lsltab, lsltab++);
 	// }
 }
