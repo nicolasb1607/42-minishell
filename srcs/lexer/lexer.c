@@ -6,35 +6,11 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 17:21:43 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/24 10:41:25 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:17:43 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-
-void	advance(t_lexer *lexer)
-{
-	char	*str;
-
-	lexer->pos += 1;
-	str = lexer->text;
-	if (str[lexer->pos])
-		lexer->current_char = str[lexer->pos];
-	else
-		lexer->current_char = 0;
-}
-
-void	recul(t_lexer *lexer)
-{
-	char	*str;
-
-	lexer->pos = lexer->pos - 1;
-	str = lexer->text;
-	if (str[lexer->pos])
-		lexer->current_char = str[lexer->pos];
-	else
-		lexer->current_char = 0;
-}
 
 void	make_quote_string(t_token *token, t_lexer *lexer)
 {
@@ -65,6 +41,35 @@ void	make_quote_string(t_token *token, t_lexer *lexer)
 	token->type = T_STRING;
 }
 
+int	make_string_b(int i, t_lexer *lexer, t_token *token)
+{
+	token->content = ft_charjoin(token->content, lexer->current_char);
+	advance(lexer);
+	if (ft_containchar(lexer->text[lexer->pos + 1], "<>|") == 1)
+	{	
+		token->content = ft_charjoin(token->content, lexer->current_char);
+		return (1);
+	}
+	if ((lexer->current_char == '\'' && lexer->text[lexer->pos + 1] != '\'')
+		|| (lexer->current_char == '\"'
+			&& lexer->text[lexer->pos + 1] != '\"'))
+	{
+		token->space_after = 0;
+		return (1);
+	}
+	else if ((lexer->current_char == '\''
+			&& lexer->text[lexer->pos + 1] == '\'')
+		|| (lexer->current_char == '\"'
+			&& lexer->text[lexer->pos + 1] == '\"'))
+	{
+		while (lexer->current_char == '\'' || lexer->current_char == '\"')
+			i += (advance(lexer), 1);
+		if (i % 2 != 0)
+			ft_error("quote error");
+	}
+	return (0);
+}
+
 void	make_string(t_token *token, t_lexer *lexer)
 {
 	int	i;
@@ -73,30 +78,8 @@ void	make_string(t_token *token, t_lexer *lexer)
 	while (ft_isascii(lexer->current_char) == 1
 		&& ft_iswhitespace(lexer->current_char) == 0)
 	{
-		token->content = ft_charjoin(token->content, lexer->current_char);
-		advance(lexer);
-		if (ft_containchar(lexer->text[lexer->pos + 1], "<>|") == 1)
-		{	
-			token->content = ft_charjoin(token->content, lexer->current_char);
+		if (make_string_b(i, lexer, token) == 1)
 			break ;
-		}
-		if ((lexer->current_char == '\'' && lexer->text[lexer->pos + 1] != '\'')
-			|| (lexer->current_char == '\"'
-				&& lexer->text[lexer->pos + 1] != '\"'))
-		{
-			token->space_after = 0;
-			break ;
-		}
-		else if ((lexer->current_char == '\''
-				&& lexer->text[lexer->pos + 1] == '\'')
-			|| (lexer->current_char == '\"'
-				&& lexer->text[lexer->pos + 1] == '\"'))
-		{
-			while (lexer->current_char == '\'' || lexer->current_char == '\"')
-				i += (advance(lexer), 1);
-			if (i % 2 != 0)
-				ft_error("quote error");
-		}
 	}
 	token->type = T_STRING;
 	if (lexer->current_char == '\"' || lexer->current_char == '\'')

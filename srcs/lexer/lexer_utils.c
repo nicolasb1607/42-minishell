@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:55 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/24 10:42:23 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:16:10 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ int	check_quote(char *str)
 	int		ret_check;
 
 	ret_check = 0;
-	i = 0;
-	if (!ft_containchar('\"', str) && !ft_containchar('\'', str))
-		return (1);
-	while (str[i])
+	i = -1;
+	while (str[++i])
 	{
 		if (str[i] == '\"')
 		{
@@ -49,7 +47,6 @@ int	check_quote(char *str)
 			if (ret_check == 0)
 				return (0);
 		}
-		i++;
 	}
 	return (1);
 }

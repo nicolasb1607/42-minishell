@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:31:41 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/12 13:24:28 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/24 11:19:11 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	expandtok(t_token *token, t_minishell *mshell);
 t_tlist	*init_tlist(char *str, t_tlist *tlist, t_minishell *mshell);
 int		parser(t_tlist *lst);
 int		__is_type(t_tlist *lst, char *type);
+void	recul(t_lexer *lexer);
 
 #endif
