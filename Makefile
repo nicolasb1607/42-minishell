@@ -42,7 +42,6 @@ SRCS = ./main.c \
 	./srcs/echo.c \
 	./srcs/init_ft.c \
 	./srcs/free.c \
-	./srcs/utils/ft_tlstaddpos.c 
 
 
 OBJS = ${SRCS:.c=.o}

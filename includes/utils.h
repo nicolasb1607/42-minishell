@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:32:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/23 17:41:11 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/24 09:42:51 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,11 @@ t_tlist	*ft_tlstnew(t_token *token);
 t_tlist	*tab_to_list(char **tab, t_tlist *head);
 char	**list_to_tab(t_tlist *alst);
 void	ft_tlstadd_back(t_tlist **alst, t_tlist *new);
-void	ft_tlstaddpos(t_tlist *tlst, char *str, int pos);
 t_tlist	*ft_tlstlast(t_tlist *lst);
 int		ft_tlstsize(t_tlist *lst);
 void	ft_printtoklst(t_tlist *tlist);
 void	ft_tlstiter(
 			t_tlist *lst, t_minishell *mshell,
 			void (*f)(t_token *, t_minishell *));
-
 
 #endif

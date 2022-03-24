@@ -12,16 +12,16 @@
 
 #include "echo.h"
 
-int	__is_valid_option(t_tlist *tlst)
+int __is_valid_option(char *content)
 {
-	int	i;
+	int i;
 
-	if (tlst->token->content[0] == '-' && ft_containchar('n', tlst->token->content) == 1)
+	if (content[0] == '-' && ft_containchar('n', content) == 1)
 	{
 		i = 1;
-		while (tlst->token->content[i])
+		while (content[i])
 		{
-			if (tlst->token->content[i] != 'n')
+			if (content[i] != 'n')
 				return (0);
 			i++;
 		}
@@ -30,40 +30,42 @@ int	__is_valid_option(t_tlist *tlst)
 	return (0);
 }
 
-void	print_rest_tok(char *str, t_tlist *tlst)
+void split_first_tok_arg(t_tlist *tlst, int *nl_opt)
 {
-	int	i;
-	char **splitted_tok;
+	char **splittedtok;
+	int i;
 
-	i = 0;
-	splitted_tok = ft_split(str, ' ');
-
-	while (splitted_tok[i])
+	i = -1;
+	splittedtok = ft_split(tlst->token->content, ' ');
+	while (splittedtok[++i])
+		printf("splittedtok %d = %s\n", i, splittedtok[i]);
+	if (splittedtok[1])
 	{
-		printf("splittedtok = %s\n", splitted_tok[i]);
-		i++;
-	}
-	
-	i = ft_tablen(splitted_tok);
-	printf("i = %d\n", i);
-	while (i > 1)
-	{
-		ft_tlstaddpos(tlst, splitted_tok[i], 2);
-		i--;
+		i = 1;
+		while (__is_valid_option(splittedtok[i]) && splittedtok[i])
+		{
+			*nl_opt = 1;
+			i++;
+		}
+		while (splittedtok[i])
+		{
+			ft_putstr(splittedtok[i++]);
+			ft_putchar(' ');
+		}
 	}
 }
 
-void	ft_echo(t_tlist *tlst)
+void ft_echo(t_tlist *tlst)
 {
-	t_tlist	*curr;
-	int		nl_opt;
+	t_tlist *curr;
+	int nl_opt;
 
-	print_rest_tok(tlst->token->content, tlst);
-	curr = tlst->next;
 	nl_opt = 0;
+	split_first_tok_arg(tlst, &nl_opt);
+	curr = tlst->next;
 	if (curr && curr->token->content[0] == '-' && ft_strlen(curr->token->content) == 1)
-		curr = curr->next;	
-	while (curr && __is_valid_option(curr) == 1)
+		curr = curr->next;
+	while (curr && __is_valid_option(curr->token->content) == 1)
 	{
 		nl_opt = 1;
 		curr = curr->next;
