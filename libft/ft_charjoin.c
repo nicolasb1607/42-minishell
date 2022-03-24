@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 18:01:53 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/09 17:25:41 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/24 10:45:36 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ char	*ft_charjoin(char *str, char c)
 	if (!new)
 		return (free(str), NULL);
 	while (str[i])
-		i += (new[i] = str[i], 1);
+	{
+		new[i] = str[i];
+		i++;
+	}
 	free(str);
 	new[i] = c;
 	new[i + 1] = '\0';

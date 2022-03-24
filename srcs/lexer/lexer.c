@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 17:21:43 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/23 15:35:28 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/24 10:41:25 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	make_quote_string(t_token *token, t_lexer *lexer)
 		token->quote = T_DQUOTE;
 	else
 		token->quote = T_SQUOTE;
-	if(lexer->text[lexer->pos + 1] == tquote)
+	if (lexer->text[lexer->pos + 1] == tquote)
 	{
 		token->content = malloc(sizeof(char));
 		token->content = "\0";
@@ -71,25 +71,29 @@ void	make_string(t_token *token, t_lexer *lexer)
 
 	i = 0;
 	while (ft_isascii(lexer->current_char) == 1
-		&& ft_iswhitespace(lexer->current_char) == 0 )
+		&& ft_iswhitespace(lexer->current_char) == 0)
 	{
 		token->content = ft_charjoin(token->content, lexer->current_char);
 		advance(lexer);
-		if (ft_containchar(lexer->text[lexer->pos + 1], "<>|") == 1 )
+		if (ft_containchar(lexer->text[lexer->pos + 1], "<>|") == 1)
 		{	
 			token->content = ft_charjoin(token->content, lexer->current_char);
 			break ;
 		}
-		if ((lexer->current_char == '\'' && lexer->text[lexer->pos + 1] != '\'') || (lexer->current_char == '\"' && lexer->text[lexer->pos + 1] != '\"'))
+		if ((lexer->current_char == '\'' && lexer->text[lexer->pos + 1] != '\'')
+			|| (lexer->current_char == '\"'
+				&& lexer->text[lexer->pos + 1] != '\"'))
 		{
 			token->space_after = 0;
-			break;
+			break ;
 		}
-		else if ((lexer->current_char == '\'' && lexer->text[lexer->pos + 1] == '\'') || (lexer->current_char == '\"' && lexer->text[lexer->pos + 1] == '\"'))
+		else if ((lexer->current_char == '\''
+				&& lexer->text[lexer->pos + 1] == '\'')
+			|| (lexer->current_char == '\"'
+				&& lexer->text[lexer->pos + 1] == '\"'))
 		{
 			while (lexer->current_char == '\'' || lexer->current_char == '\"')
 				i += (advance(lexer), 1);
-			printf("value i = %d\n", i);
 			if (i % 2 != 0)
 				ft_error("quote error");
 		}
@@ -136,7 +140,7 @@ t_token	*make_token(t_lexer *lexer)
 		make_quote_string(token, lexer);
 	else if (lexer->current_char == '\'')
 		make_quote_string(token, lexer);
-	else if (ft_containchar(lexer->current_char, ">|<") == 1 )
+	else if (ft_containchar(lexer->current_char, ">|<") == 1)
 		tok_operation(token, lexer);
 	else if (ft_isascii(lexer->current_char) == 1
 		&& ft_iswhitespace(lexer->current_char) == 0)

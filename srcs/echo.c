@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 18:22:09 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/23 16:39:555 by ngobert          ###   ########.fr       */
+/*   Created: 2022/03/24 10:37:24 by nburat-d          #+#    #+#             */
+/*   Updated: 2022/03/24 10:37:28 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "echo.h"
 
-int __is_valid_option(char *content)
+int	__is_valid_option(char *content)
 {
-	int i;
+	int	i;
 
 	if (content[0] == '-' && ft_containchar('n', content) == 1)
 	{
@@ -30,10 +30,10 @@ int __is_valid_option(char *content)
 	return (0);
 }
 
-void split_first_tok_arg(t_tlist *tlst, int *nl_opt)
+void	split_first_tok_arg(t_tlist *tlst, int *nl_opt)
 {
-	char **splittedtok;
-	int i;
+	char	**splittedtok;
+	int		i;
 
 	i = -1;
 	splittedtok = ft_split(tlst->token->content, ' ');
@@ -55,15 +55,16 @@ void split_first_tok_arg(t_tlist *tlst, int *nl_opt)
 	}
 }
 
-void ft_echo(t_tlist *tlst)
+void	ft_echo(t_tlist *tlst)
 {
-	t_tlist *curr;
-	int nl_opt;
+	t_tlist	*curr;
+	int		nl_opt;
 
 	nl_opt = 0;
 	split_first_tok_arg(tlst, &nl_opt);
 	curr = tlst->next;
-	if (curr && curr->token->content[0] == '-' && ft_strlen(curr->token->content) == 1)
+	if (curr && curr->token->content[0] == '-'
+		&& ft_strlen(curr->token->content) == 1)
 		curr = curr->next;
 	while (curr && __is_valid_option(curr->token->content) == 1)
 	{

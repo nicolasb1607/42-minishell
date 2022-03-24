@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/16 13:18:54 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/24 10:43:32 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 # define T_RBRACK "T_RBRACK"
 # define T_LBRACK "T_LBRACK"
 # define T_DOLLAR "T_DOLLAR"
-
 
 typedef struct s_token
 {

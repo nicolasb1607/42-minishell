@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:07:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/17 11:20:41 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/24 10:43:17 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	expandtok(t_token *token, t_minishell *mshell)
 
 	i = 0;
 	expandedstr = NULL;
-	if (ft_strlen(token->content) == 0 || (token->quote != NULL && ft_strncmp(token->quote, T_SQUOTE, 5) == 0))
+	if (ft_strlen(token->content) == 0 || (token->quote != NULL
+			&& ft_strncmp(token->quote, T_SQUOTE, 5) == 0))
 		return ;
 	while (token->content[i])
 	{
