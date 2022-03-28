@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/28 15:46:56 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/28 16:38:30 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,28 @@ char	**get_path_to_cmd(t_tlist *tlst, t_dlist **dupenv)
 	return (NULL);
 }
 
+int	is_absolute(char *cmd)
+{
+	if (cmd[0] == '/')
+		return (1);
+	else if (cmd[0] == '.' && cmd[1] == '.' && cmd[2] == '/')
+		return (1);
+	else
+		return (0);
+}
+
 void	update_bin(char **path, t_cmd *cmd)
 {
-	cmd->bin = get_bin(cmd->command, path);
+	if (is_absolute(cmd->command) == 0)
+	{
+		cmd->bin = get_bin(cmd->command, path);
+		printf("UPDATE_BIN NO BIN : %s\n", cmd->bin);
+	}
+	else if (access(cmd->command, F_OK))
+	{
+		printf("Ben?\n");
+		cmd->is_absolute = 1;
+	}
 }
 
 t_cmd	*tlst_to_cmd(t_tlist *tlst)
@@ -71,6 +90,11 @@ t_cmd	*tlst_to_cmd(t_tlist *tlst)
 		curr = curr->next;
 	}
 	cmd->options = ft_split(opt, ' ');
+	if (!cmd->options)
+	{
+		cmd->options = malloc(sizeof(char *));
+		cmd->options[0] = ft_strdup("");
+	}
 	free(opt);
 	return (cmd);
 }

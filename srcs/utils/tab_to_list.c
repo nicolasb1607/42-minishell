@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:22:05 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/28 14:32:08 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/28 16:32:35 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ char	**dlist_to_tab(t_dlist *alst)
 		tmp[i] = ft_strdup(curr->content);
 		curr = curr->next;
 	}
-	tmp[i] = ft_strdup("");
+	tmp[i] = NULL;
 	return (tmp);
 }

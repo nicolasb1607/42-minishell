@@ -13,7 +13,7 @@ int main(int ac, char **av, char **envp)
 	mshell.env = ft_dupenv(mshell.env, envp);
 	mshell.head_env = &mshell.env;
 
-	char *str = "echo -l -a -u -x -d test| bonjour les copains";
+	char *str = "ls";
 	// tlist = init_tlist(str, tlist, &mshell);
 	// ft_printtoklst(tlist);
 	// parser(tlist);
@@ -27,12 +27,31 @@ int main(int ac, char **av, char **envp)
 	
 	char **path;
 	t_cmd	*cmd;
+	char 	**tabenv;
+	pid_t	pipi;
 
 	cmd = tlst_to_cmd(tlist);
 	path = get_path_to_cmd(tlist, mshell.head_env);
 	update_bin(path, cmd);
+	
+	tabenv = dlist_to_tab(mshell.env);
 
-
+	if (cmd->is_absolute)
+	{
+		pipi = fork();
+		if (pipi == 0)
+			printf("Ceci est la valeur de retour de execve et c'est un chemin absolu : -> %d\n", execve(cmd->command,cmd->options,tabenv));
+	}
+	else
+	{
+		pipi = fork();
+		if (pipi == 0)
+		{
+			// if (!cmd->options)
+			// 	cmd->options = NULL;
+			printf("ret : %d, command : %s", execve(cmd->bin, cmd->options, tabenv), cmd->bin);
+		}
+	}
 	// char *ret;
 	// while (1)
 	// {
