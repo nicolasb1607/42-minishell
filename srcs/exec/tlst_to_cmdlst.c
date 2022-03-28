@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/25 12:58:11 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/28 10:32:22 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,35 @@ t_cmd	*ft_clstnew(char *cmd, char *type)
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);
+}
+
+t_cmd	*ft_clstlast(t_cmd *lst)
+{
+	t_cmd	*current;
+
+	current = lst;
+	if (current == NULL)
+		return (NULL);
+	while (current->next != NULL)
+		current = current->next;
+	return (current);
+}
+
+void	ft_clstadd_back(t_cmd **alst, t_cmd *new)
+{
+	t_cmd	*last;
+
+	if (!*alst)
+	{
+		*alst = new;
+		return ;
+	}
+	if (*alst != NULL && new != NULL)
+	{
+		last = ft_clstlast(*alst);
+		last->next = new;
+		new->prev = last;
+	}
 }
 
 
@@ -52,7 +81,8 @@ t_cmd	*tlst_to_cmd(t_tlist *tlst)
 	{
 		if (not_operator(tlst->token->content) == 1)
 		{
-			cmd = ft_clstnew(tlst->token->content, tlst->token->type);
+			cmd = ft_clstnew(ft_strdup(tlst->token->content), ft_strdup(tlst->token->type));
 		}
+		tlst = tlst->next;
 	}
 }
