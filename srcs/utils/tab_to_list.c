@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tab_to_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:22:05 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/24 14:10:31 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/28 14:32:08 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	**dlist_to_tab(t_dlist *alst)
 
 	i = -1;
 	curr = alst;
-	size = ft_tlstsize(curr);
+	size = ft_dlstsize(curr);
 	tmp = malloc(sizeof(char *) * (size + 1));
 	while (++i < size)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:32:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/24 14:10:28 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/28 13:28:08 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void	ft_tlstiter(
 			t_tlist *lst, t_minishell *mshell,
 			void (*f)(t_token *, t_minishell *));
 char	**dlist_to_tab(t_dlist *alst);
+void	print_tab(char **tab);
 
 #endif

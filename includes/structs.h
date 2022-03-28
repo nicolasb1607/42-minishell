@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/25 14:32:17 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/28 14:33:02 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ typedef struct s_cmd
 	char			**options;
 	char			*type;
 	bool			is_absolute;
-	struct s_cmd	next;
-	struct s_cmd	prev;
+	char			*bin;
+	struct s_cmd	*next;
+	struct s_cmd	*prev;
 }					t_cmd;
 
 typedef struct s_token

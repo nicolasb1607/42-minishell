@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:38:48 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/24 14:52:20 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/28 12:54:38 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	init_ft(t_tlist *tlst,  t_dlist **dupenv)
 {
 	char	*currcont;
-	pid_t	pi;
-	char	**lsltab;
-	char	**env;
+	// pid_t	pi;
+	// char	**lsltab;
+	// char	**env;
 
 	currcont = tlst->token->content;
 	if (ft_strcmp(currcont, "echo") == 0)

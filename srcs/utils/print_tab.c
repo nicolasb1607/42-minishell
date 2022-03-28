@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
+/*   print_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 12:20:55 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/28 15:41:24 by ngobert          ###   ########.fr       */
+/*   Created: 2022/03/28 13:25:13 by ngobert           #+#    #+#             */
+/*   Updated: 2022/03/28 13:27:54 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_H
+#include "utils.h"
 
-# define EXEC_H
+void	print_tab(char **tab)
+{
+	int	i;
 
-# include "minishell.h"
-
-void	ft_clstadd_back(t_cmd **alst, t_cmd *new);
-t_cmd	*ft_clstlast(t_cmd *lst);
-t_cmd	*ft_clstnew(void);
-t_cmd	*tlst_to_cmd(t_tlist *tlst);
-char	**get_path_to_cmd(t_tlist *tlst, t_dlist **dupenv);
-int		is_operator(char *content);
-void	update_bin(char **path, t_cmd *cmd);
-void	init_cmd(t_cmd *cmd);
-
-#endif
+	i = -1;
+	while (tab[++i])
+		ft_putendl_fd(tab[i], 1);
+}

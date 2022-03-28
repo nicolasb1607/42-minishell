@@ -6,83 +6,71 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/28 10:32:22 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/28 15:46:56 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-t_cmd	*ft_clstnew(char *cmd, char *type)
-{	
-	t_cmd	*node;
-
-	node = malloc(sizeof(t_cmd));
-	if (!node)
-		return (NULL);
-	node->command = cmd;
-	node->type = type;
-	node->options = NULL;
-	node->next = NULL;
-	node->prev = NULL;
-	return (node);
-}
-
-t_cmd	*ft_clstlast(t_cmd *lst)
+char	**get_path_to_cmd(t_tlist *tlst, t_dlist **dupenv)
 {
-	t_cmd	*current;
+	char	*path;
+	t_dlist *curr;
+	char	**splitpath;
 
-	current = lst;
-	if (current == NULL)
-		return (NULL);
-	while (current->next != NULL)
-		current = current->next;
-	return (current);
-}
-
-void	ft_clstadd_back(t_cmd **alst, t_cmd *new)
-{
-	t_cmd	*last;
-
-	if (!*alst)
+	curr = *dupenv;
+	path = NULL;
+	(void)tlst;
+	while (curr)
 	{
-		*alst = new;
-		return ;
+		if (ft_strncmp(curr->content, "PATH=", 5) == 0)
+		{
+			path = ft_substr(curr->content, 5, ft_strlen(curr->content));
+			if (!path)
+				ft_error("Substr failed :(\n");
+			ft_putendl_fd(path, 1);
+			splitpath = ft_split(path, ':');
+			free(path);
+			return (splitpath);
+		}
+		curr = curr->next;
 	}
-	if (*alst != NULL && new != NULL)
-	{
-		last = ft_clstlast(*alst);
-		last->next = new;
-		new->prev = last;
-	}
+	return (NULL);
 }
 
-
-int	not_operator(char *content)
+void	update_bin(char **path, t_cmd *cmd)
 {
-	if (ft_strcmp(content, T_DL_DIR) == 0)
-		return (0);
-	else if (ft_strcmp(content, T_DR_DIR) == 0)
-		return (0);
-	else if (ft_strcmp(content, T_L_DIR) == 0)
-		return (0);
-	else if (ft_strcmp(content, T_R_DIR) == 0)
-		return (0);
-	else if (ft_strcmp(content, T_PIPE) == 0)
-		return (0);
-	else
-		return (1);
+	cmd->bin = get_bin(cmd->command, path);
 }
 
 t_cmd	*tlst_to_cmd(t_tlist *tlst)
 {
+	char	*opt;
+	t_tlist *curr;
 	t_cmd	*cmd;
 
-	while (tlst)
+	curr = tlst;
+	opt = NULL;
+	if (is_operator(curr->token->type) == 0)
 	{
-		if (not_operator(tlst->token->content) == 1)
-		{
-			cmd = ft_clstnew(ft_strdup(tlst->token->content), ft_strdup(tlst->token->type));
-		}
-		tlst = tlst->next;
+		cmd = ft_clstnew();
+		cmd->command = ft_strdup(curr->token->content);
+		printf("cmd.command =  %s\n", cmd->command);
+		cmd->type = T_STRING;
+		curr = curr->next;
 	}
+	while (curr)
+	{
+		if (is_operator(curr->token->type) == 0)
+		{
+			opt = ft_strjoin(opt, curr->token->content);
+			opt = ft_strjoin(opt, " ");
+		}
+		else
+			break ;
+		curr = curr->next;
+	}
+	cmd->options = ft_split(opt, ' ');
+	free(opt);
+	return (cmd);
 }
