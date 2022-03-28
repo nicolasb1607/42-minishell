@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/24 15:01:17 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/25 14:32:17 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@
 # define T_RBRACK "T_RBRACK"
 # define T_LBRACK "T_LBRACK"
 # define T_DOLLAR "T_DOLLAR"
+# define T_BUILTIN "T_BUILTIN"
+
+typedef struct s_cmd
+{
+	char			*command;
+	char			**options;
+	char			*type;
+	bool			is_absolute;
+	struct s_cmd	next;
+	struct s_cmd	prev;
+}					t_cmd;
 
 typedef struct s_token
 {
@@ -58,11 +69,6 @@ typedef struct s_tlist
 	struct s_tlist	*prev;
 	struct s_tlist	*next;
 }					t_tlist;
-
-typedef struct s_command
-{
-	char	*command;
-}			t_command;
 
 typedef struct s_minishell
 {
