@@ -13,7 +13,7 @@ int main(int ac, char **av, char **envp)
 	mshell.env = ft_dupenv(mshell.env, envp);
 	mshell.head_env = &mshell.env;
 
-	char *str = "echo caca $USER $CACA $PWD";
+	char *str = "echo $QUEUE oui";
 	// tlist = init_tlist(str, tlist, &mshell);
 	// ft_printtoklst(tlist);
 	// parser(tlist);
@@ -45,7 +45,7 @@ int main(int ac, char **av, char **envp)
 			pipi = fork();
 			if (pipi == 0)
 			{
-				ret = execve(cmd->command,cmd->options,tabenv);
+				ret = execve(cmd->command, cmd->options, tabenv);
 				printf("Ret -> %d\n", ret);
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:25:13 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/28 13:27:54 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/29 13:52:29 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ void	print_tab(char **tab)
 
 	i = -1;
 	while (tab[++i])
-		ft_putendl_fd(tab[i], 1);
+		printf("ligne n %d = %s\n", i, tab[i]);
 }

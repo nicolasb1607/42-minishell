@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/29 11:18:44 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/29 14:04:52 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,19 @@ t_cmd	*tlst_to_cmd(t_tlist *tlst)
 	t_cmd	*cmd;
 
 	curr = tlst;
-	opt = ft_strdup("(null) ");
+	opt = NULL;
 	if (is_operator(curr->token->type) == 0)
 	{
 		cmd = ft_clstnew();
 		cmd->command = ft_strdup(curr->token->content);
 		printf("cmd.command =  %s\n", cmd->command);
 		cmd->type = T_STRING;
-		curr = curr->next;
 	}
 	while (curr)
 	{
 		if (is_operator(curr->token->type) == 0)
 		{
-			if (curr->token->content)
-				opt = ft_strjoin(opt, curr->token->content);
+			opt = ft_strjoin(opt, curr->token->content);
 			opt = ft_strjoin(opt, " ");
 		}
 		else
@@ -87,6 +85,7 @@ t_cmd	*tlst_to_cmd(t_tlist *tlst)
 		curr = curr->next;
 	}
 	cmd->options = ft_split(opt, ' ');
+	print_tab(cmd->options);
 	if (!cmd->options)
 	{
 		cmd->options = malloc(sizeof(char *));

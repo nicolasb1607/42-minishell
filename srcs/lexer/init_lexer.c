@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:17 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/29 12:09:07 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/29 13:14:00 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	ft_cleantlist(t_tlist *tlist)
 			tlist = tlist->prev;
 		}
 	}
-	// while (tlist)
-	// 	tlist = tlist->prev;
 }
 
 t_tlist	*init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
