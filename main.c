@@ -13,7 +13,7 @@ int main(int ac, char **av, char **envp)
 	mshell.env = ft_dupenv(mshell.env, envp);
 	mshell.head_env = &mshell.env;
 
-	char *str = "ls";
+	char *str = "/bin/ls -l -a";
 	// tlist = init_tlist(str, tlist, &mshell);
 	// ft_printtoklst(tlist);
 	// parser(tlist);

@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/28 16:38:30 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/29 10:21:24 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	is_absolute(char *cmd)
 		return (1);
 	else if (cmd[0] == '.' && cmd[1] == '.' && cmd[2] == '/')
 		return (1);
+	else if (cmd[0] == '.' && cmd[1] == '/')
+		return (1);
 	else
 		return (0);
 }
@@ -51,15 +53,9 @@ int	is_absolute(char *cmd)
 void	update_bin(char **path, t_cmd *cmd)
 {
 	if (is_absolute(cmd->command) == 0)
-	{
 		cmd->bin = get_bin(cmd->command, path);
-		printf("UPDATE_BIN NO BIN : %s\n", cmd->bin);
-	}
-	else if (access(cmd->command, F_OK))
-	{
-		printf("Ben?\n");
+	else
 		cmd->is_absolute = 1;
-	}
 }
 
 t_cmd	*tlst_to_cmd(t_tlist *tlst)
@@ -69,7 +65,7 @@ t_cmd	*tlst_to_cmd(t_tlist *tlst)
 	t_cmd	*cmd;
 
 	curr = tlst;
-	opt = NULL;
+	opt = ft_strdup("(null) ");
 	if (is_operator(curr->token->type) == 0)
 	{
 		cmd = ft_clstnew();
