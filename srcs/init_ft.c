@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:38:48 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/28 12:54:38 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/29 14:40:21 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 void	init_ft(t_tlist *tlst,  t_dlist **dupenv)
 {
 	char	*currcont;
-	// pid_t	pi;
-	// char	**lsltab;
-	// char	**env;
+	pid_t	pi;
+	char	**tabenv;
+	char	**path;
+	t_cmd	*cmd;
 
 	currcont = tlst->token->content;
 	if (ft_strcmp(currcont, "echo") == 0)
@@ -33,14 +34,31 @@ void	init_ft(t_tlist *tlst,  t_dlist **dupenv)
 	else if (ft_strcmp(currcont, "export") == 0)
 		loop_export(tlst, dupenv);
 	// else if (ft_strcmp(currcont, "exit") == 0)
-	// 	ft_echo(tlst);
-	// else
-	// {
-	// 	lsltab = tlist_to_tab(tlst);
-	// 	env = dlist_to_tab(*dupenv);
-	// 	pi = fork();
-	// 	if (pi == 0)
+		// ft_echo(tlst);
+	else
+	{
+		cmd = tlst_to_cmd(tlst);
+		path = get_path_to_cmd(tlst, dupenv);
+		update_bin(path, cmd);
+		tabenv = dlist_to_tab(*dupenv);
 		
-	// 		execve(lsltab, lsltab++);
-	// }
+		if (cmd->is_absolute)
+		{
+			printf("Baen?\n");
+			pi = fork();
+			if (pi == 0)
+			{
+				execve(cmd->command, cmd->options, tabenv);
+			}
+		}
+		else
+		{
+			pi = fork();
+			if (pi == 0)
+			{
+				execve(cmd->bin, cmd->options, tabenv);
+			}
+		}
+		waitpid(pi, NULL, 0);
+	}
 }

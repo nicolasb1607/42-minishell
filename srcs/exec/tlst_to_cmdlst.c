@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/29 14:04:52 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/29 14:46:21 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ int	is_absolute(char *cmd)
 void	update_bin(char **path, t_cmd *cmd)
 {
 	if (is_absolute(cmd->command) == 0)
+	{
 		cmd->bin = get_bin(cmd->command, path);
+		cmd->is_absolute = 0;
+	}
 	else
 		cmd->is_absolute = 1;
 }
@@ -86,11 +89,6 @@ t_cmd	*tlst_to_cmd(t_tlist *tlst)
 	}
 	cmd->options = ft_split(opt, ' ');
 	print_tab(cmd->options);
-	if (!cmd->options)
-	{
-		cmd->options = malloc(sizeof(char *));
-		cmd->options[0] = ft_strdup("");
-	}
 	free(opt);
 	return (cmd);
 }
