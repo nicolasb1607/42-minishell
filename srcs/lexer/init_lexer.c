@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   init_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:17 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/24 10:30:21 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/29 12:09:07 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+
+void	ft_cleantlist(t_tlist *tlist)
+{
+	while (tlist->next)
+	{
+		if (tlist->token->content && tlist->next)
+			tlist = tlist->next;
+		if (!tlist->token->content)
+		{
+			ft_tlstdelone(tlist, free);
+			tlist = tlist->prev;
+		}
+	}
+	// while (tlist)
+	// 	tlist = tlist->prev;
+}
 
 t_tlist	*init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
 {
@@ -33,5 +49,6 @@ t_tlist	*init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
 		ft_tlstadd_back(&tlist, new);
 	}
 	ft_tlstiter(tlist, mshell, expandtok);
+	ft_cleantlist(tlist);
 	return (tlist);
 }

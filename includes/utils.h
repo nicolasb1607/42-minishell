@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:32:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/28 13:28:08 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/29 11:58:33 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ void	ft_tlstiter(
 			void (*f)(t_token *, t_minishell *));
 char	**dlist_to_tab(t_dlist *alst);
 void	print_tab(char **tab);
+void	ft_printalltok(t_tlist *tlist);
+void	ft_tlstdelone(t_tlist *lst, void (*del)(void*));
 
 #endif

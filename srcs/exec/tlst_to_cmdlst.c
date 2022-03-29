@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/29 10:21:24 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/29 11:18:44 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ t_cmd	*tlst_to_cmd(t_tlist *tlst)
 	{
 		if (is_operator(curr->token->type) == 0)
 		{
-			opt = ft_strjoin(opt, curr->token->content);
+			if (curr->token->content)
+				opt = ft_strjoin(opt, curr->token->content);
 			opt = ft_strjoin(opt, " ");
 		}
 		else

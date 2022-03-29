@@ -13,7 +13,7 @@ int main(int ac, char **av, char **envp)
 	mshell.env = ft_dupenv(mshell.env, envp);
 	mshell.head_env = &mshell.env;
 
-	char *str = "/bin/ls -l -a";
+	char *str = "echo caca $USER $CACA $PWD";
 	// tlist = init_tlist(str, tlist, &mshell);
 	// ft_printtoklst(tlist);
 	// parser(tlist);
@@ -23,35 +23,46 @@ int main(int ac, char **av, char **envp)
 
 	tlist = init_tlist(str, tlist, &mshell);
 	ft_printtoklst(tlist);
+	ft_printalltok(tlist);
 
-	
-	char **path;
-	t_cmd	*cmd;
-	char 	**tabenv;
-	pid_t	pipi;
 
-	cmd = tlst_to_cmd(tlist);
-	path = get_path_to_cmd(tlist, mshell.head_env);
-	update_bin(path, cmd);
-	
-	tabenv = dlist_to_tab(mshell.env);
-
-	if (cmd->is_absolute)
+	/* EXECUTION MAIN */
+	if (tlist)
 	{
-		pipi = fork();
-		if (pipi == 0)
-			printf("Ceci est la valeur de retour de execve et c'est un chemin absolu : -> %d\n", execve(cmd->command,cmd->options,tabenv));
-	}
-	else
-	{
-		pipi = fork();
-		if (pipi == 0)
+		char	**path;
+		t_cmd	*cmd;
+		char	**tabenv;
+		pid_t	pipi;
+		int		ret;
+
+		cmd = tlst_to_cmd(tlist);
+		path = get_path_to_cmd(tlist, mshell.head_env);
+		update_bin(path, cmd);
+		tabenv = dlist_to_tab(mshell.env);
+
+		if (cmd->is_absolute)
 		{
-			// if (!cmd->options)
-			// 	cmd->options = NULL;
-			printf("ret : %d, command : %s", execve(cmd->bin, cmd->options, tabenv), cmd->bin);
+			pipi = fork();
+			if (pipi == 0)
+			{
+				ret = execve(cmd->command,cmd->options,tabenv);
+				printf("Ret -> %d\n", ret);
+			}
 		}
+		else
+		{
+			pipi = fork();
+			if (pipi == 0)
+			{
+				ret = execve(cmd->bin, cmd->options, tabenv);
+				printf("Ret -> %d\n", ret);
+			}
+		}
+		waitpid(pipi, NULL, 0);
 	}
+
+
+	/* PROMPT MAIN */
 	// char *ret;
 	// while (1)
 	// {
