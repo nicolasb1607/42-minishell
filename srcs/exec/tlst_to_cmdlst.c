@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/30 10:58:58 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/30 15:44:14 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ t_cmd	*tlst_to_cmd(t_tlist *tlst)
 	char	*opt;
 	t_tlist *curr;
 	t_cmd	*cmd;
+	int		quote;
 
+	quote = 0;
 	curr = tlst;
 	opt = NULL;
 	if (is_operator(curr->token->type) == 0)
@@ -78,14 +80,24 @@ t_cmd	*tlst_to_cmd(t_tlist *tlst)
 	{
 		if (is_operator(curr->token->type) == 0)
 		{
+			if (quote == 0 && curr->token->quote)
+			{
+				quote = 1;
+				opt = ft_strjoin(opt, "\"");
+			}
 			opt = ft_strjoin(opt, curr->token->content);
+			if (quote == 1 && !curr->token->type)
+			{
+				quote = 0;
+				opt = ft_strjoin(opt, "\"");
+			}
 			opt = ft_strjoin(opt, " ");
 		}
 		else
 			break ;
 		curr = curr->next;
 	}
-	cmd->options = ft_split(opt, ' ');
+	cmd->options = ft_split_custom(opt, ' ');
 	print_tab(cmd->options);
 	free(opt);
 	return (cmd);
