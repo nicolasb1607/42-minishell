@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:37:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/30 10:35:42 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/30 14:16:14 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,35 @@ void	split_first_tok_arg(t_tlist *tlst, int *nl_opt)
 	}
 }
 
+
+void	checktype(t_tlist *curr)
+{
+	int	i;
+	int space;
+
+	i = 0;
+	space = 0;
+	if (curr->token->quote)
+		ft_putstr(curr->token->content);
+	else
+	{
+		while(curr->token->content[i])
+		{
+			if(curr->token->content[i] != ' ')
+			{
+				ft_putchar(curr->token->content[i]);
+				space = 0;
+			}
+			else if (curr->token->content[i] == ' ' && space == 0)
+			{
+				ft_putchar(' ');
+				space = 1;
+			}
+			i++;	
+		}
+	}
+}
+
 void	ft_echo(t_tlist *tlst)
 {
 	t_tlist	*curr;
@@ -71,7 +100,7 @@ void	ft_echo(t_tlist *tlst)
 	}
 	while (curr && __is_type(curr, T_STRING))
 	{
-		ft_putstr(curr->token->content);
+		checktype(curr);
 		if (curr->next && curr->token->space_after == 1)
 			ft_putchar(' ');
 		curr = curr->next;

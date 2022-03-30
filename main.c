@@ -73,7 +73,8 @@ int main(int ac, char **av, char **envp)
 			if (tlist)
 			{
 				parser(tlist);
-				// ft_printtoklst(tlist);
+				ft_printtoklst(tlist);
+				ft_printalltok(tlist);
 				init_ft(tlist, mshell.head_env);
 				free_tlist(&tlist);
 			}
