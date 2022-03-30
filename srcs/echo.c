@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:37:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/24 10:37:28 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/30 10:35:42 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	split_first_tok_arg(t_tlist *tlst, int *nl_opt)
 
 	i = -1;
 	splittedtok = ft_split(tlst->token->content, ' ');
-	while (splittedtok[++i])
-		printf("splittedtok %d = %s\n", i, splittedtok[i]);
 	if (splittedtok[1])
 	{
 		i = 1;
