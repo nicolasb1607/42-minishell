@@ -6,27 +6,30 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:59:52 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/30 15:30:05 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/31 10:22:32 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static int	ft_wordcount(char *s, char c)
+static int	ft_wordcount_custom(char *s, char c)
 {
 	int	i;
 	int	word;
 	int	count;
 	char quote;
+	char	s_de_i;
 
 	count = 0;
 	word = 0;
 	i = 0;
 	while (s[i])
 	{
+		s_de_i = s[i];
+		ft_putchar(s_de_i);
 		if( s[i] == '\"' || s[i] == '\'')
 			{
-				quote = s[i];
+				quote = s[i++];
 				look_for_next_quote(s, quote, &i);
 				count++;
 			}
@@ -75,7 +78,7 @@ int	lenquote(char *str, int i, char q)
 	int len;
 
 	len = 0;
-	while (str[i] != q)
+	while (str[i] != q && str[i])
 	{
 		len++;
 		i++;
@@ -91,7 +94,7 @@ static char	**ft_cut(char *s, char **split, char c, int i)
 	int		len;
 
 	j = -1;
-	while (++j < ft_wordcount(s, c))
+	while (++j < ft_wordcount_custom(s, c))
 	{
 		l = 0;
 		while (s[i] == c && s[i])
@@ -103,7 +106,8 @@ static char	**ft_cut(char *s, char **split, char c, int i)
 			split[j] = malloc(sizeof(char) * len + 1);
 			if (!split[j])
 				return (free_tab(split));
-			while(i < len + i)
+			len += i;
+			while(i < len)
 			{
 				split[j][l] = s[i];
 				i++;
@@ -148,7 +152,7 @@ char	**ft_split_custom(char *s, char c)
 	i = 0;
 	if (!s)
 		return (NULL);
-	split = malloc(sizeof(char *) * (ft_wordcount(s, c) + 1));
+	split = malloc(sizeof(char *) * (ft_wordcount_custom(s, c) + 1));
 	if (!split)
 		return (NULL);
 	split = ft_cut(s, split, c, i);
