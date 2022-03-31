@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:32:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/30 15:30:20 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/31 16:29:35 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,12 @@ void	print_tab(char **tab);
 void	ft_printalltok(t_tlist *tlist);
 void	ft_tlstdelone(t_tlist *lst, void (*del)(void*));
 char	**ft_split_custom(char *s, char c);
+void	classicsplit(char *s, char **split, int *i, int *j);
+char	**ft_split_custom(char *s, char c);
+int		ft_wordcount_custom(char *s, char c);
+int		lenquote_cu(char *str, int i, char q);
+int		ft_wordlen_cu(char *s, char c);
+char	**ft_cut_cu(char *s, char **split, char c, int i);
+char	**free_tab_cu(char **tab);
 
 #endif

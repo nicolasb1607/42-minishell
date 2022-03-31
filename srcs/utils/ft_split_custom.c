@@ -6,44 +6,15 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:59:52 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/31 15:23:44 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/31 16:29:48 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static int ft_wordcount_custom(char *s, char c)
+int	ft_wordlen_cu(char *s, char c)
 {
-	int i;
-	int word;
-	int count;
-	char quote;
-
-	count = 0;
-	word = 0;
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '\"' || s[i] == '\'')
-		{
-			quote = s[i++];
-			count += (look_for_next_quote(s, quote, &i), 1);
-		}
-		else if (s[i] == c)
-			word = 0;
-		else if (word == 0)
-		{
-			if (s[i] != c && word == 0)
-				word = (count++, 1);
-		}
-		i++;
-	}
-	return (count);
-}
-
-static int ft_wordlen(char *s, char c)
-{
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] && s[i] != c)
@@ -51,9 +22,9 @@ static int ft_wordlen(char *s, char c)
 	return (i + 1);
 }
 
-static char **free_tab(char **tab)
+char	**free_tab_cu(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (!tab[i])
@@ -65,9 +36,9 @@ static char **free_tab(char **tab)
 	return (NULL);
 }
 
-int lenquote(char *str, int i, char q)
+int	lenquote_cu(char *str, int i, char q)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (str[i] != q && str[i])
@@ -78,20 +49,20 @@ int lenquote(char *str, int i, char q)
 	return (len);
 }
 
-void splitquotted(char **split, char *s, int *j, int *i)
+void	splitquotted(char **split, char *s, int *j, int *i)
 {
-	int l;
-	char quote;
-	int len;
+	int		l;
+	char	quote;
+	int		len;
 
 	l = 0;
 	quote = s[*i];
 	*i = *i + 1;
-	len = lenquote(s, *i, quote);
+	len = lenquote_cu(s, *i, quote);
 	split[*j] = malloc(sizeof(char) * len + 1);
 	if (!split[*j])
 	{
-		free_tab(split);
+		free_tab_cu(split);
 		return ;
 	}
 	len += *i;
@@ -104,29 +75,9 @@ void splitquotted(char **split, char *s, int *j, int *i)
 	split[*j][l] = '\0';
 }
 
-void classicsplit(char *s, char **split, int *i, int *j)
+char	**ft_cut_cu(char *s, char **split, char c, int i)
 {
-	int	l;
-
-	l = 0;
-	split[*j] = malloc(sizeof(char) * ft_wordlen(&s[*i], ' '));
-	if (!split[*j])
-	{
-		free_tab(split);
-		return ;
-	}
-	while (s[*i] != ' ' && s[*i])
-	{
-		split[*j][l] = s[*i];
-		*i = *i + 1;
-		l++;
-	}
-	split[*j][l] = '\0';
-}
-
-static char **ft_cut(char *s, char **split, char c, int i)
-{
-	int j;
+	int	j;
 
 	j = -1;
 	while (++j < ft_wordcount_custom(s, c))
@@ -153,17 +104,3 @@ résultant du découpage. NULL si l’allocation
 
 #1. La chaine de caractères à découper.
 #2. Le caractère délimitant.*/
-char **ft_split_custom(char *s, char c)
-{
-	char **split;
-	int i;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	split = malloc(sizeof(char *) * (ft_wordcount_custom(s, c) + 1));
-	if (!split)
-		return (NULL);
-	split = ft_cut(s, split, c, i);
-	return (split);
-}

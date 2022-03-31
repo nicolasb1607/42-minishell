@@ -43,6 +43,7 @@ SRCS = ./main.c \
 	./srcs/utils/ft_tlstdelone.c \
 	./srcs/utils/print_tab.c \
 	./srcs/utils/ft_split_custom.c \
+	./srcs/utils/ft_split_cust_2.c \
 	./srcs/parser/parser.c \
 	./srcs/echo.c \
 	./srcs/init_ft.c \
