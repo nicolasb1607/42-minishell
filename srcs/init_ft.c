@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:38:48 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/31 13:13:25 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/31 13:20:06 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_ft(t_tlist *tlst,  t_dlist **dupenv)
 		ft_pwd();
 	else if (ft_strncmp(currcont, "unset ", 6) == 0)
 		loop_unset(tlst, dupenv);
-	else if (ft_strncmp(currcont, "export ", 7) == 0)
+	else if (ft_strncmp(currcont, "export ", 6) == 0)
 		loop_export(tlst, dupenv);
 	// else if (ft_strcmp(currcont, "exit") == 0)
 		// ft_echo(tlst);

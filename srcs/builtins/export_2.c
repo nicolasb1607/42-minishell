@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:27:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/24 10:59:24 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/31 13:39:25 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,27 +101,73 @@ int	ft_export(t_tlist *tlst, t_dlist **dup_env)
 	return (0);
 }
 
+void	ft_sort_tab(char **tab)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	while (tab[i])
+	{
+		j = i + 1;
+		while (tab[j])
+		{
+			if (ft_strcmp(tab[i], tab[j]) > 0)
+			{
+				tmp = tab[i];
+				tab[i] = tab[j];
+				tab[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	print_declared_var(t_dlist **dup_env)
+{
+	char **tab;
+	int i;
+
+	i = 0;
+	tab = dlist_to_tab(*dup_env);
+	ft_sort_tab(tab);
+	while (tab[i])
+	{
+		tab[i] = ft_strjoin("export ", tab[i]);
+		i++;
+	}
+	print_tab(tab);
+}
+
+
 void	loop_export(t_tlist *tlst, t_dlist **dup_env)
 {
 	t_tlist	*currtok;
 	int		i;
 
-	if (!is_all_var_valid(tlst))
-		return ;
-	currtok = tlst->next;
-	i = ft_export(currtok, dup_env);
-	while (currtok)
+	if(tlst->next)
 	{
-		if (i == 1 && currtok->next)
+		if (!is_all_var_valid(tlst))
+			return ;
+		currtok = tlst->next;
+		i = ft_export(currtok, dup_env);
+		while (currtok)
 		{
-			currtok = currtok->next;
-			ft_export(currtok, dup_env);
+			if (i == 1 && currtok->next)
+			{
+				currtok = currtok->next;
+				ft_export(currtok, dup_env);
+			}
+			else if (i == 2 && currtok->next && currtok->next->next)
+			{
+				currtok = currtok->next->next;
+			}
+			else
+				break ;
 		}
-		else if (i == 2 && currtok->next && currtok->next->next)
-		{
-			currtok = currtok->next->next;
-		}
-		else
-			break ;
 	}
+	else
+		print_declared_var(dup_env);
 }
