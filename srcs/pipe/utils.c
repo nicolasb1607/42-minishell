@@ -6,11 +6,42 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:07:07 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/31 11:04:18 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/31 13:05:12 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipe.h"
+
+char	*get_bin_custom(char *cmd, char **paths, t_tlist *tlst)
+{
+	char	*tmp;
+	char	*ret_path;
+	int		i;
+	int		j;
+
+	tmp = ft_strdup("");
+	ret_path = NULL;
+	i = -1;
+	while (paths[++i])
+	{
+		j = -1;
+		tmp = ft_strjoin(paths[i], "/");
+		while (cmd[++j] != ' ' && cmd[j])
+			tmp = ft_charjoin(tmp, cmd[j]);
+		ret_path = ft_strdup(tmp);
+		if (ft_containchar(' ', cmd) == 1 && tlst->token->quote)
+		{
+			free(ret_path);
+			ret_path = ft_strdup(cmd);
+		}
+		if (access(ret_path, F_OK) == 0)
+			return (ret_path);
+		free(ret_path);
+	}
+	ft_putendl_fd("Command not found", 2);
+	//ft_error("Command not found\n");
+	return (NULL);
+}
 
 char	*get_bin(char *cmd, char **paths)
 {

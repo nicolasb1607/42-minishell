@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:32:13 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/09 17:32:14 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/31 11:46:46 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ char	**get_paths(t_data *data);
 void	run_first(t_data *data);
 void	run_mid(t_data *data, int i);
 void	run_last(t_data *data);
+char	*get_bin_custom(char *cmd, char **paths, t_tlist *tlst);
 
 #endif
