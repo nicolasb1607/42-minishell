@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:38:48 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/30 13:41:26 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/31 10:46:59 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	init_ft(t_tlist *tlst,  t_dlist **dupenv)
 			pi = fork();
 			if (pi == 0)
 			{
+				ft_putendl_fd(cmd->bin, 1);
 				execve(cmd->bin, cmd->options, tabenv);
 			}
 		}

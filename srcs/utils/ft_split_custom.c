@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:59:52 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/31 10:28:37 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/31 10:46:09 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ static int	ft_wordcount_custom(char *s, char c)
 	int	word;
 	int	count;
 	char quote;
-	char	s_de_i;
+	// char	s_de_i;
 
 	count = 0;
 	word = 0;
 	i = 0;
 	while (s[i])
 	{
-		s_de_i = s[i];
-		ft_putchar(s_de_i);
+		// s_de_i = s[i];
+		// ft_putchar(s_de_i);
 		if( s[i] == '\"' || s[i] == '\'')
 			{
 				quote = s[i++];

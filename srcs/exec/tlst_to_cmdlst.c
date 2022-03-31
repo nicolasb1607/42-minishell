@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/31 10:37:08 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/31 10:59:16 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	update_bin(char **path, t_cmd *cmd)
 	if (is_absolute(cmd->command) == 0)
 	{
 		cmd->bin = get_bin(cmd->command, path);
-		cmd->is_absolute = 0;
+		cmd->is_absolute = 0;	
 	}
 	else
 		cmd->is_absolute = 1;

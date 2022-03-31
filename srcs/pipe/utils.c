@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:07:07 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/30 11:56:54 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/31 11:04:18 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,17 @@ char	*get_bin(char *cmd, char **paths)
 		while (cmd[++j] != ' ' && cmd[j])
 			tmp = ft_charjoin(tmp, cmd[j]);
 		ret_path = ft_strdup(tmp);
+		if (ft_containchar(' ', cmd) == 1)
+		{
+			free(ret_path);
+			ret_path = ft_strdup(cmd);
+		}
 		if (access(ret_path, F_OK) == 0)
 			return (ret_path);
 		free(ret_path);
 	}
-	ft_error("Command not found\n");
+	ft_putendl_fd("Command not found", 2);
+	//ft_error("Command not found\n");
 	return (NULL);
 }
 
