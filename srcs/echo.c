@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:37:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/30 14:16:14 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/31 14:40:58 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,10 @@ void	split_first_tok_arg(t_tlist *tlst, int *nl_opt)
 	}
 }
 
-
 void	checktype(t_tlist *curr)
 {
 	int	i;
-	int space;
+	int	space;
 
 	i = 0;
 	space = 0;
@@ -65,9 +64,9 @@ void	checktype(t_tlist *curr)
 		ft_putstr(curr->token->content);
 	else
 	{
-		while(curr->token->content[i])
+		while (curr->token->content[i])
 		{
-			if(curr->token->content[i] != ' ')
+			if (curr->token->content[i] != ' ')
 			{
 				ft_putchar(curr->token->content[i]);
 				space = 0;
@@ -77,7 +76,7 @@ void	checktype(t_tlist *curr)
 				ft_putchar(' ');
 				space = 1;
 			}
-			i++;	
+			i++;
 		}
 	}
 }

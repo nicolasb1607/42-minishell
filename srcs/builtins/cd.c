@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:39:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/29 15:49:37 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/31 14:48:25 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	*ft_cd(char *path_name, t_dlist **dupenv)
 void	launch_cd(t_tlist *tlst, t_dlist **dupenv)
 {
 	if (!tlst->next)
-		ft_cd(look_for_varenv_value("HOME", dupenv), dupenv);	
-	else 
+		ft_cd(look_for_varenv_value("HOME", dupenv), dupenv);
+	else
 		ft_cd(tlst->next->token->content, dupenv);
 }

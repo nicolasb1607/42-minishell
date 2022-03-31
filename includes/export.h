@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:26:48 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/24 10:26:51 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/03/31 14:46:32 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,7 @@ int		spread_on_two_tok(t_tlist *tlst, t_dlist *currenv,
 			char *varexport, t_dlist **dup_env);
 int		ft_export(t_tlist *tlst, t_dlist **dup_env);
 void	loop_export(t_tlist *tlst, t_dlist **dup_env);
+void	ft_sort_tab(char **tab);
+void	print_declared_var(t_dlist **dup_env);
+
 #endif

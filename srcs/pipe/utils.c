@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:07:07 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/31 13:05:12 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/31 14:44:16 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,12 @@ char	*get_bin_custom(char *cmd, char **paths, t_tlist *tlst)
 			tmp = ft_charjoin(tmp, cmd[j]);
 		ret_path = ft_strdup(tmp);
 		if (ft_containchar(' ', cmd) == 1 && tlst->token->quote)
-		{
-			free(ret_path);
-			ret_path = ft_strdup(cmd);
-		}
+			ret_path = (free(ret_path), ft_strdup(cmd));
 		if (access(ret_path, F_OK) == 0)
 			return (ret_path);
 		free(ret_path);
 	}
-	ft_putendl_fd("Command not found", 2);
-	//ft_error("Command not found\n");
-	return (NULL);
+	return (ft_error("Command not found\n"), NULL);
 }
 
 char	*get_bin(char *cmd, char **paths)
@@ -61,17 +56,12 @@ char	*get_bin(char *cmd, char **paths)
 			tmp = ft_charjoin(tmp, cmd[j]);
 		ret_path = ft_strdup(tmp);
 		if (ft_containchar(' ', cmd) == 1)
-		{
-			free(ret_path);
-			ret_path = ft_strdup(cmd);
-		}
+			ret_path = (free(ret_path), ft_strdup(cmd));
 		if (access(ret_path, F_OK) == 0)
 			return (ret_path);
 		free(ret_path);
 	}
-	ft_putendl_fd("Command not found", 2);
-	//ft_error("Command not found\n");
-	return (NULL);
+	return (ft_error("Command not found\n"), NULL);
 }
 
 char	*get_line(t_data *data)

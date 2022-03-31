@@ -6,13 +6,13 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:38:48 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/31 13:20:06 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/31 14:39:26 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_ft(t_tlist *tlst,  t_dlist **dupenv)
+void	init_ft(t_tlist *tlst, t_dlist **dupenv)
 {
 	char	*currcont;
 	pid_t	pi;
@@ -33,15 +33,13 @@ void	init_ft(t_tlist *tlst,  t_dlist **dupenv)
 		loop_unset(tlst, dupenv);
 	else if (ft_strncmp(currcont, "export ", 6) == 0)
 		loop_export(tlst, dupenv);
-	// else if (ft_strcmp(currcont, "exit") == 0)
-		// ft_echo(tlst);
 	else
 	{
 		cmd = tlst_to_cmd(tlst);
 		path = get_path_to_cmd(tlst, dupenv);
 		update_bin(path, cmd, tlst);
 		tabenv = dlist_to_tab(*dupenv);
-		
+
 		if (cmd->is_absolute)
 		{
 			pi = fork();
