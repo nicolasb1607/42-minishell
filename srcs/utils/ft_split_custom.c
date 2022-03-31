@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:59:52 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/31 15:01:18 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/31 15:23:44 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,44 @@ int lenquote(char *str, int i, char q)
 	return (len);
 }
 
-void splitquotted(char **split, int len, int *j, int *i)
+void splitquotted(char **split, char *s, int *j, int *i)
 {
 	int l;
+	char quote;
+	int len;
 
 	l = 0;
+	quote = s[*i];
+	*i = *i + 1;
+	len = lenquote(s, *i, quote);
 	split[*j] = malloc(sizeof(char) * len + 1);
 	if (!split[*j])
-		return (free_tab(split));
+	{
+		free_tab(split);
+		return ;
+	}
 	len += *i;
 	while (*i < len)
+	{
+		split[*j][l] = s[*i];
+		*i = *i + 1;
+		l++;
+	}
+	split[*j][l] = '\0';
+}
+
+void classicsplit(char *s, char **split, int *i, int *j)
+{
+	int	l;
+
+	l = 0;
+	split[*j] = malloc(sizeof(char) * ft_wordlen(&s[*i], ' '));
+	if (!split[*j])
+	{
+		free_tab(split);
+		return ;
+	}
+	while (s[*i] != ' ' && s[*i])
 	{
 		split[*j][l] = s[*i];
 		*i = *i + 1;
@@ -99,45 +127,16 @@ void splitquotted(char **split, int len, int *j, int *i)
 static char **ft_cut(char *s, char **split, char c, int i)
 {
 	int j;
-	int l;
-	char quote;
-	int len;
 
 	j = -1;
 	while (++j < ft_wordcount_custom(s, c))
 	{
-		l = 0;
 		while (s[i] == c && s[i])
 			i++;
 		if (s[i] == '\"' || s[i] == '\'')
-		{
-			quote = s[i++];
-			len = lenquote(s, i, quote);
-			// split[j] = malloc(sizeof(char) * len + 1);
-			// if (!split[j])
-			// 	return (free_tab(split));
-			// len += i;
-			// while (i < len)
-			// {
-			// 	split[j][l] = s[i];
-			// 	i++;
-			// 	l++;
-			// }
-			// split[j][l] = '\0';
-		}
+			splitquotted(split, s, &j, &i);
 		else if (s[i] != c)
-		{
-			split[j] = malloc(sizeof(char) * ft_wordlen(&s[i], c));
-			if (!split[j])
-				return (free_tab(split));
-			while (s[i] != c && s[i])
-			{
-				split[j][l] = s[i];
-				i++;
-				l++;
-			}
-			split[j][l] = '\0';
-		}
+			classicsplit(s, split, &i, &j);
 	}
 	split[j] = 0;
 	return (split);

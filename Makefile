@@ -19,6 +19,7 @@ SRCS = ./main.c \
 	./srcs/builtins/unset.c \
 	./srcs/builtins/export_1.c \
 	./srcs/builtins/export_2.c \
+	./srcs/builtins/export_3.c \
 	./srcs/pipe/pipex.c \
 	./srcs/pipe/pipe.c \
 	./srcs/pipe/run_first.c \
