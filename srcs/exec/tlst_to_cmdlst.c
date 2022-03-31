@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/31 09:58:12 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/03/31 10:37:08 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_cmd	*tlst_to_cmd(t_tlist *tlst)
 				opt = ft_strjoin(opt, "\"");
 			}
 			opt = ft_strjoin(opt, curr->token->content);
-			if (quote == 1 && !curr->token->type)
+			if (quote == 1)
 			{
 				quote = 0;
 				opt = ft_strjoin(opt, "\"");
@@ -97,6 +97,7 @@ t_cmd	*tlst_to_cmd(t_tlist *tlst)
 			break ;
 		curr = curr->next;
 	}
+	printf("OPT : %s\n", opt);
 	cmd->options = ft_split_custom(opt, ' ');
 	print_tab(cmd->options);
 	free(opt);
