@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:17 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/29 13:14:00 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/01 16:07:30 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 void	ft_cleantlist(t_tlist *tlist)
 {
-	while (tlist->next)
+	while (tlist)
 	{
-		if (tlist->token->content && tlist->next)
-			tlist = tlist->next;
 		if (!tlist->token->content)
-		{
 			ft_tlstdelone(tlist, free);
-			tlist = tlist->prev;
-		}
+		tlist = tlist->next;
 	}
 }
 
