@@ -6,6 +6,7 @@
 		"lexer.h": "c",
 		"minishell.h": "c",
 		"ranges": "c",
-		"utils.h": "c"
+		"utils.h": "c",
+		"libft.h": "c"
 	}
 }

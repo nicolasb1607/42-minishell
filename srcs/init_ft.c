@@ -37,9 +37,7 @@ void init_ft(t_tlist *tlst, t_dlist **dupenv)
 			loop_export(tlst, dupenv);
 		else
 		{
-			printf("AVnt tlst to cmd\n");
 			cmd = tlst_to_cmd(tlst);
-			printf("AVnt get path to cmd\n");
 			path = get_path_to_cmd(tlst, dupenv);
 			update_bin(path, cmd, tlst);
 			tabenv = dlist_to_tab(*dupenv);
@@ -49,7 +47,6 @@ void init_ft(t_tlist *tlst, t_dlist **dupenv)
 				pi = fork();
 				if (pi == 0)
 				{
-					printf("AVnt execve\n");
 					execve(cmd->command, cmd->options, tabenv);
 				}
 			}
@@ -58,7 +55,6 @@ void init_ft(t_tlist *tlst, t_dlist **dupenv)
 				pi = fork();
 				if (pi == 0)
 				{
-					printf("AVnt execve\n");
 					execve(cmd->bin, cmd->options, tabenv);
 				}
 			}

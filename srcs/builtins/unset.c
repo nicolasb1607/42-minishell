@@ -67,7 +67,7 @@ void	ft_unset(char *varenv, t_dlist **dupenv)
 	{
 		if (ft_strncmp(content, varenv, ft_strlen(varenv)) == 0)
 		{
-			ft_dlstdelone(curr, free);
+			ft_dlstdelone(curr, free, dupenv);
 			return ;
 		}
 		curr = curr->next;

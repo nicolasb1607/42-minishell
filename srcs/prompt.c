@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:23:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/30 13:22:47 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/04 11:13:53 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_prompt(void)
 {
 	char	*ret_line;
 
-	ret_line = readline(BGRN"➜"BCYN"  minishell "BYEL"✗ "reset);
+	ret_line = readline(BGRN"➜"BCYN"  le_nathou_shell "BYEL"✗ "reset);
 	add_history(ret_line);
 	return (ret_line);
 }

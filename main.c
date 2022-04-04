@@ -7,6 +7,7 @@ int main(int ac, char **av, char **envp)
 	// (void)envp;
 	t_minishell mshell;
 	t_tlist *tlist;
+	
 
 	tlist = NULL;
 	mshell.env = NULL;
@@ -70,14 +71,11 @@ int main(int ac, char **av, char **envp)
 		if (ft_strlen(ret) != 0)
 		{
 			tlist = init_tlist(ret, tlist, &mshell);
-			printf("after init\n");
 			if (tlist)
 			{
 				parser(tlist);
-				printf("after parser\n");
 				ft_printtoklst(tlist);
-				//ft_printalltok(tlist);
-				printf("Init ft -----------------------\n");
+				ft_printalltok(tlist);
 				init_ft(tlist, mshell.head_env);
 				free_tlist(&tlist);
 			}
