@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:17 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/04 14:44:40 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/05 12:00:04 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ t_tlist	*init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
 	t_tlist	*new;
 	t_token	*token;
 	t_lexer	lexer;
+	int		i;
 
+	i = 0;
 	if (check_quote(str) == 0)
 		return (NULL);
 	init_lexer(&lexer, str);
@@ -45,6 +47,12 @@ t_tlist	*init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
 		ft_tlstadd_back(&tlist, new);
 	}
 	ft_tlstiter(tlist, mshell, expandtok);
-	ft_cleantlist(tlist);
+	while (i < 15)
+	{
+		ft_cleantlist(tlist);
+		if (!tlist->token->content)
+			tlist = tlist->next; // ! Peut etre un free a regler avec celui d'avant
+		i++;
+	}
 	return (tlist);
 }
