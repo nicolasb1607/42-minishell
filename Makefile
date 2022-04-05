@@ -50,7 +50,7 @@ SRCS = ./main.c \
 	./srcs/free.c \
 	./srcs/exec/tlst_to_cmdlst.c \
 	./srcs/exec/exec_utils.c \
-	
+	./srcs/exec/count_command.c \
 
 
 OBJS = ${SRCS:.c=.o}

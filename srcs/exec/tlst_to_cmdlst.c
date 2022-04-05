@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tlst_to_cmdlst.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/01 15:01:50 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/05 16:53:16 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	update_bin(char **path, t_cmd *cmd, t_tlist *tlst)
 		cmd->is_absolute = 1;
 }
 
-t_cmd	*tlst_to_cmd(t_tlist *tlst)
+t_cmd	*tlst_to_cmd(t_tlist **tlst)
 {
 	char	*opt;
 	t_tlist *curr;
@@ -68,7 +68,7 @@ t_cmd	*tlst_to_cmd(t_tlist *tlst)
 	int		quote;
 
 	quote = 0;
-	curr = tlst;
+	curr = *tlst;
 	opt = NULL;
 	if (is_operator(curr->token->type) == 0)
 	{
@@ -76,7 +76,7 @@ t_cmd	*tlst_to_cmd(t_tlist *tlst)
 		cmd->command = ft_strdup(curr->token->content);
 		cmd->type = T_STRING;
 	}
-	while (curr)
+	while (curr && ft_strcmp(curr->token->type, T_PIPE) != 0)
 	{
 		if (is_operator(curr->token->type) == 0)
 		{
@@ -97,6 +97,7 @@ t_cmd	*tlst_to_cmd(t_tlist *tlst)
 			break ;
 		curr = curr->next;
 	}
+	*tlst = curr;
 	cmd->options = ft_split_custom(opt, ' ');
 	free(opt);
 	return (cmd);

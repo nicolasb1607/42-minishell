@@ -12,13 +12,14 @@
 
 #include "minishell.h"
 
-void init_ft(t_tlist *tlst, t_dlist **dupenv)
+void init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *cmd, t_cmd **chead)
 {
 	char *currcont;
 	pid_t pi;
 	char **tabenv;
 	char **path;
-	t_cmd *cmd;
+
+	t_tlist *curr;
 
 	if (tlst->token->content)
 	{
@@ -37,9 +38,19 @@ void init_ft(t_tlist *tlst, t_dlist **dupenv)
 			loop_export(tlst, dupenv);
 		else
 		{
-			cmd = tlst_to_cmd(tlst);
-			path = get_path_to_cmd(tlst, dupenv);
-			update_bin(path, cmd, tlst);
+			while (tlst)
+			{
+				curr = tlst;
+				cmd = tlst_to_cmd(&tlst);
+				chead = &cmd;
+				// if(tlst)
+				// 	printf("tlst content %s\n", tlst->token->content);
+				path = get_path_to_cmd(curr, dupenv);
+				update_bin(path, cmd, curr);
+				ft_clstadd_back(chead, cmd);
+				if (tlst)
+					tlst = tlst->next;
+			}
 			tabenv = dlist_to_tab(*dupenv);
 
 			if (cmd->is_absolute && path)
