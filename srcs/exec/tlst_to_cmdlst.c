@@ -6,11 +6,46 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/05 16:53:16 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/06 11:30:50 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+char	**tab_dup(char **tab)
+{
+	char	**new;
+	int		i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	new = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (tab[i])
+	{
+		new[i] = ft_strdup(tab[i]);
+		i++;
+	}
+	new[i] = NULL;
+	return (new);
+}
+
+t_cmd	*cpy_tcmd(t_cmd **cmd)
+{
+	t_cmd	*new;
+	
+	new = ft_clstnew();
+	// new->bin = ft_strdup(cmd->bin);
+	new->command = ft_strdup((*cmd)->command);
+	new->options = tab_dup((*cmd)->options);
+	new->bin = 	ft_strdup((*cmd)->bin);
+	new->type = (*cmd)->type;
+	ft_free_tab((*cmd)->options);
+	free((*cmd));
+	(*cmd) = NULL;
+	return (new);
+}
 
 char	**get_path_to_cmd(t_tlist *tlst, t_dlist **dupenv)
 {

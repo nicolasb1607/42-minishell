@@ -12,12 +12,28 @@
 
 #include "minishell.h"
 
-void init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *cmd, t_cmd **chead)
+char **ft_free_tab(char **tab)
+{
+	int i;
+
+	i = 0;
+	while (!tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+	return (NULL);
+}
+
+void init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 {
 	char *currcont;
 	pid_t pi;
 	char **tabenv;
 	char **path;
+
+	t_cmd *cmd;
 
 	t_tlist *curr;
 
@@ -42,34 +58,39 @@ void init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *cmd, t_cmd **chead)
 			{
 				curr = tlst;
 				cmd = tlst_to_cmd(&tlst);
-				chead = &cmd;
+
 				// if(tlst)
 				// 	printf("tlst content %s\n", tlst->token->content);
+				//				new = ft_memcpy(ft_clstnew(), cmd, sizeof(t_cmd));
 				path = get_path_to_cmd(curr, dupenv);
 				update_bin(path, cmd, curr);
-				ft_clstadd_back(chead, cmd);
+				ft_clstadd_back(&chead, cmd);
 				if (tlst)
 					tlst = tlst->next;
 			}
 			tabenv = dlist_to_tab(*dupenv);
-
-			if (cmd->is_absolute && path)
+			print_t_cmd(chead);
+			while (chead)
 			{
-				pi = fork();
-				if (pi == 0)
+				if ((chead)->is_absolute && path)
 				{
-					execve(cmd->command, cmd->options, tabenv);
+					pi = fork();
+					if (pi == 0)
+					{
+						execve((chead)->command, (chead)->options, tabenv);
+					}
 				}
-			}
-			else
-			{
-				pi = fork();
-				if (pi == 0)
+				else
 				{
-					execve(cmd->bin, cmd->options, tabenv);
+					pi = fork();
+					if (pi == 0)
+					{
+						execve((chead)->bin, (chead)->options, tabenv);
+					}
 				}
+				waitpid(pi, NULL, 0);
+				chead = chead->next;
 			}
-			waitpid(pi, NULL, 0);
 		}
 	}
 }

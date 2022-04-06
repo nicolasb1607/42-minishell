@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:42 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/05 13:40:47 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/06 13:53:10 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,16 @@ void	ft_printalltok(t_tlist *tlist)
 		curr = curr->next;
 	}
 	ft_putstr("\n\n");
+}
+
+void print_t_cmd(t_cmd *cmd)
+{
+	while (cmd)
+	{
+		printf("command %s\n", cmd->command);
+		print_tab(cmd->options);
+		printf("bin %s\n", cmd->bin);
+		printf("is_absolute %d\n", cmd->is_absolute);
+		cmd = cmd->next;
+	}
 }

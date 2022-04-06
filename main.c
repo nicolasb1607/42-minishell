@@ -7,11 +7,11 @@ int main(int ac, char **av, char **envp)
 	// (void)envp;
 	t_minishell mshell;
 	t_tlist *tlist;
-	t_cmd *cmd;
-	t_cmd **chead;
+	//t_cmd *cmd;
+	t_cmd *chead;
 	
-	cmd = NULL;
-	chead = &cmd;
+	//cmd = NULL;
+	chead = NULL;
 	tlist = NULL;
 	mshell.env = NULL;
 	mshell.env = ft_dupenv(mshell.env, envp);
@@ -79,7 +79,7 @@ int main(int ac, char **av, char **envp)
 				parser(tlist);
 				ft_printtoklst(tlist);
 				ft_printalltok(tlist);
-				init_ft(tlist, mshell.head_env, cmd, chead);
+				init_ft(tlist, mshell.head_env, chead);
 				printf("Nombre de commandes : %d\n", count_command(tlist));
 				free_tlist(&tlist);
 			}

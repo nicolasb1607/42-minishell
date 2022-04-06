@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:31:35 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/30 10:08:05 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/06 10:16:54 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@
 # include "echo.h"
 # include "exec.h"
 # include "colors.h"
+# include "handle_sig.h"
 
 #endif

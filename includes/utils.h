@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:32:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/04 14:40:53 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/06 13:53:45 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ int		lenquote_cu(char *str, int i, char q);
 int		ft_wordlen_cu(char *s, char c);
 char	**ft_cut_cu(char *s, char **split, char c, int i);
 char	**free_tab_cu(char **tab);
+char	**ft_free_tab(char **tab);
+void	print_t_cmd(t_cmd *cmd);
 
 #endif
