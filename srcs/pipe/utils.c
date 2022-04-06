@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:07:07 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/31 14:44:16 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/06 15:44:29 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,21 @@ char	*get_bin_custom(char *cmd, char **paths, t_tlist *tlst)
 	tmp = ft_strdup("");
 	ret_path = NULL;
 	i = -1;
-	while (paths[++i])
+	if (paths)
 	{
-		j = -1;
-		tmp = ft_strjoin(paths[i], "/");
-		while (cmd[++j] != ' ' && cmd[j])
-			tmp = ft_charjoin(tmp, cmd[j]);
-		ret_path = ft_strdup(tmp);
-		if (ft_containchar(' ', cmd) == 1 && tlst->token->quote)
-			ret_path = (free(ret_path), ft_strdup(cmd));
-		if (access(ret_path, F_OK) == 0)
-			return (ret_path);
-		free(ret_path);
+		while (paths[++i])
+		{
+			j = -1;
+			tmp = ft_strjoin(paths[i], "/");
+			while (cmd[++j] != ' ' && cmd[j])
+				tmp = ft_charjoin(tmp, cmd[j]);
+			ret_path = ft_strdup(tmp);
+			if (ft_containchar(' ', cmd) == 1 && tlst->token->quote)
+				ret_path = (free(ret_path), ft_strdup(cmd));
+			if (access(ret_path, F_OK) == 0)
+				return (ret_path);
+			free(ret_path);
+		}
 	}
 	return (ft_error("Command not found\n"), NULL);
 }
