@@ -69,7 +69,6 @@ void init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					tlst = tlst->next;
 			}
 			tabenv = dlist_to_tab(*dupenv);
-			print_t_cmd(chead);
 			while (chead)
 			{
 				if ((chead)->is_absolute && path)

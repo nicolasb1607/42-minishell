@@ -80,7 +80,6 @@ int main(int ac, char **av, char **envp)
 				ft_printtoklst(tlist);
 				ft_printalltok(tlist);
 				init_ft(tlist, mshell.head_env, chead);
-				printf("Nombre de commandes : %d\n", count_command(tlist));
 				free_tlist(&tlist);
 			}
 		}
