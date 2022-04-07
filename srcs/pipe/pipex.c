@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 09:54:48 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/01 14:26:23 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/07 11:13:01 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,3 +58,17 @@ void	pipes(int argc, char **argv, char **envp)
 		ft_pipex(&data, argc);
 	}
 }
+
+// 0 : 1
+// 1 : 2
+// 2 : 3
+// 3 : 4
+// 4 : 5
+
+// while (outile[i])
+// {
+// 	open(lefichier);
+// 	if (outfile[i + 1])
+// 		close(lefichier);
+// 	i++;
+// }

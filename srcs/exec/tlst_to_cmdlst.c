@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/06 15:40:55 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/07 15:01:08 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,26 +95,70 @@ void	update_bin(char **path, t_cmd *cmd, t_tlist *tlst)
 		cmd->is_absolute = 1;
 }
 
+char	*create_tmp(void)
+{
+	int		i;
+	char	*str;
+
+	i = INT_MIN;
+	while (i < INT_MAX)
+	{
+		str = ft_itoa(i);
+		if (access(str, F_OK) == 0)
+			return (str);
+		free(str);
+		i++;
+	}
+	return (NULL);
+}
+
+void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
+{
+	lst = lst->next;
+	if (ret == 1)
+		cmd->outfile = ft_tab_addback(cmd->outfile, lst->token->content);
+	else if (ret == 2)
+		cmd->infile = ft_strdup(lst->token->content);
+	else if (ret == 3)
+	{
+		cmd->infile = ft_strdup(lst->token->content);
+		cmd->is_double = true;
+	}
+	else if (ret == 4)
+	{
+		cmd->limiter = ft_strdup(lst->token->content);
+		cmd->infile = create_tmp();
+		cmd->is_double = true;
+	}
+}
+
 t_cmd	*tlst_to_cmd(t_tlist **tlst)
 {
 	char	*opt;
 	t_tlist *curr;
 	t_cmd	*cmd;
 	int		quote;
+	int		i;
 
 	quote = 0;
+	i = 0;
 	curr = *tlst;
 	opt = NULL;
-	if (is_operator(curr->token->type) == 0)
-	{
-		cmd = ft_clstnew();
-		cmd->command = ft_strdup(curr->token->content);
-		cmd->type = T_STRING;
-	}
+	cmd = ft_clstnew();
+	cmd->type = T_STRING;
 	while (curr && ft_strcmp(curr->token->type, T_PIPE) != 0)
 	{
-		if (is_operator(curr->token->type) == 0)
+		if (curr && is_operator(curr->token->type) == 0 && i == 0)
+			cmd->command = (i++, ft_strdup(curr->token->content));
+		while (curr && is_redir(curr->token->type) != 0)
 		{
+			update_io(cmd, curr, is_redir(curr->token->type));
+			curr = curr->next->next;
+		}
+		if (curr && is_operator(curr->token->type) == 0)
+		{
+			if (i == 0)
+				cmd->command = (i++, ft_strdup(curr->token->content));
 			if (quote == 0 && curr->token->quote)
 			{
 				quote = 1;
@@ -135,5 +179,6 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 	*tlst = curr;
 	cmd->options = ft_split_custom(opt, ' ');
 	free(opt);
+	print_t_cmd(cmd);
 	return (cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:55 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/06 11:05:45 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/07 11:27:40 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void	init_cmd(t_cmd *cmd);
 int		count_command(t_tlist *tlst);
 char	**tab_dup(char **tab);
 t_cmd	*cpy_tcmd(t_cmd **cmd);
+int	is_redir(char *content);
 
 #endif

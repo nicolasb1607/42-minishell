@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:35:23 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/06 13:10:22 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/07 11:38:34 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,20 @@ int	is_operator(char *content)
 		return (1);
 	else if (ft_strcmp(content, T_PIPE) == 0)
 		return (1);
+	else
+		return (0);
+}
+
+int	is_redir(char *content)
+{
+	if (ft_strcmp(content, T_R_DIR) == 0)
+		return (1);
+	else if (ft_strcmp(content, T_L_DIR) == 0)
+		return (2);
+	else if (ft_strcmp(content, T_DR_DIR) == 0)
+		return (3);
+	else if (ft_strcmp(content, T_DL_DIR) == 0)
+		return (4);
 	else
 		return (0);
 }

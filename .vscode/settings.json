@@ -1,5 +1,6 @@
 {
 	"files.associations": {
+		"*.h": "c",
 		"*.c": "c",
 		"echo.h": "c",
 		"handle_sig.h": "c",
@@ -7,6 +8,8 @@
 		"minishell.h": "c",
 		"ranges": "c",
 		"utils.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"*.tcc": "c",
+		"fstream": "c"
 	}
 }

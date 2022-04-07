@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/05 13:50:24 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/07 13:55:46 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ typedef struct s_cmd
 	char			**options;
 	char			*type;
 	bool			is_absolute;
+	bool			is_double;
 	char			*bin;
 	char			*infile;
-	char			*outfile;
+	char			**outfile;
 	char			*limiter;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;

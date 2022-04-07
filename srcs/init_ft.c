@@ -80,12 +80,33 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				}
 			}
 			waitpid(pi, NULL, 0);
-			free(chead);
+			// free(chead);
 		}
 	}
 }
 
-void init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
+void	free_tcmd(t_cmd **cmd)
+{
+	t_cmd *curr;
+	t_cmd *next;
+
+	curr = *cmd;
+	while (curr)
+	{
+		if (curr->next)
+			next = curr->next;
+		free(curr->command);
+		free(curr->bin);
+		curr->options = ft_free_tab(curr->options);
+		curr->outfile = ft_free_tab(curr->outfile);
+		free(curr);
+		curr = next;
+	}
+	*cmd = NULL;
+	cmd = NULL;
+}
+
+void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 {
 	char *currcont;
 	pid_t pi;

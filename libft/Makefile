@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+         #
+#    By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 16:20:24 by nburat-d          #+#    #+#              #
-#    Updated: 2022/03/09 16:11:04 by nburat-d         ###   ########.fr        #
+#    Updated: 2022/04/07 13:55:07 by ngobert          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,9 +76,10 @@ SRCS = ./ft_atoi.c \
 	./ft_dlstsize.c \
 	./ft_dlstdelone.c \
 	./ft_dlstiter.c \
-	ft_charjoin.c \
-	ft_islower.c \
-	ft_isupper.c \
+	./ft_charjoin.c \
+	./ft_islower.c \
+	./ft_isupper.c \
+	./ft_tab_addback.c \
 
 INCLUDES = ./
 OBJS_SRCS = ${SRCS:.c=.o}
