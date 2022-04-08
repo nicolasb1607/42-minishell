@@ -51,6 +51,7 @@ SRCS = ./main.c \
 	./srcs/exec/tlst_to_cmdlst.c \
 	./srcs/exec/exec_utils.c \
 	./srcs/exec/count_command.c \
+	./srcs/handle_sig.c \
 
 
 OBJS = ${SRCS:.c=.o}

@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:23:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/04 11:13:53 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/08 15:33:16 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,19 @@ TO DO :
 
 - Once the excution is done, it starts again and put a prompt
 */
-char	*ft_prompt(void)
+char	*ft_prompt(t_minishell *g_mshell)
 {
 	char	*ret_line;
 
 	ret_line = readline(BGRN"➜"BCYN"  le_nathou_shell "BYEL"✗ "reset);
+	if(ret_line == NULL)
+	{
+		printf(GRN"\nCTRL D PRESSED\n"CRESET);
+		free_dlist(g_mshell->env);
+		clear_history();
+		exit (0);
+	}
+		
 	add_history(ret_line);
 	return (ret_line);
 }

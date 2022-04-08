@@ -150,6 +150,7 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				if ((chead)->is_absolute)
 				{
 					pi = fork();
+				
 					if (pi == 0)
 					{
 						execve((chead)->command, (chead)->options, tabenv);

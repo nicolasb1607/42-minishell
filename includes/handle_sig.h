@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_sig.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:31:47 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/06 10:23:54 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/08 13:21:51 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 # include "minishell.h"
 # include <signal.h>
 
-// void	free_tab(t_data *data);
-// void	handle_sig(int signum, siginfo_t *si_signo , t_data *data);
-// // // void	handle_ctrld(void);
-// // // void	handle_ctrlbslash(void);
+void free_dlist(t_dlist *dlist);
+
 
 #endif
