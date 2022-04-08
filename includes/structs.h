@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/07 13:55:46 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/08 11:16:57 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 # define T_LBRACK "T_LBRACK"
 # define T_DOLLAR "T_DOLLAR"
 # define T_BUILTIN "T_BUILTIN"
+# define STDIN "/dev/stdin"
+# define STDOUT "/dev/stdout"
 
 typedef struct s_cmd
 {
