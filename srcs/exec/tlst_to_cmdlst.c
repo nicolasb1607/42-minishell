@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/07 15:01:08 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/08 10:58:58 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,18 @@ char	**get_path_to_cmd(t_tlist *tlst, t_dlist **dupenv)
 
 int	is_absolute(char *cmd)
 {
-	if (cmd[0] == '/')
-		return (1);
-	else if (cmd[0] == '.' && cmd[1] == '.' && cmd[2] == '/')
-		return (1);
-	else if (cmd[0] == '.' && cmd[1] == '/')
-		return (1);
-	else
-		return (0);
+	if (cmd)
+	{
+		if (cmd[0] == '/')
+			return (1);
+		else if (cmd[0] == '.' && cmd[1] == '.' && cmd[2] == '/')
+			return (1);
+		else if (cmd[0] == '.' && cmd[1] == '/')
+			return (1);
+		else
+			return (0);
+	}
+	return (-1);
 }
 
 void	update_bin(char **path, t_cmd *cmd, t_tlist *tlst)
@@ -179,6 +183,6 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 	*tlst = curr;
 	cmd->options = ft_split_custom(opt, ' ');
 	free(opt);
-	print_t_cmd(cmd);
+	// print_t_cmd(cmd);
 	return (cmd);
 }

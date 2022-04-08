@@ -147,7 +147,7 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			tabenv = dlist_to_tab(*dupenv);
 			while (chead)
 			{
-				if ((chead)->is_absolute && path)
+				if ((chead)->is_absolute)
 				{
 					pi = fork();
 					if (pi == 0)
