@@ -10,6 +10,7 @@
 		"utils.h": "c",
 		"libft.h": "c",
 		"*.tcc": "c",
-		"fstream": "c"
+		"fstream": "c",
+		"sstream": "c"
 	}
 }

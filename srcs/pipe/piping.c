@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_tab.c                                        :+:      :+:    :+:   */
+/*   piping.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 13:25:13 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/08 11:34:50 by ngobert          ###   ########.fr       */
+/*   Created: 2022/04/08 13:35:41 by ngobert           #+#    #+#             */
+/*   Updated: 2022/04/08 13:36:00 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "pipe.h"
 
-void	print_tab(char **tab)
+void	piping(int argc, t_cmd *cmd, char **envp)
 {
-	int	i;
-
-	i = -1;
-	if (tab)
-	{
-	while (tab[++i])
-		printf("%s\n", tab[i]);
-	}
+	
 }

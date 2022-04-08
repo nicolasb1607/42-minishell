@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:42 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/07 14:36:00 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/08 11:31:11 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void print_t_cmd(t_cmd *cmd)
 			printf("infile %s\n", cmd->infile);
 		if (cmd->limiter)
 			printf("limiter %s\n", cmd->limiter);
+		printf("Double ? : %d\n", cmd->is_double);
 		cmd = cmd->next;
 	}
 	printf(reset"\n");

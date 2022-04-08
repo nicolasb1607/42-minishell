@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 13:46:25 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/12 13:24:11 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/08 13:02:52 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	check_pipe(t_tlist *lst)
 {
 	if (!lst->prev || !lst->next)
 		return (ft_error("PIPE ERROR"), 0);
+	else if (ft_strcmp(lst->next->token->type, T_L_DIR) == 0)
+		return (1);
 	else if (__is_type(lst->next, T_STRING) == 0)
 		return (ft_error("PIPE ERROR"), 0);
 	return (1);

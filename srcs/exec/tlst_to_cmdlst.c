@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/08 11:20:18 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/08 11:51:53 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_cmd	*cpy_tcmd(t_cmd **cmd)
 	t_cmd	*new;
 	
 	new = ft_clstnew();
-	// new->bin = ft_strdup(cmd->bin);
+	// new->bin = ft_strdup((*cmd)->bin);
 	new->command = ft_strdup((*cmd)->command);
 	new->options = tab_dup((*cmd)->options);
 	new->bin = 	ft_strdup((*cmd)->bin);
@@ -108,7 +108,7 @@ char	*create_tmp(void)
 	while (i < INT_MAX)
 	{
 		str = ft_itoa(i);
-		if (access(str, F_OK) == 0)
+		if (access(str, F_OK) != 0)
 			return (str);
 		free(str);
 		i++;
@@ -190,6 +190,5 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 	if (!cmd->outfile)
 		cmd->outfile = ft_tab_addback(cmd->outfile, STDOUT);
 	free(opt);
-	print_t_cmd(cmd);
 	return (cmd);
 }
