@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_tab.c                                        :+:      :+:    :+:   */
+/*   mpipe.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 13:25:13 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/09 14:04:16 by ngobert          ###   ########.fr       */
+/*   Created: 2022/04/09 14:53:59 by ngobert           #+#    #+#             */
+/*   Updated: 2022/04/09 15:05:27 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#ifndef MPIPE_H
+# define MPIPE_H
 
-void	print_tab(char **tab)
+/* INCLUDES */
+# include "minishell.h"
+
+/* STRUCTURE */
+typedef struct s_pipes
 {
-	int	i;
+	int		nb_cmd;
+	int		nb_pipe;
+	int		**pipe;
+	pid_t	child[255];
+	char	**env;
+}			t_pipes;
 
-	i = -1;
-	if (tab)
-	{
+/* PROTOTYPES */
+int		open_i(t_cmd *cmd);
+int		open_o(t_cmd *cmd);
+int		open_io(t_cmd *cmd);
+void	piping(int nbcmd, t_cmd *cmd, char **envp);
 
-		while (tab && tab[++i])
-			printf("%s\n", tab[i]);
-	}
-}
+#endif

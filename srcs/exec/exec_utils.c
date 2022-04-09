@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:35:23 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/07 11:38:34 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/09 14:37:56 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ t_cmd	*ft_clstlast(t_cmd *lst)
 	if (current == NULL)
 		return (NULL);
 	while (current->next != NULL)
+	{
+		if (!current->next)
+			return (current);
 		current = current->next;
+	}
 	return (current);
 }
 

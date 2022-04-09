@@ -27,6 +27,7 @@ SRCS = ./main.c \
 	./srcs/pipe/run_last.c \
 	./srcs/pipe/utils.c \
 	./srcs/pipe/more_utils.c \
+	./srcs/pipe/piping.c \
 	./srcs/lexer/lexer.c \
 	./srcs/lexer/init_lexer.c \
 	./srcs/lexer/lexer_utils.c \

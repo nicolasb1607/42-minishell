@@ -29,10 +29,10 @@ char **ft_free_tab(char **tab)
 void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 {
 	char *currcont;
-	pid_t pi;
 	char **tabenv;
 	char **path;
 	t_cmd *cmd;
+	pid_t pi;
 	t_tlist *curr;
 
 	if (tlst->token->content)
@@ -63,8 +63,8 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					tlst = tlst->next;
 			}
 			tabenv = dlist_to_tab(*dupenv);
-			print_t_cmd(chead);
-			if ((chead)->is_absolute/* && path*/)
+			// print_t_cmd(chead);
+			if ((chead)->is_absolute)
 			{
 				pi = fork();
 				if (pi == 0)
@@ -110,7 +110,7 @@ void	free_tcmd(t_cmd **cmd)
 void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 {
 	char *currcont;
-	pid_t pi;
+	// pid_t pi;
 	char **tabenv;
 	char **path;
 
@@ -146,30 +146,29 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					tlst = tlst->next;
 			}
 			tabenv = dlist_to_tab(*dupenv);
-			print_t_cmd(chead);
-
-			// piping(count_command(tlst), chead, tabenv);
-			while (chead)
-			{
-				if ((chead)->is_absolute)
-				{
-					pi = fork();
-					if (pi == 0)
-					{
-						execve((chead)->command, (chead)->options, tabenv);
-					}
-				}
-				else
-				{
-					pi = fork();
-					if (pi == 0)
-					{
-						execve((chead)->bin, (chead)->options, tabenv);
-					}
-				}
-				waitpid(pi, NULL, 0);
-				chead = chead->next;
-			}
+			// print_t_cmd(chead);
+			piping(count_command(tlst), chead, tabenv);
+			// while (chead)
+			// {
+			// 	if ((chead)->is_absolute)
+			// 	{
+			// 		pi = fork();
+			// 		if (pi == 0)
+			// 		{
+			// 			execve((chead)->command, (chead)->options, tabenv);
+			// 		}
+			// 	}
+			// 	else
+			// 	{
+			// 		pi = fork();
+			// 		if (pi == 0)
+			// 		{
+			// 			execve((chead)->bin, (chead)->options, tabenv);
+			// 		}
+			// 	}
+			// 	waitpid(pi, NULL, 0);
+			// 	chead = chead->next;
+			// }
 		}
 	}
 }

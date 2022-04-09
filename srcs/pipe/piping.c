@@ -6,59 +6,47 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 13:35:41 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/08 15:00:01 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/09 15:30:44 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipe.h"
+#include "mpipe.h"
 
-int	open_i(t_cmd *cmd)
+void	alloc_pipes(t_cmd *cmd, t_pipes *pipes)
 {
-	int	fd;
-
-	fd = open(cmd->infile, O_RDONLY);
-	if (fd < 0)
-		return (0);
-	cmd->fd_in = fd;
-	return (1);
-}
-
-int	open_o(t_cmd *cmd)
-{
-	int	fd;
 	int	i;
 
 	i = 0;
-	while (cmd->outfile[i])
+	pipes->pipe = malloc(sizeof(int *) * (pipes->nb_cmd - 1));
+	if (!pipes->pipe)
+		ft_error("Allocation error");
+	while (i < (pipes->nb_cmd - 1))
 	{
-		if (cmd->is_double == false)
-			fd = open(cmd->options[i], O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		else if (cmd->is_double == true)
-			fd = open(cmd->options[i], O_CREAT | O_WRONLY | O_APPEND, 0644);
-		if (cmd->outfile[i + 1])
-			close(fd);
-		else
-		{
-			cmd->fd_out = fd;
-			return (1);
-		}
+		pipes->pipe[i] = malloc(sizeof(int) * 2);
+		if (!pipes->pipe[i])
+			ft_error("Allocation Error");
+		pipe(pipes->pipe[i]);
 		i++;
 	}
-	return (0);
 }
 
-int	open_io(t_cmd *cmd)
+void	pipex(t_cmd *cmd, t_pipes *pipes)
 {
 	int	i;
-	int	o;
 
-	i = open_i(cmd);
-	o = open_o(cmd);
-	if (i == 0 || o == 0)
-		return (0)
+	i = 1;
+	alloc_pipes(cmd, pipes);
 }
 
-void	piping(int argc, t_cmd *cmd, char **envp)
+void	piping(int nbcmd, t_cmd *cmd, char **envp)
 {
+	t_pipes	pipes;
+
+	pipes.nb_cmd = nbcmd;
+	pipes.env = envp;
+	pipes.nb_pipe = nbcmd - 1;
+	(void)envp;
 	open_io(cmd);
+	print_t_cmd(cmd);
+	pipex(cmd, &pipes);
 }
