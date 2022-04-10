@@ -4,3 +4,5 @@ minishell
 *.a
 test.c
 a.out
+print_argc.c
+print_argc

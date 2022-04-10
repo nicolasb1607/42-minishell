@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:42 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/09 14:25:30 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/10 14:18:02 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void print_t_cmd(t_cmd *cmd)
 {
 	static int	i = 0;
 	
-	printf(BRED"");
+	printf(BBLU"");
 	while (cmd)
 	{
 		printf("NODE %d\n", i);

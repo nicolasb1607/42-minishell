@@ -109,10 +109,13 @@ void	free_tcmd(t_cmd **cmd)
 
 void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 {
-	char *currcont;
-	// pid_t pi;
-	char **tabenv;
-	char **path;
+	char	*currcont;
+	// pid_t	pi;
+	char	**tabenv;
+	char	**path;
+	int		nb_cmd;
+
+	nb_cmd = count_command(tlst);
 
 	t_cmd *cmd;
 
@@ -147,7 +150,7 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			}
 			tabenv = dlist_to_tab(*dupenv);
 			// print_t_cmd(chead);
-			piping(count_command(tlst), chead, tabenv);
+			piping(nb_cmd, chead, tabenv);
 			// while (chead)
 			// {
 			// 	if ((chead)->is_absolute)

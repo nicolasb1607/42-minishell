@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:35:23 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/09 14:37:56 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/10 12:15:01 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,10 @@ t_cmd	*ft_clstlast(t_cmd *lst)
 	t_cmd	*current;
 
 	current = lst;
-	if (current == NULL)
+	if (current == NULL || lst == NULL)
 		return (NULL);
 	while (current->next != NULL)
 	{
-		if (!current->next)
-			return (current);
 		current = current->next;
 	}
 	return (current);
@@ -42,6 +40,8 @@ void	ft_clstadd_back(t_cmd **alst, t_cmd *new)
 {
 	t_cmd	*last;
 
+	if (new == NULL)
+		return ;
 	if (!*alst)
 	{
 		*alst = new;
