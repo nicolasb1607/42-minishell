@@ -23,12 +23,12 @@ int main(int ac, char **av, char **envp)
 		if (ft_strlen(ret) != 0)
 		{
 			tlist = init_tlist(ret, tlist, &mshell);
-			printf("Number of commands : %d\n", count_command(tlist));
+			// printf("Number of commands : %d\n", count_command(tlist));
 			if (tlist)
 			{
 				parser(tlist);
-				ft_printtoklst(tlist);
-				ft_printalltok(tlist);
+				// ft_printtoklst(tlist);
+				// ft_printalltok(tlist);
 				if (count_command(tlist) == 1)
 					only1cmd(tlist, mshell.head_env, chead);
 				else

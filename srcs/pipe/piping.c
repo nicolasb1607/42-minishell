@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 13:35:41 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/10 12:57:35 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/10 15:33:31 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@ void	alloc_pipes(t_pipes *pipes)
 	}
 }
 
+void	wait_to_end(t_pipes *pipes)
+{
+	int	i;
+
+	i = 0;
+	while (i < pipes->nb_cmd)
+	{
+		waitpid(pipes->child[i], NULL, 0);
+		i++;
+	}
+}
+
 void	pipex(t_cmd *cmd, t_pipes *pipes)
 {
 	int	i;
@@ -46,6 +58,7 @@ void	pipex(t_cmd *cmd, t_pipes *pipes)
 	}
 	last_cmd(cmd, pipes);
 	cmd = cmd->next;
+	wait_to_end(pipes);
 }
 
 void	piping(int nbcmd, t_cmd *cmd, char **envp)
@@ -58,6 +71,6 @@ void	piping(int nbcmd, t_cmd *cmd, char **envp)
 	pipes.nb_pipe = nbcmd - 1;
 	(void)envp;
 	open_io(cmd, &pipes);
-	print_t_cmd(cmd);
+	// print_t_cmd(cmd);
 	pipex(cmd, &pipes);
 }

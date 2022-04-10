@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dlstdelone.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:16:40 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/04 13:14:43 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/10 15:32:53 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ft_dlstdelone(t_dlist *lst, void (*del)(void*), t_dlist **dupenv)
 	{
 		if (curr->prev == NULL && curr->next)
 		{
-			printf("condition 1 \n");
 			*dupenv = curr->next;
 			curr->next->prev = NULL;
 			free(curr->content);
@@ -32,25 +31,21 @@ void	ft_dlstdelone(t_dlist *lst, void (*del)(void*), t_dlist **dupenv)
 		}
 		else if (!curr->next && !curr->prev)
 		{
-			printf("condition 2\n");
 			free(curr->content);
 			free(curr);
 		}
 		else if (curr->next == NULL && curr->prev)
 		{
-			printf("condition 3\n");
 			curr->prev->next = NULL;
 			free(curr->content);
 			free(curr);
 		}
 		else
 		{
-			printf("condition 4\n");
 			curr->next->prev = tmp->prev;
 			curr->prev->next = tmp->next;
 			free(curr->content);
 			free(curr);
 		}
 	}
-	printf("BABAYE\n");
 }
