@@ -65,9 +65,12 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			tabenv = dlist_to_tab(*dupenv);
 			if ((chead)->is_absolute/* && path*/)
 			{
+				if (ft_strcmp(chead->command, "./minishell") == 0)
+						signal(SIGINT, SIG_IGN);
 				pi = fork();
 				if (pi == 0)
 				{
+					
 					execve((chead)->command, (chead)->options, tabenv);
 				}
 			}
