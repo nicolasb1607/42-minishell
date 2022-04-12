@@ -43,6 +43,7 @@ int main(int ac, char **av, char **envp)
 	while (1)
 	{
 		signal(SIGINT, handler);
+		signal(SIGQUIT, SIG_IGN);
 		
 		ret = ft_prompt(&g_mshell);
 		if (ft_strlen(ret) != 0)
