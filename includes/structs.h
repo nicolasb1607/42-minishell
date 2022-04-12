@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/08 14:33:58 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/12 11:08:54 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_cmd
 	char			*type;
 	bool			is_absolute;
 	bool			is_double;
+	bool			is_builtin;
 	
 	char			*bin;
 	char			*infile;

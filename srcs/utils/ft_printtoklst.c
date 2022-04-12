@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:42 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/10 14:18:02 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/12 10:42:52 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void print_t_cmd(t_cmd *cmd)
 	printf(BBLU"");
 	while (cmd)
 	{
-		printf("NODE %d\n", i);
+		printf("\nNODE %d\n", i);
 		i = i + 1;
 		printf("command %s\n", cmd->command);
 		if (cmd->options)

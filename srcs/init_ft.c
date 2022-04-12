@@ -107,11 +107,39 @@ void	free_tcmd(t_cmd **cmd)
 	cmd = NULL;
 }
 
-void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
+int	is_builtin(t_tlist *lst)
 {
 	char	*currcont;
-	// pid_t	pi;
-	char	**tabenv;
+
+	currcont = lst->token->content;
+	if (ft_strncmp(currcont, "echo ", 4) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "cd ", 2) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "env ", 3) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "pwd ", 3) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "unset ", 5) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "export ", 6) == 0)
+		return (1);
+	else
+		return (0);
+}
+
+t_cmd	*minicmd_maker(char *str)
+{
+	t_cmd *cmd;
+
+	cmd = ft_clstnew();
+	cmd->is_builtin = true;
+	cmd->command = str;
+	return (cmd);
+}
+
+void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
+{
 	char	**path;
 	int		nb_cmd;
 
@@ -123,55 +151,30 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 
 	if (tlst->token->content)
 	{
-		currcont = tlst->token->content;
-		if (ft_strncmp(currcont, "echo ", 4) == 0)
-			ft_echo(tlst);
-		else if (ft_strncmp(currcont, "cd ", 2) == 0)
-			launch_cd(tlst, dupenv);
-		else if (ft_strncmp(currcont, "env ", 3) == 0)
-			ft_env(dupenv);
-		else if (ft_strncmp(currcont, "pwd ", 3) == 0)
-			ft_pwd();
-		else if (ft_strncmp(currcont, "unset ", 5) == 0)
-			loop_unset(tlst, dupenv);
-		else if (ft_strncmp(currcont, "export ", 6) == 0)
-			loop_export(tlst, dupenv);
-		else
+		while (tlst)
 		{
-			while (tlst)
+			curr = tlst;
+			if (!is_builtin(curr))
 			{
-				curr = tlst;
 				cmd = tlst_to_cmd(&tlst);
 				path = get_path_to_cmd(curr, dupenv);
 				update_bin(path, cmd, curr);
-				ft_clstadd_back(&chead, cmd);
+				cmd->is_builtin = false;
 				if (tlst)
 					tlst = tlst->next;
 			}
-			tabenv = dlist_to_tab(*dupenv);
-			// print_t_cmd(chead);
-			piping(nb_cmd, chead, tabenv);
-			// while (chead)
-			// {
-			// 	if ((chead)->is_absolute)
-			// 	{
-			// 		pi = fork();
-			// 		if (pi == 0)
-			// 		{
-			// 			execve((chead)->command, (chead)->options, tabenv);
-			// 		}
-			// 	}
-			// 	else
-			// 	{
-			// 		pi = fork();
-			// 		if (pi == 0)
-			// 		{
-			// 			execve((chead)->bin, (chead)->options, tabenv);
-			// 		}
-			// 	}
-			// 	waitpid(pi, NULL, 0);
-			// 	chead = chead->next;
-			// }
+			else
+			{
+				cmd = minicmd_maker(curr->token->content);
+				while (tlst && tlst->next->token->content[0] != '|')
+				{
+					tlst = tlst->next;
+				}
+				tlst = tlst->next->next;
+			}
+			ft_clstadd_back(&chead, cmd);
 		}
+		print_t_cmd(chead);
+		piping(nb_cmd, chead, dupenv, tlst);	
 	}
 }

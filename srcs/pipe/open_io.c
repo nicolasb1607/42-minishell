@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:52:33 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/10 13:10:13 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/12 12:31:25 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,28 @@ int	open_o(t_cmd *cmd, t_pipes *pipes)
 	int	i;
 
 	i = 0;
-	while (cmd->outfile[i])
+	if (cmd->outfile)
 	{
-		if (cmd->is_double == false)
-			fd = open(cmd->outfile[i], O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		else if (cmd->is_double == true)
-			fd = open(cmd->outfile[i], O_CREAT | O_WRONLY | O_APPEND, 0644);
-		if (cmd->outfile[i + 1])
-			close(fd);
-		else
+		while (cmd->outfile[i])
 		{
-			pipes->fd_out = fd;
-			return (1);
+			if (cmd->is_double == false)
+				fd = open(cmd->outfile[i], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			else if (cmd->is_double == true)
+				fd = open(cmd->outfile[i], O_CREAT | O_WRONLY | O_APPEND, 0644);
+			if (cmd->outfile[i + 1])
+				close(fd);
+			else
+			{
+				pipes->fd_out = fd;
+				return (1);
+			}
+			i++;
 		}
-		i++;
+	}
+	else
+	{
+		pipes->fd_out = 1;
+		return (1);
 	}
 	return (0);
 }

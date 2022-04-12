@@ -32,6 +32,7 @@ SRCS = ./main.c \
 	./srcs/pipe/last_cmd.c \
 	./srcs/pipe/mid_cmd.c \
 	./srcs/pipe/open_io.c \
+	./srcs/pipe/exec_builtin.c \
 	./srcs/lexer/lexer.c \
 	./srcs/lexer/init_lexer.c \
 	./srcs/lexer/lexer_utils.c \

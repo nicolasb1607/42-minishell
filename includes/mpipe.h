@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:53:59 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/10 12:56:28 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/12 11:43:51 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,19 @@ typedef struct s_pipes
 	pid_t	child[255];
 	char	**env;
 	bool	here_doc;
+	t_tlist	*tlst;
+	t_dlist	**denv;
 }			t_pipes;
 
 /* PROTOTYPES */
 int		open_i(t_cmd *cmd, t_pipes *pipes);
 int		open_o(t_cmd *cmd, t_pipes *pipes);
 int		open_io(t_cmd *cmd, t_pipes *pipes);
-void	piping(int nbcmd, t_cmd *cmd, char **envp);
+void	piping(int nbcmd, t_cmd *cmd, t_dlist **envp, t_tlist *lst);
 void	first_cmd(t_cmd *cmd, t_pipes *pipes);
 void	mid_cmd(t_cmd *cmd, t_pipes *pipes, int i);
 void	last_cmd(t_cmd *cmd, t_pipes *pipes);
-
+int		is_builtin(t_tlist *lst);
+void	exec_builtin(t_cmd *cmd, t_pipes *pipes);
 
 #endif

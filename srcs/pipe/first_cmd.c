@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:11:24 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/10 13:00:14 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/12 11:32:18 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ void	first_cmd(t_cmd *cmd, t_pipes *pipes)
 		if (pipes->here_doc == false)
 			close(pipes->fd_in);
 		close(pipes->pipe[0][1]);
-		execve(cmd->bin, cmd->options, pipes->env);
+		if (cmd->is_builtin == false)
+			execve(cmd->bin, cmd->options, pipes->env);
+		else
+			exec_builtin(cmd, pipes);
 	}
 	else
 	{
