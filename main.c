@@ -9,6 +9,8 @@ int main(int ac, char **av, char **envp)
 	t_cmd *chead;
 	
 	chead = NULL;
+	// chead->next = NULL;
+	// chead->prev = NULL;
 	tlist = NULL;
 	mshell.env = NULL;
 	mshell.env = ft_dupenv(mshell.env, envp);
