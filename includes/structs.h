@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/13 15:10:00 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/13 15:21:06 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_cmd
 	char			**outfile;
 	char			*limiter;
 
-	t_tlist			*builtin;
+	// t_tlist			*builtin;
 	
 	int				fd_out;
 	int				fd_in;
