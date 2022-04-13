@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/13 16:42:05 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/13 17:12:23 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,11 @@ void	ft_child(int *pfd, t_cmd *cmd, t_pipes *data)
 {
 	close_pfd(pfd, cmd->fd_in, cmd);
 	if (cmd->builtin)
+	{
 		exec_builtin(cmd, data);
-	else
+		exit(0);
+	}
+		else
 		execve(cmd->bin, cmd->options, data->env);
 }
 

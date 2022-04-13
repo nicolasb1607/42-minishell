@@ -173,8 +173,9 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			else
 			{
 				cmd = ft_clstnew();
+				cmd->builtin = NULL;
 				cpy_till_pipe(&tlst, &cmd->builtin);
-				ft_printtoklst(cmd->builtin);
+				// ft_printtoklst(cmd->builtin);
 			}
 			if (tlst)
 					tlst = tlst->next;
