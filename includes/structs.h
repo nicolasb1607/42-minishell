@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/13 15:10:00 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/13 15:54:34 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,7 @@
 # define STDIN "/dev/stdin"
 # define STDOUT "/dev/stdout"
 
-typedef struct s_cmd
-{
-	char			*command;
-	char			**options;
-	char			*type;
-	bool			is_absolute;
-	bool			is_double;
-	bool			is_builtin;
-	
-	char			*bin;
-	char			*infile;
-	char			**outfile;
-	char			*limiter;
 
-	t_tlist			*builtin;
-	
-	int				fd_out;
-	int				fd_in;
-	
-	struct s_cmd	*next;
-	struct s_cmd	*prev;
-}					t_cmd;
 
 typedef struct s_token
 {
@@ -84,6 +63,29 @@ typedef struct s_tlist
 	struct s_tlist *prev;
 	struct s_tlist *next;
 } t_tlist;
+
+typedef struct s_cmd
+{
+	char			*command;
+	char			**options;
+	char			*type;
+	bool			is_absolute;
+	bool			is_double;
+	bool			is_builtin;
+	
+	char			*bin;
+	char			*infile;
+	char			**outfile;
+	char			*limiter;
+
+	t_tlist			*builtin;
+	
+	int				fd_out;
+	int				fd_in;
+	
+	struct s_cmd	*next;
+	struct s_cmd	*prev;
+}					t_cmd;
 
 typedef struct s_minishell
 {

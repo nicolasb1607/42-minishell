@@ -131,6 +131,21 @@ int	is_builtin(t_tlist *lst)
 		return (0);
 }
 
+void	cpy_till_pipe(t_tlist **tlist, t_tlist **tlistnew)
+{
+	t_tlist *curr;
+	t_tlist *new;
+
+	curr = *tlist;
+	while (curr && ft_strcmp(curr->token->type, T_PIPE) != 0)
+	{
+		new = ft_tlstnew(curr->token);
+		ft_tlstadd_back(tlistnew, new);
+		curr = curr->next;
+	}
+	*tlist = curr;
+}
+
 
 void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 {
@@ -154,17 +169,15 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				path = get_path_to_cmd(curr, dupenv);
 				update_bin(path, cmd, curr);
 				cmd->is_builtin = false;
-				if (tlst)
-					tlst = tlst->next;
 			}
 			else
 			{
-				// cmd = lstnew
-				// while (different de pipe)
-				// 	cpy tlis
-				// 	ft_tab_addback
-				// 	cmd.builtin = newtruc
+				cmd = ft_clstnew();
+				cpy_till_pipe(&tlst, &cmd->builtin);
+				ft_printtoklst(cmd->builtin);
 			}
+			if (tlst)
+					tlst = tlst->next;
 			ft_clstadd_back(&chead, cmd);
 		}
 		// print_t_cmd(chead);
