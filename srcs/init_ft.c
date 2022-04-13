@@ -175,6 +175,10 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				cmd = ft_clstnew();
 				cmd->builtin = NULL;
 				cpy_till_pipe(&tlst, &cmd->builtin);
+				if (!cmd->infile)
+					cmd->infile = STDIN;
+				if (!cmd->outfile)
+					cmd->outfile = ft_tab_addback(cmd->outfile, STDOUT);
 				// ft_printtoklst(cmd->builtin);
 			}
 			if (tlst)
