@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+<<<<<<< HEAD
 /*
 !	TODO :
 !		Pipes :
@@ -23,6 +24,8 @@ void	handler(int signum)
 	}
 }
 
+=======
+>>>>>>> b7e50ca1f2cefbc4ab32e719cdd591bef7f47ede
 int main(int ac, char **av, char **envp)
 {
 	t_tlist *tlist;
@@ -32,6 +35,8 @@ int main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	chead = NULL;
+	// chead->next = NULL;
+	// chead->prev = NULL;
 	tlist = NULL;
 	g_mshell.env = NULL;
 	g_mshell.env = ft_dupenv(g_mshell.env, envp);
@@ -48,14 +53,15 @@ int main(int ac, char **av, char **envp)
 		ret = ft_prompt(&g_mshell);
 		if (ft_strlen(ret) != 0)
 		{
-			tlist = init_tlist(ret, tlist, &g_mshell);
+			tlist = init_tlist(ret, tlist, &mshell);
+			// printf("Number of commands : %d\n", count_command(tlist));
 			if (tlist)
 			{
 				parser(tlist);
-				ft_printtoklst(tlist);
-				ft_printalltok(tlist);
-				if(count_command(tlist) == 1)
-					only1cmd(tlist, g_mshell.head_env, chead);
+				// ft_printtoklst(tlist);
+				// ft_printalltok(tlist);
+				if (count_command(tlist) == 1)
+					only1cmd(tlist, mshell.head_env, chead);
 				else
 					init_ft(tlist, g_mshell.head_env, chead);
 				free_tlist(&tlist);

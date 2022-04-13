@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dlstlast.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 17:27:52 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/02/23 14:32:16 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/10 12:04:04 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_dlist	*ft_dlstlast(t_dlist *lst)
 {
 	t_dlist	*current;
 
+	if (lst == NULL)
+		return (lst);
 	current = lst;
 	if (current == NULL)
 		return (NULL);

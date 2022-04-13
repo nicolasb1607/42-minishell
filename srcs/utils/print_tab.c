@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:25:13 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/31 13:44:36 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/10 19:01:43 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ void	print_tab(char **tab)
 	int	i;
 
 	i = -1;
-	while (tab[++i])
-		printf("%s\n", tab[i]);
+	if (tab)
+	{
+		while (tab && tab[++i])
+			printf("%s\n", tab[i]);
+	}
 }

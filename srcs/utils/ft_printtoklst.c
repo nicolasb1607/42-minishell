@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:42 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/07 14:36:00 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/12 10:42:52 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,14 @@ void print_t_cmd(t_cmd *cmd)
 {
 	static int	i = 0;
 	
-	printf(BRED"");
+	printf(BBLU"");
 	while (cmd)
 	{
-		printf("NODE %d\n", i);
+		printf("\nNODE %d\n", i);
 		i = i + 1;
 		printf("command %s\n", cmd->command);
-		print_tab(cmd->options);
+		if (cmd->options)
+			print_tab(cmd->options);
 		printf("bin %s\n", cmd->bin);
 		printf("is_absolute %d\n", cmd->is_absolute);
 		if (cmd->outfile)
@@ -91,6 +92,7 @@ void print_t_cmd(t_cmd *cmd)
 			printf("infile %s\n", cmd->infile);
 		if (cmd->limiter)
 			printf("limiter %s\n", cmd->limiter);
+		printf("Double ? : %d\n", cmd->is_double);
 		cmd = cmd->next;
 	}
 	printf(reset"\n");

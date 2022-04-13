@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 13:42:15 by nburat-d          #+#    #+#             */
-/*   Updated: 2021/11/24 16:40:50 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/10 19:21:35 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,3 @@ void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
-
-/*
-int main()
-{
-	int fd = 1; 
-	char c = 'a';
-	
-	ft_putchar_fd(c, fd);
-	return 0;
-} */

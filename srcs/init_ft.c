@@ -29,10 +29,10 @@ char **ft_free_tab(char **tab)
 void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 {
 	char *currcont;
-	pid_t pi;
 	char **tabenv;
 	char **path;
 	t_cmd *cmd;
+	pid_t pi;
 	t_tlist *curr;
 
 	if (tlst->token->content)
@@ -63,7 +63,8 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					tlst = tlst->next;
 			}
 			tabenv = dlist_to_tab(*dupenv);
-			if ((chead)->is_absolute/* && path*/)
+			// print_t_cmd(chead);
+			if ((chead)->is_absolute)
 			{
 				if (ft_strcmp(chead->command, "./minishell") == 0)
 						signal(SIGINT, SIG_IGN);
@@ -109,12 +110,43 @@ void	free_tcmd(t_cmd **cmd)
 	cmd = NULL;
 }
 
+int	is_builtin(t_tlist *lst)
+{
+	char	*currcont;
+
+	currcont = lst->token->content;
+	if (ft_strncmp(currcont, "echo ", 4) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "cd ", 2) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "env ", 3) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "pwd ", 3) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "unset ", 5) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "export ", 6) == 0)
+		return (1);
+	else
+		return (0);
+}
+
+t_cmd	*minicmd_maker(char *str)
+{
+	t_cmd *cmd;
+
+	cmd = ft_clstnew();
+	cmd->is_builtin = true;
+	cmd->command = str;
+	return (cmd);
+}
+
 void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 {
-	char *currcont;
-	pid_t pi;
-	char **tabenv;
-	char **path;
+	char	**path;
+	int		nb_cmd;
+
+	nb_cmd = count_command(tlst);
 
 	t_cmd *cmd;
 
@@ -122,54 +154,30 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 
 	if (tlst->token->content)
 	{
-		currcont = tlst->token->content;
-		if (ft_strncmp(currcont, "echo ", 4) == 0)
-			ft_echo(tlst);
-		else if (ft_strncmp(currcont, "cd ", 2) == 0)
-			launch_cd(tlst, dupenv);
-		else if (ft_strncmp(currcont, "env ", 3) == 0)
-			ft_env(dupenv);
-		else if (ft_strncmp(currcont, "pwd ", 3) == 0)
-			ft_pwd();
-		else if (ft_strncmp(currcont, "unset ", 5) == 0)
-			loop_unset(tlst, dupenv);
-		else if (ft_strncmp(currcont, "export ", 6) == 0)
-			loop_export(tlst, dupenv);
-		else
+		while (tlst)
 		{
-			while (tlst)
+			curr = tlst;
+			if (!is_builtin(curr))
 			{
-				curr = tlst;
 				cmd = tlst_to_cmd(&tlst);
 				path = get_path_to_cmd(curr, dupenv);
 				update_bin(path, cmd, curr);
-				ft_clstadd_back(&chead, cmd);
+				cmd->is_builtin = false;
 				if (tlst)
 					tlst = tlst->next;
 			}
-			tabenv = dlist_to_tab(*dupenv);
-			while (chead)
+			else
 			{
-				if ((chead)->is_absolute)
+				cmd = minicmd_maker(curr->token->content);
+				while (tlst && tlst->next->token->content[0] != '|')
 				{
-					pi = fork();
-				
-					if (pi == 0)
-					{
-						execve((chead)->command, (chead)->options, tabenv);
-					}
+					tlst = tlst->next;
 				}
-				else
-				{
-					pi = fork();
-					if (pi == 0)
-					{
-						execve((chead)->bin, (chead)->options, tabenv);
-					}
-				}
-				waitpid(pi, NULL, 0);
-				chead = chead->next;
+				tlst = tlst->next->next;
 			}
+			ft_clstadd_back(&chead, cmd);
 		}
+		print_t_cmd(chead);
+		piping(nb_cmd, chead, dupenv, tlst);	
 	}
 }
