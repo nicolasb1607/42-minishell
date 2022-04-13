@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/13 14:39:52 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/13 14:45:18 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 void	ft_norm(int status)
 {
 	(void)status;
-	// if (WIFEXITED(status))
-	// 	g_return = WEXITSTATUS(status);
-	// else if (WIFSIGNALED(status))
-	// 	g_return = WTERMSIG(status);
 	while (wait(NULL) != -1)
 		;
 }
