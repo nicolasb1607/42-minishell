@@ -63,7 +63,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					tlst = tlst->next;
 			}
 			tabenv = dlist_to_tab(*dupenv);
-			print_t_cmd(chead);
+			// print_t_cmd(chead);
 			if ((chead)->is_absolute)
 			{
 				if (ft_strcmp(chead->command, "./minishell") == 0)
@@ -131,15 +131,6 @@ int	is_builtin(t_tlist *lst)
 		return (0);
 }
 
-t_cmd	*minicmd_maker(char *str)
-{
-	t_cmd *cmd;
-
-	cmd = ft_clstnew();
-	cmd->is_builtin = true;
-	cmd->command = str;
-	return (cmd);
-}
 
 void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 {
@@ -168,12 +159,11 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			}
 			else
 			{
-				cmd = minicmd_maker(curr->token->content);
-				while (tlst && tlst->next->token->content[0] != '|')
-				{
-					tlst = tlst->next;
-				}
-				tlst = tlst->next->next;
+				// cmd = lstnew
+				// while (different de pipe)
+				// 	cpy tlis
+				// 	ft_tab_addback
+				// 	cmd.builtin = newtruc
 			}
 			ft_clstadd_back(&chead, cmd);
 		}

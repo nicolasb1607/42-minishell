@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/13 14:45:18 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/13 15:19:30 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,18 @@ void	close_child(int *pfd, int fd_in)
 	close(pfd[1]);
 }
 
+// void	exec_builtin(t_cmd *cmd)
+// {
+// 	if (strcmp(cmd->builtin->token->content, echo) == 0)
+// 		ft_echo(cmd->builtin);
+// }
+
 void	ft_child(int *pfd, t_cmd *cmd, t_pipes *data)
 {
 	close_pfd(pfd, cmd->fd_in, cmd);
+	// if (cest 1 builtin)
+	// 	exec_builtin(cmd);
+	// else
 	execve(cmd->bin, cmd->options, data->env);
 }
 
