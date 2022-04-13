@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/13 15:54:34 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/13 16:06:46 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@
 # define T_BUILTIN "T_BUILTIN"
 # define STDIN "/dev/stdin"
 # define STDOUT "/dev/stdout"
-
-
 
 typedef struct s_token
 {
