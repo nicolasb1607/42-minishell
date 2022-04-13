@@ -177,7 +177,7 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			}
 			ft_clstadd_back(&chead, cmd);
 		}
-		print_t_cmd(chead);
+		// print_t_cmd(chead);
 		piping(nb_cmd, chead, dupenv, tlst);	
 	}
 }
