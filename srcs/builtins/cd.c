@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:39:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/13 09:51:44 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/13 09:57:06 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ void	*ft_cd(char *path_name, t_dlist **dupenv)
 	return (NULL);
 }	
 
-void	launch_cd(t_tlist *tlst, t_dlist **dupenv)
+void	launch_cd(t_cmd *cmd, t_dlist **dupenv)
 {
-	if (!tlst->next)
+	if (!cmd->options)
 		ft_cd(look_for_varenv_value("HOME", dupenv), dupenv);
 	else
-		ft_cd(tlst->next->token->content, dupenv);
+		ft_cd(cmd->options[1], dupenv);
 }
