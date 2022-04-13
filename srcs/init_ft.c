@@ -40,8 +40,8 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 		currcont = tlst->token->content;
 		if (ft_strncmp(currcont, "echo ", 4) == 0)
 			ft_echo(tlst);
-		else if (ft_strncmp(currcont, "cd ", 2) == 0)
-			launch_cd(tlst, dupenv);
+		// else if (ft_strncmp(currcont, "cd ", 2) == 0)
+		// 	launch_cd(tlst, dupenv);
 		else if (ft_strncmp(currcont, "env ", 3) == 0)
 			ft_env(dupenv);
 		else if (ft_strncmp(currcont, "pwd ", 3) == 0)
@@ -63,7 +63,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					tlst = tlst->next;
 			}
 			tabenv = dlist_to_tab(*dupenv);
-			// print_t_cmd(chead);
+			print_t_cmd(chead);
 			if ((chead)->is_absolute)
 			{
 				if (ft_strcmp(chead->command, "./minishell") == 0)
@@ -117,8 +117,8 @@ int	is_builtin(t_tlist *lst)
 	currcont = lst->token->content;
 	if (ft_strncmp(currcont, "echo ", 4) == 0)
 		return (1);
-	else if (ft_strncmp(currcont, "cd ", 2) == 0)
-		return (1);
+	// else if (ft_strncmp(currcont, "cd ", 2) == 0)
+	// 	return (1);
 	else if (ft_strncmp(currcont, "env ", 3) == 0)
 		return (1);
 	else if (ft_strncmp(currcont, "pwd ", 3) == 0)

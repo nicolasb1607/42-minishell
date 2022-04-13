@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 11:23:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/12 11:45:56 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/13 10:18:25 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	exec_builtin(t_cmd *cmd, t_pipes *pipes)
 	currcont = cmd->command;
 	if (ft_strncmp(currcont, "echo ", 4) == 0)
 		ft_echo(tlst);
-	else if (ft_strncmp(currcont, "cd ", 2) == 0)
-		launch_cd(tlst, dupenv);
+	// else if (ft_strncmp(currcont, "cd ", 2) == 0)
+	// 	launch_cd(tlst, dupenv);
 	else if (ft_strncmp(currcont, "env ", 3) == 0)
 		ft_env(dupenv);
 	else if (ft_strncmp(currcont, "pwd ", 3) == 0)
