@@ -63,7 +63,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					tlst = tlst->next;
 			}
 			tabenv = dlist_to_tab(*dupenv);
-			print_t_cmd(chead);
+			// print_t_cmd(chead);
 			if ((chead)->is_absolute)
 			{
 				if (ft_strcmp(chead->command, "./minishell") == 0)
