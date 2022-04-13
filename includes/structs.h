@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/13 09:48:45 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:10:00 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_cmd
 	char			*infile;
 	char			**outfile;
 	char			*limiter;
+
+	t_tlist			*builtin;
 	
 	int				fd_out;
 	int				fd_in;
