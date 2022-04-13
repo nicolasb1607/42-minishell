@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 13:35:41 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/12 11:44:30 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/13 13:40:47 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ void	wait_to_end(t_pipes *pipes)
 	int	status;
 
 	i = 0;
-	while (i < pipes->nb_cmd + 5)
+	while (i < 255)
 	{
 		waitpid(pipes->child[i], &status, 0);
 		i++;
 	}
+	while (wait(NULL) != -1)
+		;
 }
 
 void	pipex(t_cmd *cmd, t_pipes *pipes)
@@ -74,5 +76,5 @@ void	piping(int nbcmd, t_cmd *cmd, t_dlist **envp, t_tlist *lst)
 	(void)envp;
 	open_io(cmd, &pipes);
 	// print_t_cmd(cmd);
-	pipex(cmd, &pipes);
+	ft_pipe(cmd, &pipes);
 }

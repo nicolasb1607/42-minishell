@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:53:59 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/12 11:43:51 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/13 13:40:36 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void	mid_cmd(t_cmd *cmd, t_pipes *pipes, int i);
 void	last_cmd(t_cmd *cmd, t_pipes *pipes);
 int		is_builtin(t_tlist *lst);
 void	exec_builtin(t_cmd *cmd, t_pipes *pipes);
+void	ft_pipe(t_cmd *cmd, t_pipes *data);
 
 #endif
