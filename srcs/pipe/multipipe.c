@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/13 15:19:30 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/13 16:42:05 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,29 @@ void	close_child(int *pfd, int fd_in)
 	close(pfd[1]);
 }
 
-// void	exec_builtin(t_cmd *cmd)
-// {
-// 	if (strcmp(cmd->builtin->token->content, echo) == 0)
-// 		ft_echo(cmd->builtin);
-// }
+void	exec_builtin(t_cmd *cmd, t_pipes *pipes)
+{
+	if (ft_strncmp(cmd->builtin->token->content, "echo ", 4) == 0)
+			ft_echo(cmd->builtin);
+		else if (ft_strncmp(cmd->builtin->token->content, "cd ", 2) == 0)
+			launch_cd(cmd->builtin, pipes->denv);
+		else if (ft_strncmp(cmd->builtin->token->content, "env ", 3) == 0)
+			ft_env(pipes->denv);
+		else if (ft_strncmp(cmd->builtin->token->content, "pwd ", 3) == 0)
+			ft_pwd();
+		else if (ft_strncmp(cmd->builtin->token->content, "unset ", 5) == 0)
+			loop_unset(cmd->builtin, pipes->denv);
+		else if (ft_strncmp(cmd->builtin->token->content, "export ", 6) == 0)
+			loop_export(cmd->builtin, pipes->denv);
+}
 
 void	ft_child(int *pfd, t_cmd *cmd, t_pipes *data)
 {
 	close_pfd(pfd, cmd->fd_in, cmd);
-	// if (cest 1 builtin)
-	// 	exec_builtin(cmd);
-	// else
-	execve(cmd->bin, cmd->options, data->env);
+	if (cmd->builtin)
+		exec_builtin(cmd, data);
+	else
+		execve(cmd->bin, cmd->options, data->env);
 }
 
 void	ft_pipe(t_cmd *cmd, t_pipes *data)
