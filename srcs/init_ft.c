@@ -189,3 +189,4 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 		piping(nb_cmd, chead, dupenv, tlst);	
 	}
 }
+ 
