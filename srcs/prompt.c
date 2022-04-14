@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:23:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/13 09:43:21 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/14 11:11:37 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_prompt(t_minishell *g_mshell)
 	ret_line = readline(BGRN"➜"BCYN"  le_nathou_shell "BYEL"✗ "reset);
 	if(ret_line == NULL)
 	{
-		printf(GRN"exit\n"CRESET);
+		printf(GRN"\nexit\n"CRESET);
 		free_dlist(g_mshell->env);
 		clear_history();
 		exit (0);
