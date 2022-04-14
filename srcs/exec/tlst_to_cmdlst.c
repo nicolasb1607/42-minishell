@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/08 15:52:32 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/14 13:57:53 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,15 +120,19 @@ void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 {
 	lst = lst->next;
 	if (ret == 1)
+	{
 		cmd->outfile = ft_tab_addback(cmd->outfile, lst->token->content);
+		cmd->is_double = false;
+	}
 	else if (ret == 2)
 	{
 		// if (access(lst->token->content, F_OK))
 			cmd->infile = ft_strdup(lst->token->content);
+		cmd->is_double = false;
 	}
 	else if (ret == 3)
 	{
-		cmd->infile = ft_strdup(lst->token->content);
+		cmd->outfile = ft_tab_addback(cmd->outfile, ft_strdup(lst->token->content));
 		cmd->is_double = true;
 	}
 	else if (ret == 4)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:39:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/14 11:21:50 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/14 13:37:29 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,5 @@ void	launch_cd(t_tlist *tlst, t_dlist **dupenv)
 	if (!tlst->next)
 		ft_cd(look_for_varenv_value("HOME", dupenv), dupenv);
 	else
-		ft_cd(tlst->token->content, dupenv);
+		ft_cd(tlst->next->token->content, dupenv);
 }

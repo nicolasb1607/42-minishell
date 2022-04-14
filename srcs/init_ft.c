@@ -28,7 +28,6 @@ char **ft_free_tab(char **tab)
 
 void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 {
-	char *currcont;
 	char **tabenv;
 	char **path;
 	t_cmd *cmd;
@@ -37,19 +36,9 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 
 	if (tlst->token->content)
 	{
-		currcont = tlst->token->content;
-		if (ft_strncmp(currcont, "echo ", 4) == 0)
-			ft_echo(tlst);
-		else if (ft_strncmp(currcont, "cd ", 2) == 0)
-			launch_cd(tlst, dupenv);
-		else if (ft_strncmp(currcont, "env ", 3) == 0)
-			ft_env(dupenv);
-		else if (ft_strncmp(currcont, "pwd ", 3) == 0)
-			ft_pwd();
-		else if (ft_strncmp(currcont, "unset ", 5) == 0)
-			loop_unset(tlst, dupenv);
-		else if (ft_strncmp(currcont, "export ", 6) == 0)
-			loop_export(tlst, dupenv);
+		// update_io()
+		if (is_builtin(tlst))
+			exec_builtin(tlst, dupenv);
 		else
 		{
 			while (tlst)
@@ -63,17 +52,13 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					tlst = tlst->next;
 			}
 			tabenv = dlist_to_tab(*dupenv);
-			// print_t_cmd(chead);
 			if ((chead)->is_absolute)
 			{
 				if (ft_strcmp(chead->command, "./minishell") == 0)
 						signal(SIGINT, SIG_IGN);
 				pi = fork();
 				if (pi == 0)
-				{
-					
 					execve((chead)->command, (chead)->options, tabenv);
-				}
 			}
 			else
 			{
@@ -85,6 +70,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			}
 			waitpid(pi, NULL, 0);
 			// free(chead);
+		// print_t_cmd(chead);
 		}
 	}
 }

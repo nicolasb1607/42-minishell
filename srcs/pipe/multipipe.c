@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/13 17:12:23 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/14 13:21:37 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,20 @@ void	close_child(int *pfd, int fd_in)
 	close(pfd[1]);
 }
 
-void	exec_builtin(t_cmd *cmd, t_pipes *pipes)
+void	exec_builtin(t_tlist *builtin, t_dlist **denv)
 {
-	if (ft_strncmp(cmd->builtin->token->content, "echo ", 4) == 0)
-			ft_echo(cmd->builtin);
-		else if (ft_strncmp(cmd->builtin->token->content, "cd ", 2) == 0)
-			launch_cd(cmd->builtin, pipes->denv);
-		else if (ft_strncmp(cmd->builtin->token->content, "env ", 3) == 0)
-			ft_env(pipes->denv);
-		else if (ft_strncmp(cmd->builtin->token->content, "pwd ", 3) == 0)
+	if (ft_strncmp(builtin->token->content, "echo ", 4) == 0)
+			ft_echo(builtin);
+		else if (ft_strncmp(builtin->token->content, "cd ", 2) == 0)
+			launch_cd(builtin, denv);
+		else if (ft_strncmp(builtin->token->content, "env ", 3) == 0)
+			ft_env(denv);
+		else if (ft_strncmp(builtin->token->content, "pwd ", 3) == 0)
 			ft_pwd();
-		else if (ft_strncmp(cmd->builtin->token->content, "unset ", 5) == 0)
-			loop_unset(cmd->builtin, pipes->denv);
-		else if (ft_strncmp(cmd->builtin->token->content, "export ", 6) == 0)
-			loop_export(cmd->builtin, pipes->denv);
+		else if (ft_strncmp(builtin->token->content, "unset ", 5) == 0)
+			loop_unset(builtin, denv);
+		else if (ft_strncmp(builtin->token->content, "export ", 6) == 0)
+			loop_export(builtin, denv);
 }
 
 void	ft_child(int *pfd, t_cmd *cmd, t_pipes *data)
@@ -57,7 +57,7 @@ void	ft_child(int *pfd, t_cmd *cmd, t_pipes *data)
 	close_pfd(pfd, cmd->fd_in, cmd);
 	if (cmd->builtin)
 	{
-		exec_builtin(cmd, data);
+		exec_builtin(cmd->builtin, data->denv);
 		exit(0);
 	}
 		else
