@@ -12,6 +12,27 @@
 
 #include "minishell.h"
 
+int	is_builtincmd(t_cmd *cmd)
+{
+	char	*currcont;
+
+	currcont = cmd->command;
+	if (ft_strncmp(currcont, "echo ", 4) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "cd ", 2) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "env ", 3) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "pwd ", 3) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "unset ", 5) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "export ", 6) == 0)
+		return (1);
+	else
+		return (0);
+}
+
 char **ft_free_tab(char **tab)
 {
 	int i;
@@ -26,6 +47,7 @@ char **ft_free_tab(char **tab)
 	return (NULL);
 }
 
+
 void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 {
 	char **tabenv;
@@ -34,44 +56,45 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 	pid_t pi;
 	t_tlist *curr;
 
+	curr = tlst;
 	if (tlst->token->content)
 	{
-		// update_io()
-		if (is_builtin(tlst))
-			exec_builtin(tlst, dupenv);
+		while (tlst)
+		{
+			curr = tlst;
+			cmd = tlst_to_cmd(&tlst);
+			path = get_path_to_cmd(curr, dupenv);
+			update_bin(path, cmd, curr);
+			ft_clstadd_back(&chead, cmd);
+			if (tlst)
+				tlst = tlst->next;
+		}
+		tabenv = dlist_to_tab(*dupenv);
+		if (is_builtincmd(cmd))
+		{
+			while (ft_strcmp(curr->token->content, cmd->command) != 0)
+				curr = curr->next;
+			exec_builtin(curr, dupenv);
+		}
+		else if ((chead)->is_absolute)
+		{
+			if (ft_strcmp(chead->command, "./minishell") == 0)
+					signal(SIGINT, SIG_IGN);
+			pi = fork();
+			if (pi == 0)
+				execve((chead)->command, (chead)->options, tabenv);
+		}
 		else
 		{
-			while (tlst)
+			pi = fork();
+			if (pi == 0)
 			{
-				curr = tlst;
-				cmd = tlst_to_cmd(&tlst);
-				path = get_path_to_cmd(curr, dupenv);
-				update_bin(path, cmd, curr);
-				ft_clstadd_back(&chead, cmd);
-				if (tlst)
-					tlst = tlst->next;
+				execve((chead)->bin, (chead)->options, tabenv);
 			}
-			tabenv = dlist_to_tab(*dupenv);
-			if ((chead)->is_absolute)
-			{
-				if (ft_strcmp(chead->command, "./minishell") == 0)
-						signal(SIGINT, SIG_IGN);
-				pi = fork();
-				if (pi == 0)
-					execve((chead)->command, (chead)->options, tabenv);
-			}
-			else
-			{
-				pi = fork();
-				if (pi == 0)
-				{
-					execve((chead)->bin, (chead)->options, tabenv);
-				}
-			}
-			waitpid(pi, NULL, 0);
-			// free(chead);
-		// print_t_cmd(chead);
 		}
+		waitpid(pi, NULL, 0);
+		// free(chead);
+		// print_t_cmd(chead);
 	}
 }
 
@@ -116,6 +139,7 @@ int	is_builtin(t_tlist *lst)
 	else
 		return (0);
 }
+
 
 void	cpy_till_pipe(t_tlist **tlist, t_tlist **tlistnew)
 {

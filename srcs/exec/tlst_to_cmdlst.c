@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/14 13:57:53 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/14 15:20:18 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,16 @@ int	is_absolute(char *cmd)
 
 void	update_bin(char **path, t_cmd *cmd, t_tlist *tlst)
 {
-	if (is_absolute(cmd->command) == 0)
+	if (!is_builtincmd(cmd))
 	{
-		cmd->bin = get_bin_custom(cmd->command, path, tlst);
-		cmd->is_absolute = 0;	
+		if (is_absolute(cmd->command) == 0)
+		{
+			cmd->bin = get_bin_custom(cmd->command, path, tlst);
+			cmd->is_absolute = 0;	
+		}
+		else
+			cmd->is_absolute = 1;
 	}
-	else
-		cmd->is_absolute = 1;
 }
 
 char	*create_tmp(void)
@@ -126,8 +129,10 @@ void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 	}
 	else if (ret == 2)
 	{
-		// if (access(lst->token->content, F_OK))
+		if (!access(lst->token->content, F_OK))
 			cmd->infile = ft_strdup(lst->token->content);
+		else
+			ft_error("Cant open infile");
 		cmd->is_double = false;
 	}
 	else if (ret == 3)

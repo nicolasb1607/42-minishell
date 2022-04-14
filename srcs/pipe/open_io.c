@@ -6,12 +6,12 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:52:33 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/12 12:31:25 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/14 15:55:22 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mpipe.h"
-
+#include <string.h>
 int	open_i(t_cmd *cmd, t_pipes *pipes)
 {
 	int	fd;
@@ -23,20 +23,38 @@ int	open_i(t_cmd *cmd, t_pipes *pipes)
 	return (1);
 }
 
+char	*ft_strndup(char *str, int i)
+{
+	char	*new;
+	int		j;
+
+	j = 0;
+	new = (char *)malloc(sizeof(char) * (i + 1));
+	while (j < i)
+	{
+		new[j] = str[j];
+		j++;
+	}
+	new[j] = '\0';
+	return (new);
+}
+
 int	open_o(t_cmd *cmd, t_pipes *pipes)
 {
-	int	fd;
-	int	i;
+	int		fd;
+	int		i;
+	char	*file_name;
 
 	i = 0;
 	if (cmd->outfile)
 	{
 		while (cmd->outfile[i])
 		{
+			file_name = ft_strndup(cmd->outfile[i], ft_strlen(cmd->outfile[i]) - 1);
 			if (cmd->is_double == false)
-				fd = open(cmd->outfile[i], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+				fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 			else if (cmd->is_double == true)
-				fd = open(cmd->outfile[i], O_CREAT | O_WRONLY | O_APPEND, 0644);
+				fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 			if (cmd->outfile[i + 1])
 				close(fd);
 			else
