@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:23:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/14 11:11:37 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/14 13:23:45 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	*ft_prompt(t_minishell *g_mshell)
 		printf(GRN"\nexit\n"CRESET);
 		free_dlist(g_mshell->env);
 		clear_history();
+
+		
 		exit (0);
 	}
 		

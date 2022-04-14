@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/13 16:06:46 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/14 13:38:02 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,12 @@ typedef struct s_cmd
 
 typedef struct s_minishell
 {
-	t_lexer *lexer;
-	t_dlist *env;
-	t_dlist **head_env;
-	t_cmd *cmd;
-	int nb_cmd;
-} t_minishell;
+	t_lexer	*lexer;
+	t_dlist	*env;
+	t_dlist	**head_env;
+	t_cmd	*cmd;
+	int		nb_cmd;
+	int		err_exit;
+}			t_minishell;
 
 #endif

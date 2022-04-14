@@ -1,4 +1,5 @@
 #include "minishell.h"
+#include "structs.h"
 
 /*
 !	TODO :
@@ -11,6 +12,7 @@
 */
 
 t_minishell g_mshell;
+
 
 void	handler(int signum)
 {
@@ -38,8 +40,6 @@ int main(int ac, char **av, char **envp)
 	g_mshell.env = NULL;
 	g_mshell.env = ft_dupenv(g_mshell.env, envp);
 	g_mshell.head_env = &g_mshell.env;
-
-	
 	
 	/* PROMPT MAIN */
 	while (1)
@@ -67,5 +67,5 @@ int main(int ac, char **av, char **envp)
 			}
 		}
 	}
-	return (0);
+	ft_exit(0);
 }
