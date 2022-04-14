@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printtoklst.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:42 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/12 10:42:52 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/14 16:01:43 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_printtoklst(t_tlist *tlist)
 			if (ft_strlen(curr->token->type) < 8)
 				ft_putchar('\t');
 			ft_putstr(curr->token->content);
+			fprintf(stderr,"||");
 			ft_putchar('\t');
 			if (curr->token->quote)
 			{

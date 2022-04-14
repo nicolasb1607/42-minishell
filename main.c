@@ -22,6 +22,7 @@ void	handler(int signum)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		g_mshell.err_exit = 130;
 	}
 }
 
@@ -55,7 +56,7 @@ int main(int ac, char **av, char **envp)
 			if (tlist)
 			{
 				parser(tlist);
-				// ft_printtoklst(tlist);
+				ft_printtoklst(tlist);
 				// ft_printalltok(tlist);
 				if (count_command(tlist) == 1)
 					only1cmd(tlist, g_mshell.head_env, chead);
@@ -67,5 +68,5 @@ int main(int ac, char **av, char **envp)
 			}
 		}
 	}
-	ft_exit(0);
+	exit(0);
 }

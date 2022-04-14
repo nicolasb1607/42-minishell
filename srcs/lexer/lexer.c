@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 17:21:43 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/13 17:33:10 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/14 16:33:48 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	make_string_b(int i, t_lexer *lexer, t_token *token)
 	advance(lexer);
 	if (ft_containchar(lexer->text[lexer->pos + 1], "<>|") == 1)
 	{	
-		token->content = ft_charjoin(token->content, lexer->current_char);
+		if (lexer->current_char != ' ')
+			token->content = ft_charjoin(token->content, lexer->current_char);
 		return (1);
 	}
 	if ((lexer->current_char == '\'' && lexer->text[lexer->pos + 1] != '\'')
