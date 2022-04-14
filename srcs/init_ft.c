@@ -36,6 +36,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 
 	if (tlst->token->content)
 	{
+		// update_io()
 		if (is_builtin(tlst))
 			exec_builtin(tlst, dupenv);
 		else
@@ -51,17 +52,13 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					tlst = tlst->next;
 			}
 			tabenv = dlist_to_tab(*dupenv);
-			// print_t_cmd(chead);
 			if ((chead)->is_absolute)
 			{
 				if (ft_strcmp(chead->command, "./minishell") == 0)
 						signal(SIGINT, SIG_IGN);
 				pi = fork();
 				if (pi == 0)
-				{
-					
 					execve((chead)->command, (chead)->options, tabenv);
-				}
 			}
 			else
 			{
@@ -73,6 +70,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			}
 			waitpid(pi, NULL, 0);
 			// free(chead);
+		// print_t_cmd(chead);
 		}
 	}
 }
