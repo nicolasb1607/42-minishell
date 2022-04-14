@@ -20,17 +20,10 @@ SRCS = ./main.c \
 	./srcs/builtins/export_1.c \
 	./srcs/builtins/export_2.c \
 	./srcs/builtins/export_3.c \
-	./srcs/pipe/pipex.c \
 	./srcs/pipe/pipe.c \
-	./srcs/pipe/run_first.c \
-	./srcs/pipe/run_mid.c \
-	./srcs/pipe/run_last.c \
 	./srcs/pipe/utils.c \
 	./srcs/pipe/more_utils.c \
 	./srcs/pipe/piping.c \
-	./srcs/pipe/first_cmd.c \
-	./srcs/pipe/last_cmd.c \
-	./srcs/pipe/mid_cmd.c \
 	./srcs/pipe/open_io.c \
 	./srcs/pipe/exec_builtin.c \
 	./srcs/pipe/multipipe.c \
