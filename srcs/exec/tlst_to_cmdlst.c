@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/15 14:10:40 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/16 01:20:11 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,11 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 	curr = *tlst;
 	opt = NULL;
 	cmd = ft_clstnew();
+	cmd->infile = NULL;
+	cmd->outfile = NULL;
 	cmd->type = T_STRING;
+	cmd->next = NULL;
+	cmd->prev = NULL;
 	while (curr && ft_strcmp(curr->token->type, T_PIPE) != 0)
 	{
 		if (curr && is_operator(curr->token->type) == 0 && i == 0)

@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:52:33 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/15 15:48:29 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/16 01:09:46 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	open_o(t_cmd *cmd, t_pipes *pipes)
 	char	*file_name;
 
 	i = 0;
-	if (cmd->outfile)
+	if (cmd->outfile[i])
 	{
 		while (cmd->outfile[i])
 		{

@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:42 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/15 13:37:39 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/16 01:20:55 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ void print_t_cmd(t_cmd *cmd)
 		dprintf(2, "command %s\n", cmd->command);
 		if (cmd->options)
 			print_tab(cmd->options);
-		dprintf(2, "bin %s\n", cmd->bin);
+		if (cmd->bin)
+			dprintf(2, "bin %s\n", cmd->bin);
 		dprintf(2, "is_absolute %d\n", cmd->is_absolute);
 		if (cmd->outfile)
 		{
@@ -90,9 +91,9 @@ void print_t_cmd(t_cmd *cmd)
 		}
 		if (cmd->infile)
 			dprintf(2, "infile %s\n", cmd->infile);
-		if (cmd->limiter)
-			dprintf(2, "limiter %s\n", cmd->limiter);
-		dprintf(2, "Double ? : %d\n", cmd->is_double);
+		// if (cmd->limiter)
+		// 	dprintf(2, "limiter %s\n", cmd->limiter);
+		// dprintf(2, "Double ? : %d\n", cmd->is_double);
 		cmd = cmd->next;
 	}
 	dprintf(2, reset"\n");
