@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/14 13:21:37 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/15 11:55:34 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mpipe.h"
 
-void	ft_norm(int status)
+void	ft_norm(int *status)
 {
-	(void)status;
-	while (wait(NULL) != -1)
+	while (wait(status) != -1)
 		;
 }
 
@@ -60,8 +59,12 @@ void	ft_child(int *pfd, t_cmd *cmd, t_pipes *data)
 		exec_builtin(cmd->builtin, data->denv);
 		exit(0);
 	}
-		else
-		execve(cmd->bin, cmd->options, data->env);
+	else
+	{
+		if(execve(cmd->bin, cmd->options, data->env) > 0)
+			g_mshell.err_exit = errno;
+	}
+
 }
 
 void	ft_pipe(t_cmd *cmd, t_pipes *data)
@@ -69,7 +72,6 @@ void	ft_pipe(t_cmd *cmd, t_pipes *data)
 	t_cmd	*tmp;
 	int		pfd[2];
 	pid_t	pid;
-	int		status;
 	
 	tmp = cmd;
 	while (tmp)
@@ -82,6 +84,6 @@ void	ft_pipe(t_cmd *cmd, t_pipes *data)
 		close_child(pfd, data->fd_in);
 		tmp = tmp->next;
 	}
-	waitpid(pid, &status, 0);
-	ft_norm(status);
+	waitpid(pid, &g_mshell.err_exit, 0);
+	ft_norm(&g_mshell.err_exit);
 }

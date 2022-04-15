@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:34:20 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/09 17:34:21 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/15 10:47:23 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 # define EXIT_H
 
 # include "minishell.h"
+# include "errno.h"
 
 #endif

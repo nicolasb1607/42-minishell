@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:31:35 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/14 13:40:45 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/15 12:18:19 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # include "colors.h"
 # include "handle_sig.h"
 # include "mpipe.h"
+// # include "exit.h"
 
 extern t_minishell g_mshell;
 

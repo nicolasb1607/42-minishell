@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:37:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/14 16:34:54 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/15 12:02:28 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,12 @@ void	ft_echo(t_tlist *tlst)
 	split_first_tok_arg(tlst, &nl_opt);
 	curr = tlst->next;
 	if (ft_strcmp(curr->token->content, "$?") == 0)
+	{	
 		ft_putnbr(g_mshell.err_exit);
+		ft_putchar('\n');
+		g_mshell.err_exit = 0;
+		return ;
+	}
 	if (curr && curr->token->content[0] == '-'
 		&& ft_strlen(curr->token->content) == 1)
 		curr = curr->next;

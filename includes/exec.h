@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:55 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/07 11:27:40 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/15 11:29:30 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_cmd	*ft_clstnew(void);
 t_cmd	*tlst_to_cmd(t_tlist **tlst);
 char	**get_path_to_cmd(t_tlist *tlst, t_dlist **dupenv);
 int		is_operator(char *content);
-void	update_bin(char **path, t_cmd *cmd, t_tlist *tlst);
+int		update_bin(char **path, t_cmd *cmd, t_tlist *tlst);
 void	init_cmd(t_cmd *cmd);
 int		count_command(t_tlist *tlst);
 char	**tab_dup(char **tab);

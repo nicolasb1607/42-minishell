@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tlst_to_cmdlst.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/14 13:57:53 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/15 11:30:38 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	is_absolute(char *cmd)
 	return (-1);
 }
 
-void	update_bin(char **path, t_cmd *cmd, t_tlist *tlst)
+int	update_bin(char **path, t_cmd *cmd, t_tlist *tlst)
 {
 	if (is_absolute(cmd->command) == 0)
 	{
@@ -97,6 +97,9 @@ void	update_bin(char **path, t_cmd *cmd, t_tlist *tlst)
 	}
 	else
 		cmd->is_absolute = 1;
+	if (cmd->bin == NULL)
+		return (-1);
+	return (0);
 }
 
 char	*create_tmp(void)

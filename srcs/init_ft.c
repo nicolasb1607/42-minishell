@@ -46,7 +46,11 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				curr = tlst;
 				cmd = tlst_to_cmd(&tlst);
 				path = get_path_to_cmd(curr, dupenv);
-				update_bin(path, cmd, curr);
+				if(update_bin(path, cmd, curr) == -1)
+				{
+					g_mshell.err_exit = 127;
+					return ;
+				}
 				ft_clstadd_back(&chead, cmd);
 				if (tlst)
 					tlst = tlst->next;
@@ -56,6 +60,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			{
 				if (ft_strcmp(chead->command, "./minishell") == 0)
 						signal(SIGINT, SIG_IGN);
+				
 				pi = fork();
 				if (pi == 0)
 					execve((chead)->command, (chead)->options, tabenv);
@@ -68,7 +73,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					execve((chead)->bin, (chead)->options, tabenv);
 				}
 			}
-			waitpid(pi, NULL, 0);
+			waitpid(pi, &g_mshell.err_exit, 0);
 			// free(chead);
 		// print_t_cmd(chead);
 		}
@@ -153,7 +158,11 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			{
 				cmd = tlst_to_cmd(&tlst);
 				path = get_path_to_cmd(curr, dupenv);
-				update_bin(path, cmd, curr);
+				if(update_bin(path, cmd, curr) == -1)
+				{
+					g_mshell.err_exit = 127;
+					return ;
+				}
 				cmd->is_builtin = false;
 			}
 			else

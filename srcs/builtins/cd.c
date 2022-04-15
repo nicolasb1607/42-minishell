@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:39:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/14 13:37:29 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/15 12:05:21 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	*ft_cd(char *path_name, t_dlist **dupenv)
 	content = curr->content;
 	curr_dir = (save_olddir(dupenv), NULL);
 	if (chdir(path_name) == -1)
-		return (ft_putstr(NO_ACCESS), NULL);
+		return (ft_putstr(NO_ACCESS), g_mshell.err_exit = 1, NULL);
 	if (is_existing("PWD", dupenv) == 0)
 		return (NULL);
 	curr_dir = getcwd(curr_dir, 2048);

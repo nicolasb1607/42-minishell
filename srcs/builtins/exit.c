@@ -6,14 +6,16 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/14 14:46:14 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/15 12:18:14 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exit.h"
 
-// void	ft_exit(int errno)
+// void	ft_exit(void)
 // {
-// 	g_mshell.err_exit = errno;
-// 	exit(errno);
+// 	printf(GRN"\nexit\n"CRESET);
+// 	free_dlist(g_mshell->env);
+// 	clear_history();	
+// 	exit (0);
 // }

@@ -56,7 +56,7 @@ int main(int ac, char **av, char **envp)
 			if (tlist)
 			{
 				parser(tlist);
-				ft_printtoklst(tlist);
+				// ft_printtoklst(tlist);
 				// ft_printalltok(tlist);
 				if (count_command(tlist) == 1)
 					only1cmd(tlist, g_mshell.head_env, chead);
