@@ -69,7 +69,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			if (tlst)
 				tlst = tlst->next;
 		}
-		print_t_cmd(chead);
+		// print_t_cmd(chead);
 		// fprintf(stderr, "cmd->outfile[0] = %s\n", cmd->outfile[0]);
 		open_io(chead, &pipes);
 		if (is_builtincmd(cmd))
