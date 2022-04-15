@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 13:46:25 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/15 13:39:57 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/15 15:15:20 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,22 @@ int	__is_type(t_tlist *lst, char *type)
 int	check_pipe(t_tlist *lst)
 {
 	if (!lst->prev || !lst->next)
-		return (disp_synt_erro('|'), 0);
+		return (disp_synt_erro("|"), 0);
 	else if (ft_strcmp(lst->next->token->type, T_L_DIR) == 0)
 		return (1);
+	// else if (__is_type(lst->next, T_R_DIR) == 0 || __is_type(lst->next, T_L_DIR) == 0)
+	// 	return (disp_synt_erro("newline"), 0);
 	else if (__is_type(lst->next, T_STRING) == 0)
-		return (disp_synt_erro('|'), 0);
+		return (disp_synt_erro("|"), 0);
 	return (1);
 }
 
 int	check_rdir(t_tlist *lst)
 {
 	if (!lst->next)
-		return (disp_synt_erro('>'), 0);
+		return (disp_synt_erro("newline"), 0);
 	else if (!__is_type(lst->next, T_STRING))
-		return (disp_synt_erro('>'), 0);
+		return (disp_synt_erro("newline"), 0);
 	return (1);
 }
 
