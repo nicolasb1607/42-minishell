@@ -36,7 +36,6 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 
 	if (tlst->token->content)
 	{
-		// update_io()
 		if (is_builtin(tlst))
 			exec_builtin(tlst, dupenv);
 		else
@@ -74,8 +73,6 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				}
 			}
 			waitpid(pi, &g_mshell.err_exit, 0);
-			// free(chead);
-		// print_t_cmd(chead);
 		}
 	}
 }
@@ -118,6 +115,8 @@ int	is_builtin(t_tlist *lst)
 		return (1);
 	else if (ft_strncmp(currcont, "export ", 6) == 0)
 		return (1);
+	else if (ft_strncmp(currcont, "exit ", 4) == 0)
+		return (1);
 	else
 		return (0);
 }
@@ -142,13 +141,10 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 {
 	char	**path;
 	int		nb_cmd;
-
-	nb_cmd = count_command(tlst);
-
 	t_cmd *cmd;
-
 	t_tlist *curr;
 
+	nb_cmd = count_command(tlst);
 	if (tlst->token->content)
 	{
 		while (tlst)
@@ -174,13 +170,11 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					cmd->infile = STDIN;
 				if (!cmd->outfile)
 					cmd->outfile = ft_tab_addback(cmd->outfile, STDOUT);
-				// ft_printtoklst(cmd->builtin);
 			}
 			if (tlst)
 					tlst = tlst->next;
 			ft_clstadd_back(&chead, cmd);
 		}
-		// print_t_cmd(chead);
 		piping(nb_cmd, chead, dupenv, tlst);	
 	}
 }

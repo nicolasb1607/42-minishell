@@ -13,10 +13,9 @@
 
 t_minishell g_mshell;
 
-
-void	handler(int signum)
+void handler(int signum)
 {
-	if(signum == SIGINT)
+	if (signum == SIGINT)
 	{
 		ft_putchar('\n');
 		rl_on_new_line();
@@ -41,30 +40,32 @@ int main(int ac, char **av, char **envp)
 	g_mshell.env = NULL;
 	g_mshell.env = ft_dupenv(g_mshell.env, envp);
 	g_mshell.head_env = &g_mshell.env;
-	
+
 	/* PROMPT MAIN */
 	while (1)
 	{
 		signal(SIGINT, handler);
 		signal(SIGQUIT, SIG_IGN);
-		
-		ret = ft_prompt(&g_mshell);
+
+		ret = ft_prompt();
 		if (ft_strlen(ret) != 0)
 		{
 			tlist = init_tlist(ret, tlist, &g_mshell);
 			// printf("Number of commands : %d\n", count_command(tlist));
 			if (tlist)
 			{
-				parser(tlist);
-				// ft_printtoklst(tlist);
-				// ft_printalltok(tlist);
-				if (count_command(tlist) == 1)
-					only1cmd(tlist, g_mshell.head_env, chead);
+				if (parser(tlist))
+				{
+					if (count_command(tlist) == 1)
+						only1cmd(tlist, g_mshell.head_env, chead);
+					else
+						init_ft(tlist, g_mshell.head_env, chead);
+					free_tlist(&tlist);
+					free_tcmd(&chead);
+					chead = NULL;
+				}
 				else
-					init_ft(tlist, g_mshell.head_env, chead);
-				free_tlist(&tlist);
-				free_tcmd(&chead);
-				chead = NULL;
+					free_tlist(&tlist);
 			}
 		}
 	}

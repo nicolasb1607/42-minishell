@@ -1,7 +1,7 @@
 {
 	"files.associations": {
-		"*.h": "c",
 		"*.c": "c",
+		"*.h": "c",
 		"echo.h": "c",
 		"handle_sig.h": "c",
 		"lexer.h": "c",
@@ -11,6 +11,7 @@
 		"libft.h": "c",
 		"*.tcc": "c",
 		"fstream": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"exception": "c"
 	}
 }

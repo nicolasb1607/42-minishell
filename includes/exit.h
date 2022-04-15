@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:34:20 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/15 10:47:23 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/15 13:46:54 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,9 @@
 
 # include "minishell.h"
 # include "errno.h"
+
+void	ft_exit(void);
+void	disp_synt_erro(char c);
+void	disp_mem_error(void);
 
 #endif

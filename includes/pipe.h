@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:32:13 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/09 14:55:50 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/15 13:53:12 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_data
 
 /* PROTOTYPES */
 t_data	get_args(int argc, char **argv, char **envp);
-void	ft_error(const char *str);
+void	ft_error(char *str);
 void	pipe_creator(t_data *data);
 char	*get_bin(char *cmd, char **paths);
 char	*get_line(t_data *data);

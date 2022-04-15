@@ -52,6 +52,7 @@ SRCS = ./main.c \
 	./srcs/exec/exec_utils.c \
 	./srcs/exec/count_command.c \
 	./srcs/handle_sig.c \
+	./srcs/builtins/exit.c \
 
 
 OBJS = ${SRCS:.c=.o}

@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/15 11:55:34 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/15 13:20:56 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	exec_builtin(t_tlist *builtin, t_dlist **denv)
 			loop_unset(builtin, denv);
 		else if (ft_strncmp(builtin->token->content, "export ", 6) == 0)
 			loop_export(builtin, denv);
+		else if (ft_strncmp(builtin->token->content, "exit ", 4) == 0)
+			ft_exit();
+		
 }
 
 void	ft_child(int *pfd, t_cmd *cmd, t_pipes *data)
