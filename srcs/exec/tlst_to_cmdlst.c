@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/14 15:20:18 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/15 14:10:40 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ char	*create_tmp(void)
 
 void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 {
+	char	*file_name;
+	
 	lst = lst->next;
 	if (ret == 1)
 	{
@@ -129,8 +131,11 @@ void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 	}
 	else if (ret == 2)
 	{
-		if (!access(lst->token->content, F_OK))
-			cmd->infile = ft_strdup(lst->token->content);
+		file_name = ft_strdup(lst->token->content);
+		if (file_name[ft_strlen(file_name) - 1] == ' ')
+			file_name = ft_strndup(file_name, ft_strlen(file_name) - 1);
+		if (!access(file_name, F_OK))
+			cmd->infile = ft_strdup(file_name);
 		else
 			ft_error("Cant open infile");
 		cmd->is_double = false;
@@ -197,7 +202,7 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 	if (!cmd->infile)
 		cmd->infile = STDIN;
 	if (!cmd->outfile)
-		cmd->outfile = ft_tab_addback(cmd->outfile, STDOUT);
+		cmd->outfile = ft_tab_addback(cmd->outfile, "/dev/stdout");
 	free(opt);
 	return (cmd);
 }

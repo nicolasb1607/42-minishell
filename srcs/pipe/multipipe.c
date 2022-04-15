@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/14 15:03:49 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/15 10:37:48 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_child(int *pfd, t_cmd *cmd, t_pipes *data)
 		exec_builtin(cmd->builtin, data->denv);
 		exit(0);
 	}
-		else
+	else
 		execve(cmd->bin, cmd->options, data->env);
 }
 

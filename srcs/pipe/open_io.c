@@ -6,12 +6,13 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:52:33 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/14 15:55:22 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/15 13:50:02 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mpipe.h"
 #include <string.h>
+
 int	open_i(t_cmd *cmd, t_pipes *pipes)
 {
 	int	fd;
@@ -50,7 +51,10 @@ int	open_o(t_cmd *cmd, t_pipes *pipes)
 	{
 		while (cmd->outfile[i])
 		{
-			file_name = ft_strndup(cmd->outfile[i], ft_strlen(cmd->outfile[i]) - 1);
+			if (cmd->outfile[i][ft_strlen(cmd->outfile[i]) - 1] == ' ')
+				file_name = ft_strndup(cmd->outfile[i], ft_strlen(cmd->outfile[i]) - 1);
+			else
+				file_name = ft_strdup(cmd->outfile[i]);
 			if (cmd->is_double == false)
 				fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 			else if (cmd->is_double == true)
