@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:39:30 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/04 13:05:57 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/18 12:35:27 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
+#include "minishell.h"
 
 t_dlist	*ft_dupenv(t_dlist *lst, char **envp)
 {
@@ -34,8 +35,8 @@ void	ft_env(t_dlist **dupenv)
 	curr = *dupenv;
 	while (curr != NULL)
 	{
-		ft_putstr(curr->content);
-		ft_putchar('\n');
+		ft_putstr_fd(curr->content, 1);
+		ft_putchar_fd('\n', 1);
 		curr = curr->next;
 	}
 }

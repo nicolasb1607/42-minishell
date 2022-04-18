@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/15 10:37:48 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/18 12:35:19 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,18 @@ void	close_child(int *pfd, int fd_in)
 void	exec_builtin(t_tlist *builtin, t_dlist **denv)
 {
 	// dprintf(2, BRED"EXEC BUILTIN\n"CRESET);
-	if (ft_strncmp(builtin->token->content, "echo ", 4) == 0)
-			ft_echo(builtin);
-		else if (ft_strncmp(builtin->token->content, "cd ", 2) == 0)
-			launch_cd(builtin, denv);
-		else if (ft_strncmp(builtin->token->content, "env ", 3) == 0)
-			ft_env(denv);
-		else if (ft_strncmp(builtin->token->content, "pwd ", 3) == 0)
-			ft_pwd();
-		else if (ft_strncmp(builtin->token->content, "unset ", 5) == 0)
-			loop_unset(builtin, denv);
-		else if (ft_strncmp(builtin->token->content, "export ", 6) == 0)
-			loop_export(builtin, denv);
+	if (!ft_strncmp(builtin->token->content, "env", 3))
+		ft_env(denv);
+	else if (!ft_strncmp(builtin->token->content, "echo", 4))
+		ft_echo(builtin);
+	else if (!ft_strncmp(builtin->token->content, "cd", 2))
+		launch_cd(builtin, denv);
+	else if (!ft_strncmp(builtin->token->content, "pwd", 3))
+		ft_pwd();
+	else if (!ft_strncmp(builtin->token->content, "unset", 5))
+		loop_unset(builtin, denv);
+	else if (!ft_strncmp(builtin->token->content, "export", 6))
+		loop_export(builtin, denv);
 }
 
 void	ft_child(int *pfd, t_cmd *cmd, t_pipes *data)
@@ -59,7 +59,7 @@ void	ft_child(int *pfd, t_cmd *cmd, t_pipes *data)
 	if (cmd->builtin)
 	{
 		exec_builtin(cmd->builtin, data->denv);
-		exit(0);
+		exit(EXIT_SUCCESS);
 	}
 	else
 		execve(cmd->bin, cmd->options, data->env);
