@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/24 10:38:48 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/01 16:04:444 by nburat-d         ###   ########.fr       */
+/*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
+/*   Updated: 2022/04/18 20:27:46 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,16 +223,21 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				cmd->builtin = NULL;
 				cpy_till_pipe(&tlst, &cmd->builtin);
 				if (!cmd->infile)
+				{
 					cmd->infile = STDIN;
+					cmd->update_i = false;
+				}
 				if (!cmd->outfile)
+				{
 					cmd->outfile = ft_tab_addback(cmd->outfile, STDOUT);
-				// ft_printtoklst(cmd->builtin);
+					cmd->update_o = false;
+				}
 			}
 			if (tlst)
 					tlst = tlst->next;
 			ft_clstadd_back(&chead, cmd);
 		}
-		// print_t_cmd(chead);
+		print_t_cmd(chead);
 		piping(nb_cmd, chead, dupenv, tlst);	
 	}
 }

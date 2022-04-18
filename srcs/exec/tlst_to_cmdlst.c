@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/16 01:20:11 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/18 20:23:18 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,9 +204,19 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 	*tlst = curr;
 	cmd->options = ft_split_custom(opt, ' ');
 	if (!cmd->infile)
+	{
 		cmd->infile = STDIN;
+		cmd->update_i = false;
+	}
+	else
+		cmd->update_i = true;
 	if (!cmd->outfile)
+	{
 		cmd->outfile = ft_tab_addback(cmd->outfile, "/dev/stdout");
+		cmd->update_o = false;
+	}
+	else
+		cmd->update_o = true;
 	free(opt);
 	return (cmd);
 }
