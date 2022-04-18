@@ -33,6 +33,23 @@ int	is_builtincmd(t_cmd *cmd)
 		return (0);
 }
 
+int	is_forkbuiltin(t_cmd *cmd)
+{
+	char	*currcont;
+
+	currcont = cmd->command;
+	if (ft_strncmp(currcont, "echo ", 4) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "env ", 3) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "pwd ", 3) == 0)
+		return (1);
+	else if (ft_strncmp(currcont, "export ", 6) == 0 && !cmd->options[1])
+		return (dprintf(2, "oui\n"), 1);
+	else
+		return (0);
+}
+
 char **ft_free_tab(char **tab)
 {
 	int i;
@@ -76,7 +93,19 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 		{
 			while (ft_strcmp(curr->token->content, cmd->command) != 0)
 				curr = curr->next;
-			exec_builtin(curr, dupenv);
+			if (is_forkbuiltin(cmd))
+			{
+				pi = fork();
+				if (pi == 0)
+				{
+					dup2(pipes.fd_out, STDOUT_FILENO);
+					dup2(pipes.fd_in, STDIN_FILENO);
+					exec_builtin(curr, dupenv);
+					exit(EXIT_SUCCESS);
+				}
+			}
+			else
+				exec_builtin(curr, dupenv);
 		}
 		else if ((chead)->is_absolute)
 		{
@@ -100,6 +129,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				execve((chead)->bin, (chead)->options, dlist_to_tab(*dupenv));
 			}
 		}
+		// print_t_cmd(chead);
 		waitpid(pi, NULL, 0);
 		// free(chead);
 	}
