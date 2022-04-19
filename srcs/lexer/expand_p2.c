@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:07:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/18 11:56:37 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/19 11:33:13 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	lenvarenv(char *str, int i)
 
 	j = 1;
 	i++;
+	if(ft_strcmp(str, "$?") == 0)
+		return(2);
 	while (str[i] && ft_isenv(str[i]) == 1)
 	{
 		j++;
@@ -39,7 +41,7 @@ void	expandtok(t_token *token, t_minishell *mshell)
 		return ;
 	while (token->content[i])
 	{
-		if (token->content[i] == '$' && ft_isenv(token->content[i + 1]) == 1)
+		if (token->content[i] == '$' && (ft_isenv(token->content[i + 1]) == 1 || token->content[i + 1] == '?'))
 		{
 			ret_expand = expand(token, i, mshell);
 			if (ret_expand)

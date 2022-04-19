@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:02 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/18 12:13:20 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/19 11:38:46 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,9 @@ char	*expand(t_token *token, int i, t_minishell *mshell)
 		varenv = ft_charjoin(varenv, token->content[i]);
 		i++;
 	}
+	printf("%s\n", varenv);
+	if(ft_strcmp(varenv,"?") == 0)
+		return(ft_itoa(mshell->err_exit));
 	if (is_valid_varenv(varenv) == 1)
 		varvalue = look_for_varenv_value(varenv, mshell->head_env);
 	free(varenv);
