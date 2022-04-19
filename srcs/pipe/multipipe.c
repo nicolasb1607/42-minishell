@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/18 12:35:19 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/19 16:13:15 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,14 @@ void	ft_norm(int status)
 
 void	close_pfd(int *pfd, int fd_in, t_cmd *cmd)
 {
-	dup2(fd_in, STDIN_FILENO);
-	if (cmd->next)
+	if (!cmd->prev || (cmd->prev && cmd->prev->update_i == false))
+		dup2(fd_in, STDIN_FILENO);
+	else if (cmd->prev->update_i == true)
+		dup2(cmd->fd_in, STDIN_FILENO);
+	if (cmd->next && cmd->update_o == false)
 		dup2(pfd[1], STDOUT_FILENO);
+	else if (cmd->next && cmd->update_o == true)
+		dup2(cmd->fd_out, STDOUT_FILENO);
 	close(pfd[0]);
 	close(pfd[1]);
 	close(fd_in);
@@ -53,8 +58,31 @@ void	exec_builtin(t_tlist *builtin, t_dlist **denv)
 		loop_export(builtin, denv);
 }
 
+void	check_io(t_cmd *cmd, t_pipes *data)
+{
+	int	fd_i;
+	// int	fd_o;
+	// int	size;
+
+	(void)data;
+	if (cmd->update_i)
+	{
+		close(0);
+		fd_i = open(cmd->infile, O_RDONLY);
+		dup2(fd_i, STDIN_FILENO);
+		data->fd_in = fd_i;
+	}
+	if (cmd->update_o)
+	{
+		close(1);
+		dup2(data->fd_out, STDOUT_FILENO);
+		data->fd_out = cmd->fd_out;
+	}
+}
+
 void	ft_child(int *pfd, t_cmd *cmd, t_pipes *data)
 {
+	check_io(cmd, data);
 	close_pfd(pfd, cmd->fd_in, cmd);
 	if (cmd->builtin)
 	{
@@ -79,7 +107,9 @@ void	ft_pipe(t_cmd *cmd, t_pipes *data)
 		pipe(pfd);
 		pid = fork();
 		if (pid == 0)
+		{
 			ft_child(pfd, tmp, data);
+		}
 		close_child(pfd, data->fd_in);
 		tmp = tmp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:52:33 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/16 01:09:46 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/19 15:07:30 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	open_o(t_cmd *cmd, t_pipes *pipes)
 			else
 			{
 				pipes->fd_out = fd;
+				cmd->fd_out = fd;
 				return (1);
 			}
 			i++;
@@ -79,11 +80,17 @@ int	open_o(t_cmd *cmd, t_pipes *pipes)
 
 int	open_io(t_cmd *cmd, t_pipes *pipes)
 {
-	int	i;
-	int	o;
+	int		i;
+	int		o;
+	t_cmd	*temp;
 
+	temp = cmd;
 	i = open_i(cmd, pipes);
-	o = open_o(cmd, pipes);
+	while (temp)
+	{
+		o = open_o(temp, pipes);
+		temp = temp->next;
+	}
 	if (i == 0 || o == 0)
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:42 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/18 20:27:31 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/19 14:31:04 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void print_t_cmd(t_cmd *cmd)
 		}
 		if (cmd->infile)
 			dprintf(2, "infile %s\n", cmd->infile);
+		printf("FD IN: %d\n", cmd->fd_in);
+		printf("FD OUT: %d\n", cmd->fd_out);
 		// if (cmd->limiter)
 		// 	dprintf(2, "limiter %s\n", cmd->limiter);
 		// dprintf(2, "Double ? : %d\n", cmd->is_double);
@@ -100,3 +102,4 @@ void print_t_cmd(t_cmd *cmd)
 	}
 	dprintf(2, reset"\n");
 }
+// hrazanam

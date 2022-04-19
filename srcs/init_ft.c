@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/18 20:27:46 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/19 11:24:15 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ int	is_builtincmd(t_cmd *cmd)
 	char	*currcont;
 
 	currcont = cmd->command;
-	if (ft_strncmp(currcont, "echo ", 4) == 0)
-		return (1);
-	else if (ft_strncmp(currcont, "cd ", 2) == 0)
-		return (1);
-	else if (ft_strncmp(currcont, "env ", 3) == 0)
-		return (1);
-	else if (ft_strncmp(currcont, "pwd ", 3) == 0)
-		return (1);
-	else if (ft_strncmp(currcont, "unset ", 5) == 0)
-		return (1);
-	else if (ft_strncmp(currcont, "export ", 6) == 0)
-		return (1);
+	if (ft_strncmp(currcont, "echo", 5) == 0)
+		return (printf(BRED"builtin\n"CRESET), 1);
+	else if (ft_strncmp(currcont, "cd", 3) == 0)
+		return (printf(BRED"builtin\n"CRESET), 1);
+	else if (ft_strncmp(currcont, "env", 4) == 0)
+		return (printf(BRED"builtin\n"CRESET), 1);
+	else if (ft_strncmp(currcont, "pwd", 4) == 0)
+		return (printf(BRED"builtin\n"CRESET), 1);
+	else if (ft_strncmp(currcont, "unset", 6) == 0)
+		return (printf(BRED"builtin\n"CRESET), 1);
+	else if (ft_strncmp(currcont, "export", 7) == 0)
+		return (printf(BRED"builtin\n"CRESET), 1);
 	else
 		return (0);
 }
@@ -38,14 +38,14 @@ int	is_forkbuiltin(t_cmd *cmd)
 	char	*currcont;
 
 	currcont = cmd->command;
-	if (ft_strncmp(currcont, "echo ", 4) == 0)
+	if (ft_strncmp(currcont, "echo", 5) == 0)
 		return (1);
-	else if (ft_strncmp(currcont, "env ", 3) == 0)
+	else if (ft_strncmp(currcont, "env", 4) == 0)
 		return (1);
-	else if (ft_strncmp(currcont, "pwd ", 3) == 0)
+	else if (ft_strncmp(currcont, "pwd", 4) == 0)
 		return (1);
-	else if (ft_strncmp(currcont, "export ", 6) == 0 && !cmd->options[1])
-		return (dprintf(2, "oui\n"), 1);
+	else if (ft_strncmp(currcont, "export", 7) == 0 && !cmd->options[1])
+		return (1);
 	else
 		return (0);
 }
@@ -86,8 +86,6 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			if (tlst)
 				tlst = tlst->next;
 		}
-		// print_t_cmd(chead);
-		// fprintf(stderr, "cmd->outfile[0] = %s\n", cmd->outfile[0]);
 		open_io(chead, &pipes);
 		if (is_builtincmd(cmd))
 		{
@@ -109,8 +107,8 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 		}
 		else if ((chead)->is_absolute)
 		{
-			if (ft_strcmp(chead->command, "./minishell") == 0)
-					signal(SIGINT, SIG_IGN);
+			if (ft_strncmp(chead->command, "./minishell", 12) == 0)
+				signal(SIGINT, SIG_IGN);
 			pi = fork();
 			if (pi == 0)
 			{
@@ -161,17 +159,17 @@ int	is_builtin(t_tlist *lst)
 	char	*currcont;
 
 	currcont = lst->token->content;
-	if (ft_strncmp(currcont, "echo ", 4) == 0)
+	if (ft_strncmp(currcont, "echo", 5) == 0)
 		return (1);
-	else if (ft_strncmp(currcont, "cd ", 2) == 0)
+	else if (ft_strncmp(currcont, "cd", 3) == 0)
 		return (1);
-	else if (ft_strncmp(currcont, "env ", 3) == 0)
+	else if (ft_strncmp(currcont, "env", 4) == 0)
 		return (1);
-	else if (ft_strncmp(currcont, "pwd ", 3) == 0)
+	else if (ft_strncmp(currcont, "pwd", 4) == 0)
 		return (1);
-	else if (ft_strncmp(currcont, "unset ", 5) == 0)
+	else if (ft_strncmp(currcont, "unset", 6) == 0)
 		return (1);
-	else if (ft_strncmp(currcont, "export ", 6) == 0)
+	else if (ft_strncmp(currcont, "export", 7) == 0)
 		return (1);
 	else
 		return (0);
@@ -237,7 +235,7 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					tlst = tlst->next;
 			ft_clstadd_back(&chead, cmd);
 		}
-		print_t_cmd(chead);
+		// print_t_cmd(chead);
 		piping(nb_cmd, chead, dupenv, tlst);	
 	}
 }
