@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:07:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/01 15:34:44 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/18 11:56:37 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,11 @@ void	expandtok(t_token *token, t_minishell *mshell)
 				expandedstr = ft_strjoin(expandedstr, ret_expand);
 			i = i + lenvarenv(token->content, i);
 		}
-		if (token->content[i])
+		if (token->content[i] && token->content[i] != '$')
+		{
 			expandedstr = ft_charjoin(expandedstr, token->content[i]);
-		i++;
+			i++;
+		}
 	}
 	token->content = expandedstr;
 }
