@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/15 14:51:46 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/15 15:46:32 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_exit(void)
 
 void	disp_synt_erro(char *str)
 {
-	printf(RED"minishell: syntax error near unexpected token \'%s\'\n"CRESET, str);	
+	printf(RED"minishell: syntax error near unexpected token \'%s\'\n"CRESET, str);
 }
 
 void	ft_error(char *str)

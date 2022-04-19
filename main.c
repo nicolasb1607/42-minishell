@@ -13,7 +13,7 @@
 
 t_minishell g_mshell;
 
-void handler(int signum)
+void handler_main(int signum)
 {
 	if (signum == SIGINT)
 	{
@@ -21,6 +21,17 @@ void handler(int signum)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		g_mshell.err_exit = 130;
+	}
+}
+
+void handler_cmd(int signum)
+{
+	if (signum == SIGINT)
+	{
+		ft_putchar('\n');
+		rl_on_new_line();
+		rl_replace_line("", 0);
 		g_mshell.err_exit = 130;
 	}
 }
@@ -44,13 +55,14 @@ int main(int ac, char **av, char **envp)
 	/* PROMPT MAIN */
 	while (1)
 	{
-		signal(SIGINT, handler);
+		signal(SIGINT, handler_main);
 		signal(SIGQUIT, SIG_IGN);
 
 		ret = ft_prompt();
 		if (ft_strlen(ret) != 0)
 		{
 			tlist = init_tlist(ret, tlist, &g_mshell);
+			ft_printtoklst(tlist);
 			// printf("Number of commands : %d\n", count_command(tlist));
 			if (tlist)
 			{
@@ -63,6 +75,7 @@ int main(int ac, char **av, char **envp)
 					free_tlist(&tlist);
 					free_tcmd(&chead);
 					chead = NULL;
+
 				}
 				else
 					free_tlist(&tlist);

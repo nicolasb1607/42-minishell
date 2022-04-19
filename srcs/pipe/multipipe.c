@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/15 13:20:56 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/19 10:30:11 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	ft_pipe(t_cmd *cmd, t_pipes *data)
 	pid_t	pid;
 	
 	tmp = cmd;
+	signal(SIGQUIT, SIG_IGN);
 	while (tmp)
 	{
 		tmp->fd_in = data->fd_in;
