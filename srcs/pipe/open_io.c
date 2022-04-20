@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:52:33 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/19 15:07:30 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/20 10:47:53 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int	open_o(t_cmd *cmd, t_pipes *pipes)
 				file_name = ft_strndup(cmd->outfile[i], ft_strlen(cmd->outfile[i]) - 1);
 			else
 				file_name = ft_strdup(cmd->outfile[i]);
-			if (cmd->is_double == false)
+			if (cmd->is_double == false || cmd->outfile[i + 1])
 				fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-			else if (cmd->is_double == true)
+			else if (cmd->is_double == true && !cmd->outfile[i + 1])
 				fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 			if (cmd->outfile[i + 1])
 				close(fd);
