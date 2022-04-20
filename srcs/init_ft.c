@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/20 12:14:12 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:26:46 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				g_mshell.err_exit = 127;
 				return ;
 			}
-			//! ajout erreur 127 si on ne trouve pas la commande
 			ft_clstadd_back(&chead, cmd);
 			if (tlst)
 				tlst = tlst->next;
@@ -94,7 +93,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 		open_io(chead, &pipes);
 
 		//! Ajout de la gestion des signaux
-		if (ft_strcmp(chead->command, "./minishell") == 0)
+		if (ft_strncmp(chead->command,"./minishell", 12) == 0)
 			signal(SIGINT, SIG_IGN);
 		else
 			signal(SIGINT, handler_cmd);
@@ -119,8 +118,6 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 		}
 		else if ((chead)->is_absolute)
 		{
-			if (ft_strncmp(chead->command, "./minishell", 12) == 0)
-				signal(SIGINT, SIG_IGN);
 			pi = fork();
 			if (pi == 0)
 			{

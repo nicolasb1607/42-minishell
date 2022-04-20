@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:02 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/20 13:56:28 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:06:50 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ char	*expand(t_token *token, int i, t_minishell *mshell)
 	{
 		if(token->content[i] == '?')
 		{
-			printf("true\n");
 			varenv = malloc(sizeof(char) * 2);
 			varenv = ft_strdup("?");	
 			break;
