@@ -58,11 +58,11 @@ int main(int ac, char **av, char **envp)
 		signal(SIGINT, handler_main);
 		signal(SIGQUIT, SIG_IGN);
 
-		ret = ft_prompt();
+		ret = ft_prompt(&g_mshell);
 		if (ft_strlen(ret) != 0)
 		{
 			tlist = init_tlist(ret, tlist, &g_mshell);
-			ft_printtoklst(tlist);
+			// ft_printtoklst(tlist);
 			// printf("Number of commands : %d\n", count_command(tlist));
 			if (tlist)
 			{

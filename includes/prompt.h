@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:31:17 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/15 13:15:01 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/20 11:26:11 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,5 @@
 
 # include "minishell.h"
 
-char	*ft_prompt(void);
-
+char	*ft_prompt(t_minishell *g_mshell);
 #endif

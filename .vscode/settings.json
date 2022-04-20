@@ -1,17 +1,45 @@
 {
-	"files.associations": {
-		"*.c": "c",
-		"*.h": "c",
-		"echo.h": "c",
-		"handle_sig.h": "c",
-		"lexer.h": "c",
-		"minishell.h": "c",
-		"ranges": "c",
-		"utils.h": "c",
-		"libft.h": "c",
-		"*.tcc": "c",
-		"fstream": "c",
-		"sstream": "c",
-		"exception": "c"
-	}
+  "files.associations": {
+    "*.h": "c",
+    "*.c": "c",
+    "echo.h": "c",
+    "handle_sig.h": "c",
+    "lexer.h": "c",
+    "minishell.h": "c",
+    "ranges": "c",
+    "utils.h": "c",
+    "libft.h": "c",
+    "*.tcc": "c",
+    "fstream": "c",
+    "sstream": "c",
+    "cstdlib": "c"
+  },
+  "C_Cpp_Runner.cCompilerPath": "gcc",
+  "C_Cpp_Runner.cppCompilerPath": "/usr/bin/g++",
+  "C_Cpp_Runner.debuggerPath": "/usr/bin/gdb",
+  "C_Cpp_Runner.cStandard": "",
+  "C_Cpp_Runner.cppStandard": "",
+  "C_Cpp_Runner.msvcBatchPath": "",
+  "C_Cpp_Runner.warnings": [
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic"
+  ],
+  "C_Cpp_Runner.enableWarnings": true,
+  "C_Cpp_Runner.warningsAsError": false,
+  "C_Cpp_Runner.compilerArgs": [],
+  "C_Cpp_Runner.linkerArgs": [],
+  "C_Cpp_Runner.includePaths": [],
+  "C_Cpp_Runner.includeSearch": [
+    "*",
+    "**/*"
+  ],
+  "C_Cpp_Runner.excludeSearch": [
+    "**/build",
+    "**/build/**",
+    "**/.*",
+    "**/.*/**",
+    "**/.vscode",
+    "**/.vscode/**"
+  ]
 }

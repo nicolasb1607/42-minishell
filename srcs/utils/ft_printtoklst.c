@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:42 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/14 16:01:43 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/20 11:05:50 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,27 +74,33 @@ void print_t_cmd(t_cmd *cmd)
 {
 	static int	i = 0;
 	
-	printf(BBLU"");
+	dprintf(2, BBLU"");
 	while (cmd)
 	{
-		printf("\nNODE %d\n", i);
+		dprintf(2, "\nNODE %d\n", i);
 		i = i + 1;
-		printf("command %s\n", cmd->command);
+		dprintf(2, "command %s\n", cmd->command);
 		if (cmd->options)
 			print_tab(cmd->options);
-		printf("bin %s\n", cmd->bin);
-		printf("is_absolute %d\n", cmd->is_absolute);
+		if (cmd->bin)
+			dprintf(2, "bin %s\n", cmd->bin);
+		dprintf(2, "is_absolute %d\n", cmd->is_absolute);
 		if (cmd->outfile)
 		{
-			printf("outfile :\n");
+			dprintf(2, "outfile :\n");
 			print_tab(cmd->outfile);
 		}
 		if (cmd->infile)
-			printf("infile %s\n", cmd->infile);
-		if (cmd->limiter)
-			printf("limiter %s\n", cmd->limiter);
-		printf("Double ? : %d\n", cmd->is_double);
+			dprintf(2, "infile %s\n", cmd->infile);
+		printf("FD IN: %d\n", cmd->fd_in);
+		printf("FD OUT: %d\n", cmd->fd_out);
+		// if (cmd->limiter)
+		// 	dprintf(2, "limiter %s\n", cmd->limiter);
+		// dprintf(2, "Double ? : %d\n", cmd->is_double);
+		printf("Update i : %d\n", cmd->update_i);
+		printf("Update o : %d\n", cmd->update_o);
 		cmd = cmd->next;
 	}
-	printf(reset"\n");
+	dprintf(2, reset"\n");
 }
+// hrazanam

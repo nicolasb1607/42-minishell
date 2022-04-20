@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/15 11:30:38 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/20 12:02:57 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,19 @@ int	is_absolute(char *cmd)
 
 int	update_bin(char **path, t_cmd *cmd, t_tlist *tlst)
 {
-	if (is_absolute(cmd->command) == 0)
+	if (!is_builtincmd(cmd))
 	{
-		cmd->bin = get_bin_custom(cmd->command, path, tlst);
-		cmd->is_absolute = 0;	
+		if (is_absolute(cmd->command) == 0)
+		{
+			cmd->bin = get_bin_custom(cmd->command, path, tlst);
+			cmd->is_absolute = 0;	
+		}
+		else
+			cmd->is_absolute = 1;
 	}
 	else
 		cmd->is_absolute = 1;
-	if (cmd->bin == NULL)
+	if (!is_builtincmd(cmd) && cmd->bin == NULL)
 		return (-1);
 	return (0);
 }
@@ -121,6 +126,8 @@ char	*create_tmp(void)
 
 void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 {
+	char	*file_name;
+	
 	lst = lst->next;
 	if (ret == 1)
 	{
@@ -129,8 +136,13 @@ void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 	}
 	else if (ret == 2)
 	{
-		// if (access(lst->token->content, F_OK))
-			cmd->infile = ft_strdup(lst->token->content);
+		file_name = ft_strdup(lst->token->content);
+		if (file_name[ft_strlen(file_name) - 1] == ' ')
+			file_name = ft_strndup(file_name, ft_strlen(file_name) - 1);
+		if (!access(file_name, F_OK))
+			cmd->infile = ft_strdup(file_name);
+		else
+			ft_error("Cant open infile");
 		cmd->is_double = false;
 	}
 	else if (ret == 3)
@@ -159,7 +171,11 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 	curr = *tlst;
 	opt = NULL;
 	cmd = ft_clstnew();
+	cmd->infile = NULL;
+	cmd->outfile = NULL;
 	cmd->type = T_STRING;
+	cmd->next = NULL;
+	cmd->prev = NULL;
 	while (curr && ft_strcmp(curr->token->type, T_PIPE) != 0)
 	{
 		if (curr && is_operator(curr->token->type) == 0 && i == 0)
@@ -193,9 +209,19 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 	*tlst = curr;
 	cmd->options = ft_split_custom(opt, ' ');
 	if (!cmd->infile)
+	{
 		cmd->infile = STDIN;
+		cmd->update_i = false;
+	}
+	else
+		cmd->update_i = true;
 	if (!cmd->outfile)
-		cmd->outfile = ft_tab_addback(cmd->outfile, STDOUT);
+	{
+		cmd->outfile = ft_tab_addback(cmd->outfile, "/dev/stdout");
+		cmd->update_o = false;
+	}
+	else
+		cmd->update_o = true;
 	free(opt);
 	return (cmd);
 }

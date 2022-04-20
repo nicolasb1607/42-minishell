@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:35:23 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/10 20:45:14 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/19 11:40:16 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_cmd	*ft_clstnew(void)
 {	
 	t_cmd *node;
 
-	node = malloc(sizeof(t_cmd));
+	node = ft_calloc(1, sizeof(t_cmd));
 	if (!node)
 		return (NULL);
 	return (node);

@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/14 13:38:02 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/20 11:23:40 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ typedef struct s_cmd
 	char			*infile;
 	char			**outfile;
 	char			*limiter;
+	bool			update_o;
+	bool			update_i;
 
 	t_tlist			*builtin;
 	

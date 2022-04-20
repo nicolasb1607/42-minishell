@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:27:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/31 14:47:33 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/18 15:23:21 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	loop_export(t_tlist *tlst, t_dlist **dup_env)
 	t_tlist	*currtok;
 	int		i;
 
-	if (tlst->next)
+	if (tlst->next && ft_strcmp(tlst->next->token->type, "T_STRING") == 0)
 	{
 		if (!is_all_var_valid(tlst))
 			return ;
