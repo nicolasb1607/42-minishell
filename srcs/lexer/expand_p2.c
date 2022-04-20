@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:07:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/19 11:33:13 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:34:48 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	lenvarenv(char *str, int i)
 
 	j = 1;
 	i++;
-	if(ft_strcmp(str, "$?") == 0)
+	if(str[i] == '?')
 		return(2);
 	while (str[i] && ft_isenv(str[i]) == 1)
 	{
