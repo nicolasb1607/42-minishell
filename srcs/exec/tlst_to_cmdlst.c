@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/20 12:02:57 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/21 13:21:30 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,17 +92,22 @@ int	update_bin(char **path, t_cmd *cmd, t_tlist *tlst)
 {
 	if (!is_builtincmd(cmd))
 	{
+		printf("This way\n");
 		if (is_absolute(cmd->command) == 0)
 		{
+			
 			cmd->bin = get_bin_custom(cmd->command, path, tlst);
 			cmd->is_absolute = 0;	
 		}
 		else
+		{
 			cmd->is_absolute = 1;
+			printf("Im absolute\n");
+		}
 	}
 	else
 		cmd->is_absolute = 1;
-	if (!is_builtincmd(cmd) && cmd->bin == NULL)
+	if (!is_builtincmd(cmd)&& cmd->is_absolute == 0 && cmd->bin == NULL)
 		return (-1);
 	return (0);
 }

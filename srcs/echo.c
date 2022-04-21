@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:37:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/19 11:41:31 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/21 11:49:08 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,4 @@ void	ft_echo(t_tlist *tlst)
 	}
 	if (nl_opt == 0)
 		ft_putchar('\n');
-	g_mshell.err_exit = 0;
 }

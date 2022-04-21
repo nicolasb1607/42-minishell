@@ -7,4 +7,4 @@ a.out
 print_argc.c
 print_argc
 .vscode
-.ntf*
+.nfs*
