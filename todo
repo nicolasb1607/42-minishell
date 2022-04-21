@@ -1,1 +1,2 @@
-echofgpsfpogisdp = echo -> pas bien !! pb avec le strncmp
+Changer tout pour que infile soit un tab de string et pas une string
+Addback a chaque fois les infile et faire les here_docs
