@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 13:46:25 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/15 15:15:20 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/21 11:26:25 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,18 @@ int	parser(t_tlist *lst)
 		if (__is_type(lst, T_PIPE))
 		{
 			if (!check_pipe(lst))
+			{	
+				g_mshell.err_exit = 2;
 				return (0);
+			}
 		}
 		else if (!__is_type(lst, T_STRING))
 		{
 			if (!check_rdir(lst))
+			{	
+				g_mshell.err_exit = 2;
 				return (0);
+			}
 		}
 		lst = lst->next;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:17 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/08 10:14:28 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/21 11:50:24 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ t_tlist	*init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
 			tlist = tlist->next; // ! Peut etre un free a regler avec celui d'avant
 		i++;
 	}
+	g_mshell.err_exit = 0;
 	return (tlist);
 }

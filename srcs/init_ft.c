@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/20 14:26:46 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:52:37 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	is_builtincmd(t_cmd *cmd)
 	else if (ft_strncmp(currcont, "unset", 6) == 0)
 		return (1);
 	else if (ft_strncmp(currcont, "export", 7) == 0)
+		return (1);
+	else if (!ft_strncmp(currcont, "exit", 5))
 		return (1);
 	else
 		return (0);
@@ -72,6 +74,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 	pid_t pi;
 	t_tlist *curr;
 	t_pipes	pipes;
+	int status;
 
 	curr = tlst;
 	if (tlst->token->content)
@@ -93,7 +96,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 		open_io(chead, &pipes);
 
 		//! Ajout de la gestion des signaux
-		if (ft_strncmp(chead->command,"./minishell", 12) == 0)
+		if (ft_strcmp(chead->command,"./minishell") == 0)
 			signal(SIGINT, SIG_IGN);
 		else
 			signal(SIGINT, handler_cmd);
@@ -123,7 +126,8 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			{
 				dup2(pipes.fd_out, STDOUT_FILENO);
 				dup2(pipes.fd_in, STDIN_FILENO);
-				execve((chead)->command, (chead)->options, dlist_to_tab(*dupenv));
+				if (execve((chead)->command, (chead)->options, dlist_to_tab(*dupenv)) != 0)
+					g_mshell.err_exit = errno;
 			}
 		}
 		else
@@ -133,13 +137,15 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			{
 				dup2(pipes.fd_out, STDOUT_FILENO);
 				dup2(pipes.fd_in, STDIN_FILENO);
-				execve((chead)->bin, (chead)->options, dlist_to_tab(*dupenv));
+				if(execve((chead)->bin, (chead)->options, dlist_to_tab(*dupenv)) != 0)
+					g_mshell.err_exit = errno;
 			}
 		}
-		// print_t_cmd(chead);
-		waitpid(pi, NULL, 0);
-//! Ajout de la fonction de gestion d erreur 
-		// free(chead);
+		while(waitpid(pi, &status, 0) != -1)
+		{
+			if(WIFEXITED(status))
+				g_mshell.err_exit = WEXITSTATUS(status);
+		}
 	}
 }
 

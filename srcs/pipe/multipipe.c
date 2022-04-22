@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/20 12:06:47 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:58:55 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,15 @@ void	ft_norm(int *status)
 {
 	while (wait(status) != -1)
 		;
+		
 }
+
+// int	ft_wait_exit(int pid)
+// {
+// 	int status;
+	
+// 	while(waitpid(pid, &status, WIFEXITED(status)) != )
+// }
 
 void	close_pfd(int *pfd, int fd_in, t_cmd *cmd)
 {
@@ -42,7 +50,7 @@ void	close_child(int *pfd, int fd_in)
 
 void	exec_builtin(t_tlist *builtin, t_dlist **denv)
 {
-	// dprintf(2, BRED"EXEC BUILTIN\n"CRESET);
+	dprintf(2, BRED"EXEC BUILTIN\n"CRESET);
 	if (!ft_strncmp(builtin->token->content, "env", 4))
 		ft_env(denv);
 	else if (!ft_strncmp(builtin->token->content, "echo", 5))
@@ -56,7 +64,7 @@ void	exec_builtin(t_tlist *builtin, t_dlist **denv)
 	else if (!ft_strncmp(builtin->token->content, "export", 7))
 		loop_export(builtin, denv);
 	else if (!ft_strncmp(builtin->token->content, "exit", 5))
-		ft_exit();
+		ft_exit(builtin);
 }
 
 void	check_io(t_cmd *cmd, t_pipes *data)
@@ -95,7 +103,6 @@ void	ft_child(int *pfd, t_cmd *cmd, t_pipes *data)
 		if(execve(cmd->bin, cmd->options, data->env) > 0)
 			g_mshell.err_exit = errno;
 	}
-
 }
 
 void	ft_pipe(t_cmd *cmd, t_pipes *data)
@@ -103,6 +110,7 @@ void	ft_pipe(t_cmd *cmd, t_pipes *data)
 	t_cmd	*tmp;
 	int		pfd[2];
 	pid_t	pid;
+	int status;
 	
 	tmp = cmd;
 	if (cmd->command && ft_strcmp(cmd->command, "./minishell") == 0)
@@ -122,6 +130,8 @@ void	ft_pipe(t_cmd *cmd, t_pipes *data)
 		close_child(pfd, data->fd_in);
 		tmp = tmp->next;
 	}
-	waitpid(pid, &g_mshell.err_exit, 0);
-	ft_norm(&g_mshell.err_exit);
+	if(waitpid(pid, &status, 0) != -1)
+		if (WIFEXITED(status))
+			g_mshell.err_exit = WEXITSTATUS(status);
+	ft_norm(&status);
 }

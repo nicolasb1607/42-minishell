@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:02 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/20 14:06:50 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/21 13:35:43 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,14 @@ char	*expand(t_token *token, int i, t_minishell *mshell)
 	while (token->content[i] && token->content[i] != ' '
 		&& token->content[i] != '\'' && token->content[i] != '=' && token->content[i] != '$' )
 	{
+		
 		if(token->content[i] == '?')
 		{
 			varenv = malloc(sizeof(char) * 2);
 			varenv = ft_strdup("?");	
 			break;
 		}
+		
 		varenv = ft_charjoin(varenv, token->content[i]);
 		i++;
 	}
