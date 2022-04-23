@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/22 14:58:55 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/23 15:45:51 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	close_child(int *pfd, int fd_in)
 
 void	exec_builtin(t_tlist *builtin, t_dlist **denv)
 {
-	dprintf(2, BRED"EXEC BUILTIN\n"CRESET);
+	// dprintf(2, BRED"EXEC BUILTIN\n"CRESET);
 	if (!ft_strncmp(builtin->token->content, "env", 4))
 		ft_env(denv);
 	else if (!ft_strncmp(builtin->token->content, "echo", 5))
