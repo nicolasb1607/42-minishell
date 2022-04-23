@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/22 14:44:45 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/23 15:37:48 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,17 @@ void	ft_exit(t_tlist *tlst)
 {
 	char *exit_val;
 	int i;
+	int error_arg;
 
 	exit_val = NULL;
+	error_arg = 0;
 	i = 0;
 	if(tlst->next)
 	{
 		if (ft_isdigit(tlst->next->token->content[i]) == 0)
 		{
-			ft_putstr("minishell: exit: tests: numeric argument required\n");
-			g_mshell.err_exit = 2;
-			return ;
+			printf("minishell: exit: %s: numeric argument required\n", tlst->next->token->content);
+			error_arg = 1;
 		}
 		while(tlst->next->token->content[i] && ft_isdigit(tlst->next->token->content[i]) == 1)
 		{
@@ -35,11 +36,13 @@ void	ft_exit(t_tlist *tlst)
 	}
 	printf(GRN"exit\n"CRESET);
 	free_dlist(g_mshell.env);
-	clear_history();	
+	clear_history();
+	if (error_arg == 1)
+		exit(2);	
 	if (exit_val == NULL)
 		exit(0);
 	else
-		exit(ft_atoi(exit_val));
+		exit(ft_atoi(exit_val) % 256);
 
 }
 
