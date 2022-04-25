@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printtoklst.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:42 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/20 11:05:50 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:42:50 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,18 @@ void print_t_cmd(t_cmd *cmd)
 			print_tab(cmd->outfile);
 		}
 		if (cmd->infile)
-			dprintf(2, "infile %s\n", cmd->infile);
+		{
+			dprintf(2, "infile :\n");
+			print_tab(cmd->infile);
+		}
 		printf("FD IN: %d\n", cmd->fd_in);
 		printf("FD OUT: %d\n", cmd->fd_out);
-		// if (cmd->limiter)
-		// 	dprintf(2, "limiter %s\n", cmd->limiter);
-		// dprintf(2, "Double ? : %d\n", cmd->is_double);
+		if (cmd->limiter)
+		{
+			dprintf(2, "limiter :\n");
+			print_tab(cmd->limiter);
+		}
+		dprintf(2, "Double ? : %d\n", cmd->is_double);
 		printf("Update i : %d\n", cmd->update_i);
 		printf("Update o : %d\n", cmd->update_o);
 		cmd = cmd->next;

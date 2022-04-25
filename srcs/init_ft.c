@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/25 14:12:16 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/25 15:23:55 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				cpy_till_pipe(&tlst, &cmd->builtin);
 				if (!cmd->infile)
 				{
-					cmd->infile = STDIN;
+					cmd->infile = ft_tab_addback(cmd->infile, STDIN);
 					cmd->update_i = false;
 				}
 				if (!cmd->outfile)

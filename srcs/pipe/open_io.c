@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_io.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:52:33 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/20 11:07:13 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:17:20 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	open_i(t_cmd *cmd, t_pipes *pipes)
 {
 	int	fd;
 
-	fd = open(cmd->infile, O_RDONLY);
+	fd = open(cmd->infile[0], O_RDONLY);
 	if (fd < 0)
 		return (0);
 	pipes->fd_in = fd;
