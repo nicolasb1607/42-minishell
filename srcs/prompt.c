@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:23:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/20 11:06:53 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:12:27 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,9 @@ char	*ft_strsub(char *str, int to_sub, int len)
 
 char	*ft_prompt(t_minishell *g_mshell)
 {
-	char	*ret_line;
-	char	*prompt;
-	char	*secprompt;
-
-	prompt = ft_strnstr(getcwd(NULL, 2048), "homes/", ft_strlen(getcwd(NULL, 2048)));
-	secprompt = ft_strnstr(getcwd(NULL, 2048), "home/", ft_strlen(getcwd(NULL, 2048)));
-	if (prompt)
-		prompt = ft_strsub(prompt, 6, ft_strlen(prompt) - 6);
-	else if (secprompt)
-		prompt = ft_strsub(secprompt, 5, ft_strlen(secprompt) - 5);
-	else
-		prompt = getcwd(NULL, 2048);
-	prompt = ft_strjoin(prompt, " $> ");
-	ret_line = readline(prompt);
+	 char	*ret_line;
+	
+	ret_line = readline(BLU"Minishell$> "CRESET);
 	if(ret_line == NULL)
 	{
 		printf(GRN"exit\n"CRESET);

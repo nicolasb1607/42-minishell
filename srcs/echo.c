@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:37:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/21 11:49:08 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:51:40 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	ft_echo(t_tlist *tlst)
 	while (curr && __is_type(curr, T_STRING))
 	{
 		checktype(curr);
-		if (curr->next && curr->token->space_after == 1)
+		if (curr->next && !ft_strcmp(curr->next->token->type, T_STRING) && curr->token->space_after == 1)
 			ft_putchar(' ');
 		curr = curr->next;
 	}

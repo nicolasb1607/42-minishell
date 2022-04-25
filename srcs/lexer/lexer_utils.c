@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:55 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/24 11:16:10 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:42:38 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,20 @@ int	check_quote(char *str)
 			quote = (i++, '\"');
 			ret_check = look_for_next_quote(str, quote, &i);
 			if (ret_check == 0)
+			{	
+				ft_putstr("Syntax error missing quote\n");
 				return (0);
+			}
 		}
 		else if (str[i] == '\'')
 		{
 			quote = (i++, '\'');
 			ret_check = look_for_next_quote(str, quote, &i);
 			if (ret_check == 0)
+			{	
+				ft_putstr("Syntax error missing quote\n");
 				return (0);
+			}
 		}
 	}
 	return (1);

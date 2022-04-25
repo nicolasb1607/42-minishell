@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/22 15:52:37 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/25 13:22:12 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				dup2(pipes.fd_out, STDOUT_FILENO);
 				dup2(pipes.fd_in, STDIN_FILENO);
 				if (execve((chead)->command, (chead)->options, dlist_to_tab(*dupenv)) != 0)
-					g_mshell.err_exit = errno;
+					exit(errno);
 			}
 		}
 		else
@@ -138,7 +138,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				dup2(pipes.fd_out, STDOUT_FILENO);
 				dup2(pipes.fd_in, STDIN_FILENO);
 				if(execve((chead)->bin, (chead)->options, dlist_to_tab(*dupenv)) != 0)
-					g_mshell.err_exit = errno;
+					exit(errno);
 			}
 		}
 		while(waitpid(pi, &status, 0) != -1)
