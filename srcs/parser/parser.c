@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 13:46:25 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/21 11:26:25 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:04:47 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@ int	check_pipe(t_tlist *lst)
 		return (disp_synt_erro("|"), 0);
 	else if (ft_strcmp(lst->next->token->type, T_L_DIR) == 0)
 		return (1);
-	// else if (__is_type(lst->next, T_R_DIR) == 0 || __is_type(lst->next, T_L_DIR) == 0)
-	// 	return (disp_synt_erro("newline"), 0);
-	else if (__is_type(lst->next, T_STRING) == 0)
-		return (disp_synt_erro("|"), 0);
 	return (1);
 }
 
