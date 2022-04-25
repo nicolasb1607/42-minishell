@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tlst_to_cmdlst.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/22 11:31:28 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/25 14:11:33 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_cmd	*cpy_tcmd(t_cmd **cmd)
 	t_cmd	*new;
 	
 	new = ft_clstnew();
-	// new->bin = ft_strdup((*cmd)->bin);
 	new->command = ft_strdup((*cmd)->command);
 	new->options = tab_dup((*cmd)->options);
 	new->bin = 	ft_strdup((*cmd)->bin);
@@ -171,11 +170,6 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 	curr = *tlst;
 	opt = NULL;
 	cmd = ft_clstnew();
-	cmd->infile = NULL;
-	cmd->outfile = NULL;
-	cmd->type = T_STRING;
-	cmd->next = NULL;
-	cmd->prev = NULL;
 	while (curr && ft_strcmp(curr->token->type, T_PIPE) != 0)
 	{
 		if (curr && is_operator(curr->token->type) == 0 && i == 0)
