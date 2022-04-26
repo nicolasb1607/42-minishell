@@ -45,8 +45,6 @@ int main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	chead = NULL;
-	// chead->next = NULL;
-	// chead->prev = NULL;
 	tlist = NULL;
 	g_mshell.env = NULL;
 	g_mshell.env = ft_dupenv(g_mshell.env, envp);
