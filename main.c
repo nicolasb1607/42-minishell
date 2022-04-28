@@ -80,6 +80,7 @@ int main(int ac, char **av, char **envp)
 				else
 					free_tlist(&tlist);
 			}
+			free_tlist(&tlist);
 		}
 	}
 	exit (0);

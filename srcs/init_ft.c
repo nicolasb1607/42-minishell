@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/25 13:22:12 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:30:08 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,9 @@ void	free_tcmd(t_cmd **cmd)
 			next = curr->next;
 		free(curr->command);
 		free(curr->bin);
+		free(curr->infile);
+		free(curr->limiter);
+		free(curr->type);
 		curr->options = ft_free_tab(curr->options);
 		curr->outfile = ft_free_tab(curr->outfile);
 		free(curr);

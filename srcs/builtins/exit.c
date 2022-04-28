@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/23 15:37:48 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:32:45 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_exit(t_tlist *tlst)
 	}
 	printf(GRN"exit\n"CRESET);
 	free_dlist(g_mshell.env);
+	free_tlist(&tlst);
 	clear_history();
 	if (error_arg == 1)
 		exit(2);	
