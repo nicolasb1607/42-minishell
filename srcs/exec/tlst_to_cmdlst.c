@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/25 15:41:41 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/28 14:31:51 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	is_absolute(char *cmd)
 
 int	update_bin(char **path, t_cmd *cmd, t_tlist *tlst)
 {
-	if (!is_builtincmd(cmd))
+	if (cmd->command && !is_builtincmd(cmd))
 	{
 		if (is_absolute(cmd->command) == 0)
 		{
@@ -101,7 +101,7 @@ int	update_bin(char **path, t_cmd *cmd, t_tlist *tlst)
 	}
 	else
 		cmd->is_absolute = 1;
-	if (!is_builtincmd(cmd)&& cmd->is_absolute == 0 && cmd->bin == NULL)
+	if (!cmd->command || (!is_builtincmd(cmd)&& cmd->is_absolute == 0 && cmd->bin == NULL))
 		return (-1);
 	return (0);
 }
@@ -115,12 +115,50 @@ char	*create_tmp(void)
 	while (i < INT_MAX)
 	{
 		str = ft_itoa(i);
+		str = ft_strjoin("/tmp/.", str);
 		if (access(str, F_OK) != 0)
 			return (str);
 		free(str);
 		i++;
 	}
 	return (NULL);
+}
+
+void	make_heredoc(t_cmd *cmd)
+{
+	pid_t	pid;
+	char	*tmp;
+	int		fd;
+	int		i;
+	
+	i = 0;
+	fd = open(cmd->infile[tab_size(cmd->infile) - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	tmp = NULL;
+	pid = fork();
+	if (pid == 0)
+	{
+		while (i == 0)
+		{
+			// dprintf(2, "Coucou\n");
+			tmp = readline("> ");
+			if (tmp)
+			{
+				if (ft_strncmp(tmp, cmd->limiter[0], ft_strlen(cmd->limiter[0]) + 1) == 0)
+					i = (1);
+				else
+				{
+					write(fd, tmp, ft_strlen(tmp));
+					write(fd, "\n", 1);
+				}
+			}
+			else
+				write(fd, "\n", 1);
+			free(tmp);
+		}
+		exit (0);
+	}
+	waitpid(pid, NULL, 0);
+	close(fd);
 }
 
 void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
@@ -154,6 +192,7 @@ void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 		cmd->limiter = ft_tab_addback(cmd->limiter, lst->token->content);
 		cmd->infile = ft_tab_addback(cmd->infile, create_tmp());
 		cmd->is_double = true;
+		make_heredoc(cmd);
 	}
 }
 

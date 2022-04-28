@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 13:35:41 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/25 10:51:38 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/04/28 14:04:26 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ void	piping(int nbcmd, t_cmd *cmd, t_dlist **envp, t_tlist *lst)
 	pipes.nb_pipe = nbcmd - 1;
 	(void)envp;
 	open_io(cmd, &pipes);
-	print_t_cmd(cmd);
 	ft_pipe(cmd, &pipes);
 }

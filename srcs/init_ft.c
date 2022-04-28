@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/26 11:21:09 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/28 13:23:28 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				tlst = tlst->next;
 		}
 		open_io(chead, &pipes);
-
+		// print_t_cmd(chead);
 		//! Ajout de la gestion des signaux
 		if (ft_strcmp(chead->command,"./minishell") == 0)
 			signal(SIGINT, SIG_IGN);
