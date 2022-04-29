@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/23 15:45:51 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:07:10 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,15 @@ void	exec_builtin(t_tlist *builtin, t_dlist **denv)
 
 void	check_io(t_cmd *cmd, t_pipes *data)
 {
-	int	fd_i;
-	// int	fd_o;
-	// int	size;
+	// int	fd_i;
 
 	(void)data;
 	if (cmd->update_i)
 	{
 		close(0);
-		fd_i = open(cmd->infile, O_RDONLY);
-		dup2(fd_i, STDIN_FILENO);
-		data->fd_in = fd_i;
+		// fd_i = open(cmd->infile[0], O_RDONLY);
+		dup2(cmd->fd_in, STDIN_FILENO);
+		data->fd_in = cmd->fd_in;
 	}
 	if (cmd->update_o)
 	{

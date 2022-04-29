@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/28 14:30:08 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/29 10:14:58 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				tlst = tlst->next;
 		}
 		open_io(chead, &pipes);
-
+		// print_t_cmd(chead);
 		//! Ajout de la gestion des signaux
 		if (ft_strcmp(chead->command,"./minishell") == 0)
 			signal(SIGINT, SIG_IGN);
@@ -212,13 +212,13 @@ void	cpy_till_pipe(t_tlist **tlist, t_tlist **tlistnew)
 	*tlist = curr;
 }
 
-
 void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 {
 	char	**path;
 	int		nb_cmd;
 	t_cmd *cmd;
 	t_tlist *curr;
+	t_tlist	*tmp;
 
 	nb_cmd = count_command(tlst);
 	if (tlst->token->content)
@@ -239,12 +239,13 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			}
 			else
 			{
-				cmd = ft_clstnew();
+				tmp = tlst;
+				cmd = tlst_to_cmd(&tmp);
 				cmd->builtin = NULL;
 				cpy_till_pipe(&tlst, &cmd->builtin);
 				if (!cmd->infile)
 				{
-					cmd->infile = STDIN;
+					cmd->infile = ft_tab_addback(cmd->infile, STDIN);
 					cmd->update_i = false;
 				}
 				if (!cmd->outfile)
@@ -260,4 +261,3 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 		piping(nb_cmd, chead, dupenv, tlst);	
 	}
 }
- 

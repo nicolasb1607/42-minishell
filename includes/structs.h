@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/20 11:23:40 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:40:01 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ typedef struct s_cmd
 	bool			is_builtin;
 	
 	char			*bin;
-	char			*infile;
+	char			**infile;
 	char			**outfile;
-	char			*limiter;
+	char			**limiter;
 	bool			update_o;
 	bool			update_i;
 

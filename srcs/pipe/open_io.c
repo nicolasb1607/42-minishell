@@ -3,21 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   open_io.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:52:33 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/20 11:07:13 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:29:29 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mpipe.h"
 #include <string.h>
 
+int	tab_size(char **tab)
+{
+	int		i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
+}
+
 int	open_i(t_cmd *cmd, t_pipes *pipes)
 {
 	int	fd;
 
-	fd = open(cmd->infile, O_RDONLY);
+	fd = open(cmd->infile[tab_size(cmd->infile) - 1], O_RDONLY);
 	if (fd < 0)
 		return (0);
 	pipes->fd_in = fd;
@@ -85,9 +95,9 @@ int	open_io(t_cmd *cmd, t_pipes *pipes)
 	t_cmd	*temp;
 
 	temp = cmd;
-	i = open_i(cmd, pipes);
 	while (temp)
 	{
+		i = open_i(cmd, pipes);
 		o = open_o(temp, pipes);
 		temp = temp->next;
 	}
