@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/29 15:58:49 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/29 16:02:50 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,15 +244,15 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 			if (quote == 0 && curr->token->quote)
 			{
 				quote = 1;
-				opt = ft_strjoin(opt, "\"");
+				opt = ft_strjoin_frees1(opt, "\"");
 			}
-			opt = ft_strjoin(opt, curr->token->content);
+			opt = ft_strjoin_frees1(opt, curr->token->content);
 			if (quote == 1)
 			{
 				quote = 0;
-				opt = ft_strjoin(opt, "\"");
+				opt = ft_strjoin_frees1(opt, "\"");
 			}
-			opt = ft_strjoin(opt, " ");
+			opt = ft_strjoin_frees1(opt, " ");
 		}
 		else
 			break ;
