@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/29 11:29:38 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:58:49 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,8 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 	cmd = ft_clstnew();
 	while (curr && ft_strcmp(curr->token->type, T_PIPE) != 0)
 	{
+		if(cmd->command)
+			free(cmd->command);
 		if (curr && is_operator(curr->token->type) == 0 && i == 0)
 			cmd->command = (i++, ft_strdup(curr->token->content));
 		while (curr && is_redir(curr->token->type) != 0)
@@ -235,6 +237,8 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 		}
 		if (curr && is_operator(curr->token->type) == 0)
 		{
+			// if(cmd->command)
+			// 	cmd->command = (free(cmd->command), NULL);
 			if (i == 0)
 				cmd->command = (i++, ft_strdup(curr->token->content));
 			if (quote == 0 && curr->token->quote)

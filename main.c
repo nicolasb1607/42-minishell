@@ -48,12 +48,12 @@ void	handler_heredoc(int signum)
 int main(int ac, char **av, char **envp)
 {
 	t_tlist *tlist;
-	t_cmd *chead;
+	// t_cmd *chead;
 	char *ret;
 
 	(void)ac;
 	(void)av;
-	chead = NULL;
+	// chead = NULL;
 	tlist = NULL;
 	g_mshell.env = NULL;
 	g_mshell.env = ft_dupenv(g_mshell.env, envp);
@@ -76,12 +76,13 @@ int main(int ac, char **av, char **envp)
 				if (parser(tlist))
 				{
 					if (count_command(tlist) == 1)
-						only1cmd(tlist, g_mshell.head_env, chead);
+						only1cmd(tlist, g_mshell.head_env, g_mshell.cmd);
 					else
-						init_ft(tlist, g_mshell.head_env, chead);
+						init_ft(tlist, g_mshell.head_env, g_mshell.cmd);
 					free_tlist(&tlist);
-					free_tcmd(&chead);
-					chead = NULL;
+					fprintf(stderr, "clear here\n");
+					free_tcmd(&g_mshell.cmd);
+					g_mshell.cmd = NULL;
 
 				}
 				else

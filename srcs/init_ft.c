@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/29 11:38:14 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:51:35 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				g_mshell.err_exit = WEXITSTATUS(status);
 		}
 	}
+	free(path);
 }
 
 void	free_tcmd(t_cmd **cmd)
@@ -155,14 +156,15 @@ void	free_tcmd(t_cmd **cmd)
 	t_cmd *next;
 
 	curr = *cmd;
+	//print_t_cmd(curr);
 	while (curr)
 	{
 		if (curr->next)
 			next = curr->next;
-		free(curr->command);
+		//free(curr->command);
 		free(curr->bin);
 		free(curr->infile);
-		free(curr->limiter);
+		curr->limiter =ft_free_tab(curr->limiter);
 		free(curr->type);
 		curr->options = ft_free_tab(curr->options);
 		curr->outfile = ft_free_tab(curr->outfile);
