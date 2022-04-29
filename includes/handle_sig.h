@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:31:47 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/19 10:46:49 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/29 10:46:47 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 void free_dlist(t_dlist *dlist);
 void handler_main(int signum);
 void handler_cmd(int signum);
+void	handler_heredoc(int signum);
 
 
 #endif

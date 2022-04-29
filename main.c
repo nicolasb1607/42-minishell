@@ -36,6 +36,15 @@ void handler_cmd(int signum)
 	}
 }
 
+void	handler_heredoc(int signum)
+{
+	if (signum == SIGINT)
+	{
+		ft_putchar('\n');
+		exit(130);
+	}
+}
+
 int main(int ac, char **av, char **envp)
 {
 	t_tlist *tlist;

@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/29 10:15:18 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/29 11:29:38 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,17 +131,25 @@ void	make_heredoc(t_cmd *cmd)
 	char	*tmp;
 	int		fd;
 	int		i;
+	int status;
 	
 	i = 0;
 	fd = open(cmd->infile[tab_size(cmd->infile) - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	tmp = NULL;
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGINT, handler_heredoc);
 		while (i == 0)
 		{
 			// dprintf(2, "Coucou\n");
 			tmp = readline("> ");
+			if (!tmp)
+			{
+				ft_putstr("minishell: warning: here-document at line 1 delimited by end-of-file (wanted `hd')\n");
+				break;
+			}
 			if (tmp)
 			{
 				if (ft_strncmp(tmp, cmd->limiter[0], ft_strlen(cmd->limiter[0]) + 1) == 0)
@@ -158,7 +166,11 @@ void	make_heredoc(t_cmd *cmd)
 		}
 		exit (0);
 	}
-	waitpid(pid, NULL, 0);
+	while(waitpid(pid, &status, 0) != -1)
+	{
+			if(WIFEXITED(status))
+				g_mshell.err_exit = WEXITSTATUS(status);
+		}
 	close(fd);
 }
 
@@ -217,6 +229,8 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 		while (curr && is_redir(curr->token->type) != 0)
 		{
 			update_io(cmd, curr, is_redir(curr->token->type));
+			if(g_mshell.err_exit == 130)
+				break ;
 			curr = curr->next->next;
 		}
 		if (curr && is_operator(curr->token->type) == 0)

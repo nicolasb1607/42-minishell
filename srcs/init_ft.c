@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/29 10:14:58 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/29 11:38:14 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			path = get_path_to_cmd(curr, dupenv);
 			if(update_bin(path, cmd, curr) == -1)
 			{
-				g_mshell.err_exit = 127;
+				if (g_mshell.err_exit != 130)
+					g_mshell.err_exit = 127;
 				return ;
 			}
 			ft_clstadd_back(&chead, cmd);
@@ -95,7 +96,6 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 		}
 		open_io(chead, &pipes);
 		// print_t_cmd(chead);
-		//! Ajout de la gestion des signaux
 		if (ft_strcmp(chead->command,"./minishell") == 0)
 			signal(SIGINT, SIG_IGN);
 		else
@@ -230,11 +230,12 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			{
 				cmd = tlst_to_cmd(&tlst);
 				path = get_path_to_cmd(curr, dupenv);
-				if(update_bin(path, cmd, curr) == -1)
-				{
+			if (update_bin(path, cmd, curr) == -1)
+			{
+				if (g_mshell.err_exit != 130)
 					g_mshell.err_exit = 127;
-					return ;
-				}
+				return ;
+			}
 				cmd->is_builtin = false;
 			}
 			else
