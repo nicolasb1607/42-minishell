@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/29 11:29:38 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:03:11 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,8 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 	cmd = ft_clstnew();
 	while (curr && ft_strcmp(curr->token->type, T_PIPE) != 0)
 	{
+		if (cmd->command)
+			free(cmd->command);
 		if (curr && is_operator(curr->token->type) == 0 && i == 0)
 			cmd->command = (i++, ft_strdup(curr->token->content));
 		while (curr && is_redir(curr->token->type) != 0)
@@ -240,15 +242,15 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 			if (quote == 0 && curr->token->quote)
 			{
 				quote = 1;
-				opt = ft_strjoin(opt, "\"");
+				opt = ft_strjoin_frees1(opt, "\"");
 			}
-			opt = ft_strjoin(opt, curr->token->content);
+			opt = ft_strjoin_frees1(opt, curr->token->content);
 			if (quote == 1)
 			{
 				quote = 0;
-				opt = ft_strjoin(opt, "\"");
+				opt = ft_strjoin_frees1(opt, "\"");
 			}
-			opt = ft_strjoin(opt, " ");
+			opt = ft_strjoin_frees1(opt, " ");
 		}
 		else
 			break ;
