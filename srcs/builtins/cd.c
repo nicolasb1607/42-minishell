@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:39:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/15 12:05:21 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/02 15:16:42 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	*ft_cd(char *path_name, t_dlist **dupenv)
 	}
 	content = (free(curr->content), ft_strjoin("PWD=", curr_dir));
 	curr->content = content;
+	free(curr_dir);
 	return (NULL);
 }	
 

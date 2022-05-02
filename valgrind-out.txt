@@ -1,407 +1,272 @@
-==57550== Memcheck, a memory error detector
-==57550== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==57550== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
-==57550== Command: ./minishell
-==57550== Parent PID: 11178
-==57550== 
---57550-- 
---57550-- Valgrind options:
---57550--    --suppressions=valgrind_readline_leaks_ignore.txt
---57550--    --leak-check=full
---57550--    --show-leak-kinds=all
---57550--    --track-origins=yes
---57550--    --verbose
---57550--    --log-file=valgrind-out.txt
---57550-- Contents of /proc/version:
---57550--   Linux version 5.4.0-109-generic (buildd@ubuntu) (gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1)) #123-Ubuntu SMP Fri Apr 8 09:10:54 UTC 2022
---57550-- 
---57550-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-ssse3-avx
---57550-- Page sizes: currently 4096, max supported 4096
---57550-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
---57550-- Reading syms from /mnt/nfs/homes/nburat-d/Documents/minishell/minishell
---57550-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
---57550--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
---57550--   .. CRC mismatch (computed 0306b78c wanted 8d362b37)
---57550--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
---57550--   .. CRC mismatch (computed 0306b78c wanted 8d362b37)
---57550--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
---57550--   .. CRC is valid
---57550-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
---57550--    object doesn't have a symbol table
---57550--    object doesn't have a dynamic symbol table
---57550-- Scheduler: using generic scheduler lock implementation.
---57550-- Reading suppressions file: valgrind_readline_leaks_ignore.txt
---57550-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
-==57550== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-57550-by-nburat-d-on-???
-==57550== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-57550-by-nburat-d-on-???
-==57550== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-57550-by-nburat-d-on-???
-==57550== 
-==57550== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==57550== don't want to do, unless you know exactly what you're doing,
-==57550== or are doing some strange experiment):
-==57550==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=57550 ...command...
-==57550== 
-==57550== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==57550==   /path/to/gdb ./minishell
-==57550== and then give GDB the following command
-==57550==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=57550
-==57550== --pid is optional if only one valgrind process is running
-==57550== 
---57550-- REDIR: 0x4022e10 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
---57550-- REDIR: 0x4022be0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
---57550-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
---57550--    object doesn't have a symbol table
---57550-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
---57550--    object doesn't have a symbol table
-==57550== WARNING: new redirection conflicts with existing -- ignoring it
---57550--     old: 0x04022e10 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
---57550--     new: 0x04022e10 (strlen              ) R-> (2007.0) 0x0483f060 strlen
---57550-- REDIR: 0x401f5f0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
---57550-- REDIR: 0x4023370 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
---57550-- Reading syms from /usr/lib/x86_64-linux-gnu/libreadline.so.8.0
---57550--    object doesn't have a symbol table
---57550-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
---57550--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
---57550--   .. CRC mismatch (computed ef41b1a0 wanted f854b801)
---57550--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
---57550--   .. CRC mismatch (computed ef41b1a0 wanted f854b801)
---57550--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
---57550--   .. CRC is valid
---57550-- Reading syms from /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2
---57550--    object doesn't have a symbol table
---57550-- REDIR: 0x49544b0 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x49537b0 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x49547e0 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x49530d0 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4953810 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4955c80 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4970d10 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4970850 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4954610 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4954440 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4953740 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4953180 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4954570 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4970810 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x49536a0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4953260 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4954830 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4953200 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4954980 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4971f80 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4970890 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4953850 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4953130 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4953660 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x495cbd0 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4954880 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4954400 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4970960 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4953b10 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4954780 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4954720 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4955cc0 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x49548d0 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x49536e0 (libc.so.6:strncat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x49e1880 (libc.so.6:__memcpy_chk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x4954320 (libc.so.6:strstr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---57550-- REDIR: 0x49658e0 (libc.so.6:__strrchr_sse2) redirected to 0x483ea70 (__strrchr_sse2)
---57550-- REDIR: 0x494e110 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
---57550-- REDIR: 0x4965be0 (libc.so.6:__strlen_sse2) redirected to 0x483efa0 (__strlen_sse2)
---57550-- REDIR: 0x496ab20 (libc.so.6:__strcpy_sse2_unaligned) redirected to 0x483f090 (strcpy)
---57550-- REDIR: 0x49656d0 (libc.so.6:__strchrnul_sse2) redirected to 0x4843540 (strchrnul)
---57550-- REDIR: 0x48fa520 (libc.so.6:setenv) redirected to 0x4844480 (setenv)
---57550-- REDIR: 0x49654a0 (libc.so.6:__strchr_sse2) redirected to 0x483eb90 (__strchr_sse2)
---57550-- REDIR: 0x4a32bd0 (libc.so.6:__strncmp_sse42) redirected to 0x483f7c0 (__strncmp_sse42)
---57550-- REDIR: 0x494eeb0 (libc.so.6:realloc) redirected to 0x483df30 (realloc)
---57550-- REDIR: 0x496faf0 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4840100 (memcpy@GLIBC_2.2.5)
---57550-- REDIR: 0x496fad0 (libc.so.6:__mempcpy_sse2_unaligned) redirected to 0x4843660 (mempcpy)
---57550-- REDIR: 0x495e3d0 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x483fed0 (strcmp)
---57550-- REDIR: 0x494fb40 (libc.so.6:calloc) redirected to 0x483dce0 (calloc)
---57550-- REDIR: 0x4965d80 (libc.so.6:__strnlen_sse2) redirected to 0x483eee0 (strnlen)
---57550-- REDIR: 0x494e700 (libc.so.6:free) redirected to 0x483c9d0 (free)
---57550-- REDIR: 0x4953fd0 (libc.so.6:__GI_strstr) redirected to 0x4843ca0 (__strstr_sse2)
---57550-- REDIR: 0x496fae0 (libc.so.6:__memcpy_chk_sse2_unaligned) redirected to 0x4843b10 (__memcpy_chk)
---57550-- REDIR: 0x496b150 (libc.so.6:__strncpy_sse2_unaligned) redirected to 0x483f560 (__strncpy_sse2_unaligned)
---57550-- REDIR: 0x495fee0 (libc.so.6:__memchr_sse2) redirected to 0x4840050 (memchr)
---57550-- REDIR: 0x496c160 (libc.so.6:__stpcpy_sse2_unaligned) redirected to 0x4842570 (__stpcpy_sse2_unaligned)
---57550-- REDIR: 0x4a38fb0 (libc.so.6:__strcasecmp_avx) redirected to 0x483f830 (strcasecmp)
---57550-- REDIR: 0x4a3a630 (libc.so.6:__strncasecmp_avx) redirected to 0x483f910 (strncasecmp)
---57550-- REDIR: 0x496ff20 (libc.so.6:__memset_sse2_unaligned) redirected to 0x48428e0 (memset)
---57550-- REDIR: 0x4a41460 (libc.so.6:__memcmp_sse4_1) redirected to 0x4842150 (__memcmp_sse4_1)
-==57550== Invalid read of size 1
-==57550==    at 0x10FBA7: ft_strlen (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x110B46: ft_charjoin (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8BB: make_string_b (lexer.c:49)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Address 0x4b197a0 is 0 bytes inside a block of size 2 free'd
-==57550==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10B89F: make_string_b (lexer.c:48)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Block was alloc'd at
-==57550==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10FA90: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8CB: make_string_b (lexer.c:50)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550== 
-==57550== Invalid read of size 1
-==57550==    at 0x110BA1: ft_charjoin (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8BB: make_string_b (lexer.c:49)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Address 0x4b197a0 is 0 bytes inside a block of size 2 free'd
-==57550==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10B89F: make_string_b (lexer.c:48)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Block was alloc'd at
-==57550==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10FA90: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8CB: make_string_b (lexer.c:50)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550== 
-==57550== Invalid read of size 1
-==57550==    at 0x110B8B: ft_charjoin (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8BB: make_string_b (lexer.c:49)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Address 0x4b197a0 is 0 bytes inside a block of size 2 free'd
-==57550==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10B89F: make_string_b (lexer.c:48)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Block was alloc'd at
-==57550==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10FA90: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8CB: make_string_b (lexer.c:50)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550== 
-==57550== Invalid free() / delete / delete[] / realloc()
-==57550==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x110BB3: ft_charjoin (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8BB: make_string_b (lexer.c:49)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Address 0x4b197a0 is 0 bytes inside a block of size 2 free'd
-==57550==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10B89F: make_string_b (lexer.c:48)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Block was alloc'd at
-==57550==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10FA90: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8CB: make_string_b (lexer.c:50)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550== 
-==57550== Invalid read of size 1
-==57550==    at 0x10B902: make_string_b (lexer.c:53)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Address 0x4b185b5 is 0 bytes after a block of size 5 alloc'd
-==57550==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x48A000C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==57550==    by 0x48792AB: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==57550==    by 0x487A504: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==57550==    by 0x109781: ft_prompt (prompt.c:49)
-==57550==    by 0x1095DD: main (main.c:69)
-==57550== 
-==57550== Conditional jump or move depends on uninitialised value(s)
-==57550==    at 0x10E4DE: free_tcmd (init_ft.c:160)
-==57550==    by 0x10F786: ft_exit (exit.c:39)
-==57550==    by 0x10B4B2: exec_builtin (multipipe.c:67)
-==57550==    by 0x10E27B: only1cmd (init_ft.c:121)
-==57550==    by 0x10965F: main (main.c:80)
-==57550==  Uninitialised value was created by a stack allocation
-==57550==    at 0x10E3F8: free_tcmd (init_ft.c:154)
-==57550== 
-==57550== 
-==57550== HEAP SUMMARY:
-==57550==     in use at exit: 204,656 bytes in 217 blocks
-==57550==   total heap usage: 586 allocs, 372 frees, 231,051 bytes allocated
-==57550== 
-==57550== Searching for pointers to 217 not-freed blocks
-==57550== Checked 207,944 bytes
-==57550== 
-==57550== 5 bytes in 1 blocks are definitely lost in loss record 2 of 60
-==57550==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10FA90: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8CB: make_string_b (lexer.c:50)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550== 
-==57550== LEAK SUMMARY:
-==57550==    definitely lost: 5 bytes in 1 blocks
-==57550==    indirectly lost: 0 bytes in 0 blocks
-==57550==      possibly lost: 0 bytes in 0 blocks
-==57550==    still reachable: 0 bytes in 0 blocks
-==57550==         suppressed: 204,651 bytes in 216 blocks
-==57550== 
-==57550== ERROR SUMMARY: 30 errors from 7 contexts (suppressed: 0 from 0)
-==57550== 
-==57550== 1 errors in context 1 of 7:
-==57550== Conditional jump or move depends on uninitialised value(s)
-==57550==    at 0x10E4DE: free_tcmd (init_ft.c:160)
-==57550==    by 0x10F786: ft_exit (exit.c:39)
-==57550==    by 0x10B4B2: exec_builtin (multipipe.c:67)
-==57550==    by 0x10E27B: only1cmd (init_ft.c:121)
-==57550==    by 0x10965F: main (main.c:80)
-==57550==  Uninitialised value was created by a stack allocation
-==57550==    at 0x10E3F8: free_tcmd (init_ft.c:154)
-==57550== 
-==57550== 
-==57550== 1 errors in context 2 of 7:
-==57550== Invalid read of size 1
-==57550==    at 0x10B902: make_string_b (lexer.c:53)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Address 0x4b185b5 is 0 bytes after a block of size 5 alloc'd
-==57550==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x48A000C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==57550==    by 0x48792AB: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==57550==    by 0x487A504: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==57550==    by 0x109781: ft_prompt (prompt.c:49)
-==57550==    by 0x1095DD: main (main.c:69)
-==57550== 
-==57550== 
-==57550== 3 errors in context 3 of 7:
-==57550== Invalid free() / delete / delete[] / realloc()
-==57550==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x110BB3: ft_charjoin (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8BB: make_string_b (lexer.c:49)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Address 0x4b197a0 is 0 bytes inside a block of size 2 free'd
-==57550==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10B89F: make_string_b (lexer.c:48)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Block was alloc'd at
-==57550==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10FA90: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8CB: make_string_b (lexer.c:50)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550== 
-==57550== 
-==57550== 6 errors in context 4 of 7:
-==57550== Invalid read of size 1
-==57550==    at 0x110B8B: ft_charjoin (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8BB: make_string_b (lexer.c:49)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Address 0x4b197a0 is 0 bytes inside a block of size 2 free'd
-==57550==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10B89F: make_string_b (lexer.c:48)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Block was alloc'd at
-==57550==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10FA90: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8CB: make_string_b (lexer.c:50)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550== 
-==57550== 
-==57550== 9 errors in context 5 of 7:
-==57550== Invalid read of size 1
-==57550==    at 0x110BA1: ft_charjoin (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8BB: make_string_b (lexer.c:49)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Address 0x4b197a0 is 0 bytes inside a block of size 2 free'd
-==57550==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10B89F: make_string_b (lexer.c:48)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Block was alloc'd at
-==57550==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10FA90: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8CB: make_string_b (lexer.c:50)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550== 
-==57550== 
-==57550== 9 errors in context 6 of 7:
-==57550== Invalid read of size 1
-==57550==    at 0x10FBA7: ft_strlen (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x110B46: ft_charjoin (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8BB: make_string_b (lexer.c:49)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Address 0x4b197a0 is 0 bytes inside a block of size 2 free'd
-==57550==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10B89F: make_string_b (lexer.c:48)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550==  Block was alloc'd at
-==57550==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==57550==    by 0x10FA90: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==57550==    by 0x10B8CB: make_string_b (lexer.c:50)
-==57550==    by 0x10BA8D: make_string (lexer.c:87)
-==57550==    by 0x10BD1A: make_token (lexer.c:136)
-==57550==    by 0x10BE1E: init_tlist (init_lexer.c:43)
-==57550==    by 0x10960C: main (main.c:72)
-==57550== 
---57550-- 
---57550-- used_suppression:     58 leak readline valgrind_readline_leaks_ignore.txt:2 suppressed: 200,635 bytes in 215 blocks
---57550-- used_suppression:      1 leak add_history valgrind_readline_leaks_ignore.txt:8 suppressed: 4,016 bytes in 1 blocks
-==57550== 
-==57550== ERROR SUMMARY: 30 errors from 7 contexts (suppressed: 0 from 0)
+==59988== Memcheck, a memory error detector
+==59988== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==59988== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==59988== Command: ./minishell
+==59988== Parent PID: 11178
+==59988== 
+--59988-- 
+--59988-- Valgrind options:
+--59988--    --suppressions=valgrind_readline_leaks_ignore.txt
+--59988--    --leak-check=full
+--59988--    --show-leak-kinds=all
+--59988--    --track-origins=yes
+--59988--    --verbose
+--59988--    --log-file=valgrind-out.txt
+--59988-- Contents of /proc/version:
+--59988--   Linux version 5.4.0-109-generic (buildd@ubuntu) (gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1)) #123-Ubuntu SMP Fri Apr 8 09:10:54 UTC 2022
+--59988-- 
+--59988-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-ssse3-avx
+--59988-- Page sizes: currently 4096, max supported 4096
+--59988-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
+--59988-- Reading syms from /mnt/nfs/homes/nburat-d/Documents/minishell/minishell
+--59988-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
+--59988--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
+--59988--   .. CRC mismatch (computed 0306b78c wanted 8d362b37)
+--59988--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
+--59988--   .. CRC mismatch (computed 0306b78c wanted 8d362b37)
+--59988--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
+--59988--   .. CRC is valid
+--59988-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
+--59988--    object doesn't have a symbol table
+--59988--    object doesn't have a dynamic symbol table
+--59988-- Scheduler: using generic scheduler lock implementation.
+--59988-- Reading suppressions file: valgrind_readline_leaks_ignore.txt
+--59988-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
+==59988== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-59988-by-nburat-d-on-???
+==59988== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-59988-by-nburat-d-on-???
+==59988== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-59988-by-nburat-d-on-???
+==59988== 
+==59988== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==59988== don't want to do, unless you know exactly what you're doing,
+==59988== or are doing some strange experiment):
+==59988==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=59988 ...command...
+==59988== 
+==59988== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==59988==   /path/to/gdb ./minishell
+==59988== and then give GDB the following command
+==59988==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=59988
+==59988== --pid is optional if only one valgrind process is running
+==59988== 
+--59988-- REDIR: 0x4022e10 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
+--59988-- REDIR: 0x4022be0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
+--59988-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
+--59988--    object doesn't have a symbol table
+--59988-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
+--59988--    object doesn't have a symbol table
+==59988== WARNING: new redirection conflicts with existing -- ignoring it
+--59988--     old: 0x04022e10 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
+--59988--     new: 0x04022e10 (strlen              ) R-> (2007.0) 0x0483f060 strlen
+--59988-- REDIR: 0x401f5f0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
+--59988-- REDIR: 0x4023370 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
+--59988-- Reading syms from /usr/lib/x86_64-linux-gnu/libreadline.so.8.0
+--59988--    object doesn't have a symbol table
+--59988-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
+--59988--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
+--59988--   .. CRC mismatch (computed ef41b1a0 wanted f854b801)
+--59988--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
+--59988--   .. CRC mismatch (computed ef41b1a0 wanted f854b801)
+--59988--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
+--59988--   .. CRC is valid
+--59988-- Reading syms from /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2
+--59988--    object doesn't have a symbol table
+--59988-- REDIR: 0x49544b0 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x49537b0 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x49547e0 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x49530d0 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4953810 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4955c80 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4970d10 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4970850 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4954610 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4954440 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4953740 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4953180 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4954570 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4970810 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x49536a0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4953260 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4954830 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4953200 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4954980 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4971f80 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4970890 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4953850 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4953130 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4953660 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x495cbd0 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4954880 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4954400 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4970960 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4953b10 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4954780 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4954720 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4955cc0 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x49548d0 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x49536e0 (libc.so.6:strncat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x49e1880 (libc.so.6:__memcpy_chk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x4954320 (libc.so.6:strstr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--59988-- REDIR: 0x49658e0 (libc.so.6:__strrchr_sse2) redirected to 0x483ea70 (__strrchr_sse2)
+--59988-- REDIR: 0x494e110 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
+--59988-- REDIR: 0x4965be0 (libc.so.6:__strlen_sse2) redirected to 0x483efa0 (__strlen_sse2)
+--59988-- REDIR: 0x496ab20 (libc.so.6:__strcpy_sse2_unaligned) redirected to 0x483f090 (strcpy)
+--59988-- REDIR: 0x49656d0 (libc.so.6:__strchrnul_sse2) redirected to 0x4843540 (strchrnul)
+--59988-- REDIR: 0x48fa520 (libc.so.6:setenv) redirected to 0x4844480 (setenv)
+--59988-- REDIR: 0x49654a0 (libc.so.6:__strchr_sse2) redirected to 0x483eb90 (__strchr_sse2)
+--59988-- REDIR: 0x4a32bd0 (libc.so.6:__strncmp_sse42) redirected to 0x483f7c0 (__strncmp_sse42)
+--59988-- REDIR: 0x494eeb0 (libc.so.6:realloc) redirected to 0x483df30 (realloc)
+--59988-- REDIR: 0x496faf0 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4840100 (memcpy@GLIBC_2.2.5)
+--59988-- REDIR: 0x496fad0 (libc.so.6:__mempcpy_sse2_unaligned) redirected to 0x4843660 (mempcpy)
+--59988-- REDIR: 0x495e3d0 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x483fed0 (strcmp)
+--59988-- REDIR: 0x494fb40 (libc.so.6:calloc) redirected to 0x483dce0 (calloc)
+--59988-- REDIR: 0x4965d80 (libc.so.6:__strnlen_sse2) redirected to 0x483eee0 (strnlen)
+--59988-- REDIR: 0x494e700 (libc.so.6:free) redirected to 0x483c9d0 (free)
+--59988-- REDIR: 0x4953fd0 (libc.so.6:__GI_strstr) redirected to 0x4843ca0 (__strstr_sse2)
+--59988-- REDIR: 0x496fae0 (libc.so.6:__memcpy_chk_sse2_unaligned) redirected to 0x4843b10 (__memcpy_chk)
+--59988-- REDIR: 0x496b150 (libc.so.6:__strncpy_sse2_unaligned) redirected to 0x483f560 (__strncpy_sse2_unaligned)
+--59988-- REDIR: 0x495fee0 (libc.so.6:__memchr_sse2) redirected to 0x4840050 (memchr)
+--59988-- REDIR: 0x496c160 (libc.so.6:__stpcpy_sse2_unaligned) redirected to 0x4842570 (__stpcpy_sse2_unaligned)
+--59988-- REDIR: 0x4a38fb0 (libc.so.6:__strcasecmp_avx) redirected to 0x483f830 (strcasecmp)
+--59988-- REDIR: 0x4a3a630 (libc.so.6:__strncasecmp_avx) redirected to 0x483f910 (strncasecmp)
+--59988-- REDIR: 0x496ff20 (libc.so.6:__memset_sse2_unaligned) redirected to 0x48428e0 (memset)
+--59988-- REDIR: 0x4a41460 (libc.so.6:__memcmp_sse4_1) redirected to 0x4842150 (__memcmp_sse4_1)
+==59988== Invalid read of size 1
+==59988==    at 0x10B8F3: make_string_b (lexer.c:52)
+==59988==    by 0x10BA7E: make_string (lexer.c:86)
+==59988==    by 0x10BD0B: make_token (lexer.c:135)
+==59988==    by 0x10BE0F: init_tlist (init_lexer.c:43)
+==59988==    by 0x10960C: main (main.c:72)
+==59988==  Address 0x4b185b6 is 0 bytes after a block of size 6 alloc'd
+==59988==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==59988==    by 0x48A000C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==59988==    by 0x48792AB: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==59988==    by 0x487A504: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==59988==    by 0x109781: ft_prompt (prompt.c:49)
+==59988==    by 0x1095DD: main (main.c:69)
+==59988== 
+==59988== Syscall param wait4(pid) contains uninitialised byte(s)
+==59988==    at 0x4996C6A: wait4 (wait4.c:27)
+==59988==    by 0x10E3CA: only1cmd (init_ft.c:145)
+==59988==    by 0x10965F: main (main.c:80)
+==59988==  Uninitialised value was created by a stack allocation
+==59988==    at 0x10DFDF: only1cmd (init_ft.c:71)
+==59988== 
+==59988== 
+==59988== HEAP SUMMARY:
+==59988==     in use at exit: 204,850 bytes in 227 blocks
+==59988==   total heap usage: 599 allocs, 372 frees, 235,355 bytes allocated
+==59988== 
+==59988== Searching for pointers to 227 not-freed blocks
+==59988== Checked 207,744 bytes
+==59988== 
+==59988== 3 bytes in 1 blocks are indirectly lost in loss record 1 of 68
+==59988==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==59988==    by 0x10FA81: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==59988==    by 0x10F13C: tlst_to_cmd (tlst_to_cmdlst.c:229)
+==59988==    by 0x10E04F: only1cmd (init_ft.c:85)
+==59988==    by 0x10965F: main (main.c:80)
+==59988== 
+==59988== 6 bytes in 2 blocks are indirectly lost in loss record 3 of 68
+==59988==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==59988==    by 0x10D739: classicsplit (ft_split_cust_2.c:64)
+==59988==    by 0x10D4D3: ft_cut_cu (ft_split_custom.c:90)
+==59988==    by 0x10D6CB: ft_split_custom (ft_split_cust_2.c:55)
+==59988==    by 0x10F2D1: tlst_to_cmd (tlst_to_cmdlst.c:259)
+==59988==    by 0x10E04F: only1cmd (init_ft.c:85)
+==59988==    by 0x10965F: main (main.c:80)
+==59988== 
+==59988== 6 bytes in 2 blocks are definitely lost in loss record 4 of 68
+==59988==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==59988==    by 0x10FA81: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==59988==    by 0x10B8BC: make_string_b (lexer.c:49)
+==59988==    by 0x10BA7E: make_string (lexer.c:86)
+==59988==    by 0x10BD0B: make_token (lexer.c:135)
+==59988==    by 0x10BE0F: init_tlist (init_lexer.c:43)
+==59988==    by 0x10960C: main (main.c:72)
+==59988== 
+==59988== 11 bytes in 1 blocks are indirectly lost in loss record 7 of 68
+==59988==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==59988==    by 0x10FA81: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==59988==    by 0x110C73: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==59988==    by 0x110CBE: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==59988==    by 0x10F2FD: tlst_to_cmd (tlst_to_cmdlst.c:262)
+==59988==    by 0x10E04F: only1cmd (init_ft.c:85)
+==59988==    by 0x10965F: main (main.c:80)
+==59988== 
+==59988== 12 bytes in 1 blocks are indirectly lost in loss record 8 of 68
+==59988==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==59988==    by 0x10FA81: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==59988==    by 0x110C73: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==59988==    by 0x110CBE: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==59988==    by 0x10F33B: tlst_to_cmd (tlst_to_cmdlst.c:269)
+==59988==    by 0x10E04F: only1cmd (init_ft.c:85)
+==59988==    by 0x10965F: main (main.c:80)
+==59988== 
+==59988== 16 bytes in 1 blocks are indirectly lost in loss record 13 of 68
+==59988==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==59988==    by 0x110C55: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==59988==    by 0x110CBE: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==59988==    by 0x10F2FD: tlst_to_cmd (tlst_to_cmdlst.c:262)
+==59988==    by 0x10E04F: only1cmd (init_ft.c:85)
+==59988==    by 0x10965F: main (main.c:80)
+==59988== 
+==59988== 16 bytes in 1 blocks are indirectly lost in loss record 14 of 68
+==59988==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==59988==    by 0x110C55: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==59988==    by 0x110CBE: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==59988==    by 0x10F33B: tlst_to_cmd (tlst_to_cmdlst.c:269)
+==59988==    by 0x10E04F: only1cmd (init_ft.c:85)
+==59988==    by 0x10965F: main (main.c:80)
+==59988== 
+==59988== 24 bytes in 1 blocks are indirectly lost in loss record 19 of 68
+==59988==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==59988==    by 0x10D6A2: ft_split_custom (ft_split_cust_2.c:52)
+==59988==    by 0x10F2D1: tlst_to_cmd (tlst_to_cmdlst.c:259)
+==59988==    by 0x10E04F: only1cmd (init_ft.c:85)
+==59988==    by 0x10965F: main (main.c:80)
+==59988== 
+==59988== 192 (104 direct, 88 indirect) bytes in 1 blocks are definitely lost in loss record 28 of 68
+==59988==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==59988==    by 0x10F94C: ft_calloc (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==59988==    by 0x10F382: ft_clstnew (exec_utils.c:19)
+==59988==    by 0x10F0F5: tlst_to_cmd (tlst_to_cmdlst.c:225)
+==59988==    by 0x10E04F: only1cmd (init_ft.c:85)
+==59988==    by 0x10965F: main (main.c:80)
+==59988== 
+==59988== LEAK SUMMARY:
+==59988==    definitely lost: 110 bytes in 3 blocks
+==59988==    indirectly lost: 88 bytes in 8 blocks
+==59988==      possibly lost: 0 bytes in 0 blocks
+==59988==    still reachable: 0 bytes in 0 blocks
+==59988==         suppressed: 204,652 bytes in 216 blocks
+==59988== 
+==59988== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
+==59988== 
+==59988== 1 errors in context 1 of 4:
+==59988== Syscall param wait4(pid) contains uninitialised byte(s)
+==59988==    at 0x4996C6A: wait4 (wait4.c:27)
+==59988==    by 0x10E3CA: only1cmd (init_ft.c:145)
+==59988==    by 0x10965F: main (main.c:80)
+==59988==  Uninitialised value was created by a stack allocation
+==59988==    at 0x10DFDF: only1cmd (init_ft.c:71)
+==59988== 
+==59988== 
+==59988== 1 errors in context 2 of 4:
+==59988== Invalid read of size 1
+==59988==    at 0x10B8F3: make_string_b (lexer.c:52)
+==59988==    by 0x10BA7E: make_string (lexer.c:86)
+==59988==    by 0x10BD0B: make_token (lexer.c:135)
+==59988==    by 0x10BE0F: init_tlist (init_lexer.c:43)
+==59988==    by 0x10960C: main (main.c:72)
+==59988==  Address 0x4b185b6 is 0 bytes after a block of size 6 alloc'd
+==59988==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==59988==    by 0x48A000C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==59988==    by 0x48792AB: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==59988==    by 0x487A504: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==59988==    by 0x109781: ft_prompt (prompt.c:49)
+==59988==    by 0x1095DD: main (main.c:69)
+==59988== 
+--59988-- 
+--59988-- used_suppression:     58 leak readline valgrind_readline_leaks_ignore.txt:2 suppressed: 200,636 bytes in 215 blocks
+--59988-- used_suppression:      1 leak add_history valgrind_readline_leaks_ignore.txt:8 suppressed: 4,016 bytes in 1 blocks
+==59988== 
+==59988== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
