@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 17:21:43 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/14 16:33:48 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/02 15:02:55 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ void	make_quote_string(t_token *token, t_lexer *lexer)
 
 int	make_string_b(int i, t_lexer *lexer, t_token *token)
 {
-	token->content = ft_charjoin(token->content, lexer->current_char);
+	char *tmp;
+	
+	tmp = ft_charjoin(token->content, lexer->current_char);
+	token->content = ft_strdup(tmp);
+	free(tmp);
 	advance(lexer);
 	if (ft_containchar(lexer->text[lexer->pos + 1], "<>|") == 1)
 	{	

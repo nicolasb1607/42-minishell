@@ -6,11 +6,12 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 18:01:53 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/02 12:40:34 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/02 14:54:25 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 char	*char_to_str(char c)
 {
@@ -32,7 +33,7 @@ char	*ft_charjoin(char *str, char c)
 	i = 0;
 	if (!c)
 		return (NULL);
-	if (!str)
+	if (str == NULL)
 		return (char_to_str(c));
 	new = malloc(sizeof(char) * (ft_strlen(str) + 2));
 	if (!new)

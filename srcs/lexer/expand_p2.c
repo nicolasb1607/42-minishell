@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:07:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/02 12:43:30 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/02 12:52:15 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,6 @@ void	expandtok(t_token *token, t_minishell *mshell)
 			i++;
 		}
 	}
-	// free(token->content);
-	token->content = expandedstr;
+	token->content = ft_strdup(expandedstr);
+	free(expandedstr);
 }

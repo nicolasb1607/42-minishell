@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_io.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:52:33 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/28 10:29:29 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/02 13:42:55 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,9 @@ int	open_o(t_cmd *cmd, t_pipes *pipes)
 			{
 				pipes->fd_out = fd;
 				cmd->fd_out = fd;
-				return (1);
+				return (free(file_name), 1);
 			}
+			free(file_name);
 			i++;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tab_addback.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 13:50:50 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/07 14:04:41 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/02 13:54:02 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char **ft_free_tabz(char **tab)
 	int i;
 
 	i = 0;
-	while (!tab[i])
+	while (tab[i])
 	{
 		free(tab[i]);
 		i++;
