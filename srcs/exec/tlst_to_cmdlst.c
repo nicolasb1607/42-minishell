@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/29 16:02:50 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/02 10:30:23 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 		else
 			ft_error("Cant open infile");
 		cmd->is_double = false;
+		free(file_name);
 	}
 	else if (ret == 3)
 	{
@@ -224,8 +225,6 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 	cmd = ft_clstnew();
 	while (curr && ft_strcmp(curr->token->type, T_PIPE) != 0)
 	{
-		if(cmd->command)
-			free(cmd->command);
 		if (curr && is_operator(curr->token->type) == 0 && i == 0)
 			cmd->command = (i++, ft_strdup(curr->token->content));
 		while (curr && is_redir(curr->token->type) != 0)
@@ -237,22 +236,20 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 		}
 		if (curr && is_operator(curr->token->type) == 0)
 		{
-			// if(cmd->command)
-			// 	cmd->command = (free(cmd->command), NULL);
 			if (i == 0)
 				cmd->command = (i++, ft_strdup(curr->token->content));
 			if (quote == 0 && curr->token->quote)
 			{
 				quote = 1;
-				opt = ft_strjoin_frees1(opt, "\"");
+				opt = ft_strjoin_free(opt, "\"");
 			}
-			opt = ft_strjoin_frees1(opt, curr->token->content);
+			opt = ft_strjoin_free(opt, curr->token->content);
 			if (quote == 1)
 			{
 				quote = 0;
-				opt = ft_strjoin_frees1(opt, "\"");
+				opt = ft_strjoin_free(opt, "\"");
 			}
-			opt = ft_strjoin_frees1(opt, " ");
+			opt = ft_strjoin_free(opt, " ");
 		}
 		else
 			break ;

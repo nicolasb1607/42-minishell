@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/29 16:02:42 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/02 12:26:35 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char **ft_free_tab(char **tab)
 	int i;
 
 	i = 0;
-	while (!tab[i])
+	while (tab[i])
 	{
 		free(tab[i]);
 		i++;
@@ -90,6 +90,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					g_mshell.err_exit = 127;
 				return ;
 			}
+			path = ft_free_tab(path);
 			ft_clstadd_back(&chead, cmd);
 			if (tlst)
 				tlst = tlst->next;
@@ -112,12 +113,12 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				{
 					dup2(pipes.fd_out, STDOUT_FILENO);
 					dup2(pipes.fd_in, STDIN_FILENO);
-					exec_builtin(curr, dupenv);
+					exec_builtin(curr, dupenv, &chead);
 					exit(EXIT_SUCCESS);
 				}
 			}
 			else
-				exec_builtin(curr, dupenv);
+				exec_builtin(curr, dupenv, &chead);
 		}
 		else if ((chead)->is_absolute)
 		{
@@ -147,7 +148,6 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				g_mshell.err_exit = WEXITSTATUS(status);
 		}
 	}
-	free(path);
 }
 
 void	free_tcmd(t_cmd **cmd)
@@ -161,10 +161,11 @@ void	free_tcmd(t_cmd **cmd)
 	{
 		if (curr->next)
 			next = curr->next;
-		//free(curr->command);
+		free(curr->command);
 		free(curr->bin);
 		free(curr->infile);
-		curr->limiter =ft_free_tab(curr->limiter);
+		if(curr->limiter)
+			curr->limiter =ft_free_tab(curr->limiter);
 		free(curr->type);
 		curr->options = ft_free_tab(curr->options);
 		curr->outfile = ft_free_tab(curr->outfile);

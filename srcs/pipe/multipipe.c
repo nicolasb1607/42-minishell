@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/26 16:07:10 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/02 11:43:15 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	close_child(int *pfd, int fd_in)
 	close(pfd[1]);
 }
 
-void	exec_builtin(t_tlist *builtin, t_dlist **denv)
+void	exec_builtin(t_tlist *builtin, t_dlist **denv, t_cmd **cmd)
 {
 	// dprintf(2, BRED"EXEC BUILTIN\n"CRESET);
 	if (!ft_strncmp(builtin->token->content, "env", 4))
@@ -64,7 +64,7 @@ void	exec_builtin(t_tlist *builtin, t_dlist **denv)
 	else if (!ft_strncmp(builtin->token->content, "export", 7))
 		loop_export(builtin, denv);
 	else if (!ft_strncmp(builtin->token->content, "exit", 5))
-		ft_exit(builtin);
+		ft_exit(builtin, cmd);
 }
 
 void	check_io(t_cmd *cmd, t_pipes *data)
@@ -93,7 +93,7 @@ void	ft_child(int *pfd, t_cmd *cmd, t_pipes *data)
 	close_pfd(pfd, cmd->fd_in, cmd);
 	if (cmd->builtin)
 	{
-		exec_builtin(cmd->builtin, data->denv);
+		exec_builtin(cmd->builtin, data->denv, &cmd);
 		exit(EXIT_SUCCESS);
 	}
 	else

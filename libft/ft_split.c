@@ -6,113 +6,98 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:59:52 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/27 09:46:02 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/02 10:52:06 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_wordcount(char const *s, char c)
+static int	ft_is_charset(char c, char sep)
+{
+	if (c == sep)
+		return (1);
+	else
+		return (0);
+}
+
+static int	ft_count_words(char *str, char sep)
 {
 	int	i;
-	int	word;
 	int	count;
 
-	count = 0;
-	word = 0;
 	i = 0;
-	while (s[i])
+	count = 0;
+	while (str[i])
 	{
-		if (s[i] == c)
-			word = 0;
-		if (word == 0)
+		while (ft_is_charset(str[i], sep) == 1 && str[i])
+			i++;
+		if (ft_is_charset(str[i], sep) == 0 && str[i])
 		{
-			if (s[i] != c && word == 0)
-			{
-				word = 1;
-				count++;
-			}
+			while (ft_is_charset(str[i], sep) == 0 && str[i])
+				i++;
+			count++;
 		}
-		i++;
 	}
 	return (count);
 }
 
-static int	ft_wordlen(char const *s, char c)
+static char	*ft_strndup(char *str, int j)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] && s[i] != c)
-		i++;
-	return (i + 1);
-}
-
-static char	**free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (!tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-	return (NULL);
-}
-
-static char	**ft_cut(char const *s, char **split, char c, int i)
-{
-	int		j;
-	int		l;
-
-	j = -1;
-	while (++j < ft_wordcount(s, c))
-	{
-		l = 0;
-		while (s[i] == c && s[i])
-			i++;
-		if (s[i] != c)
-		{
-			split[j] = malloc(sizeof(char) * ft_wordlen(&s[i], c));
-			if (!split[j])
-				return (free_tab(split));
-			while (s[i] != c && s[i])
-			{
-				split[j][l] = s[i];
-				i++;
-				l++;
-			}
-			split[j][l] = '\0';
-		}
-	}
-	split[j] = 0;
-	return (split);
-}
-
-/*Alloue (avec malloc(3)) et retourne un tableau
-de chaines de caracteres obtenu en séparant ’s’ à
-l’aide du caractère ’c’, utilisé comme délimiteur.
-Le tableau doit être terminé par NULL.
-
-Le tableau de nouvelles chaines de caractères,
-résultant du découpage. NULL si l’allocation
-échoue.
-
-#1. La chaine de caractères à découper.
-#2. Le caractère délimitant.*/
-char	**ft_split(char const *s, char c)
-{
-	char	**split;
 	int		i;
+	char	*finalstr;
 
 	i = 0;
-	if (!s)
+	finalstr = malloc(sizeof(char) * (j + 1));
+	if (!finalstr)
 		return (NULL);
-	split = malloc(sizeof(char *) * (ft_wordcount(s, c) + 1));
-	if (!split)
+	while (str[i] && i < j)
+	{
+		finalstr[i] = str[i];
+		i++;
+	}
+	finalstr[i] = '\0';
+	return (finalstr);
+}
+
+static char	**ft_split2(char **finalstr, char *str, char sep, int size)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (j < size)
+	{
+		while (ft_is_charset(str[i], sep) == 1 && str[i])
+			i++;
+		str = str + i;
+		i = 0;
+		while (ft_is_charset(str[i], sep) == 0 && str[i])
+			i++;
+		finalstr[j++] = ft_strndup(str, i);
+		str = str + i;
+		i = 0;
+	}
+	finalstr[j] = 0;
+	return (finalstr);
+}
+
+char	**ft_split(char const *s, char sep)
+{
+	char	**finalstr;
+	int		size;
+	char	*str;
+
+	str = (char *)s;
+	size = ft_count_words(str, sep);
+	finalstr = malloc(sizeof(char *) * (ft_count_words(str, sep) + 1));
+	if (!finalstr)
 		return (NULL);
-	split = ft_cut(s, split, c, i);
-	return (split);
+	if (ft_count_words(str, sep) == 0)
+	{
+		finalstr[0] = 0;
+		return (finalstr);
+	}
+	finalstr = ft_split2(finalstr, str, sep, size);
+	return (finalstr);
 }

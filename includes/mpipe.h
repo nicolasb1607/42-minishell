@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mpipe.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:53:59 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/28 11:07:40 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/02 11:41:10 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	mid_cmd(t_cmd *cmd, t_pipes *pipes, int i);
 void	last_cmd(t_cmd *cmd, t_pipes *pipes);
 int		is_builtin(t_tlist *lst);
 int	is_builtincmd(t_cmd *cmd);
-void	exec_builtin(t_tlist *builtin, t_dlist **denv);
+void	exec_builtin(t_tlist *builtin, t_dlist **denv, t_cmd **cmd);
 void	ft_pipe(t_cmd *cmd, t_pipes *data);
 char	*ft_strndup(char *str, int i);
 int		is_forkbuiltin(t_cmd *cmd);

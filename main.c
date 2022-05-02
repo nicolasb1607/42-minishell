@@ -50,6 +50,7 @@ int main(int ac, char **av, char **envp)
 	t_tlist *tlist;
 	// t_cmd *chead;
 	char *ret;
+	// t_cmd	*tmp;
 
 	(void)ac;
 	(void)av;
