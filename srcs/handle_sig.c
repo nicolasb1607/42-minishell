@@ -6,19 +6,19 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:22:54 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/08 13:21:26 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/03 10:39:27 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "handle_sig.h"
 
 
-void free_dlist(t_dlist *dlist)
+void free_dlist(t_dlist **dlist)
 {
 	t_dlist *curr;
 	t_dlist *tmp;
 
-	curr = dlist;
+	curr = *dlist;
 	while (curr)
 	{
 		tmp = curr->next;
