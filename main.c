@@ -48,13 +48,17 @@ void	handler_heredoc(int signum)
 int main(int ac, char **av, char **envp)
 {
 	t_tlist *tlist;
+	// t_cmd *chead;
 	char *ret;
+	// t_cmd	*tmp;
 
 	(void)ac;
 	(void)av;
+	// chead = NULL;
 	tlist = NULL;
 	g_mshell.env = NULL;
 	g_mshell.env = ft_dupenv(g_mshell.env, envp);
+	g_mshell.head_env = &g_mshell.env;
 
 	/* PROMPT MAIN */
 	while (1)
@@ -66,17 +70,20 @@ int main(int ac, char **av, char **envp)
 		if (ft_strlen(ret) != 0)
 		{
 			tlist = init_tlist(ret, tlist, &g_mshell);
+			//ft_printtoklst(tlist);
+			// printf("Number of commands : %d\n", count_command(tlist));
 			if (tlist)
 			{
 				if (parser(tlist))
 				{
 					if (count_command(tlist) == 1)
-						only1cmd(tlist, &g_mshell.env, g_mshell.cmd);
+						only1cmd(tlist, g_mshell.head_env, g_mshell.cmd);
 					else
-						init_ft(tlist, &g_mshell.env, g_mshell.cmd);
+						init_ft(tlist, g_mshell.head_env, g_mshell.cmd);
 					free_tlist(&tlist);
 					free_tcmd(&g_mshell.cmd);
 					g_mshell.cmd = NULL;
+
 				}
 				else
 					free_tlist(&tlist);

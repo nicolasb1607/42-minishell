@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/03 13:58:10 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/03 14:27:57 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					dup2(pipes.fd_out, STDOUT_FILENO);
 					dup2(pipes.fd_in, STDIN_FILENO);
 					exec_builtin(curr, dupenv, &chead);
-					exit(EXIT_SUCCESS);
+					ft_exit_builtin(0, tlst, &cmd);
 				}
 			}
 			else
@@ -128,7 +128,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				dup2(pipes.fd_out, STDOUT_FILENO);
 				dup2(pipes.fd_in, STDIN_FILENO);
 				if (execve((chead)->command, (chead)->options, dlist_to_tab(*dupenv)) != 0)
-					exit(errno);
+					ft_exit_builtin(errno, tlst, &cmd);
 			}
 		}
 		else
@@ -139,7 +139,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				dup2(pipes.fd_out, STDOUT_FILENO);
 				dup2(pipes.fd_in, STDIN_FILENO);
 				if(execve((chead)->bin, (chead)->options, dlist_to_tab(*dupenv)) != 0)
-					exit(errno);
+					ft_exit_builtin(errno, tlst, &cmd);
 			}
 		}
 		while(waitpid(pi, &status, 0) != -1)
