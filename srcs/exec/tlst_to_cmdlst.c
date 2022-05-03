@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:27 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/02 10:30:23 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/03 13:25:49 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,7 @@ void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 		make_heredoc(cmd);
 	}
 }
-
+		
 t_cmd	*tlst_to_cmd(t_tlist **tlst)
 {
 	char	*opt;

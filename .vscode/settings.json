@@ -1,7 +1,7 @@
 {
   "files.associations": {
-    "*.h": "c",
     "*.c": "c",
+    "*.h": "c",
     "echo.h": "c",
     "handle_sig.h": "c",
     "lexer.h": "c",
@@ -12,7 +12,8 @@
     "*.tcc": "c",
     "fstream": "c",
     "sstream": "c",
-    "cstdlib": "c"
+    "cstdlib": "c",
+    "cerrno": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "/usr/bin/g++",
