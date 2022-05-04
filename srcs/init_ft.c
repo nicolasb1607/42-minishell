@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/04 18:38:21 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/04 19:10:04 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,34 @@ char **ft_free_tab(char **tab)
 	return (NULL);
 }
 
+t_cmd	*make_commands(t_tlist *tlst, t_cmd **chead, t_dlist **dupenv, t_tlist *curr)
+{
+	t_cmd	*cmd;
+	char	**path;
+	
+	while (tlst)
+	{
+		curr = (tlst);
+		cmd = tlst_to_cmd(&tlst);
+		path = get_path_to_cmd(curr, dupenv);
+		if(update_bin(path, cmd, curr) == -1)
+		{
+			path = (ft_free_tab(path), free_tcmd(chead), free_tcmd(&cmd), NULL);
+			if (g_mshell.err_exit != 130)
+				g_mshell.err_exit = 127;
+			return (NULL);
+		}
+		path = ft_free_tab(path);
+		ft_clstadd_back(chead, cmd);
+		if (tlst)
+			(tlst) = (tlst)->next;
+	}
+	return (cmd);
+}
 
 void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 {
-	char **path;
+	// char **path;
 	t_cmd *cmd;
 	pid_t pi;
 	t_tlist *curr;
@@ -79,23 +103,26 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 	curr = tlst;
 	if (tlst->token->content)
 	{
-		while (tlst)
-		{
-			curr = tlst;
-			cmd = tlst_to_cmd(&tlst);
-			path = get_path_to_cmd(curr, dupenv);
-			if(update_bin(path, cmd, curr) == -1)
-			{
-				path = (ft_free_tab(path), free_tcmd(&chead), free_tcmd(&cmd), NULL);
-				if (g_mshell.err_exit != 130)
-					g_mshell.err_exit = 127;
-				return ;
-			}
-			path = ft_free_tab(path);
-			ft_clstadd_back(&chead, cmd);
-			if (tlst)
-				tlst = tlst->next;
-		}
+		// while (tlst)
+		// {
+		// 	curr = tlst;
+		// 	cmd = tlst_to_cmd(&tlst);
+		// 	path = get_path_to_cmd(curr, dupenv);
+		// 	if(update_bin(path, cmd, curr) == -1)
+		// 	{
+		// 		path = (ft_free_tab(path), free_tcmd(&chead), free_tcmd(&cmd), NULL);
+		// 		if (g_mshell.err_exit != 130)
+		// 			g_mshell.err_exit = 127;
+		// 		return ;
+		// 	}
+		// 	path = ft_free_tab(path);
+		// 	ft_clstadd_back(&chead, cmd);
+		// 	if (tlst)
+		// 		tlst = tlst->next;
+		// }
+		cmd = make_commands(tlst, &chead, dupenv, curr);
+		if (!cmd)
+			return ;
 		open_io(chead, &pipes);
 		// print_t_cmd(chead);
 		if (ft_strcmp(chead->command,"./minishell") == 0)
@@ -115,6 +142,9 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					dup2(pipes.fd_out, STDOUT_FILENO);
 					dup2(pipes.fd_in, STDIN_FILENO);
 					exec_builtin(curr, dupenv, &chead);
+					free_dlist(dupenv);
+					free_tcmd(&chead);
+					free_tlist(&tlst);
 					exit(errno);
 				}
 			}
