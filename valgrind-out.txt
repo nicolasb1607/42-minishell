@@ -315,7 +315,7 @@
 ==93245==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
 ==93245==    by 0x110D25: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
 ==93245==    by 0x110D8E: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==93245==    by 0x10F3CC: tlst_to_cmd (tlst_to_cmdlst.c:269)
+==93245==    by 0x10F3CC: tlst_to_cmd (tlst_to_cmdlst.c:269)z
 ==93245==    by 0x10E07B: only1cmd (init_ft.c:91)
 ==93245==    by 0x10965B: main (main.c:80)
 ==93245== 
@@ -339,4 +339,4 @@
 --93245-- used_suppression:     58 leak readline valgrind_readline_leaks_ignore.txt:2 suppressed: 200,634 bytes in 215 blocks
 --93245-- used_suppression:      1 leak add_history valgrind_readline_leaks_ignore.txt:8 suppressed: 4,016 bytes in 1 blocks
 ==93245== 
-==93245== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0
+==93245== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
