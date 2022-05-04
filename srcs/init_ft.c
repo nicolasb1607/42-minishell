@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/03 14:27:57 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/04 11:38:35 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,12 @@ int	is_forkbuiltin(t_cmd *cmd)
 	char	*currcont;
 
 	currcont = cmd->command;
-	if (ft_strncmp(currcont, "echo", 5) == 0)
+	if (ft_strncmp(currcont, "exit", 5) == 0)
+	{
+		free_dlist(g_mshell.head_env);
+		return(0);
+	}
+	else if (ft_strncmp(currcont, "echo", 5) == 0)
 		return (1);
 	else if (ft_strncmp(currcont, "env", 4) == 0)
 		return (1);
@@ -48,6 +53,7 @@ int	is_forkbuiltin(t_cmd *cmd)
 		return (1);
 	else if (ft_strncmp(currcont, "export", 7) == 0 && !cmd->options[1])
 		return (1);
+	
 	else
 		return (0);
 }
@@ -170,6 +176,7 @@ void	free_tcmd(t_cmd **cmd)
 		curr->options = ft_free_tab(curr->options);
 		curr->outfile = ft_free_tab(curr->outfile);
 		free(curr);
+		free_dlist(g_mshell.head_env);	
 		curr = next;
 	}
 	*cmd = NULL;

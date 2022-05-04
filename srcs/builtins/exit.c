@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/03 14:42:44 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/04 11:44:31 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void	ft_exit_builtin(int errnumb, t_tlist *tlst, t_cmd **cmd)
 {
+	(void) cmd;
 	free_tlist(&tlst);
-	free_tcmd(cmd);
-	free_dlist(&g_mshell.env);	
+	//free_tcmd(cmd);
+	free_dlist(g_mshell.head_env);	
 	exit(errnumb);
 }
 

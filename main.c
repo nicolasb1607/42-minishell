@@ -70,7 +70,7 @@ int main(int ac, char **av, char **envp)
 		if (ft_strlen(ret) != 0)
 		{
 			tlist = init_tlist(ret, tlist, &g_mshell);
-			//ft_printtoklst(tlist);
+			// ft_printtoklst(tlist);
 			// printf("Number of commands : %d\n", count_command(tlist));
 			if (tlist)
 			{

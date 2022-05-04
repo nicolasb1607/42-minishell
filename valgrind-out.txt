@@ -1,914 +1,342 @@
-==175963== Memcheck, a memory error detector
-==175963== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==175963== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
-==175963== Command: ./minishell
-==175963== Parent PID: 171182
-==175963== 
---175963-- 
---175963-- Valgrind options:
---175963--    --suppressions=valgrind_readline_leaks_ignore.txt
---175963--    --leak-check=full
---175963--    --show-leak-kinds=all
---175963--    --track-origins=yes
---175963--    --verbose
---175963--    --log-file=valgrind-out.txt
---175963-- Contents of /proc/version:
---175963--   Linux version 5.4.0-109-generic (buildd@ubuntu) (gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1)) #123-Ubuntu SMP Fri Apr 8 09:10:54 UTC 2022
---175963-- 
---175963-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-ssse3-avx
---175963-- Page sizes: currently 4096, max supported 4096
---175963-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
---175963-- Reading syms from /mnt/nfs/homes/nburat-d/Documents/minishell/minishell
---175963-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
---175963--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
---175963--   .. CRC mismatch (computed 0306b78c wanted 8d362b37)
---175963--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
---175963--   .. CRC mismatch (computed 0306b78c wanted 8d362b37)
---175963--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
---175963--   .. CRC is valid
---175963-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
---175963--    object doesn't have a symbol table
---175963--    object doesn't have a dynamic symbol table
---175963-- Scheduler: using generic scheduler lock implementation.
---175963-- Reading suppressions file: valgrind_readline_leaks_ignore.txt
---175963-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
-==175963== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-175963-by-nburat-d-on-???
-==175963== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-175963-by-nburat-d-on-???
-==175963== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-175963-by-nburat-d-on-???
-==175963== 
-==175963== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==175963== don't want to do, unless you know exactly what you're doing,
-==175963== or are doing some strange experiment):
-==175963==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=175963 ...command...
-==175963== 
-==175963== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==175963==   /path/to/gdb ./minishell
-==175963== and then give GDB the following command
-==175963==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=175963
-==175963== --pid is optional if only one valgrind process is running
-==175963== 
---175963-- REDIR: 0x4022e10 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
---175963-- REDIR: 0x4022be0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
---175963-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
---175963--    object doesn't have a symbol table
---175963-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
---175963--    object doesn't have a symbol table
-==175963== WARNING: new redirection conflicts with existing -- ignoring it
---175963--     old: 0x04022e10 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
---175963--     new: 0x04022e10 (strlen              ) R-> (2007.0) 0x0483f060 strlen
---175963-- REDIR: 0x401f5f0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
---175963-- REDIR: 0x4023370 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
---175963-- Reading syms from /usr/lib/x86_64-linux-gnu/libreadline.so.8.0
---175963--    object doesn't have a symbol table
---175963-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
---175963--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
---175963--   .. CRC mismatch (computed ef41b1a0 wanted f854b801)
---175963--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
---175963--   .. CRC mismatch (computed ef41b1a0 wanted f854b801)
---175963--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
---175963--   .. CRC is valid
---175963-- Reading syms from /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2
---175963--    object doesn't have a symbol table
---175963-- REDIR: 0x49544b0 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x49537b0 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x49547e0 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x49530d0 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4953810 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4955c80 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4970d10 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4970850 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4954610 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4954440 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4953740 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4953180 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4954570 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4970810 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x49536a0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4953260 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4954830 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4953200 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4954980 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4971f80 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4970890 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4953850 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4953130 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4953660 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x495cbd0 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4954880 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4954400 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4970960 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4953b10 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4954780 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4954720 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4955cc0 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x49548d0 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x49536e0 (libc.so.6:strncat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x49e1880 (libc.so.6:__memcpy_chk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x4954320 (libc.so.6:strstr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---175963-- REDIR: 0x49658e0 (libc.so.6:__strrchr_sse2) redirected to 0x483ea70 (__strrchr_sse2)
---175963-- REDIR: 0x494e110 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
---175963-- REDIR: 0x494e700 (libc.so.6:free) redirected to 0x483c9d0 (free)
---175963-- REDIR: 0x4965be0 (libc.so.6:__strlen_sse2) redirected to 0x483efa0 (__strlen_sse2)
---175963-- REDIR: 0x496ab20 (libc.so.6:__strcpy_sse2_unaligned) redirected to 0x483f090 (strcpy)
---175963-- REDIR: 0x49656d0 (libc.so.6:__strchrnul_sse2) redirected to 0x4843540 (strchrnul)
---175963-- REDIR: 0x48fa520 (libc.so.6:setenv) redirected to 0x4844480 (setenv)
---175963-- REDIR: 0x49654a0 (libc.so.6:__strchr_sse2) redirected to 0x483eb90 (__strchr_sse2)
---175963-- REDIR: 0x4a32bd0 (libc.so.6:__strncmp_sse42) redirected to 0x483f7c0 (__strncmp_sse42)
---175963-- REDIR: 0x494eeb0 (libc.so.6:realloc) redirected to 0x483df30 (realloc)
---175963-- REDIR: 0x496faf0 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4840100 (memcpy@GLIBC_2.2.5)
---175963-- REDIR: 0x496fad0 (libc.so.6:__mempcpy_sse2_unaligned) redirected to 0x4843660 (mempcpy)
---175963-- REDIR: 0x495e3d0 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x483fed0 (strcmp)
---175963-- REDIR: 0x494fb40 (libc.so.6:calloc) redirected to 0x483dce0 (calloc)
---175963-- REDIR: 0x4965d80 (libc.so.6:__strnlen_sse2) redirected to 0x483eee0 (strnlen)
---175963-- REDIR: 0x4953fd0 (libc.so.6:__GI_strstr) redirected to 0x4843ca0 (__strstr_sse2)
---175963-- REDIR: 0x496fae0 (libc.so.6:__memcpy_chk_sse2_unaligned) redirected to 0x4843b10 (__memcpy_chk)
---175963-- REDIR: 0x496b150 (libc.so.6:__strncpy_sse2_unaligned) redirected to 0x483f560 (__strncpy_sse2_unaligned)
---175963-- REDIR: 0x495fee0 (libc.so.6:__memchr_sse2) redirected to 0x4840050 (memchr)
---175963-- REDIR: 0x496c160 (libc.so.6:__stpcpy_sse2_unaligned) redirected to 0x4842570 (__stpcpy_sse2_unaligned)
---175963-- REDIR: 0x4a38fb0 (libc.so.6:__strcasecmp_avx) redirected to 0x483f830 (strcasecmp)
---175963-- REDIR: 0x4a3a630 (libc.so.6:__strncasecmp_avx) redirected to 0x483f910 (strncasecmp)
---175963-- REDIR: 0x496ff20 (libc.so.6:__memset_sse2_unaligned) redirected to 0x48428e0 (memset)
---175963-- REDIR: 0x4a41460 (libc.so.6:__memcmp_sse4_1) redirected to 0x4842150 (__memcmp_sse4_1)
-==175963== Invalid read of size 1
-==175963==    at 0x10B8E3: make_string_b (lexer.c:52)
-==175963==    by 0x10BA6E: make_string (lexer.c:86)
-==175963==    by 0x10BCFB: make_token (lexer.c:135)
-==175963==    by 0x10BDFF: init_tlist (init_lexer.c:43)
-==175963==    by 0x10960C: main (main.c:72)
-==175963==  Address 0x4b1869b is 0 bytes after a block of size 11 alloc'd
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x48A000C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==175963==    by 0x48792AB: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==175963==    by 0x487A504: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==175963==    by 0x10975D: ft_prompt (prompt.c:49)
-==175963==    by 0x1095DD: main (main.c:69)
-==175963== 
-==175963== Invalid read of size 1
-==175963==    at 0x10FCE3: ft_strncmp (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EAF3: get_path_to_cmd (tlst_to_cmdlst.c:60)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad8040 is 0 bytes inside a block of size 14 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== Invalid read of size 1
-==175963==    at 0x10FD23: ft_strncmp (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EAF3: get_path_to_cmd (tlst_to_cmdlst.c:60)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad8040 is 0 bytes inside a block of size 14 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== Invalid read of size 1
-==175963==    at 0x10FD03: ft_strncmp (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EAF3: get_path_to_cmd (tlst_to_cmdlst.c:60)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad8a20 is 0 bytes inside a block of size 11 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== Invalid read of size 1
-==175963==    at 0x10FC01: ft_strlen (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EB06: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad9780 is 0 bytes inside a block of size 160 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== Invalid read of size 1
-==175963==    at 0x10FC01: ft_strlen (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10FE61: ft_substr (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EB1D: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad9780 is 0 bytes inside a block of size 160 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== Invalid read of size 1
-==175963==    at 0x10FC01: ft_strlen (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10FE8F: ft_substr (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EB1D: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad9785 is 5 bytes inside a block of size 160 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== Invalid read of size 1
-==175963==    at 0x10FC01: ft_strlen (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10FEA7: ft_substr (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EB1D: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad9785 is 5 bytes inside a block of size 160 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== Invalid read of size 1
-==175963==    at 0x10FF05: ft_substr (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EB1D: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad9785 is 5 bytes inside a block of size 160 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== Invalid read of size 1
-==175963==    at 0x10FEE3: ft_substr (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EB1D: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad9785 is 5 bytes inside a block of size 160 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175975== Conditional jump or move depends on uninitialised value(s)
-==175975==    at 0x10E503: free_tcmd (init_ft.c:160)
-==175975==    by 0x10F69A: ft_exit_builtin (exit.c:18)
-==175975==    by 0x10E24E: only1cmd (init_ft.c:117)
-==175975==    by 0x10965B: main (main.c:80)
-==175975==  Uninitialised value was created by a stack allocation
-==175975==    at 0x10E41D: free_tcmd (init_ft.c:154)
-==175975== 
-==175975== Use of uninitialised value of size 8
-==175975==    at 0x10E441: free_tcmd (init_ft.c:162)
-==175975==    by 0x10F69A: ft_exit_builtin (exit.c:18)
-==175975==    by 0x10E24E: only1cmd (init_ft.c:117)
-==175975==    by 0x10965B: main (main.c:80)
-==175975==  Uninitialised value was created by a stack allocation
-==175975==    at 0x10E41D: free_tcmd (init_ft.c:154)
-==175975== 
-==175975== Invalid read of size 8
-==175975==    at 0x10E441: free_tcmd (init_ft.c:162)
-==175975==    by 0x10F69A: ft_exit_builtin (exit.c:18)
-==175975==    by 0x10E24E: only1cmd (init_ft.c:117)
-==175975==    by 0x10965B: main (main.c:80)
-==175975==  Address 0x69956425b199e858 is not stack'd, malloc'd or (recently) free'd
-==175975== 
-==175975== 
-==175975== Process terminating with default action of signal 11 (SIGSEGV)
-==175975==  General Protection Fault
-==175975==    at 0x10E441: free_tcmd (init_ft.c:162)
-==175975==    by 0x10F69A: ft_exit_builtin (exit.c:18)
-==175975==    by 0x10E24E: only1cmd (init_ft.c:117)
-==175975==    by 0x10965B: main (main.c:80)
-==175975== 
-==175975== HEAP SUMMARY:
-==175975==     in use at exit: 206,323 bytes in 290 blocks
-==175975==   total heap usage: 612 allocs, 322 frees, 231,397 bytes allocated
-==175975== 
-==175975== Searching for pointers to 290 not-freed blocks
-==175975== Checked 209,520 bytes
-==175975== 
-==175975== 5 bytes in 1 blocks are indirectly lost in loss record 1 of 69
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x1102DE: ft_strndup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x11042C: ft_split2 (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x110515: ft_split (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x10DA6E: split_first_tok_arg (echo.c:39)
-==175975==    by 0x10DC53: ft_echo (echo.c:91)
-==175975==    by 0x10B3A0: exec_builtin (multipipe.c:57)
-==175975==    by 0x10E233: only1cmd (init_ft.c:116)
-==175975==    by 0x10965B: main (main.c:80)
-==175975== 
-==175975== 11 bytes in 2 blocks are still reachable in loss record 6 of 69
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x10C781: expandtok (expand_p2.c:62)
-==175975==    by 0x10CF97: ft_tlstiter (ft_tlstiter.c:25)
-==175975==    by 0x10BE57: init_tlist (init_lexer.c:49)
-==175975==    by 0x10960C: main (main.c:72)
-==175975== 
-==175975== 11 bytes in 2 blocks are definitely lost in loss record 7 of 69
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x10B8AC: make_string_b (lexer.c:49)
-==175975==    by 0x10BA6E: make_string (lexer.c:86)
-==175975==    by 0x10BCFB: make_token (lexer.c:135)
-==175975==    by 0x10BDFF: init_tlist (init_lexer.c:43)
-==175975==    by 0x10960C: main (main.c:72)
-==175975== 
-==175975== 21 (16 direct, 5 indirect) bytes in 1 blocks are definitely lost in loss record 14 of 69
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x1104C5: ft_split (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x10DA6E: split_first_tok_arg (echo.c:39)
-==175975==    by 0x10DC53: ft_echo (echo.c:91)
-==175975==    by 0x10B3A0: exec_builtin (multipipe.c:57)
-==175975==    by 0x10E233: only1cmd (init_ft.c:116)
-==175975==    by 0x10965B: main (main.c:80)
-==175975== 
-==175975== 48 bytes in 2 blocks are still reachable in loss record 23 of 69
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x10C9EB: ft_tlstnew (ft_tlstnew.c:19)
-==175975==    by 0x10BE1B: init_tlist (init_lexer.c:46)
-==175975==    by 0x10960C: main (main.c:72)
-==175975== 
-==175975== 64 bytes in 2 blocks are still reachable in loss record 24 of 69
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x10C082: init_token (lexer_utils.c:71)
-==175975==    by 0x10BC0E: make_token (lexer.c:124)
-==175975==    by 0x10BDFF: init_tlist (init_lexer.c:43)
-==175975==    by 0x10960C: main (main.c:72)
-==175975== 
-==175975== 1,464 bytes in 61 blocks are still reachable in loss record 40 of 69
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x110935: ft_dlstnew (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x109844: ft_dupenv (env.c:26)
-==175975==    by 0x10959C: main (main.c:60)
-==175975== 
-==175975== LEAK SUMMARY:
-==175975==    definitely lost: 27 bytes in 3 blocks
-==175975==    indirectly lost: 5 bytes in 1 blocks
-==175975==      possibly lost: 0 bytes in 0 blocks
-==175975==    still reachable: 1,587 bytes in 67 blocks
-==175975==         suppressed: 204,704 bytes in 219 blocks
-==175975== 
-==175975== ERROR SUMMARY: 1019 errors from 15 contexts (suppressed: 0 from 0)
-==175975== 
-==175975== 1 errors in context 1 of 15:
-==175975== Invalid read of size 8
-==175975==    at 0x10E441: free_tcmd (init_ft.c:162)
-==175975==    by 0x10F69A: ft_exit_builtin (exit.c:18)
-==175975==    by 0x10E24E: only1cmd (init_ft.c:117)
-==175975==    by 0x10965B: main (main.c:80)
-==175975==  Address 0x69956425b199e858 is not stack'd, malloc'd or (recently) free'd
-==175975== 
-==175975== 
-==175975== 1 errors in context 2 of 15:
-==175975== Use of uninitialised value of size 8
-==175975==    at 0x10E441: free_tcmd (init_ft.c:162)
-==175975==    by 0x10F69A: ft_exit_builtin (exit.c:18)
-==175975==    by 0x10E24E: only1cmd (init_ft.c:117)
-==175975==    by 0x10965B: main (main.c:80)
-==175975==  Uninitialised value was created by a stack allocation
-==175975==    at 0x10E41D: free_tcmd (init_ft.c:154)
-==175975== 
-==175975== 
-==175975== 1 errors in context 3 of 15:
-==175975== Conditional jump or move depends on uninitialised value(s)
-==175975==    at 0x10E503: free_tcmd (init_ft.c:160)
-==175975==    by 0x10F69A: ft_exit_builtin (exit.c:18)
-==175975==    by 0x10E24E: only1cmd (init_ft.c:117)
-==175975==    by 0x10965B: main (main.c:80)
-==175975==  Uninitialised value was created by a stack allocation
-==175975==    at 0x10E41D: free_tcmd (init_ft.c:154)
-==175975== 
-==175975== 
-==175975== 1 errors in context 4 of 15:
-==175975== Invalid read of size 1
-==175975==    at 0x10B8E3: make_string_b (lexer.c:52)
-==175975==    by 0x10BA6E: make_string (lexer.c:86)
-==175975==    by 0x10BCFB: make_token (lexer.c:135)
-==175975==    by 0x10BDFF: init_tlist (init_lexer.c:43)
-==175975==    by 0x10960C: main (main.c:72)
-==175975==  Address 0x4b1869b is 0 bytes after a block of size 11 alloc'd
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x48A000C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==175975==    by 0x48792AB: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==175975==    by 0x487A504: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==175975==    by 0x10975D: ft_prompt (prompt.c:49)
-==175975==    by 0x1095DD: main (main.c:69)
-==175975== 
-==175975== 
-==175975== 7 errors in context 5 of 15:
-==175975== Invalid read of size 1
-==175975==    at 0x10FD03: ft_strncmp (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x10EAF3: get_path_to_cmd (tlst_to_cmdlst.c:60)
-==175975==    by 0x10E060: only1cmd (init_ft.c:86)
-==175975==    by 0x10965B: main (main.c:80)
-==175975==  Address 0x4ad8a20 is 0 bytes inside a block of size 11 free'd
-==175975==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x109854: ft_dupenv (env.c:27)
-==175975==    by 0x10959C: main (main.c:60)
-==175975==  Block was alloc'd at
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x109834: ft_dupenv (env.c:25)
-==175975==    by 0x10959C: main (main.c:60)
-==175975== 
-==175975== 
-==175975== 31 errors in context 6 of 15:
-==175975== Invalid read of size 1
-==175975==    at 0x10FD23: ft_strncmp (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x10EAF3: get_path_to_cmd (tlst_to_cmdlst.c:60)
-==175975==    by 0x10E060: only1cmd (init_ft.c:86)
-==175975==    by 0x10965B: main (main.c:80)
-==175975==  Address 0x4ad8040 is 0 bytes inside a block of size 14 free'd
-==175975==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x109854: ft_dupenv (env.c:27)
-==175975==    by 0x10959C: main (main.c:60)
-==175975==  Block was alloc'd at
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x109834: ft_dupenv (env.c:25)
-==175975==    by 0x10959C: main (main.c:60)
-==175975== 
-==175975== 
-==175975== 37 errors in context 7 of 15:
-==175975== Invalid read of size 1
-==175975==    at 0x10FCE3: ft_strncmp (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x10EAF3: get_path_to_cmd (tlst_to_cmdlst.c:60)
-==175975==    by 0x10E060: only1cmd (init_ft.c:86)
-==175975==    by 0x10965B: main (main.c:80)
-==175975==  Address 0x4ad8040 is 0 bytes inside a block of size 14 free'd
-==175975==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x109854: ft_dupenv (env.c:27)
-==175975==    by 0x10959C: main (main.c:60)
-==175975==  Block was alloc'd at
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x109834: ft_dupenv (env.c:25)
-==175975==    by 0x10959C: main (main.c:60)
-==175975== 
-==175975== 
-==175975== 154 errors in context 8 of 15:
-==175975== Invalid read of size 1
-==175975==    at 0x10FEE3: ft_substr (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x10EB1D: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175975==    by 0x10E060: only1cmd (init_ft.c:86)
-==175975==    by 0x10965B: main (main.c:80)
-==175975==  Address 0x4ad9785 is 5 bytes inside a block of size 160 free'd
-==175975==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x109854: ft_dupenv (env.c:27)
-==175975==    by 0x10959C: main (main.c:60)
-==175975==  Block was alloc'd at
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x109834: ft_dupenv (env.c:25)
-==175975==    by 0x10959C: main (main.c:60)
-==175975== 
-==175975== 
-==175975== 154 errors in context 9 of 15:
-==175975== Invalid read of size 1
-==175975==    at 0x10FF05: ft_substr (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x10EB1D: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175975==    by 0x10E060: only1cmd (init_ft.c:86)
-==175975==    by 0x10965B: main (main.c:80)
-==175975==  Address 0x4ad9785 is 5 bytes inside a block of size 160 free'd
-==175975==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x109854: ft_dupenv (env.c:27)
-==175975==    by 0x10959C: main (main.c:60)
-==175975==  Block was alloc'd at
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x109834: ft_dupenv (env.c:25)
-==175975==    by 0x10959C: main (main.c:60)
-==175975== 
-==175975== 
-==175975== 155 errors in context 10 of 15:
-==175975== Invalid read of size 1
-==175975==    at 0x10FC01: ft_strlen (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x10FEA7: ft_substr (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x10EB1D: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175975==    by 0x10E060: only1cmd (init_ft.c:86)
-==175975==    by 0x10965B: main (main.c:80)
-==175975==  Address 0x4ad9785 is 5 bytes inside a block of size 160 free'd
-==175975==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x109854: ft_dupenv (env.c:27)
-==175975==    by 0x10959C: main (main.c:60)
-==175975==  Block was alloc'd at
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x109834: ft_dupenv (env.c:25)
-==175975==    by 0x10959C: main (main.c:60)
-==175975== 
-==175975== 
-==175975== 155 errors in context 11 of 15:
-==175975== Invalid read of size 1
-==175975==    at 0x10FC01: ft_strlen (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x10FE8F: ft_substr (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x10EB1D: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175975==    by 0x10E060: only1cmd (init_ft.c:86)
-==175975==    by 0x10965B: main (main.c:80)
-==175975==  Address 0x4ad9785 is 5 bytes inside a block of size 160 free'd
-==175975==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x109854: ft_dupenv (env.c:27)
-==175975==    by 0x10959C: main (main.c:60)
-==175975==  Block was alloc'd at
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x109834: ft_dupenv (env.c:25)
-==175975==    by 0x10959C: main (main.c:60)
-==175975== 
-==175975== 
-==175975== 160 errors in context 12 of 15:
-==175975== Invalid read of size 1
-==175975==    at 0x10FC01: ft_strlen (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x10FE61: ft_substr (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x10EB1D: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175975==    by 0x10E060: only1cmd (init_ft.c:86)
-==175975==    by 0x10965B: main (main.c:80)
-==175975==  Address 0x4ad9780 is 0 bytes inside a block of size 160 free'd
-==175975==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x109854: ft_dupenv (env.c:27)
-==175975==    by 0x10959C: main (main.c:60)
-==175975==  Block was alloc'd at
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x109834: ft_dupenv (env.c:25)
-==175975==    by 0x10959C: main (main.c:60)
-==175975== 
-==175975== 
-==175975== 160 errors in context 13 of 15:
-==175975== Invalid read of size 1
-==175975==    at 0x10FC01: ft_strlen (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x10EB06: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175975==    by 0x10E060: only1cmd (init_ft.c:86)
-==175975==    by 0x10965B: main (main.c:80)
-==175975==  Address 0x4ad9780 is 0 bytes inside a block of size 160 free'd
-==175975==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x109854: ft_dupenv (env.c:27)
-==175975==    by 0x10959C: main (main.c:60)
-==175975==  Block was alloc'd at
-==175975==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175975==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175975==    by 0x109834: ft_dupenv (env.c:25)
-==175975==    by 0x10959C: main (main.c:60)
-==175975== 
---175975-- 
---175975-- used_suppression:     58 leak readline valgrind_readline_leaks_ignore.txt:2 suppressed: 200,641 bytes in 215 blocks
---175975-- used_suppression:      4 leak add_history valgrind_readline_leaks_ignore.txt:8 suppressed: 4,063 bytes in 4 blocks
-==175975== 
-==175975== ERROR SUMMARY: 1019 errors from 15 contexts (suppressed: 0 from 0)
-==175963== Invalid free() / delete / delete[] / realloc()
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10F64C: free_dlist (handle_sig.c:25)
-==175963==    by 0x10F7D4: ft_exit (exit.c:46)
-==175963==    by 0x10B4AE: exec_builtin (multipipe.c:67)
-==175963==    by 0x10E273: only1cmd (init_ft.c:121)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad8040 is 0 bytes inside a block of size 14 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== Conditional jump or move depends on uninitialised value(s)
-==175963==    at 0x10E503: free_tcmd (init_ft.c:160)
-==175963==    by 0x10F7E0: ft_exit (exit.c:47)
-==175963==    by 0x10B4AE: exec_builtin (multipipe.c:67)
-==175963==    by 0x10E273: only1cmd (init_ft.c:121)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Uninitialised value was created by a stack allocation
-==175963==    at 0x10E41D: free_tcmd (init_ft.c:154)
-==175963== 
-==175963== 
-==175963== HEAP SUMMARY:
-==175963==     in use at exit: 204,877 bytes in 229 blocks
-==175963==   total heap usage: 658 allocs, 490 frees, 232,228 bytes allocated
-==175963== 
-==175963== Searching for pointers to 229 not-freed blocks
-==175963== Checked 207,968 bytes
-==175963== 
-==175963== 5 bytes in 1 blocks are indirectly lost in loss record 2 of 69
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10F15D: tlst_to_cmd (tlst_to_cmdlst.c:229)
-==175963==    by 0x10E040: only1cmd (init_ft.c:85)
-==175963==    by 0x10965B: main (main.c:80)
-==175963== 
-==175963== 11 bytes in 1 blocks are indirectly lost in loss record 5 of 69
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x110CDC: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x110D27: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10F31E: tlst_to_cmd (tlst_to_cmdlst.c:262)
-==175963==    by 0x10E040: only1cmd (init_ft.c:85)
-==175963==    by 0x10965B: main (main.c:80)
-==175963== 
-==175963== 11 bytes in 2 blocks are indirectly lost in loss record 6 of 69
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10D729: classicsplit (ft_split_cust_2.c:64)
-==175963==    by 0x10D4C3: ft_cut_cu (ft_split_custom.c:90)
-==175963==    by 0x10D6BB: ft_split_custom (ft_split_cust_2.c:55)
-==175963==    by 0x10F2F2: tlst_to_cmd (tlst_to_cmdlst.c:259)
-==175963==    by 0x10E040: only1cmd (init_ft.c:85)
-==175963==    by 0x10965B: main (main.c:80)
-==175963== 
-==175963== 12 bytes in 1 blocks are indirectly lost in loss record 8 of 69
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x110CDC: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x110D27: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10F35C: tlst_to_cmd (tlst_to_cmdlst.c:269)
-==175963==    by 0x10E040: only1cmd (init_ft.c:85)
-==175963==    by 0x10965B: main (main.c:80)
-==175963== 
-==175963== 16 bytes in 1 blocks are indirectly lost in loss record 13 of 69
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x110CBE: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x110D27: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10F31E: tlst_to_cmd (tlst_to_cmdlst.c:262)
-==175963==    by 0x10E040: only1cmd (init_ft.c:85)
-==175963==    by 0x10965B: main (main.c:80)
-==175963== 
-==175963== 16 bytes in 1 blocks are indirectly lost in loss record 14 of 69
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x110CBE: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x110D27: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10F35C: tlst_to_cmd (tlst_to_cmdlst.c:269)
-==175963==    by 0x10E040: only1cmd (init_ft.c:85)
-==175963==    by 0x10965B: main (main.c:80)
-==175963== 
-==175963== 16 bytes in 3 blocks are definitely lost in loss record 15 of 69
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10B8AC: make_string_b (lexer.c:49)
-==175963==    by 0x10BA6E: make_string (lexer.c:86)
-==175963==    by 0x10BCFB: make_token (lexer.c:135)
-==175963==    by 0x10BDFF: init_tlist (init_lexer.c:43)
-==175963==    by 0x10960C: main (main.c:72)
-==175963== 
-==175963== 24 bytes in 1 blocks are indirectly lost in loss record 20 of 69
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10D692: ft_split_custom (ft_split_cust_2.c:52)
-==175963==    by 0x10F2F2: tlst_to_cmd (tlst_to_cmdlst.c:259)
-==175963==    by 0x10E040: only1cmd (init_ft.c:85)
-==175963==    by 0x10965B: main (main.c:80)
-==175963== 
-==175963== 199 (104 direct, 95 indirect) bytes in 1 blocks are definitely lost in loss record 29 of 69
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10F9B5: ft_calloc (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10F3A3: ft_clstnew (exec_utils.c:19)
-==175963==    by 0x10F116: tlst_to_cmd (tlst_to_cmdlst.c:225)
-==175963==    by 0x10E040: only1cmd (init_ft.c:85)
-==175963==    by 0x10965B: main (main.c:80)
-==175963== 
-==175963== LEAK SUMMARY:
-==175963==    definitely lost: 120 bytes in 4 blocks
-==175963==    indirectly lost: 95 bytes in 8 blocks
-==175963==      possibly lost: 0 bytes in 0 blocks
-==175963==    still reachable: 0 bytes in 0 blocks
-==175963==         suppressed: 204,662 bytes in 217 blocks
-==175963== 
-==175963== ERROR SUMMARY: 2092 errors from 14 contexts (suppressed: 1 from 1)
-==175963== 
-==175963== 1 errors in context 1 of 14:
-==175963== Conditional jump or move depends on uninitialised value(s)
-==175963==    at 0x10E503: free_tcmd (init_ft.c:160)
-==175963==    by 0x10F7E0: ft_exit (exit.c:47)
-==175963==    by 0x10B4AE: exec_builtin (multipipe.c:67)
-==175963==    by 0x10E273: only1cmd (init_ft.c:121)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Uninitialised value was created by a stack allocation
-==175963==    at 0x10E41D: free_tcmd (init_ft.c:154)
-==175963== 
-==175963== 
-==175963== 2 errors in context 2 of 14:
-==175963== Invalid read of size 1
-==175963==    at 0x10B8E3: make_string_b (lexer.c:52)
-==175963==    by 0x10BA6E: make_string (lexer.c:86)
-==175963==    by 0x10BCFB: make_token (lexer.c:135)
-==175963==    by 0x10BDFF: init_tlist (init_lexer.c:43)
-==175963==    by 0x10960C: main (main.c:72)
-==175963==  Address 0x4b1869b is 0 bytes after a block of size 11 alloc'd
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x48A000C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==175963==    by 0x48792AB: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==175963==    by 0x487A504: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==175963==    by 0x10975D: ft_prompt (prompt.c:49)
-==175963==    by 0x1095DD: main (main.c:69)
-==175963== 
-==175963== 
-==175963== 14 errors in context 3 of 14:
-==175963== Invalid read of size 1
-==175963==    at 0x10FD03: ft_strncmp (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EAF3: get_path_to_cmd (tlst_to_cmdlst.c:60)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad8a20 is 0 bytes inside a block of size 11 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== 
-==175963== 61 errors in context 4 of 14:
-==175963== Invalid free() / delete / delete[] / realloc()
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10F64C: free_dlist (handle_sig.c:25)
-==175963==    by 0x10F7D4: ft_exit (exit.c:46)
-==175963==    by 0x10B4AE: exec_builtin (multipipe.c:67)
-==175963==    by 0x10E273: only1cmd (init_ft.c:121)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad8040 is 0 bytes inside a block of size 14 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== 
-==175963== 62 errors in context 5 of 14:
-==175963== Invalid read of size 1
-==175963==    at 0x10FD23: ft_strncmp (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EAF3: get_path_to_cmd (tlst_to_cmdlst.c:60)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad8040 is 0 bytes inside a block of size 14 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== 
-==175963== 74 errors in context 6 of 14:
-==175963== Invalid read of size 1
-==175963==    at 0x10FCE3: ft_strncmp (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EAF3: get_path_to_cmd (tlst_to_cmdlst.c:60)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad8040 is 0 bytes inside a block of size 14 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== 
-==175963== 308 errors in context 7 of 14:
-==175963== Invalid read of size 1
-==175963==    at 0x10FEE3: ft_substr (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EB1D: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad9785 is 5 bytes inside a block of size 160 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== 
-==175963== 308 errors in context 8 of 14:
-==175963== Invalid read of size 1
-==175963==    at 0x10FF05: ft_substr (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EB1D: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad9785 is 5 bytes inside a block of size 160 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== 
-==175963== 310 errors in context 9 of 14:
-==175963== Invalid read of size 1
-==175963==    at 0x10FC01: ft_strlen (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10FEA7: ft_substr (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EB1D: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad9785 is 5 bytes inside a block of size 160 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== 
-==175963== 310 errors in context 10 of 14:
-==175963== Invalid read of size 1
-==175963==    at 0x10FC01: ft_strlen (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10FE8F: ft_substr (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EB1D: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad9785 is 5 bytes inside a block of size 160 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== 
-==175963== 320 errors in context 11 of 14:
-==175963== Invalid read of size 1
-==175963==    at 0x10FC01: ft_strlen (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10FE61: ft_substr (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EB1D: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad9780 is 0 bytes inside a block of size 160 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
-==175963== 
-==175963== 320 errors in context 12 of 14:
-==175963== Invalid read of size 1
-==175963==    at 0x10FC01: ft_strlen (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x10EB06: get_path_to_cmd (tlst_to_cmdlst.c:62)
-==175963==    by 0x10E060: only1cmd (init_ft.c:86)
-==175963==    by 0x10965B: main (main.c:80)
-==175963==  Address 0x4ad9780 is 0 bytes inside a block of size 160 free'd
-==175963==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x109854: ft_dupenv (env.c:27)
-==175963==    by 0x10959C: main (main.c:60)
-==175963==  Block was alloc'd at
-==175963==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==175963==    by 0x10FAEA: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
-==175963==    by 0x109834: ft_dupenv (env.c:25)
-==175963==    by 0x10959C: main (main.c:60)
-==175963== 
---175963-- 
---175963-- used_suppression:     59 leak readline valgrind_readline_leaks_ignore.txt:2 suppressed: 200,646 bytes in 216 blocks
---175963-- used_suppression:      1 leak add_history valgrind_readline_leaks_ignore.txt:8 suppressed: 4,016 bytes in 1 blocks
-==175963== 
-==175963== ERROR SUMMARY: 2092 errors from 14 contexts (suppressed: 1 from 1)
+==93245== Memcheck, a memory error detector
+==93245== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==93245== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==93245== Command: ./minishell
+==93245== Parent PID: 87147
+==93245== 
+--93245-- 
+--93245-- Valgrind options:
+--93245--    --suppressions=valgrind_readline_leaks_ignore.txt
+--93245--    --leak-check=full
+--93245--    --show-leak-kinds=all
+--93245--    --track-origins=yes
+--93245--    --verbose
+--93245--    --log-file=valgrind-out.txt
+--93245-- Contents of /proc/version:
+--93245--   Linux version 5.4.0-109-generic (buildd@ubuntu) (gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1)) #123-Ubuntu SMP Fri Apr 8 09:10:54 UTC 2022
+--93245-- 
+--93245-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-ssse3-avx
+--93245-- Page sizes: currently 4096, max supported 4096
+--93245-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
+--93245-- Reading syms from /mnt/nfs/homes/nburat-d/Documents/minishell/minishell
+--93245-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
+--93245--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
+--93245--   .. CRC mismatch (computed 0306b78c wanted 8d362b37)
+--93245--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
+--93245--   .. CRC mismatch (computed 0306b78c wanted 8d362b37)
+--93245--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
+--93245--   .. CRC is valid
+--93245-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
+--93245--    object doesn't have a symbol table
+--93245--    object doesn't have a dynamic symbol table
+--93245-- Scheduler: using generic scheduler lock implementation.
+--93245-- Reading suppressions file: valgrind_readline_leaks_ignore.txt
+--93245-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
+==93245== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-93245-by-nburat-d-on-???
+==93245== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-93245-by-nburat-d-on-???
+==93245== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-93245-by-nburat-d-on-???
+==93245== 
+==93245== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==93245== don't want to do, unless you know exactly what you're doing,
+==93245== or are doing some strange experiment):
+==93245==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=93245 ...command...
+==93245== 
+==93245== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==93245==   /path/to/gdb ./minishell
+==93245== and then give GDB the following command
+==93245==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=93245
+==93245== --pid is optional if only one valgrind process is running
+==93245== 
+--93245-- REDIR: 0x4022e10 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
+--93245-- REDIR: 0x4022be0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
+--93245-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
+--93245--    object doesn't have a symbol table
+--93245-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
+--93245--    object doesn't have a symbol table
+==93245== WARNING: new redirection conflicts with existing -- ignoring it
+--93245--     old: 0x04022e10 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
+--93245--     new: 0x04022e10 (strlen              ) R-> (2007.0) 0x0483f060 strlen
+--93245-- REDIR: 0x401f5f0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
+--93245-- REDIR: 0x4023370 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
+--93245-- Reading syms from /usr/lib/x86_64-linux-gnu/libreadline.so.8.0
+--93245--    object doesn't have a symbol table
+--93245-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
+--93245--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
+--93245--   .. CRC mismatch (computed ef41b1a0 wanted f854b801)
+--93245--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
+--93245--   .. CRC mismatch (computed ef41b1a0 wanted f854b801)
+--93245--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
+--93245--   .. CRC is valid
+--93245-- Reading syms from /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2
+--93245--    object doesn't have a symbol table
+--93245-- REDIR: 0x49544b0 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x49537b0 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x49547e0 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x49530d0 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4953810 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4955c80 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4970d10 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4970850 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4954610 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4954440 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4953740 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4953180 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4954570 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4970810 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x49536a0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4953260 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4954830 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4953200 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4954980 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4971f80 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4970890 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4953850 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4953130 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4953660 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x495cbd0 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4954880 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4954400 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4970960 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4953b10 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4954780 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4954720 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4955cc0 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x49548d0 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x49536e0 (libc.so.6:strncat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x49e1880 (libc.so.6:__memcpy_chk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x4954320 (libc.so.6:strstr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--93245-- REDIR: 0x49658e0 (libc.so.6:__strrchr_sse2) redirected to 0x483ea70 (__strrchr_sse2)
+--93245-- REDIR: 0x494e110 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
+--93245-- REDIR: 0x4965be0 (libc.so.6:__strlen_sse2) redirected to 0x483efa0 (__strlen_sse2)
+--93245-- REDIR: 0x496ab20 (libc.so.6:__strcpy_sse2_unaligned) redirected to 0x483f090 (strcpy)
+--93245-- REDIR: 0x49656d0 (libc.so.6:__strchrnul_sse2) redirected to 0x4843540 (strchrnul)
+--93245-- REDIR: 0x48fa520 (libc.so.6:setenv) redirected to 0x4844480 (setenv)
+--93245-- REDIR: 0x49654a0 (libc.so.6:__strchr_sse2) redirected to 0x483eb90 (__strchr_sse2)
+--93245-- REDIR: 0x4a32bd0 (libc.so.6:__strncmp_sse42) redirected to 0x483f7c0 (__strncmp_sse42)
+--93245-- REDIR: 0x494eeb0 (libc.so.6:realloc) redirected to 0x483df30 (realloc)
+--93245-- REDIR: 0x496faf0 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4840100 (memcpy@GLIBC_2.2.5)
+--93245-- REDIR: 0x496fad0 (libc.so.6:__mempcpy_sse2_unaligned) redirected to 0x4843660 (mempcpy)
+--93245-- REDIR: 0x495e3d0 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x483fed0 (strcmp)
+--93245-- REDIR: 0x494fb40 (libc.so.6:calloc) redirected to 0x483dce0 (calloc)
+--93245-- REDIR: 0x4965d80 (libc.so.6:__strnlen_sse2) redirected to 0x483eee0 (strnlen)
+--93245-- REDIR: 0x494e700 (libc.so.6:free) redirected to 0x483c9d0 (free)
+--93245-- REDIR: 0x4953fd0 (libc.so.6:__GI_strstr) redirected to 0x4843ca0 (__strstr_sse2)
+--93245-- REDIR: 0x496fae0 (libc.so.6:__memcpy_chk_sse2_unaligned) redirected to 0x4843b10 (__memcpy_chk)
+--93245-- REDIR: 0x496b150 (libc.so.6:__strncpy_sse2_unaligned) redirected to 0x483f560 (__strncpy_sse2_unaligned)
+--93245-- REDIR: 0x495fee0 (libc.so.6:__memchr_sse2) redirected to 0x4840050 (memchr)
+--93245-- REDIR: 0x496c160 (libc.so.6:__stpcpy_sse2_unaligned) redirected to 0x4842570 (__stpcpy_sse2_unaligned)
+--93245-- REDIR: 0x4a38fb0 (libc.so.6:__strcasecmp_avx) redirected to 0x483f830 (strcasecmp)
+--93245-- REDIR: 0x4a3a630 (libc.so.6:__strncasecmp_avx) redirected to 0x483f910 (strncasecmp)
+--93245-- REDIR: 0x496ff20 (libc.so.6:__memset_sse2_unaligned) redirected to 0x48428e0 (memset)
+--93245-- REDIR: 0x4a41460 (libc.so.6:__memcmp_sse4_1) redirected to 0x4842150 (__memcmp_sse4_1)
+==93253== 
+==93253== HEAP SUMMARY:
+==93253==     in use at exit: 204,937 bytes in 231 blocks
+==93253==   total heap usage: 583 allocs, 352 frees, 231,024 bytes allocated
+==93253== 
+==93253== Searching for pointers to 231 not-freed blocks
+==93253== Checked 208,144 bytes
+==93253== 
+==93253== 4 bytes in 1 blocks are still reachable in loss record 3 of 74
+==93253==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93253==    by 0x10FB51: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93253==    by 0x10C787: expandtok (expand_p2.c:62)
+==93253==    by 0x10CF9D: ft_tlstiter (ft_tlstiter.c:25)
+==93253==    by 0x10BE5D: init_tlist (init_lexer.c:49)
+==93253==    by 0x10960C: main (main.c:72)
+==93253== 
+==93253== 4 bytes in 1 blocks are still reachable in loss record 4 of 74
+==93253==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93253==    by 0x10FB51: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93253==    by 0x10F1CD: tlst_to_cmd (tlst_to_cmdlst.c:229)
+==93253==    by 0x10E07B: only1cmd (init_ft.c:91)
+==93253==    by 0x10965B: main (main.c:80)
+==93253== 
+==93253== 4 bytes in 1 blocks are still reachable in loss record 5 of 74
+==93253==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93253==    by 0x10D72F: classicsplit (ft_split_cust_2.c:64)
+==93253==    by 0x10D4C9: ft_cut_cu (ft_split_custom.c:90)
+==93253==    by 0x10D6C1: ft_split_custom (ft_split_cust_2.c:55)
+==93253==    by 0x10F362: tlst_to_cmd (tlst_to_cmdlst.c:259)
+==93253==    by 0x10E07B: only1cmd (init_ft.c:91)
+==93253==    by 0x10965B: main (main.c:80)
+==93253== 
+==93253== 4 bytes in 1 blocks are definitely lost in loss record 6 of 74
+==93253==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93253==    by 0x10FB51: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93253==    by 0x10B898: make_string_b (lexer.c:49)
+==93253==    by 0x10BA74: make_string (lexer.c:86)
+==93253==    by 0x10BD01: make_token (lexer.c:135)
+==93253==    by 0x10BE05: init_tlist (init_lexer.c:43)
+==93253==    by 0x10960C: main (main.c:72)
+==93253== 
+==93253== 11 bytes in 1 blocks are still reachable in loss record 9 of 74
+==93253==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93253==    by 0x10FB51: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93253==    by 0x110D43: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93253==    by 0x110D8E: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93253==    by 0x10F38E: tlst_to_cmd (tlst_to_cmdlst.c:262)
+==93253==    by 0x10E07B: only1cmd (init_ft.c:91)
+==93253==    by 0x10965B: main (main.c:80)
+==93253== 
+==93253== 12 bytes in 1 blocks are still reachable in loss record 11 of 74
+==93253==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93253==    by 0x10FB51: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93253==    by 0x110D43: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93253==    by 0x110D8E: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93253==    by 0x10F3CC: tlst_to_cmd (tlst_to_cmdlst.c:269)
+==93253==    by 0x10E07B: only1cmd (init_ft.c:91)
+==93253==    by 0x10965B: main (main.c:80)
+==93253== 
+==93253== 16 bytes in 1 blocks are still reachable in loss record 16 of 74
+==93253==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93253==    by 0x10D698: ft_split_custom (ft_split_cust_2.c:52)
+==93253==    by 0x10F362: tlst_to_cmd (tlst_to_cmdlst.c:259)
+==93253==    by 0x10E07B: only1cmd (init_ft.c:91)
+==93253==    by 0x10965B: main (main.c:80)
+==93253== 
+==93253== 16 bytes in 1 blocks are still reachable in loss record 17 of 74
+==93253==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93253==    by 0x110D25: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93253==    by 0x110D8E: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93253==    by 0x10F38E: tlst_to_cmd (tlst_to_cmdlst.c:262)
+==93253==    by 0x10E07B: only1cmd (init_ft.c:91)
+==93253==    by 0x10965B: main (main.c:80)
+==93253== 
+==93253== 16 bytes in 1 blocks are still reachable in loss record 18 of 74
+==93253==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93253==    by 0x110D25: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93253==    by 0x110D8E: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93253==    by 0x10F3CC: tlst_to_cmd (tlst_to_cmdlst.c:269)
+==93253==    by 0x10E07B: only1cmd (init_ft.c:91)
+==93253==    by 0x10965B: main (main.c:80)
+==93253== 
+==93253== 24 bytes in 1 blocks are still reachable in loss record 24 of 74
+==93253==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93253==    by 0x10C9F1: ft_tlstnew (ft_tlstnew.c:19)
+==93253==    by 0x10BE21: init_tlist (init_lexer.c:46)
+==93253==    by 0x10960C: main (main.c:72)
+==93253== 
+==93253== 32 bytes in 1 blocks are still reachable in loss record 25 of 74
+==93253==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93253==    by 0x10C088: init_token (lexer_utils.c:71)
+==93253==    by 0x10BC14: make_token (lexer.c:124)
+==93253==    by 0x10BE05: init_tlist (init_lexer.c:43)
+==93253==    by 0x10960C: main (main.c:72)
+==93253== 
+==93253== 104 bytes in 1 blocks are still reachable in loss record 32 of 74
+==93253==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93253==    by 0x10FA1C: ft_calloc (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93253==    by 0x10F413: ft_clstnew (exec_utils.c:19)
+==93253==    by 0x10F186: tlst_to_cmd (tlst_to_cmdlst.c:225)
+==93253==    by 0x10E07B: only1cmd (init_ft.c:91)
+==93253==    by 0x10965B: main (main.c:80)
+==93253== 
+==93253== LEAK SUMMARY:
+==93253==    definitely lost: 4 bytes in 1 blocks
+==93253==    indirectly lost: 0 bytes in 0 blocks
+==93253==      possibly lost: 0 bytes in 0 blocks
+==93253==    still reachable: 243 bytes in 11 blocks
+==93253==         suppressed: 204,690 bytes in 219 blocks
+==93253== 
+==93253== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+--93253-- 
+--93253-- used_suppression:     58 leak readline valgrind_readline_leaks_ignore.txt:2 suppressed: 200,634 bytes in 215 blocks
+--93253-- used_suppression:      4 leak add_history valgrind_readline_leaks_ignore.txt:8 suppressed: 4,056 bytes in 4 blocks
+==93253== 
+==93253== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==93245== 
+==93245== HEAP SUMMARY:
+==93245==     in use at exit: 204,837 bytes in 225 blocks
+==93245==   total heap usage: 586 allocs, 361 frees, 231,080 bytes allocated
+==93245== 
+==93245== Searching for pointers to 225 not-freed blocks
+==93245== Checked 207,744 bytes
+==93245== 
+==93245== 4 bytes in 1 blocks are indirectly lost in loss record 2 of 68
+==93245==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93245==    by 0x10FB51: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93245==    by 0x10F1CD: tlst_to_cmd (tlst_to_cmdlst.c:229)
+==93245==    by 0x10E07B: only1cmd (init_ft.c:91)
+==93245==    by 0x10965B: main (main.c:80)
+==93245== 
+==93245== 4 bytes in 1 blocks are indirectly lost in loss record 3 of 68
+==93245==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93245==    by 0x10D72F: classicsplit (ft_split_cust_2.c:64)
+==93245==    by 0x10D4C9: ft_cut_cu (ft_split_custom.c:90)
+==93245==    by 0x10D6C1: ft_split_custom (ft_split_cust_2.c:55)
+==93245==    by 0x10F362: tlst_to_cmd (tlst_to_cmdlst.c:259)
+==93245==    by 0x10E07B: only1cmd (init_ft.c:91)
+==93245==    by 0x10965B: main (main.c:80)
+==93245== 
+==93245== 4 bytes in 1 blocks are definitely lost in loss record 4 of 68
+==93245==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93245==    by 0x10FB51: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93245==    by 0x10B898: make_string_b (lexer.c:49)
+==93245==    by 0x10BA74: make_string (lexer.c:86)
+==93245==    by 0x10BD01: make_token (lexer.c:135)
+==93245==    by 0x10BE05: init_tlist (init_lexer.c:43)
+==93245==    by 0x10960C: main (main.c:72)
+==93245== 
+==93245== 11 bytes in 1 blocks are indirectly lost in loss record 7 of 68
+==93245==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93245==    by 0x10FB51: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93245==    by 0x110D43: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93245==    by 0x110D8E: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93245==    by 0x10F38E: tlst_to_cmd (tlst_to_cmdlst.c:262)
+==93245==    by 0x10E07B: only1cmd (init_ft.c:91)
+==93245==    by 0x10965B: main (main.c:80)
+==93245== 
+==93245== 12 bytes in 1 blocks are indirectly lost in loss record 8 of 68
+==93245==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93245==    by 0x10FB51: ft_strdup (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93245==    by 0x110D43: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93245==    by 0x110D8E: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93245==    by 0x10F3CC: tlst_to_cmd (tlst_to_cmdlst.c:269)
+==93245==    by 0x10E07B: only1cmd (init_ft.c:91)
+==93245==    by 0x10965B: main (main.c:80)
+==93245== 
+==93245== 16 bytes in 1 blocks are indirectly lost in loss record 13 of 68
+==93245==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93245==    by 0x10D698: ft_split_custom (ft_split_cust_2.c:52)
+==93245==    by 0x10F362: tlst_to_cmd (tlst_to_cmdlst.c:259)
+==93245==    by 0x10E07B: only1cmd (init_ft.c:91)
+==93245==    by 0x10965B: main (main.c:80)
+==93245== 
+==93245== 16 bytes in 1 blocks are indirectly lost in loss record 14 of 68
+==93245==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93245==    by 0x110D25: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93245==    by 0x110D8E: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93245==    by 0x10F38E: tlst_to_cmd (tlst_to_cmdlst.c:262)
+==93245==    by 0x10E07B: only1cmd (init_ft.c:91)
+==93245==    by 0x10965B: main (main.c:80)
+==93245== 
+==93245== 16 bytes in 1 blocks are indirectly lost in loss record 15 of 68
+==93245==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93245==    by 0x110D25: ft_tab_new (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93245==    by 0x110D8E: ft_tab_addback (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93245==    by 0x10F3CC: tlst_to_cmd (tlst_to_cmdlst.c:269)
+==93245==    by 0x10E07B: only1cmd (init_ft.c:91)
+==93245==    by 0x10965B: main (main.c:80)
+==93245== 
+==93245== 183 (104 direct, 79 indirect) bytes in 1 blocks are definitely lost in loss record 28 of 68
+==93245==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==93245==    by 0x10FA1C: ft_calloc (in /mnt/nfs/homes/nburat-d/Documents/minishell/minishell)
+==93245==    by 0x10F413: ft_clstnew (exec_utils.c:19)
+==93245==    by 0x10F186: tlst_to_cmd (tlst_to_cmdlst.c:225)
+==93245==    by 0x10E07B: only1cmd (init_ft.c:91)
+==93245==    by 0x10965B: main (main.c:80)
+==93245== 
+==93245== LEAK SUMMARY:
+==93245==    definitely lost: 108 bytes in 2 blocks
+==93245==    indirectly lost: 79 bytes in 7 blocks
+==93245==      possibly lost: 0 bytes in 0 blocks
+==93245==    still reachable: 0 bytes in 0 blocks
+==93245==         suppressed: 204,650 bytes in 216 blocks
+==93245== 
+==93245== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+--93245-- 
+--93245-- used_suppression:     58 leak readline valgrind_readline_leaks_ignore.txt:2 suppressed: 200,634 bytes in 215 blocks
+--93245-- used_suppression:      1 leak add_history valgrind_readline_leaks_ignore.txt:8 suppressed: 4,016 bytes in 1 blocks
+==93245== 
+==93245== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0
