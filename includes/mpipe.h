@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mpipe.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:53:59 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/02 11:41:10 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/03 15:32:48 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_pipes
 int		open_i(t_cmd *cmd, t_pipes *pipes);
 int		open_o(t_cmd *cmd, t_pipes *pipes);
 int		open_io(t_cmd *cmd, t_pipes *pipes);
-void	piping(int nbcmd, t_cmd *cmd, t_dlist **envp, t_tlist *lst);
+void	piping(int nbcmd, t_cmd **cmd, t_dlist **envp, t_tlist *lst);
 void	first_cmd(t_cmd *cmd, t_pipes *pipes);
 void	mid_cmd(t_cmd *cmd, t_pipes *pipes, int i);
 void	last_cmd(t_cmd *cmd, t_pipes *pipes);

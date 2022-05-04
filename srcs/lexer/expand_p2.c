@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_p2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:07:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/02 12:52:15 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:12:02 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	expandtok(t_token *token, t_minishell *mshell)
 			i++;
 		}
 	}
+	if (ft_strcmp(token->type, T_STRING) == 0)
+		free(token->content);
 	token->content = ft_strdup(expandedstr);
 	free(expandedstr);
 }

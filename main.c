@@ -75,7 +75,6 @@ int main(int ac, char **av, char **envp)
 					else
 						init_ft(tlist, &g_mshell.env, g_mshell.cmd);
 					free_tlist(&tlist);
-					fprintf(stderr, "clear here\n");
 					free_tcmd(&g_mshell.cmd);
 					g_mshell.cmd = NULL;
 				}

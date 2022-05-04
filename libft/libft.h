@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:37:34 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/02 12:37:46 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:33:53 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ void	ft_dlstiter(t_dlist *lst, void (*f)(void *));
 char	*ft_charjoin(char *str, char c);
 char	**ft_tab_addback(char **tab, char *str);
 char	*ft_charjoin_free(char *str, char c);
+char	*ft_strnjoin_free(char *s1, char *s2, int size);
 
 #endif

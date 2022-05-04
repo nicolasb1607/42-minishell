@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/02 13:57:54 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/04 18:38:21 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			path = get_path_to_cmd(curr, dupenv);
 			if(update_bin(path, cmd, curr) == -1)
 			{
+				path = (ft_free_tab(path), free_tcmd(&chead), free_tcmd(&cmd), NULL);
 				if (g_mshell.err_exit != 130)
 					g_mshell.err_exit = 127;
 				return ;
@@ -114,7 +115,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					dup2(pipes.fd_out, STDOUT_FILENO);
 					dup2(pipes.fd_in, STDIN_FILENO);
 					exec_builtin(curr, dupenv, &chead);
-					exit(EXIT_SUCCESS);
+					exit(errno);
 				}
 			}
 			else
@@ -148,6 +149,7 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				g_mshell.err_exit = WEXITSTATUS(status);
 		}
 	}
+	free_tcmd(&chead);
 }
 
 void	free_tcmd(t_cmd **cmd)
@@ -159,7 +161,8 @@ void	free_tcmd(t_cmd **cmd)
 	//print_t_cmd(curr);
 	while (curr)
 	{
-		if (curr->next)
+		// dprintf(2, "freeing %s\n", curr->command);
+		// if (curr->next)
 			next = curr->next;
 		free(curr->command);
 		free(curr->bin);
@@ -233,12 +236,13 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			{
 				cmd = tlst_to_cmd(&tlst);
 				path = get_path_to_cmd(curr, dupenv);
-			if (update_bin(path, cmd, curr) == -1)
-			{
-				if (g_mshell.err_exit != 130)
-					g_mshell.err_exit = 127;
-				return ;
-			}
+				if (update_bin(path, cmd, curr) == -1)
+				{
+					if (g_mshell.err_exit != 130)
+						g_mshell.err_exit = 127;
+					return ;
+				}
+				ft_free_tab(path);
 				cmd->is_builtin = false;
 			}
 			else
@@ -262,6 +266,7 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 					tlst = tlst->next;
 			ft_clstadd_back(&chead, cmd);
 		}
-		piping(nb_cmd, chead, dupenv, tlst);	
+		piping(nb_cmd, &chead, dupenv, tlst);
+		free_tcmd(&chead);	
 	}
 }

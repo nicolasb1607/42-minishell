@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:07:07 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/14 16:52:40 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:34:58 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_bin_custom(char *cmd, char **paths, t_tlist *tlst)
 	int		i;
 	int		j;
 
-	tmp = ft_strdup("");
+	// tmp = ft_strdup("");
 	ret_path = NULL;
 	i = -1;
 	if (paths)
@@ -31,6 +31,7 @@ char	*get_bin_custom(char *cmd, char **paths, t_tlist *tlst)
 			while (cmd[++j] != ' ' && cmd[j])
 				tmp = ft_charjoin(tmp, cmd[j]);
 			ret_path = ft_strdup(tmp);
+			free(tmp);
 			if (ft_containchar(' ', cmd) == 1 && tlst->token->quote)
 				ret_path = (free(ret_path), ft_strdup(cmd));
 			if (access(ret_path, F_OK) == 0)

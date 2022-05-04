@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/03 17:21:43 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/02 15:02:55 by nburat-d         ###   ########.fr       */
+/*   Created: 2022/05/03 15:50:57 by ngobert           #+#    #+#             */
+/*   Updated: 2022/05/04 13:34:02 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	make_string_b(int i, t_lexer *lexer, t_token *token)
 {
 	char *tmp;
 	
-	tmp = ft_charjoin(token->content, lexer->current_char);
-	token->content = ft_strdup(tmp);
-	free(tmp);
+	tmp = ft_strnjoin_free(token->content, &lexer->current_char, 1);
+	token->content = tmp;
+	// free(tmp);
 	advance(lexer);
 	if (ft_containchar(lexer->text[lexer->pos + 1], "<>|") == 1)
-	{	
+	{
 		if (lexer->current_char != ' ')
 			token->content = ft_charjoin(token->content, lexer->current_char);
 		return (1);
