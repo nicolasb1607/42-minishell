@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 14:32:01 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/02 13:13:07 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/04 18:41:30 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	free_tlist(t_tlist **tlst)
 		{
 			next = currtok->next;
 			free(currtok->token->content);
-			free(currtok->token->quote);
 			free(currtok->token);
 			free(currtok);
 			currtok = next;
