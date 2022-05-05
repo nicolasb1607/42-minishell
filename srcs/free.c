@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 14:32:01 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/05 15:28:13 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/05 16:28:02 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,20 @@ void	free_till_pipe(t_tlist *tlst)
 	
 	curr = tlst;
 	i = 0;
-	while (curr->prev)
+	while (curr && curr->prev)
 		curr = (i++, curr->prev);
-	while (curr && i > 0)
+	while (curr && ft_strcmp(curr->token->type, T_PIPE) != 0)
 	{
-		next = curr->next;
-		if (curr->token->content)
-		{
-			if (ft_strlen(curr->token->content) != 0)
-				free(curr->token->content);
-			free(curr->token);
-			free(curr);
-			curr = next;
-		}
-		i--;
+			next = curr->next;
+			if (curr->token->content)
+			{
+				if (ft_strlen(curr->token->content) != 0)
+					free(curr->token->content);
+				free(curr->token);
+				free(curr);
+				curr = next;
+			}
 	}
-	t
 }
 
 void free_tlist(t_tlist **tlst)

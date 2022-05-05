@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/05 15:20:20 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/05 16:18:44 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,10 @@ void	cpy_till_pipe(t_tlist **tlist, t_tlist **tlistnew)
 		curr = curr->next;
 	}
 	free_till_pipe(curr);
-	*tlist = curr;
+	if (curr == NULL)
+		dprintf(2, "c est null\n");
+	if (curr)
+		*tlist = curr;
 }
 
 void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
