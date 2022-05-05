@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:38:43 by nburat-d          #+#    #+#             */
-/*   Updated: 2021/11/29 12:53:05 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/05 10:31:12 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,29 @@ On success, the strdup() function returns a pointer to the duplicated string.
 It  returns  NULL  if  insufficient  memory  was available, with errno set to 
 indicate the cause of the error.
 */
+
+char	*ft_strdup_seg(const char *s)
+{
+	int		len;
+	int		i;
+	char	*dup;
+
+	if (!s)
+		return (NULL);
+	len = ft_strlen(s);
+	i = 0;
+	dup = malloc((len + 1) * sizeof(char));
+	if (!dup)
+		return (NULL);
+	while (s[i] != '\0')
+	{
+		dup[i] = s[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
+}
+
 char	*ft_strdup(const char *s)
 {
 	int		len;

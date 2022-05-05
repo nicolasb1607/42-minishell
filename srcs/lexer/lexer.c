@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 15:50:57 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/04 13:34:02 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/05 11:51:29 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	make_quote_string(t_token *token, t_lexer *lexer)
 		token->quote = T_SQUOTE;
 	if (lexer->text[lexer->pos + 1] == tquote)
 	{
-		token->content = malloc(sizeof(char));
 		token->content = "\0";
 		advance(lexer);
 	}
@@ -32,7 +31,7 @@ void	make_quote_string(t_token *token, t_lexer *lexer)
 		advance(lexer);
 		while (lexer->current_char != tquote)
 		{
-			token->content = ft_charjoin(token->content, lexer->current_char);
+			token->content = ft_strnjoin_free(token->content, &lexer->current_char, 1);
 			advance(lexer);
 		}
 	}

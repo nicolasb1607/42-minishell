@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:37:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/04 19:14:59 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/05 12:49:16 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	split_first_tok_arg(t_tlist *tlst, int *nl_opt)
 		}
 	splittedtok = ft_free_tab(splittedtok);
 	}
+	else
+		splittedtok = ft_free_tab(splittedtok);
 }
 
 void	checktype(t_tlist *curr)

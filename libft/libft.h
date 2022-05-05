@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:37:34 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/04 22:20:14 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/05 10:31:36 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ char	*ft_charjoin(char *str, char c);
 char	**ft_tab_addback(char **tab, char *str);
 char	*ft_charjoin_free(char *str, char c);
 char	*ft_strnjoin_free(char *s1, char *s2, int size);
+char	*ft_strdup_seg(const char *s);
 
 #endif

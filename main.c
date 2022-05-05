@@ -70,9 +70,9 @@ int main(int ac, char **av, char **envp)
 			{
 				if (parser(tlist))
 				{
-					if (count_command(tlist) == 1)
+					if (count_command(tlist) == 1 && (ft_tlstsize(tlist) != 0 && ft_strlen(tlist->token->content) != 0))
 						only1cmd(tlist, &g_mshell.env, g_mshell.cmd);
-					else
+					else if (count_command(tlist) > 1)
 						init_ft(tlist, &g_mshell.env, g_mshell.cmd);
 					free_tlist(&tlist);
 					free_tcmd(&g_mshell.cmd);

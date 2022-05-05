@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 14:32:01 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/04 18:41:30 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/05 11:47:41 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	free_tlist(t_tlist **tlst)
 		if (currtok->token->content)
 		{
 			next = currtok->next;
-			free(currtok->token->content);
+			if (ft_strlen(currtok->token->content) != 0)
+				free(currtok->token->content);
 			free(currtok->token);
 			free(currtok);
 			currtok = next;

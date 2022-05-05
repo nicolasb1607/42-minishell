@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:07:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/04 15:12:02 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/05 12:53:34 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	expandtok(t_token *token, t_minishell *mshell)
 		{
 			ret_expand = expand(token, i, mshell);
 			if (ret_expand)
-				expandedstr = ft_strjoin(expandedstr, ret_expand);
-			i = i + lenvarenv(token->content, i);
+				expandedstr = ft_strjoin_free(expandedstr, ret_expand);
+			i = (free(ret_expand), i + lenvarenv(token->content, i));
 		}
 		if (token->content[i] && token->content[i] != '$' )
 		{
@@ -61,6 +61,6 @@ void	expandtok(t_token *token, t_minishell *mshell)
 	}
 	if (ft_strcmp(token->type, T_STRING) == 0)
 		free(token->content);
-	token->content = ft_strdup(expandedstr);
+	token->content = ft_strdup_seg(expandedstr);
 	free(expandedstr);
 }

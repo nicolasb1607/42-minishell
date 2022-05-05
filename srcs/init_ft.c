@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/04 19:20:29 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/05 11:11:24 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,23 +106,6 @@ void only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 	curr = tlst;
 	if (tlst->token->content)
 	{
-		// while (tlst)
-		// {
-		// 	curr = tlst;
-		// 	cmd = tlst_to_cmd(&tlst);
-		// 	path = get_path_to_cmd(curr, dupenv);
-		// 	if(update_bin(path, cmd, curr) == -1)
-		// 	{
-		// 		path = (ft_free_tab(path), free_tcmd(&chead), free_tcmd(&cmd), NULL);
-		// 		if (g_mshell.err_exit != 130)
-		// 			g_mshell.err_exit = 127;
-		// 		return ;
-		// 	}
-		// 	path = ft_free_tab(path);
-		// 	ft_clstadd_back(&chead, cmd);
-		// 	if (tlst)
-		// 		tlst = tlst->next;
-		// }
 		cmd = make_commands(tlst, &chead, dupenv, curr);
 		if (!cmd)
 			return ;
@@ -201,7 +184,7 @@ void	free_tcmd(t_cmd **cmd)
 		free(curr->bin);
 		ft_free_tab(curr->infile);
 		if(curr->limiter)
-			curr->limiter =ft_free_tab(curr->limiter);
+			curr->limiter = ft_free_tab(curr->limiter);
 		free(curr->type);
 		curr->options = ft_free_tab(curr->options);
 		curr->outfile = ft_free_tab(curr->outfile);

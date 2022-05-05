@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:02 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/04 22:24:49 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/05 10:25:49 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ char	*expand(t_token *token, int i, t_minishell *mshell)
 	if(ft_strncmp(varenv,"?", 2) == 0)
 		varvalue = ft_itoa(mshell->err_exit);
 	else if (is_valid_varenv(varenv) == 1)
-		varvalue = look_for_varenv_value(varenv, mshell->head_env);
+		varvalue = look_for_varenv_value(varenv, &mshell->env);
 	free(varenv);
 	return (varvalue);
 }
