@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_p1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:02 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/21 13:35:43 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/04 22:24:49 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,24 @@ int	is_valid_varenv(char *str)
 char	*get_corresponding_val(char *varenv, t_dlist *curr)
 {
 	char	*val;
+	char	*tmp;
 
 	while (curr)
 	{
-		if (ft_strncmp(get_var(curr->content), varenv, ft_strlen(varenv)) == 0
-			&& ft_strlen(varenv) == ft_strlen(get_var(curr->content)))
+		tmp = get_var(curr->content);
+		if (ft_strncmp(tmp, varenv, ft_strlen(varenv)) == 0
+			&& ft_strlen(varenv) == ft_strlen(tmp))
 		{
 			val = curr->content;
 			break ;
 		}
+		free(tmp);
 		curr = curr->next;
 		if (!curr)
 			return (NULL);
 	}
+	if (tmp)
+		free(tmp);
 	return (val);
 }
 

@@ -198,8 +198,9 @@ void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 	}
 	else if (ret == 3)
 	{
-		cmd->outfile = ft_tab_addback(cmd->outfile, ft_strdup(lst->token->content));
-		cmd->is_double = true;
+		file_name = ft_strdup(lst->token->content);
+		cmd->outfile = ft_tab_addback(cmd->outfile, file_name);
+		cmd->is_double = (free(file_name), true);
 	}
 	else if (ret == 4)
 	{

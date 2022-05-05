@@ -1,0 +1,7 @@
+$> cd											(DONE)
+$> export a="a"									(DONE)
+$> export										(DONE)
+$> Les builtins dans les pipes
+$> echo en general
+$> double redirection							(DONE)
+$> Here_docs 4 1cmd (possiblement pour pipes)

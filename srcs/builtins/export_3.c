@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 14:44:46 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/31 14:46:06 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/04 21:54:09 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	ft_sort_tab(char **tab)
 void	print_declared_var(t_dlist **dup_env)
 {
 	char	**tab;
+	char	*temp;
 	int		i;
 
 	i = 0;
@@ -46,8 +47,12 @@ void	print_declared_var(t_dlist **dup_env)
 	ft_sort_tab(tab);
 	while (tab[i])
 	{
-		tab[i] = ft_strjoin("export ", tab[i]);
+		temp = ft_strdup(tab[i]);
+		free(tab[i]);
+		tab[i] = ft_strjoin("export ", temp);
+		free(temp);
 		i++;
 	}
 	print_tab(tab);
+	ft_free_tab(tab);
 }

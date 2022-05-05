@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:12 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/23 13:28:44 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/04 22:00:13 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,13 @@ int	check_equal(char *str, t_tlist *tlst)
 int	is_all_var_valid(t_tlist *tlst)
 {
 	t_tlist	*curr;
+	char	*varenval;
 
 	curr = tlst->next;
 	while (curr)
 	{
-		if (is_valid_varenv(get_var(curr->token->content)) == 1)
+		varenval = get_var(curr->token->content);
+		if (is_valid_varenv(varenval) == 1)
 		{
 			if (check_equal(curr->token->content, curr) == 1 && curr->next)
 				curr = curr->next;
@@ -59,10 +61,11 @@ int	is_all_var_valid(t_tlist *tlst)
 			else if (check_equal(curr->token->content, curr) == 0)
 				curr = curr->next;
 			else
-				return (1);
+				return (free(varenval), 1);
+			free(varenval);
 		}
 		else
-			return (0);
+			return (free(varenval), 0);
 	}
 	return (1);
 }

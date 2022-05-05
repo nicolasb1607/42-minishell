@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 10:27:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/18 15:23:21 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/04 21:57:42 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ int	ft_export(t_tlist *tlst, t_dlist **dup_env)
 		&& ft_containchar('=', tlst->token->content))
 	{
 		if (spread_on_one_tok(tlst, currenv, varexport, dup_env) == 1)
-			return (1);
+			return (free(varexport), 1);
 		else if (spread_on_two_tok(tlst, currenv, varexport, dup_env) == 2)
-			return (2);
+			return (free(varexport), 2);
 		else if (no_assigment(tlst, currenv, varexport, dup_env) == 1)
-			return (1);
+			return (free(varexport), 1);
 	}
-	return (0);
+	return (free(varexport), 0);
 }
 
 void	loop_export(t_tlist *tlst, t_dlist **dup_env)
