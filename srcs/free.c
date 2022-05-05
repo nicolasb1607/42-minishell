@@ -6,16 +6,43 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 14:32:01 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/05 11:47:41 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:28:13 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "free.h"
 
-void	free_tlist(t_tlist **tlst)
+
+void	free_till_pipe(t_tlist *tlst)
 {
-	t_tlist	*currtok;
+	int		i;
 	t_tlist	*next;
+	t_tlist	*curr;
+	
+	curr = tlst;
+	i = 0;
+	while (curr->prev)
+		curr = (i++, curr->prev);
+	while (curr && i > 0)
+	{
+		next = curr->next;
+		if (curr->token->content)
+		{
+			if (ft_strlen(curr->token->content) != 0)
+				free(curr->token->content);
+			free(curr->token);
+			free(curr);
+			curr = next;
+		}
+		i--;
+	}
+	t
+}
+
+void free_tlist(t_tlist **tlst)
+{
+	t_tlist *currtok;
+	t_tlist *next;
 
 	currtok = *tlst;
 	while (currtok)
