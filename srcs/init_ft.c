@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/05 16:18:44 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/06 16:28:16 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,7 @@ void	cpy_till_pipe(t_tlist **tlist, t_tlist **tlistnew)
 {
 	t_tlist *curr;
 	t_tlist *new;
-
+	
 	curr = *tlist;
 	while (curr && ft_strcmp(curr->token->type, T_PIPE) != 0)
 	{
@@ -229,11 +229,9 @@ void	cpy_till_pipe(t_tlist **tlist, t_tlist **tlistnew)
 		ft_tlstadd_back(tlistnew, new);
 		curr = curr->next;
 	}
-	free_till_pipe(curr);
 	if (curr == NULL)
 		dprintf(2, "c est null\n");
-	if (curr)
-		*tlist = curr;
+	*tlist = curr;
 }
 
 void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
@@ -285,6 +283,8 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			ft_clstadd_back(&chead, cmd);
 		}
 		piping(nb_cmd, &chead, dupenv, tlst);
+		free_tlist(&cmd->builtin);
 		free_tcmd(&chead);
+		free_tlist(&tlst);
 	}
 }

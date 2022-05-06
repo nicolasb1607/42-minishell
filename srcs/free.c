@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 14:32:01 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/05 16:28:02 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/06 16:48:49 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	free_till_pipe(t_tlist *tlst)
 	t_tlist	*next;
 	t_tlist	*curr;
 	
+	
 	curr = tlst;
 	i = 0;
 	while (curr && curr->prev)
@@ -30,7 +31,8 @@ void	free_till_pipe(t_tlist *tlst)
 			{
 				if (ft_strlen(curr->token->content) != 0)
 					free(curr->token->content);
-				free(curr->token);
+				if(curr->token)
+					free(curr->token);
 				free(curr);
 				curr = next;
 			}
@@ -42,16 +44,19 @@ void free_tlist(t_tlist **tlst)
 	t_tlist *currtok;
 	t_tlist *next;
 
-	currtok = *tlst;
+	if (tlst)
+		currtok = *tlst;
 	while (currtok)
 	{
 		if (currtok->token->content)
 		{
 			next = currtok->next;
-			if (ft_strlen(currtok->token->content) != 0)
+			if (currtok->token->content && ft_strlen(currtok->token->content) != 0)
 				free(currtok->token->content);
-			free(currtok->token);
-			free(currtok);
+			if(currtok->token)
+				free(currtok->token);
+			if(currtok)
+				free(currtok);
 			currtok = next;
 		}
 	}
