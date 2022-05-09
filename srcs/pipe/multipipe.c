@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/05 15:10:54 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/09 14:20:50 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,11 @@ void	ft_child(int *pfd, t_cmd *cmd, t_pipes *data)
 	if (cmd->builtin)
 	{
 		exec_builtin(cmd->builtin, data->denv, &cmd);
-		execve("/bin/true", cmd->options, dlist_to_tab(*data->denv));
 		// free_dlist(data->denv);
 		// ft_free_tab(data->env);
 		// free_tlist(&cmd->builtin);
 		// free_tcmd(&cmd);
+		execve("/bin/true", cmd->options, dlist_to_tab(*data->denv));
 		exit(EXIT_SUCCESS);
 	}
 	else

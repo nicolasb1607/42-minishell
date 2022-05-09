@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/09 13:35:20 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/09 15:36:43 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,6 +261,7 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 				path = get_path_to_cmd(curr, dupenv);
 				if (update_bin(path, cmd, curr) == -1)
 				{
+					path = (ft_free_tab(path), free_tcmd(&chead), free_tcmd(&cmd), NULL);
 					if (g_mshell.err_exit != 130)
 						g_mshell.err_exit = 127;
 					return ;
@@ -294,9 +295,6 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 		piping(nb_cmd, &chead, dupenv, tlst);
 		free_tcmd(&chead);
 		free_tlist(&tlst);
-		// free_tlist(&tmp);
-		//! JSS TROP CON CEST PAS TLIST QUIL FAUT FREE CEST CMD->BUILTIN
 	}
 }
-
 // 72 24
