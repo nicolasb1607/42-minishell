@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/06 16:28:16 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/09 13:35:20 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,16 @@ void	free_tcmd(t_cmd **cmd)
 		free(curr->type);
 		curr->options = ft_free_tab(curr->options);
 		curr->outfile = ft_free_tab(curr->outfile);
+		if (curr->builtin)
+		{
+			while (curr->builtin->prev)
+				curr->builtin = curr->builtin->prev;
+			while (curr->builtin)
+			{
+				free(curr->builtin);
+				curr->builtin = curr->builtin->next;
+			}
+		}
 		free(curr);
 		curr = next;
 	}
@@ -216,7 +226,6 @@ int	is_builtin(t_tlist *lst)
 		return (0);
 }
 
-
 void	cpy_till_pipe(t_tlist **tlist, t_tlist **tlistnew)
 {
 	t_tlist *curr;
@@ -229,8 +238,6 @@ void	cpy_till_pipe(t_tlist **tlist, t_tlist **tlistnew)
 		ft_tlstadd_back(tlistnew, new);
 		curr = curr->next;
 	}
-	if (curr == NULL)
-		dprintf(2, "c est null\n");
 	*tlist = curr;
 }
 
@@ -265,8 +272,10 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			{
 				tmp = tlst;
 				cmd = tlst_to_cmd(&tmp);
+				tmp = tlst;
 				cmd->builtin = NULL;
 				cpy_till_pipe(&tlst, &cmd->builtin);
+				// cmd->builtin = tlst;
 				if (!cmd->infile)
 				{
 					cmd->infile = ft_tab_addback(cmd->infile, STDIN);
@@ -283,8 +292,11 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			ft_clstadd_back(&chead, cmd);
 		}
 		piping(nb_cmd, &chead, dupenv, tlst);
-		free_tlist(&cmd->builtin);
 		free_tcmd(&chead);
 		free_tlist(&tlst);
+		// free_tlist(&tmp);
+		//! JSS TROP CON CEST PAS TLIST QUIL FAUT FREE CEST CMD->BUILTIN
 	}
 }
+
+// 72 24
