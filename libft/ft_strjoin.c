@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:38:47 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/04 13:34:15 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/10 11:12:05 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,21 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	return (strcat);
 }
 
+static void	ft_strnjoin_free1(char **strcat, char *s2, int *j, int *size)
+{
+	int	i;
+
+	i = -1;
+	if (s2 != NULL)
+	{
+		while (s2[++i] && s2 != NULL && *size > 0)
+		{
+			(*strcat)[++(*j)] = s2[i];
+			*size = *size - 1 ;
+		}
+	}
+}
+
 char	*ft_strnjoin_free(char *s1, char *s2, int size)
 {
 	int		catlen;
@@ -94,15 +109,7 @@ char	*ft_strnjoin_free(char *s1, char *s2, int size)
 	if (s1 != NULL)
 		while (s1[++i])
 			strcat[++j] = s1[i];
-	i = -1;
-	if (s2 != NULL)
-	{
-		while (s2[++i] && s2 != NULL && size > 0)
-		{
-			strcat[++j] = s2[i];
-			size--;
-		}
-	}
+	ft_strnjoin_free1(&strcat, s2, &j, &size);
 	strcat[++j] = (free(s1), '\0');
 	return (strcat);
 }
