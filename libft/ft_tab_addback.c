@@ -6,15 +6,15 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 13:50:50 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/02 13:54:02 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:30:36 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char **ft_free_tabz(char **tab)
+char	**ft_free_tabz(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tab[i])
@@ -30,7 +30,8 @@ char	**ft_tab_new(char *str)
 {
 	char	**tab;
 
-	if (!(tab = (char **)malloc(sizeof(char *) * 2)))
+	tab = (char **)malloc(sizeof(char *) * 2);
+	if (!tab)
 		return (NULL);
 	tab[0] = ft_strdup(str);
 	tab[1] = NULL;
