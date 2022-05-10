@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:32:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/06 13:53:45 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/10 10:29:52 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,15 @@ char	**ft_cut_cu(char *s, char **split, char c, int i);
 char	**free_tab_cu(char **tab);
 char	**ft_free_tab(char **tab);
 void	print_t_cmd(t_cmd *cmd);
+
+/*	INIT_FT_UTILS	*/
+int		is_builtincmd(t_cmd *cmd);
+int		is_forkbuiltin(t_cmd *cmd);
+void	cpy_till_pipe(t_tlist **tlist, t_tlist **tlistnew);
+int		is_builtin(t_tlist *lst);
+
+/*	INIT_FT_FREE	*/
+char	**ft_free_tab(char **tab);
+void	free_tcmd(t_cmd **cmd);
 
 #endif

@@ -53,6 +53,8 @@ SRCS = ./main.c \
 	./srcs/exec/count_command.c \
 	./srcs/handle_sig.c \
 	./srcs/builtins/exit.c \
+	./srcs/utils/init_ft_utils.c \
+	./srcs/utils/init_ft_free.c \
 
 
 OBJS = ${SRCS:.c=.o}
