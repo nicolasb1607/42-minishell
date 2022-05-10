@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/10 10:05:19 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/10 14:16:17 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_cmd	*make_commands(t_tlist *tlst, t_cmd **chead, t_dlist **dupenv, t_tlist *cu
 	{
 		curr = (tlst);
 		cmd = tlst_to_cmd(&tlst);
-		path = get_path_to_cmd(curr, dupenv);
+		path = get_path_to_cmd(dupenv);
 		if(update_bin(path, cmd, curr) == -1)
 		{
 			path = (ft_free_tab(path), free_tcmd(chead), free_tcmd(&cmd), NULL);
@@ -258,7 +258,7 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			if (!is_builtin(curr))
 			{
 				cmd = tlst_to_cmd(&tlst);
-				path = get_path_to_cmd(curr, dupenv);
+				path = get_path_to_cmd(dupenv);
 				if (update_bin(path, cmd, curr) == -1)
 				{
 					path = (ft_free_tab(path), free_tcmd(&chead), free_tcmd(&cmd), NULL);

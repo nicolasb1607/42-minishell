@@ -34,11 +34,11 @@ char	**tab_dup(char **tab)
 t_cmd	*cpy_tcmd(t_cmd **cmd)
 {
 	t_cmd	*new;
-	
+
 	new = ft_clstnew();
 	new->command = ft_strdup((*cmd)->command);
 	new->options = tab_dup((*cmd)->options);
-	new->bin = 	ft_strdup((*cmd)->bin);
+	new->bin = ft_strdup((*cmd)->bin);
 	new->type = (*cmd)->type;
 	ft_free_tab((*cmd)->options);
 	free((*cmd));
@@ -46,15 +46,14 @@ t_cmd	*cpy_tcmd(t_cmd **cmd)
 	return (new);
 }
 
-char	**get_path_to_cmd(t_tlist *tlst, t_dlist **dupenv)
+char	**get_path_to_cmd(t_dlist **dupenv)
 {
 	char	*path;
-	t_dlist *curr;
+	t_dlist	*curr;
 	char	**splitpath;
 
 	curr = *dupenv;
 	path = NULL;
-	(void)tlst;
 	while (curr)
 	{
 		if (ft_strncmp(curr->content, "PATH=", 5) == 0)
@@ -95,14 +94,15 @@ int	update_bin(char **path, t_cmd *cmd, t_tlist *tlst)
 		if (is_absolute(cmd->command) == 0)
 		{
 			cmd->bin = get_bin_custom(cmd->command, path, tlst);
-			cmd->is_absolute = 0;	
+			cmd->is_absolute = 0;
 		}
 		else
 			cmd->is_absolute = 1;
 	}
 	else
 		cmd->is_absolute = 1;
-	if (!cmd->command || (!is_builtincmd(cmd)&& cmd->is_absolute == 0 && cmd->bin == NULL))
+	if (!cmd->command || (!is_builtincmd(cmd)
+			&& cmd->is_absolute == 0 && cmd->bin == NULL))
 		return (-1);
 	return (0);
 }
@@ -131,10 +131,11 @@ void	make_heredoc(t_cmd *cmd)
 	char	*tmp;
 	int		fd;
 	int		i;
-	int status;
-	
+	int		status;
+
 	i = 0;
-	fd = open(cmd->infile[tab_size(cmd->infile) - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	fd = open(cmd->infile[tab_size(cmd->infile) - 1]
+			O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	tmp = NULL;
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
@@ -143,16 +144,17 @@ void	make_heredoc(t_cmd *cmd)
 		signal(SIGINT, handler_heredoc);
 		while (i == 0)
 		{
-			// dprintf(2, "Coucou\n");
 			tmp = readline("> ");
 			if (!tmp)
 			{
-				ft_putstr("minishell: warning: here-document at line 1 delimited by end-of-file (wanted `hd')\n");
-				break;
+				ft_putstr("minishell: warning: here-document at line \
+					1 delimited by end-of-file (wanted `hd')\n");
+				break ;
 			}
 			if (tmp)
 			{
-				if (ft_strncmp(tmp, cmd->limiter[0], ft_strlen(cmd->limiter[0]) + 1) == 0)
+				if (ft_strncmp(tmp, cmd->limiter[0],
+						ft_strlen(cmd->limiter[0]) + 1) == 0)
 					i = (1);
 				else
 				{
@@ -166,18 +168,18 @@ void	make_heredoc(t_cmd *cmd)
 		}
 		exit (0);
 	}
-	while(waitpid(pid, &status, 0) != -1)
+	while (waitpid(pid, &status, 0) != -1)
 	{
-			if(WIFEXITED(status))
-				g_mshell.err_exit = WEXITSTATUS(status);
-		}
+		if (WIFEXITED(status))
+			g_mshell.err_exit = WEXITSTATUS(status);
+	}
 	close(fd);
 }
 
 void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 {
 	char	*file_name;
-	
+
 	lst = lst->next;
 	if (ret == 1)
 	{
@@ -214,7 +216,7 @@ void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 t_cmd	*tlst_to_cmd(t_tlist **tlst)
 {
 	char	*opt;
-	t_tlist *curr;
+	t_tlist	*curr;
 	t_cmd	*cmd;
 	int		quote;
 	int		i;
@@ -231,7 +233,7 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 		while (curr && is_redir(curr->token->type) != 0)
 		{
 			update_io(cmd, curr, is_redir(curr->token->type));
-			if(g_mshell.err_exit == 130)
+			if (g_mshell.err_exit == 130)
 				break ;
 			curr = curr->next->next;
 		}

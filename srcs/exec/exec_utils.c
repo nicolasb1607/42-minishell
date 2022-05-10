@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 10:35:23 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/19 11:40:16 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/10 14:10:34 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_cmd	*ft_clstnew(void)
 {	
-	t_cmd *node;
+	t_cmd	*node;
 
 	node = ft_calloc(1, sizeof(t_cmd));
 	if (!node)
