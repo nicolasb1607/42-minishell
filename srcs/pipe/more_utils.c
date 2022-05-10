@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:07:20 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/20 11:10:31 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/10 17:20:24 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,3 @@ t_data	get_args(int argc, char **argv, char **envp)
 	tmp.outfile = 0;
 	return (tmp);
 }
-

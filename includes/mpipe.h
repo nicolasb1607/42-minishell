@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:53:59 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/03 15:32:48 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/10 17:26:21 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,15 @@ void	first_cmd(t_cmd *cmd, t_pipes *pipes);
 void	mid_cmd(t_cmd *cmd, t_pipes *pipes, int i);
 void	last_cmd(t_cmd *cmd, t_pipes *pipes);
 int		is_builtin(t_tlist *lst);
-int	is_builtincmd(t_cmd *cmd);
+int		is_builtincmd(t_cmd *cmd);
 void	exec_builtin(t_tlist *builtin, t_dlist **denv, t_cmd **cmd);
 void	ft_pipe(t_cmd *cmd, t_pipes *data);
 char	*ft_strndup(char *str, int i);
 int		is_forkbuiltin(t_cmd *cmd);
 int		tab_size(char **tab);
+void	sig_norm(t_pipes *pipes, t_cmd **chead);
+void	close_child(int *pfd, int fd_in);
+void	ft_norm(int *status);
+void	close_pfd(int *pfd, int fd_in, t_cmd *cmd);
 
 #endif

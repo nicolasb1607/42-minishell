@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 10:25:44 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/10 10:27:39 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/10 16:47:07 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ char	**ft_free_tab(char **tab)
 
 void	free_tcmd(t_cmd **cmd)
 {
-	t_cmd *curr;
-	t_cmd *next;
+	t_cmd	*curr;
+	t_cmd	*next;
 
 	curr = *cmd;
 	while (curr)

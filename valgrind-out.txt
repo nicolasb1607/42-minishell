@@ -1,228 +1,472 @@
-==17817== Memcheck, a memory error detector
-==17817== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==17817== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
-==17817== Command: ./minishell
-==17817== Parent PID: 11253
-==17817== 
---17817-- 
---17817-- Valgrind options:
---17817--    --suppressions=valgrind_readline_leaks_ignore.txt
---17817--    --leak-check=full
---17817--    --show-leak-kinds=all
---17817--    --track-origins=yes
---17817--    --verbose
---17817--    --log-file=valgrind-out.txt
---17817-- Contents of /proc/version:
---17817--   Linux version 5.4.0-109-generic (buildd@ubuntu) (gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1)) #123-Ubuntu SMP Fri Apr 8 09:10:54 UTC 2022
---17817-- 
---17817-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-ssse3-avx
---17817-- Page sizes: currently 4096, max supported 4096
---17817-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
---17817-- Reading syms from /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell
---17817-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
---17817--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
---17817--   .. CRC mismatch (computed 0306b78c wanted 8d362b37)
---17817--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
---17817--   .. CRC mismatch (computed 0306b78c wanted 8d362b37)
---17817--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
---17817--   .. CRC is valid
---17817-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
---17817--    object doesn't have a symbol table
---17817--    object doesn't have a dynamic symbol table
---17817-- Scheduler: using generic scheduler lock implementation.
---17817-- Reading suppressions file: valgrind_readline_leaks_ignore.txt
---17817-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
-==17817== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-17817-by-ngobert-on-???
-==17817== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-17817-by-ngobert-on-???
-==17817== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-17817-by-ngobert-on-???
-==17817== 
-==17817== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==17817== don't want to do, unless you know exactly what you're doing,
-==17817== or are doing some strange experiment):
-==17817==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=17817 ...command...
-==17817== 
-==17817== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==17817==   /path/to/gdb ./minishell
-==17817== and then give GDB the following command
-==17817==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=17817
-==17817== --pid is optional if only one valgrind process is running
-==17817== 
---17817-- REDIR: 0x4022e10 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
---17817-- REDIR: 0x4022be0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
---17817-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
---17817--    object doesn't have a symbol table
---17817-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
---17817--    object doesn't have a symbol table
-==17817== WARNING: new redirection conflicts with existing -- ignoring it
---17817--     old: 0x04022e10 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
---17817--     new: 0x04022e10 (strlen              ) R-> (2007.0) 0x0483f060 strlen
---17817-- REDIR: 0x401f5f0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
---17817-- REDIR: 0x4023370 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
---17817-- Reading syms from /usr/lib/x86_64-linux-gnu/libreadline.so.8.0
---17817--    object doesn't have a symbol table
---17817-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
---17817--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
---17817--   .. CRC mismatch (computed ef41b1a0 wanted f854b801)
---17817--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
---17817--   .. CRC mismatch (computed ef41b1a0 wanted f854b801)
---17817--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
---17817--   .. CRC is valid
---17817-- Reading syms from /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2
---17817--    object doesn't have a symbol table
---17817-- REDIR: 0x49544b0 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x49537b0 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x49547e0 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x49530d0 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4953810 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4955c80 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4970d10 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4970850 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4954610 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4954440 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4953740 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4953180 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4954570 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4970810 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x49536a0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4953260 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4954830 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4953200 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4954980 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4971f80 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4970890 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4953850 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4953130 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4953660 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x495cbd0 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4954880 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4954400 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4970960 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4953b10 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4954780 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4954720 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4955cc0 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x49548d0 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x49536e0 (libc.so.6:strncat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x49e1880 (libc.so.6:__memcpy_chk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x4954320 (libc.so.6:strstr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
---17817-- REDIR: 0x49658e0 (libc.so.6:__strrchr_sse2) redirected to 0x483ea70 (__strrchr_sse2)
---17817-- REDIR: 0x494e110 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
---17817-- REDIR: 0x4965be0 (libc.so.6:__strlen_sse2) redirected to 0x483efa0 (__strlen_sse2)
---17817-- REDIR: 0x496ab20 (libc.so.6:__strcpy_sse2_unaligned) redirected to 0x483f090 (strcpy)
---17817-- REDIR: 0x49656d0 (libc.so.6:__strchrnul_sse2) redirected to 0x4843540 (strchrnul)
---17817-- REDIR: 0x48fa520 (libc.so.6:setenv) redirected to 0x4844480 (setenv)
---17817-- REDIR: 0x49654a0 (libc.so.6:__strchr_sse2) redirected to 0x483eb90 (__strchr_sse2)
---17817-- REDIR: 0x4a32bd0 (libc.so.6:__strncmp_sse42) redirected to 0x483f7c0 (__strncmp_sse42)
---17817-- REDIR: 0x494eeb0 (libc.so.6:realloc) redirected to 0x483df30 (realloc)
---17817-- REDIR: 0x496faf0 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4840100 (memcpy@GLIBC_2.2.5)
---17817-- REDIR: 0x496fad0 (libc.so.6:__mempcpy_sse2_unaligned) redirected to 0x4843660 (mempcpy)
---17817-- REDIR: 0x495e3d0 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x483fed0 (strcmp)
---17817-- REDIR: 0x494fb40 (libc.so.6:calloc) redirected to 0x483dce0 (calloc)
---17817-- REDIR: 0x4965d80 (libc.so.6:__strnlen_sse2) redirected to 0x483eee0 (strnlen)
---17817-- REDIR: 0x494e700 (libc.so.6:free) redirected to 0x483c9d0 (free)
---17817-- REDIR: 0x4953fd0 (libc.so.6:__GI_strstr) redirected to 0x4843ca0 (__strstr_sse2)
---17817-- REDIR: 0x496fae0 (libc.so.6:__memcpy_chk_sse2_unaligned) redirected to 0x4843b10 (__memcpy_chk)
---17817-- REDIR: 0x496b150 (libc.so.6:__strncpy_sse2_unaligned) redirected to 0x483f560 (__strncpy_sse2_unaligned)
---17817-- REDIR: 0x495fee0 (libc.so.6:__memchr_sse2) redirected to 0x4840050 (memchr)
---17817-- REDIR: 0x496c160 (libc.so.6:__stpcpy_sse2_unaligned) redirected to 0x4842570 (__stpcpy_sse2_unaligned)
---17817-- REDIR: 0x4a38fb0 (libc.so.6:__strcasecmp_avx) redirected to 0x483f830 (strcasecmp)
---17817-- REDIR: 0x4a3a630 (libc.so.6:__strncasecmp_avx) redirected to 0x483f910 (strncasecmp)
---17817-- REDIR: 0x496ff20 (libc.so.6:__memset_sse2_unaligned) redirected to 0x48428e0 (memset)
---17817-- REDIR: 0x4a41460 (libc.so.6:__memcmp_sse4_1) redirected to 0x4842150 (__memcmp_sse4_1)
-==17817== Conditional jump or move depends on uninitialised value(s)
-==17817==    at 0x110072: ft_strlen (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
-==17817==    by 0x110652: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
-==17817==    by 0x10B997: make_string_b (lexer.c:47)
-==17817==    by 0x10BB55: make_string (lexer.c:85)
-==17817==    by 0x10BDE2: make_token (lexer.c:134)
-==17817==    by 0x10BEE6: init_tlist (init_lexer.c:43)
-==17817==    by 0x1095FE: main (main.c:68)
-==17817==  Uninitialised value was created by a stack allocation
-==17817==    at 0x10BE53: init_tlist (init_lexer.c:28)
-==17817== 
-==17817== Conditional jump or move depends on uninitialised value(s)
-==17817==    at 0x11070E: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
-==17817==    by 0x10B997: make_string_b (lexer.c:47)
-==17817==    by 0x10BB55: make_string (lexer.c:85)
-==17817==    by 0x10BDE2: make_token (lexer.c:134)
-==17817==    by 0x10BEE6: init_tlist (init_lexer.c:43)
-==17817==    by 0x1095FE: main (main.c:68)
-==17817==  Uninitialised value was created by a stack allocation
-==17817==    at 0x10BE53: init_tlist (init_lexer.c:28)
-==17817== 
-==17817== Invalid read of size 1
-==17817==    at 0x10B9CA: make_string_b (lexer.c:51)
-==17817==    by 0x10BB55: make_string (lexer.c:85)
-==17817==    by 0x10BDE2: make_token (lexer.c:134)
-==17817==    by 0x10BEE6: init_tlist (init_lexer.c:43)
-==17817==    by 0x1095FE: main (main.c:68)
-==17817==  Address 0x4b189ac is 0 bytes after a block of size 12 alloc'd
-==17817==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==17817==    by 0x48A000C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==17817==    by 0x48792AB: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==17817==    by 0x487A504: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==17817==    by 0x109778: ft_prompt (prompt.c:49)
-==17817==    by 0x1095CF: main (main.c:65)
-==17817== 
-==17817== 
-==17817== HEAP SUMMARY:
-==17817==     in use at exit: 204,655 bytes in 216 blocks
-==17817==   total heap usage: 747 allocs, 531 frees, 237,321 bytes allocated
-==17817== 
-==17817== Searching for pointers to 216 not-freed blocks
-==17817== Checked 207,888 bytes
-==17817== 
-==17817== LEAK SUMMARY:
-==17817==    definitely lost: 0 bytes in 0 blocks
-==17817==    indirectly lost: 0 bytes in 0 blocks
-==17817==      possibly lost: 0 bytes in 0 blocks
-==17817==    still reachable: 0 bytes in 0 blocks
-==17817==         suppressed: 204,655 bytes in 216 blocks
-==17817== 
-==17817== ERROR SUMMARY: 15 errors from 3 contexts (suppressed: 0 from 0)
-==17817== 
-==17817== 1 errors in context 1 of 3:
-==17817== Invalid read of size 1
-==17817==    at 0x10B9CA: make_string_b (lexer.c:51)
-==17817==    by 0x10BB55: make_string (lexer.c:85)
-==17817==    by 0x10BDE2: make_token (lexer.c:134)
-==17817==    by 0x10BEE6: init_tlist (init_lexer.c:43)
-==17817==    by 0x1095FE: main (main.c:68)
-==17817==  Address 0x4b189ac is 0 bytes after a block of size 12 alloc'd
-==17817==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==17817==    by 0x48A000C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==17817==    by 0x48792AB: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==17817==    by 0x487A504: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
-==17817==    by 0x109778: ft_prompt (prompt.c:49)
-==17817==    by 0x1095CF: main (main.c:65)
-==17817== 
-==17817== 
-==17817== 7 errors in context 2 of 3:
-==17817== Conditional jump or move depends on uninitialised value(s)
-==17817==    at 0x11070E: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
-==17817==    by 0x10B997: make_string_b (lexer.c:47)
-==17817==    by 0x10BB55: make_string (lexer.c:85)
-==17817==    by 0x10BDE2: make_token (lexer.c:134)
-==17817==    by 0x10BEE6: init_tlist (init_lexer.c:43)
-==17817==    by 0x1095FE: main (main.c:68)
-==17817==  Uninitialised value was created by a stack allocation
-==17817==    at 0x10BE53: init_tlist (init_lexer.c:28)
-==17817== 
-==17817== 
-==17817== 7 errors in context 3 of 3:
-==17817== Conditional jump or move depends on uninitialised value(s)
-==17817==    at 0x110072: ft_strlen (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
-==17817==    by 0x110652: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
-==17817==    by 0x10B997: make_string_b (lexer.c:47)
-==17817==    by 0x10BB55: make_string (lexer.c:85)
-==17817==    by 0x10BDE2: make_token (lexer.c:134)
-==17817==    by 0x10BEE6: init_tlist (init_lexer.c:43)
-==17817==    by 0x1095FE: main (main.c:68)
-==17817==  Uninitialised value was created by a stack allocation
-==17817==    at 0x10BE53: init_tlist (init_lexer.c:28)
-==17817== 
---17817-- 
---17817-- used_suppression:     58 leak readline valgrind_readline_leaks_ignore.txt:2 suppressed: 200,639 bytes in 215 blocks
---17817-- used_suppression:      1 leak add_history valgrind_readline_leaks_ignore.txt:8 suppressed: 4,016 bytes in 1 blocks
-==17817== 
-==17817== ERROR SUMMARY: 15 errors from 3 contexts (suppressed: 0 from 0)
+==30039== Memcheck, a memory error detector
+==30039== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==30039== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==30039== Command: ./minishell
+==30039== Parent PID: 11253
+==30039== 
+--30039-- 
+--30039-- Valgrind options:
+--30039--    --suppressions=valgrind_readline_leaks_ignore.txt
+--30039--    --leak-check=full
+--30039--    --show-leak-kinds=all
+--30039--    --track-origins=yes
+--30039--    --verbose
+--30039--    --log-file=valgrind-out.txt
+--30039-- Contents of /proc/version:
+--30039--   Linux version 5.4.0-109-generic (buildd@ubuntu) (gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1)) #123-Ubuntu SMP Fri Apr 8 09:10:54 UTC 2022
+--30039-- 
+--30039-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-ssse3-avx
+--30039-- Page sizes: currently 4096, max supported 4096
+--30039-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
+--30039-- Reading syms from /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell
+--30039-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
+--30039--   Considering /usr/lib/x86_64-linux-gnu/ld-2.31.so ..
+--30039--   .. CRC mismatch (computed 0306b78c wanted 8d362b37)
+--30039--   Considering /lib/x86_64-linux-gnu/ld-2.31.so ..
+--30039--   .. CRC mismatch (computed 0306b78c wanted 8d362b37)
+--30039--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.31.so ..
+--30039--   .. CRC is valid
+--30039-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
+--30039--    object doesn't have a symbol table
+--30039--    object doesn't have a dynamic symbol table
+--30039-- Scheduler: using generic scheduler lock implementation.
+--30039-- Reading suppressions file: valgrind_readline_leaks_ignore.txt
+--30039-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
+==30039== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-30039-by-ngobert-on-???
+==30039== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-30039-by-ngobert-on-???
+==30039== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-30039-by-ngobert-on-???
+==30039== 
+==30039== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==30039== don't want to do, unless you know exactly what you're doing,
+==30039== or are doing some strange experiment):
+==30039==   /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=30039 ...command...
+==30039== 
+==30039== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==30039==   /path/to/gdb ./minishell
+==30039== and then give GDB the following command
+==30039==   target remote | /usr/lib/x86_64-linux-gnu/valgrind/../../bin/vgdb --pid=30039
+==30039== --pid is optional if only one valgrind process is running
+==30039== 
+--30039-- REDIR: 0x4022e10 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c9ce2 (???)
+--30039-- REDIR: 0x4022be0 (ld-linux-x86-64.so.2:index) redirected to 0x580c9cfc (???)
+--30039-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
+--30039--    object doesn't have a symbol table
+--30039-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
+--30039--    object doesn't have a symbol table
+==30039== WARNING: new redirection conflicts with existing -- ignoring it
+--30039--     old: 0x04022e10 (strlen              ) R-> (0000.0) 0x580c9ce2 ???
+--30039--     new: 0x04022e10 (strlen              ) R-> (2007.0) 0x0483f060 strlen
+--30039-- REDIR: 0x401f5f0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ffd0 (strcmp)
+--30039-- REDIR: 0x4023370 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4843a20 (mempcpy)
+--30039-- Reading syms from /usr/lib/x86_64-linux-gnu/libreadline.so.8.0
+--30039--    object doesn't have a symbol table
+--30039-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
+--30039--   Considering /usr/lib/x86_64-linux-gnu/libc-2.31.so ..
+--30039--   .. CRC mismatch (computed ef41b1a0 wanted f854b801)
+--30039--   Considering /lib/x86_64-linux-gnu/libc-2.31.so ..
+--30039--   .. CRC mismatch (computed ef41b1a0 wanted f854b801)
+--30039--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.31.so ..
+--30039--   .. CRC is valid
+--30039-- Reading syms from /usr/lib/x86_64-linux-gnu/libtinfo.so.6.2
+--30039--    object doesn't have a symbol table
+--30039-- REDIR: 0x49544b0 (libc.so.6:memmove) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x49537b0 (libc.so.6:strncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x49547e0 (libc.so.6:strcasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x49530d0 (libc.so.6:strcat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4953810 (libc.so.6:rindex) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4955c80 (libc.so.6:rawmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4970d10 (libc.so.6:wmemchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4970850 (libc.so.6:wcscmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4954610 (libc.so.6:mempcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4954440 (libc.so.6:bcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4953740 (libc.so.6:strncmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4953180 (libc.so.6:strcmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4954570 (libc.so.6:memset) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4970810 (libc.so.6:wcschr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x49536a0 (libc.so.6:strnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4953260 (libc.so.6:strcspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4954830 (libc.so.6:strncasecmp) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4953200 (libc.so.6:strcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4954980 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4971f80 (libc.so.6:wcsnlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4970890 (libc.so.6:wcscpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4953850 (libc.so.6:strpbrk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4953130 (libc.so.6:index) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4953660 (libc.so.6:strlen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x495cbd0 (libc.so.6:memrchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4954880 (libc.so.6:strcasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4954400 (libc.so.6:memchr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4970960 (libc.so.6:wcslen) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4953b10 (libc.so.6:strspn) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4954780 (libc.so.6:stpncpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4954720 (libc.so.6:stpcpy) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4955cc0 (libc.so.6:strchrnul) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x49548d0 (libc.so.6:strncasecmp_l) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x49536e0 (libc.so.6:strncat) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x49e1880 (libc.so.6:__memcpy_chk) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x4954320 (libc.so.6:strstr) redirected to 0x48311d0 (_vgnU_ifunc_wrapper)
+--30039-- REDIR: 0x49658e0 (libc.so.6:__strrchr_sse2) redirected to 0x483ea70 (__strrchr_sse2)
+--30039-- REDIR: 0x494e110 (libc.so.6:malloc) redirected to 0x483b780 (malloc)
+--30039-- REDIR: 0x4965be0 (libc.so.6:__strlen_sse2) redirected to 0x483efa0 (__strlen_sse2)
+--30039-- REDIR: 0x496ab20 (libc.so.6:__strcpy_sse2_unaligned) redirected to 0x483f090 (strcpy)
+--30039-- REDIR: 0x49656d0 (libc.so.6:__strchrnul_sse2) redirected to 0x4843540 (strchrnul)
+--30039-- REDIR: 0x48fa520 (libc.so.6:setenv) redirected to 0x4844480 (setenv)
+--30039-- REDIR: 0x49654a0 (libc.so.6:__strchr_sse2) redirected to 0x483eb90 (__strchr_sse2)
+--30039-- REDIR: 0x4a32bd0 (libc.so.6:__strncmp_sse42) redirected to 0x483f7c0 (__strncmp_sse42)
+--30039-- REDIR: 0x494eeb0 (libc.so.6:realloc) redirected to 0x483df30 (realloc)
+--30039-- REDIR: 0x496faf0 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4840100 (memcpy@GLIBC_2.2.5)
+--30039-- REDIR: 0x496fad0 (libc.so.6:__mempcpy_sse2_unaligned) redirected to 0x4843660 (mempcpy)
+--30039-- REDIR: 0x495e3d0 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x483fed0 (strcmp)
+--30039-- REDIR: 0x494fb40 (libc.so.6:calloc) redirected to 0x483dce0 (calloc)
+--30039-- REDIR: 0x4965d80 (libc.so.6:__strnlen_sse2) redirected to 0x483eee0 (strnlen)
+--30039-- REDIR: 0x494e700 (libc.so.6:free) redirected to 0x483c9d0 (free)
+--30039-- REDIR: 0x4953fd0 (libc.so.6:__GI_strstr) redirected to 0x4843ca0 (__strstr_sse2)
+--30039-- REDIR: 0x496fae0 (libc.so.6:__memcpy_chk_sse2_unaligned) redirected to 0x4843b10 (__memcpy_chk)
+--30039-- REDIR: 0x496b150 (libc.so.6:__strncpy_sse2_unaligned) redirected to 0x483f560 (__strncpy_sse2_unaligned)
+--30039-- REDIR: 0x495fee0 (libc.so.6:__memchr_sse2) redirected to 0x4840050 (memchr)
+--30039-- REDIR: 0x496c160 (libc.so.6:__stpcpy_sse2_unaligned) redirected to 0x4842570 (__stpcpy_sse2_unaligned)
+--30039-- REDIR: 0x4a38fb0 (libc.so.6:__strcasecmp_avx) redirected to 0x483f830 (strcasecmp)
+--30039-- REDIR: 0x4a3a630 (libc.so.6:__strncasecmp_avx) redirected to 0x483f910 (strncasecmp)
+--30039-- REDIR: 0x496ff20 (libc.so.6:__memset_sse2_unaligned) redirected to 0x48428e0 (memset)
+--30039-- REDIR: 0x4a41460 (libc.so.6:__memcmp_sse4_1) redirected to 0x4842150 (__memcmp_sse4_1)
+==30039== Conditional jump or move depends on uninitialised value(s)
+==30039==    at 0x110184: ft_strlen (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30039==    by 0x110764: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30039==    by 0x10B997: make_string_b (lexer.c:47)
+==30039==    by 0x10BB55: make_string (lexer.c:85)
+==30039==    by 0x10BDE2: make_token (lexer.c:134)
+==30039==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30039==    by 0x1095FE: main (main.c:68)
+==30039==  Uninitialised value was created by a stack allocation
+==30039==    at 0x10BE53: init_tlist (init_lexer.c:28)
+==30039== 
+==30039== Conditional jump or move depends on uninitialised value(s)
+==30039==    at 0x110820: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30039==    by 0x10B997: make_string_b (lexer.c:47)
+==30039==    by 0x10BB55: make_string (lexer.c:85)
+==30039==    by 0x10BDE2: make_token (lexer.c:134)
+==30039==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30039==    by 0x1095FE: main (main.c:68)
+==30039==  Uninitialised value was created by a stack allocation
+==30039==    at 0x10BE53: init_tlist (init_lexer.c:28)
+==30039== 
+==30039== Invalid read of size 1
+==30039==    at 0x10B9CA: make_string_b (lexer.c:51)
+==30039==    by 0x10BB55: make_string (lexer.c:85)
+==30039==    by 0x10BDE2: make_token (lexer.c:134)
+==30039==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30039==    by 0x1095FE: main (main.c:68)
+==30039==  Address 0x4b189c7 is 0 bytes after a block of size 7 alloc'd
+==30039==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30039==    by 0x48A000C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==30039==    by 0x48792AB: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==30039==    by 0x487A504: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==30039==    by 0x109778: ft_prompt (prompt.c:49)
+==30039==    by 0x1095CF: main (main.c:65)
+==30039== 
+==30044== 
+==30044== HEAP SUMMARY:
+==30044==     in use at exit: 204,693 bytes in 219 blocks
+==30044==   total heap usage: 604 allocs, 385 frees, 231,459 bytes allocated
+==30044== 
+==30044== Searching for pointers to 219 not-freed blocks
+==30044== Checked 208,104 bytes
+==30044== 
+==30044== LEAK SUMMARY:
+==30044==    definitely lost: 0 bytes in 0 blocks
+==30044==    indirectly lost: 0 bytes in 0 blocks
+==30044==      possibly lost: 0 bytes in 0 blocks
+==30044==    still reachable: 0 bytes in 0 blocks
+==30044==         suppressed: 204,693 bytes in 219 blocks
+==30044== 
+==30044== ERROR SUMMARY: 11 errors from 3 contexts (suppressed: 0 from 0)
+==30044== 
+==30044== 1 errors in context 1 of 3:
+==30044== Invalid read of size 1
+==30044==    at 0x10B9CA: make_string_b (lexer.c:51)
+==30044==    by 0x10BB55: make_string (lexer.c:85)
+==30044==    by 0x10BDE2: make_token (lexer.c:134)
+==30044==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30044==    by 0x1095FE: main (main.c:68)
+==30044==  Address 0x4b189c7 is 0 bytes after a block of size 7 alloc'd
+==30044==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30044==    by 0x48A000C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==30044==    by 0x48792AB: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==30044==    by 0x487A504: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==30044==    by 0x109778: ft_prompt (prompt.c:49)
+==30044==    by 0x1095CF: main (main.c:65)
+==30044== 
+==30044== 
+==30044== 5 errors in context 2 of 3:
+==30044== Conditional jump or move depends on uninitialised value(s)
+==30044==    at 0x110820: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30044==    by 0x10B997: make_string_b (lexer.c:47)
+==30044==    by 0x10BB55: make_string (lexer.c:85)
+==30044==    by 0x10BDE2: make_token (lexer.c:134)
+==30044==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30044==    by 0x1095FE: main (main.c:68)
+==30044==  Uninitialised value was created by a stack allocation
+==30044==    at 0x10BE53: init_tlist (init_lexer.c:28)
+==30044== 
+==30044== 
+==30044== 5 errors in context 3 of 3:
+==30044== Conditional jump or move depends on uninitialised value(s)
+==30044==    at 0x110184: ft_strlen (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30044==    by 0x110764: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30044==    by 0x10B997: make_string_b (lexer.c:47)
+==30044==    by 0x10BB55: make_string (lexer.c:85)
+==30044==    by 0x10BDE2: make_token (lexer.c:134)
+==30044==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30044==    by 0x1095FE: main (main.c:68)
+==30044==  Uninitialised value was created by a stack allocation
+==30044==    at 0x10BE53: init_tlist (init_lexer.c:28)
+==30044== 
+--30044-- 
+--30044-- used_suppression:     58 leak readline valgrind_readline_leaks_ignore.txt:2 suppressed: 200,634 bytes in 215 blocks
+--30044-- used_suppression:      4 leak add_history valgrind_readline_leaks_ignore.txt:8 suppressed: 4,059 bytes in 4 blocks
+==30044== 
+==30044== ERROR SUMMARY: 11 errors from 3 contexts (suppressed: 0 from 0)
+==30045== 
+==30045== HEAP SUMMARY:
+==30045==     in use at exit: 204,737 bytes in 223 blocks
+==30045==   total heap usage: 644 allocs, 421 frees, 232,194 bytes allocated
+==30045== 
+==30045== Searching for pointers to 223 not-freed blocks
+==30045== Checked 208,048 bytes
+==30045== 
+==30045== LEAK SUMMARY:
+==30045==    definitely lost: 0 bytes in 0 blocks
+==30045==    indirectly lost: 0 bytes in 0 blocks
+==30045==      possibly lost: 0 bytes in 0 blocks
+==30045==    still reachable: 0 bytes in 0 blocks
+==30045==         suppressed: 204,737 bytes in 223 blocks
+==30045== 
+==30045== ERROR SUMMARY: 18 errors from 3 contexts (suppressed: 1 from 1)
+==30045== 
+==30045== 2 errors in context 1 of 3:
+==30045== Invalid read of size 1
+==30045==    at 0x10B9CA: make_string_b (lexer.c:51)
+==30045==    by 0x10BB55: make_string (lexer.c:85)
+==30045==    by 0x10BDE2: make_token (lexer.c:134)
+==30045==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30045==    by 0x1095FE: main (main.c:68)
+==30045==  Address 0x4b189c7 is 0 bytes after a block of size 7 alloc'd
+==30045==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30045==    by 0x48A000C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==30045==    by 0x48792AB: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==30045==    by 0x487A504: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==30045==    by 0x109778: ft_prompt (prompt.c:49)
+==30045==    by 0x1095CF: main (main.c:65)
+==30045== 
+==30045== 
+==30045== 8 errors in context 2 of 3:
+==30045== Conditional jump or move depends on uninitialised value(s)
+==30045==    at 0x110820: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30045==    by 0x10B997: make_string_b (lexer.c:47)
+==30045==    by 0x10BB55: make_string (lexer.c:85)
+==30045==    by 0x10BDE2: make_token (lexer.c:134)
+==30045==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30045==    by 0x1095FE: main (main.c:68)
+==30045==  Uninitialised value was created by a stack allocation
+==30045==    at 0x10BE53: init_tlist (init_lexer.c:28)
+==30045== 
+==30045== 
+==30045== 8 errors in context 3 of 3:
+==30045== Conditional jump or move depends on uninitialised value(s)
+==30045==    at 0x110184: ft_strlen (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30045==    by 0x110764: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30045==    by 0x10B997: make_string_b (lexer.c:47)
+==30045==    by 0x10BB55: make_string (lexer.c:85)
+==30045==    by 0x10BDE2: make_token (lexer.c:134)
+==30045==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30045==    by 0x1095FE: main (main.c:68)
+==30045==  Uninitialised value was created by a stack allocation
+==30045==    at 0x10BE53: init_tlist (init_lexer.c:28)
+==30045== 
+--30045-- 
+--30045-- used_suppression:     59 leak readline valgrind_readline_leaks_ignore.txt:2 suppressed: 200,638 bytes in 216 blocks
+--30045-- used_suppression:      4 leak add_history valgrind_readline_leaks_ignore.txt:8 suppressed: 4,099 bytes in 7 blocks
+==30045== 
+==30045== ERROR SUMMARY: 18 errors from 3 contexts (suppressed: 1 from 1)
+==30047== 
+==30047== HEAP SUMMARY:
+==30047==     in use at exit: 204,787 bytes in 227 blocks
+==30047==   total heap usage: 888 allocs, 661 frees, 245,882 bytes allocated
+==30047== 
+==30047== Searching for pointers to 227 not-freed blocks
+==30047== Checked 208,088 bytes
+==30047== 
+==30047== LEAK SUMMARY:
+==30047==    definitely lost: 0 bytes in 0 blocks
+==30047==    indirectly lost: 0 bytes in 0 blocks
+==30047==      possibly lost: 0 bytes in 0 blocks
+==30047==    still reachable: 0 bytes in 0 blocks
+==30047==         suppressed: 204,787 bytes in 227 blocks
+==30047== 
+==30047== ERROR SUMMARY: 31 errors from 3 contexts (suppressed: 1 from 1)
+==30047== 
+==30047== 3 errors in context 1 of 3:
+==30047== Invalid read of size 1
+==30047==    at 0x10B9CA: make_string_b (lexer.c:51)
+==30047==    by 0x10BB55: make_string (lexer.c:85)
+==30047==    by 0x10BDE2: make_token (lexer.c:134)
+==30047==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30047==    by 0x1095FE: main (main.c:68)
+==30047==  Address 0x4b189c7 is 0 bytes after a block of size 7 alloc'd
+==30047==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30047==    by 0x48A000C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==30047==    by 0x48792AB: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==30047==    by 0x487A504: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==30047==    by 0x109778: ft_prompt (prompt.c:49)
+==30047==    by 0x1095CF: main (main.c:65)
+==30047== 
+==30047== 
+==30047== 14 errors in context 2 of 3:
+==30047== Conditional jump or move depends on uninitialised value(s)
+==30047==    at 0x110820: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30047==    by 0x10B997: make_string_b (lexer.c:47)
+==30047==    by 0x10BB55: make_string (lexer.c:85)
+==30047==    by 0x10BDE2: make_token (lexer.c:134)
+==30047==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30047==    by 0x1095FE: main (main.c:68)
+==30047==  Uninitialised value was created by a stack allocation
+==30047==    at 0x10BE53: init_tlist (init_lexer.c:28)
+==30047== 
+==30047== 
+==30047== 14 errors in context 3 of 3:
+==30047== Conditional jump or move depends on uninitialised value(s)
+==30047==    at 0x110184: ft_strlen (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30047==    by 0x110764: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30047==    by 0x10B997: make_string_b (lexer.c:47)
+==30047==    by 0x10BB55: make_string (lexer.c:85)
+==30047==    by 0x10BDE2: make_token (lexer.c:134)
+==30047==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30047==    by 0x1095FE: main (main.c:68)
+==30047==  Uninitialised value was created by a stack allocation
+==30047==    at 0x10BE53: init_tlist (init_lexer.c:28)
+==30047== 
+--30047-- 
+--30047-- used_suppression:     59 leak readline valgrind_readline_leaks_ignore.txt:2 suppressed: 200,645 bytes in 217 blocks
+--30047-- used_suppression:      4 leak add_history valgrind_readline_leaks_ignore.txt:8 suppressed: 4,142 bytes in 10 blocks
+==30047== 
+==30047== ERROR SUMMARY: 31 errors from 3 contexts (suppressed: 1 from 1)
+==30039== Conditional jump or move depends on uninitialised value(s)
+==30039==    at 0x110184: ft_strlen (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30039==    by 0x110764: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30039==    by 0x10B8E8: make_quote_string (lexer.c:34)
+==30039==    by 0x10BD49: make_token (lexer.c:127)
+==30039==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30039==    by 0x1095FE: main (main.c:68)
+==30039==  Uninitialised value was created by a stack allocation
+==30039==    at 0x10BE53: init_tlist (init_lexer.c:28)
+==30039== 
+==30039== Conditional jump or move depends on uninitialised value(s)
+==30039==    at 0x110820: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30039==    by 0x10B8E8: make_quote_string (lexer.c:34)
+==30039==    by 0x10BD49: make_token (lexer.c:127)
+==30039==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30039==    by 0x1095FE: main (main.c:68)
+==30039==  Uninitialised value was created by a stack allocation
+==30039==    at 0x10BE53: init_tlist (init_lexer.c:28)
+==30039== 
+==30039== Syscall param wait4(pid) contains uninitialised byte(s)
+==30039==    at 0x4996C6A: wait4 (wait4.c:27)
+==30039==    by 0x10E324: only1cmd (init_ft.c:123)
+==30039==    by 0x109671: main (main.c:74)
+==30039==  Uninitialised value was created by a stack allocation
+==30039==    at 0x10E041: fork_built (init_ft.c:58)
+==30039== 
+==30080== 
+==30080== HEAP SUMMARY:
+==30080==     in use at exit: 204,903 bytes in 235 blocks
+==30080==   total heap usage: 1,017 allocs, 782 frees, 247,844 bytes allocated
+==30080== 
+==30080== Searching for pointers to 235 not-freed blocks
+==30080== Checked 208,184 bytes
+==30080== 
+==30080== LEAK SUMMARY:
+==30080==    definitely lost: 0 bytes in 0 blocks
+==30080==    indirectly lost: 0 bytes in 0 blocks
+==30080==      possibly lost: 0 bytes in 0 blocks
+==30080==    still reachable: 0 bytes in 0 blocks
+==30080==         suppressed: 204,903 bytes in 235 blocks
+==30080== 
+==30080== ERROR SUMMARY: 67 errors from 6 contexts (suppressed: 1 from 1)
+==30080== 
+==30080== 1 errors in context 1 of 6:
+==30080== Syscall param wait4(pid) contains uninitialised byte(s)
+==30080==    at 0x4996C6A: wait4 (wait4.c:27)
+==30080==    by 0x10E324: only1cmd (init_ft.c:123)
+==30080==    by 0x109671: main (main.c:74)
+==30080==  Uninitialised value was created by a stack allocation
+==30080==    at 0x10E041: fork_built (init_ft.c:58)
+==30080== 
+==30080== 
+==30080== 3 errors in context 2 of 6:
+==30080== Conditional jump or move depends on uninitialised value(s)
+==30080==    at 0x110820: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30080==    by 0x10B8E8: make_quote_string (lexer.c:34)
+==30080==    by 0x10BD49: make_token (lexer.c:127)
+==30080==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30080==    by 0x1095FE: main (main.c:68)
+==30080==  Uninitialised value was created by a stack allocation
+==30080==    at 0x10BE53: init_tlist (init_lexer.c:28)
+==30080== 
+==30080== 
+==30080== 3 errors in context 3 of 6:
+==30080== Conditional jump or move depends on uninitialised value(s)
+==30080==    at 0x110184: ft_strlen (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30080==    by 0x110764: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30080==    by 0x10B8E8: make_quote_string (lexer.c:34)
+==30080==    by 0x10BD49: make_token (lexer.c:127)
+==30080==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30080==    by 0x1095FE: main (main.c:68)
+==30080==  Uninitialised value was created by a stack allocation
+==30080==    at 0x10BE53: init_tlist (init_lexer.c:28)
+==30080== 
+==30080== 
+==30080== 4 errors in context 4 of 6:
+==30080== Invalid read of size 1
+==30080==    at 0x10B9CA: make_string_b (lexer.c:51)
+==30080==    by 0x10BB55: make_string (lexer.c:85)
+==30080==    by 0x10BDE2: make_token (lexer.c:134)
+==30080==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30080==    by 0x1095FE: main (main.c:68)
+==30080==  Address 0x4b189c7 is 0 bytes after a block of size 7 alloc'd
+==30080==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==30080==    by 0x48A000C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==30080==    by 0x48792AB: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==30080==    by 0x487A504: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==30080==    by 0x109778: ft_prompt (prompt.c:49)
+==30080==    by 0x1095CF: main (main.c:65)
+==30080== 
+==30080== 
+==30080== 28 errors in context 5 of 6:
+==30080== Conditional jump or move depends on uninitialised value(s)
+==30080==    at 0x110820: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30080==    by 0x10B997: make_string_b (lexer.c:47)
+==30080==    by 0x10BB55: make_string (lexer.c:85)
+==30080==    by 0x10BDE2: make_token (lexer.c:134)
+==30080==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30080==    by 0x1095FE: main (main.c:68)
+==30080==  Uninitialised value was created by a stack allocation
+==30080==    at 0x10BE53: init_tlist (init_lexer.c:28)
+==30080== 
+==30080== 
+==30080== 28 errors in context 6 of 6:
+==30080== Conditional jump or move depends on uninitialised value(s)
+==30080==    at 0x110184: ft_strlen (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30080==    by 0x110764: ft_strnjoin_free (in /mnt/nfs/homes/ngobert/Desktop/42/minishell/minishell)
+==30080==    by 0x10B997: make_string_b (lexer.c:47)
+==30080==    by 0x10BB55: make_string (lexer.c:85)
+==30080==    by 0x10BDE2: make_token (lexer.c:134)
+==30080==    by 0x10BEE6: init_tlist (init_lexer.c:43)
+==30080==    by 0x1095FE: main (main.c:68)
+==30080==  Uninitialised value was created by a stack allocation
+==30080==    at 0x10BE53: init_tlist (init_lexer.c:28)
+==30080== 
+--30080-- 
+--30080-- used_suppression:     59 leak readline valgrind_readline_leaks_ignore.txt:2 suppressed: 200,667 bytes in 219 blocks
+--30080-- used_suppression:      4 leak add_history valgrind_readline_leaks_ignore.txt:8 suppressed: 4,236 bytes in 16 blocks
+==30080== 
+==30080== ERROR SUMMARY: 67 errors from 6 contexts (suppressed: 1 from 1)

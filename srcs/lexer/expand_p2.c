@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:07:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/05 12:53:34 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/10 17:52:17 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	lenvarenv(char *str, int i)
 
 	j = 1;
 	i++;
-	if(str[i] == '?')
-		return(2);
+	if (str[i] == '?')
+		return (2);
 	while (str[i] && ft_isenv(str[i]) == 1)
 	{
 		j++;

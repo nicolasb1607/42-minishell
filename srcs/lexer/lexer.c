@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 15:50:57 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/05 11:51:29 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/10 17:53:39 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	make_quote_string(t_token *token, t_lexer *lexer)
 		advance(lexer);
 		while (lexer->current_char != tquote)
 		{
-			token->content = ft_strnjoin_free(token->content, &lexer->current_char, 1);
+			token->content = ft_strnjoin_free(token->content,
+					&lexer->current_char, 1);
 			advance(lexer);
 		}
 	}
@@ -42,11 +43,10 @@ void	make_quote_string(t_token *token, t_lexer *lexer)
 
 int	make_string_b(int i, t_lexer *lexer, t_token *token)
 {
-	char *tmp;
-	
+	char	*tmp;
+
 	tmp = ft_strnjoin_free(token->content, &lexer->current_char, 1);
 	token->content = tmp;
-	// free(tmp);
 	advance(lexer);
 	if (ft_containchar(lexer->text[lexer->pos + 1], "<>|") == 1)
 	{

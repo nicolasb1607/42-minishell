@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:32:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/10 10:29:52 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/10 17:16:16 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define UTILS_H
 
 # include "minishell.h"
+# include "mpipe.h"
 
 t_tlist	*ft_tlstnew(t_token *token);
 t_tlist	*tab_to_list(char **tab, t_tlist *head);
@@ -49,5 +50,12 @@ int		is_builtin(t_tlist *lst);
 /*	INIT_FT_FREE	*/
 char	**ft_free_tab(char **tab);
 void	free_tcmd(t_cmd **cmd);
+
+/*	INIT_FT_MKCMD	*/
+t_cmd	*make_commands(t_tlist *tlst, t_cmd **chead,
+			t_dlist **dupenv, t_tlist *curr);
+t_cmd	*mk_built(t_tlist **tlst);
+t_cmd	*mk_cmd_b(t_tlist **tlst, t_dlist **dupenv,
+			t_cmd *chead, t_tlist **curr);
 
 #endif

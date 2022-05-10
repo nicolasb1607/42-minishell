@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:07:07 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/04 13:34:58 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/10 17:50:02 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	*get_bin_custom(char *cmd, char **paths, t_tlist *tlst)
 	int		i;
 	int		j;
 
-	// tmp = ft_strdup("");
 	ret_path = NULL;
 	i = -1;
 	if (paths)

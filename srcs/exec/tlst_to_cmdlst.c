@@ -34,11 +34,11 @@ char	**tab_dup(char **tab)
 t_cmd	*cpy_tcmd(t_cmd **cmd)
 {
 	t_cmd	*new;
-	
+
 	new = ft_clstnew();
 	new->command = ft_strdup((*cmd)->command);
 	new->options = tab_dup((*cmd)->options);
-	new->bin = 	ft_strdup((*cmd)->bin);
+	new->bin = ft_strdup((*cmd)->bin);
 	new->type = (*cmd)->type;
 	ft_free_tab((*cmd)->options);
 	free((*cmd));
@@ -49,7 +49,7 @@ t_cmd	*cpy_tcmd(t_cmd **cmd)
 char	**get_path_to_cmd(t_tlist *tlst, t_dlist **dupenv)
 {
 	char	*path;
-	t_dlist *curr;
+	t_dlist	*curr;
 	char	**splitpath;
 
 	curr = *dupenv;
@@ -95,14 +95,15 @@ int	update_bin(char **path, t_cmd *cmd, t_tlist *tlst)
 		if (is_absolute(cmd->command) == 0)
 		{
 			cmd->bin = get_bin_custom(cmd->command, path, tlst);
-			cmd->is_absolute = 0;	
+			cmd->is_absolute = 0;
 		}
 		else
 			cmd->is_absolute = 1;
 	}
 	else
 		cmd->is_absolute = 1;
-	if (!cmd->command || (!is_builtincmd(cmd)&& cmd->is_absolute == 0 && cmd->bin == NULL))
+	if (!cmd->command || (!is_builtincmd(cmd)
+		&& cmd->is_absolute == 0 && cmd->bin == NULL))
 		return (-1);
 	return (0);
 }
@@ -131,8 +132,8 @@ void	make_heredoc(t_cmd *cmd)
 	char	*tmp;
 	int		fd;
 	int		i;
-	int status;
-	
+	int		status;
+
 	i = 0;
 	fd = open(cmd->infile[tab_size(cmd->infile) - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	tmp = NULL;
@@ -143,12 +144,12 @@ void	make_heredoc(t_cmd *cmd)
 		signal(SIGINT, handler_heredoc);
 		while (i == 0)
 		{
-			// dprintf(2, "Coucou\n");
 			tmp = readline("> ");
 			if (!tmp)
 			{
-				ft_putstr("minishell: warning: here-document at line 1 delimited by end-of-file (wanted `hd')\n");
-				break;
+				ft_putstr(
+					"minishell: warning: here-document at line 1 delimited by end-of-file (wanted `hd')\n");
+				break ;
 			}
 			if (tmp)
 			{

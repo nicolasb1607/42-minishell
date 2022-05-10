@@ -6,16 +6,25 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:56:11 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/10 15:33:41 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/10 17:17:15 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
+void	t_norm(t_tlist **curr, t_tlist **tmp)
+{
+	(*curr)->next->prev = (*tmp)->prev;
+	(*curr)->prev->next = (*tmp)->next;
+	free((*curr)->token->content);
+	free((*curr));
+}
+
 void	ft_tlstdelone(t_tlist *lst, void (*del)(void*))
 {
 	t_tlist	*tmp;
 	t_tlist	*curr;
+	int		i;
 
 	tmp = lst;
 	curr = lst;
@@ -25,26 +34,17 @@ void	ft_tlstdelone(t_tlist *lst, void (*del)(void*))
 		{
 			lst = curr->next;
 			curr->next->prev = NULL;
-			free(curr->token->content);
-			free(curr);
+			i = (free(curr->token->content), free(curr), 0);
 		}
 		else if (!curr->next && !curr->prev)
-		{
-			free(curr->token->content);
-			free(curr);
-		}
+			i = (free(curr->token->content), free(curr), 0);
 		else if (curr->next == NULL && curr->prev)
 		{
-			curr->prev->next = NULL;
-			free(curr->token->content);
-			free(curr);
+			curr->prev->next = (NULL);
+			i = (free(curr->token->content), free(curr), 0);
 		}
 		else
-		{
-			curr->next->prev = tmp->prev;
-			curr->prev->next = tmp->next;
-			free(curr->token->content);
-			free(curr);
-		}
+			t_norm(&curr, &tmp);
 	}
+	i++;
 }

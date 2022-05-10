@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:17 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/05 11:42:59 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/10 17:52:39 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_tlist	*init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
 	{
 		ft_cleantlist(tlist);
 		if (tlist && !tlist->token->content && tlist->next)
-			tlist = tlist->next; // ! Peut etre un free a regler avec celui d'avant
+			tlist = tlist->next;
 		i++;
 	}
 	g_mshell.err_exit = 0;

@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 10:23:12 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/10 10:29:33 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/10 17:11:28 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int	is_forkbuiltin(t_cmd *cmd)
 
 void	cpy_till_pipe(t_tlist **tlist, t_tlist **tlistnew)
 {
-	t_tlist *curr;
-	t_tlist *new;
-	
+	t_tlist	*curr;
+	t_tlist	*new;
+
 	curr = *tlist;
 	while (curr && ft_strcmp(curr->token->type, T_PIPE) != 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:52:33 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/10 13:43:24 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/10 17:48:36 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int	open_o(t_cmd *cmd, t_pipes *pipes)
 		while (cmd->outfile[i])
 		{
 			if (cmd->outfile[i][ft_strlen(cmd->outfile[i]) - 1] == ' ')
-				file_name = ft_strndup(cmd->outfile[i], ft_strlen(cmd->outfile[i]) - 1);
+				file_name = ft_strndup(cmd->outfile[i],
+						ft_strlen(cmd->outfile[i]) - 1);
 			else
 				file_name = ft_strdup(cmd->outfile[i]);
 			if (cmd->is_double == false || cmd->outfile[i + 1])
