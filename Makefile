@@ -30,9 +30,11 @@ SRCS = ./main.c \
 	./srcs/lexer/lexer.c \
 	./srcs/lexer/init_lexer.c \
 	./srcs/lexer/lexer_utils.c \
+	./srcs/lexer/lexer_utils2.c \
 	./srcs/lexer/expand_p1.c \
 	./srcs/lexer/expand_p2.c \
 	./srcs/lexer/position.c \
+	./srcs/lexer/make_token.c \
 	./srcs/utils/tab_to_list.c \
 	./srcs/utils/ft_tlstnew.c \
 	./srcs/utils/ft_tlstadd_back.c \

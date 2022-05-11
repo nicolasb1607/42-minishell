@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_p1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:02 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/05 10:25:49 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/11 13:34:22 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,20 +98,19 @@ char	*expand(t_token *token, int i, t_minishell *mshell)
 	varenv = NULL;
 	i++;
 	while (token->content[i] && token->content[i] != ' '
-		&& token->content[i] != '\'' && token->content[i] != '=' && token->content[i] != '$' )
+		&& token->content[i] != '\'' && token->content[i] != '='
+		&& token->content[i] != '$' )
 	{
-		
-		if(token->content[i] == '?')
+		if (token->content[i] == '?')
 		{
 			varenv = malloc(sizeof(char) * 2);
-			varenv = ft_strdup("?");	
-			break;
+			varenv = ft_strdup("?");
+			break ;
 		}
-		
 		varenv = ft_charjoin(varenv, token->content[i]);
 		i++;
 	}
-	if(ft_strncmp(varenv,"?", 2) == 0)
+	if (ft_strncmp(varenv, "?", 2) == 0)
 		varvalue = ft_itoa(mshell->err_exit);
 	else if (is_valid_varenv(varenv) == 1)
 		varvalue = look_for_varenv_value(varenv, &mshell->env);
