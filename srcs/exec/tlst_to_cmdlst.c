@@ -275,26 +275,29 @@ static void	tlst_to_cmd_condition2(t_cmd **cmd)
 		(*cmd)->update_o = true;
 }
 
-// static void tlst_to_cmd_loop()
-// {
-// 	while (curr && ft_strcmp(curr->token->type, T_PIPE) != 0)
-// 	{
-// 		if (curr && is_operator(curr->token->type) == 0 && i == 0)
-// 			cmd->command = (i++, ft_strdup(curr->token->content));
-// 		while (curr && is_redir(curr->token->type) != 0)
-// 		{
-// 			update_io(cmd, curr, is_redir(curr->token->type));
-// 			if (g_mshell.err_exit == 130)
-// 				break ;
-// 			curr = curr->next->next;
-// 		}
-// 		if (curr && is_operator(curr->token->type) == 0)
-// 			tlst_to_cmd_condition1(&cmd, &curr, &i, &opt);
-// 		else
-// 			break ;
-// 		curr = curr->next;
-// 	}
-// }
+static void tlst_to_cmd_loop(t_tlist **curr, t_cmd **cmd, int *i, char **opt)
+{
+	while ((*curr) && ft_strcmp((*curr)->token->type, T_PIPE) != 0)
+	{
+		if ((*curr) && is_operator((*curr)->token->type) == 0 && *i == 0)
+		{
+			*i = *i + 1;
+			(*cmd)->command = ft_strdup((*curr)->token->content);
+		}
+		while ((*curr) && is_redir((*curr)->token->type) != 0)
+		{
+			update_io((*cmd), (*curr), is_redir((*curr)->token->type));
+			if (g_mshell.err_exit == 130)
+				break ;
+			(*curr) = (*curr)->next->next;
+		}
+		if ((*curr) && is_operator((*curr)->token->type) == 0)
+			tlst_to_cmd_condition1(cmd, curr, i, opt);
+		else
+			break ;
+		(*curr) = (*curr)->next;
+	}
+}
 
 t_cmd	*tlst_to_cmd(t_tlist **tlst)
 {
@@ -307,23 +310,7 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 	curr = *tlst;
 	opt = NULL;
 	cmd = ft_clstnew();
-	while (curr && ft_strcmp(curr->token->type, T_PIPE) != 0)
-	{
-		if (curr && is_operator(curr->token->type) == 0 && i == 0)
-			cmd->command = (i++, ft_strdup(curr->token->content));
-		while (curr && is_redir(curr->token->type) != 0)
-		{
-			update_io(cmd, curr, is_redir(curr->token->type));
-			if (g_mshell.err_exit == 130)
-				break ;
-			curr = curr->next->next;
-		}
-		if (curr && is_operator(curr->token->type) == 0)
-			tlst_to_cmd_condition1(&cmd, &curr, &i, &opt);
-		else
-			break ;
-		curr = curr->next;
-	}
+	tlst_to_cmd_loop(&curr, &cmd, &i, &opt);
 	*tlst = curr;
 	cmd->options = ft_split_custom(opt, ' ');
 	tlst_to_cmd_condition2(&cmd);
