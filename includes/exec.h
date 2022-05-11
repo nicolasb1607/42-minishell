@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:55 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/11 16:14:27 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/11 16:39:06 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ void	make_heredoc(t_cmd *cmd);
 char	*create_tmp(void);
 int		is_absolute(char *cmd);
 void	update_io(t_cmd *cmd, t_tlist *lst, int ret);
+void	exit_status_here_doc(int pid);
 
 #endif

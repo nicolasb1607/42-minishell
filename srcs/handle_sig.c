@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:22:54 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/11 16:17:06 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/11 17:13:47 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,37 @@ void	free_dlist(t_dlist **dlist)
 		free(curr->content);
 		free(curr);
 		curr = tmp;
+	}
+}
+
+void	handler_main(int signum)
+{
+	if (signum == SIGINT)
+	{
+		ft_putchar('\n');
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		g_mshell.err_exit = 130;
+	}
+}
+
+void	handler_cmd(int signum)
+{
+	if (signum == SIGINT)
+	{
+		ft_putchar('\n');
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		g_mshell.err_exit = 130;
+	}
+}
+
+void	handler_heredoc(int signum)
+{
+	if (signum == SIGINT)
+	{
+		ft_putchar('\n');
+		exit(130);
 	}
 }

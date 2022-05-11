@@ -12,24 +12,6 @@
 
 #include "unset.h"
 
-// void	free_tab(char **tab)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (tab[i])
-// 	{
-// 		free(tab[i]);
-// 		i++;
-// 	}
-// 	free(tab);
-// }
-
-/*
-TODO :
-	- Gerer les multiples variable a unset sur une ligne de cmd
-	- 
-*/
 int	is_existing(char *varenv, t_dlist **dupenv)
 {
 	int		lentoequal;

@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/11 16:18:40 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/11 16:39:51 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 	pid_t	pi;
 	t_tlist	*curr;
 	t_pipes	pipes;
-	int		status;
 
 	curr = tlst;
 	if (tlst->token->content)
@@ -89,9 +88,7 @@ void	only1cmd(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			pi = fork_absolute(pipes, chead, dupenv);
 		else
 			pi = fork_normal(pipes, chead, dupenv);
-		while (waitpid(pi, &status, 0) != -1)
-			if (WIFEXITED(status))
-				g_mshell.err_exit = WEXITSTATUS(status);
+		exit_status_here_doc(pi);
 	}
 	free_tcmd(&chead);
 }
