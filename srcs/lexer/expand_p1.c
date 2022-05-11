@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_p1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:02 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/10 17:51:45 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/11 16:19:02 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*expand(t_token *token, int i, t_minishell *mshell)
 	i++;
 	while (token->content[i] && token->content[i] != ' '
 		&& token->content[i] != '\'' && token->content[i] != '='
-		&& token->content[i] != '$')
+		&& token->content[i] != '$' )
 	{
 		if (token->content[i] == '?')
 		{

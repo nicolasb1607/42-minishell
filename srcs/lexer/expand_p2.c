@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_p2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:07:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/11 11:29:07 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/11 16:19:10 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,37 +28,53 @@ int	lenvarenv(char *str, int i)
 	return (j);
 }
 
+static void	expandtok_condition2(t_token **token, char **expandedstr, int *i)
+{
+	if ((*token)->content[*i] == '$' && (!(*token)->content[*i + 1]
+			|| (*token)->content[*i + 1] == '\"'
+			|| (*token)->content[*i + 1] == '$'))
+	{
+		(*expandedstr) = ft_charjoin((*expandedstr), (*token)->content[*i]);
+		*i = *i + 1;
+	}
+}
+
+static void	expandtok_condition1(t_token **token, char **expandedstr,
+	char **ret_expand, t_minishell **mshell)
+{
+	int	i;
+
+	i = 0;
+	while ((*token)->content[i])
+	{
+		expandtok_condition2(token, expandedstr, &i);
+		if ((*token)->content[i] == '$'
+			&& (ft_isenv((*token)->content[i + 1]) == 1
+				|| (*token)->content[i + 1] == '?'))
+		{
+			(*ret_expand) = expand((*token), i, *mshell);
+			if ((*ret_expand))
+				(*expandedstr) = ft_strjoin_free((*expandedstr), (*ret_expand));
+			i = (free((*ret_expand)), i + lenvarenv((*token)->content, i));
+		}
+		if ((*token)->content[i] && (*token)->content[i] != '$' )
+		{
+			(*expandedstr) = ft_charjoin((*expandedstr), (*token)->content[i]);
+			i++;
+		}
+	}
+}
+
 void	expandtok(t_token *token, t_minishell *mshell)
 {
-	int		i;
 	char	*expandedstr;
 	char	*ret_expand;
 
-	i = 0;
 	expandedstr = NULL;
 	if (ft_strlen(token->content) == 0 || (token->quote != NULL
 			&& ft_strncmp(token->quote, T_SQUOTE, 5) == 0))
 		return ;
-	while (token->content[i])
-	{
-		if (token->content[i] == '$' && (!token->content[i + 1] || token->content[i + 1] == '\"' || token->content[i + 1] == '$'))
-		{
-			expandedstr = ft_charjoin(expandedstr, token->content[i]);
-			i++;
-		}
-		if (token->content[i] == '$' && (ft_isenv(token->content[i + 1]) == 1 || token->content[i + 1] == '?'))
-		{
-			ret_expand = expand(token, i, mshell);
-			if (ret_expand)
-				expandedstr = ft_strjoin_free(expandedstr, ret_expand);
-			i = (free(ret_expand), i + lenvarenv(token->content, i));
-		}
-		if (token->content[i] && token->content[i] != '$' )
-		{
-			expandedstr = ft_charjoin(expandedstr, token->content[i]);
-			i++;
-		}
-	}
+	expandtok_condition1(&token, &expandedstr, &ret_expand, &mshell);
 	if (ft_strcmp(token->type, T_STRING) == 0)
 		free(token->content);
 	token->content = ft_strdup_seg(expandedstr);

@@ -26,11 +26,9 @@
 // }
 
 /*
-
 TODO :
 	- Gerer les multiples variable a unset sur une ligne de cmd
 	- 
-
 */
 int	is_existing(char *varenv, t_dlist **dupenv)
 {

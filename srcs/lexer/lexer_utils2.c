@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_sig.c                                       :+:      :+:    :+:   */
+/*   lexer_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 18:22:54 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/11 16:17:06 by nburat-d         ###   ########.fr       */
+/*   Created: 2022/05/11 14:37:45 by nburat-d          #+#    #+#             */
+/*   Updated: 2022/05/11 14:50:19 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "handle_sig.h"
+#include "lexer.h"
 
-void	free_dlist(t_dlist **dlist)
+t_token	*init_token(void)
 {
-	t_dlist	*curr;
-	t_dlist	*tmp;
+	t_token	*token;
 
-	curr = *dlist;
-	while (curr)
-	{
-		tmp = curr->next;
-		free(curr->content);
-		free(curr);
-		curr = tmp;
-	}
+	token = malloc(sizeof(t_token));
+	if (!token)
+		return (NULL);
+	token->content = NULL;
+	token->type = NULL;
+	token->quote = NULL;
+	token->space_after = 1;
+	return (token);
+}
+
+void	assign_toks(t_token *token, char *content, char *type)
+{
+	token->content = content;
+	token->type = type;
 }

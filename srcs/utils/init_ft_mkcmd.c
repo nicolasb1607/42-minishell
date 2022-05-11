@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft_mkcmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:48:08 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/10 16:47:32 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/11 16:21:26 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_cmd
 	{
 		curr = (tlst);
 		cmd = tlst_to_cmd(&tlst);
-		path = get_path_to_cmd(curr, dupenv);
+		path = get_path_to_cmd(dupenv);
 		if (update_bin(path, cmd, curr) == -1)
 		{
 			path = (ft_free_tab(path), free_tcmd(chead), free_tcmd(&cmd), NULL);
@@ -60,7 +60,7 @@ t_cmd
 	char	**path;
 
 	cmd = tlst_to_cmd(tlst);
-	path = get_path_to_cmd(*curr, dupenv);
+	path = get_path_to_cmd(dupenv);
 	if (update_bin(path, cmd, *curr) == -1)
 	{
 		path = (ft_free_tab(path), free_tcmd(&chead), free_tcmd(&cmd), NULL);

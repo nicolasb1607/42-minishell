@@ -31,9 +31,11 @@ SRCS = ./main.c \
 	./srcs/lexer/lexer.c \
 	./srcs/lexer/init_lexer.c \
 	./srcs/lexer/lexer_utils.c \
+	./srcs/lexer/lexer_utils2.c \
 	./srcs/lexer/expand_p1.c \
 	./srcs/lexer/expand_p2.c \
 	./srcs/lexer/position.c \
+	./srcs/lexer/make_token.c \
 	./srcs/utils/tab_to_list.c \
 	./srcs/utils/ft_tlstnew.c \
 	./srcs/utils/ft_tlstadd_back.c \
@@ -48,7 +50,10 @@ SRCS = ./main.c \
 	./srcs/echo.c \
 	./srcs/init_ft.c \
 	./srcs/free.c \
-	./srcs/exec/tlst_to_cmdlst.c \
+	./srcs/exec/tlst_to_cmd1.c \
+	./srcs/exec/tlst_to_cmd2.c \
+	./srcs/exec/tlst_to_cmd3.c \
+	./srcs/exec/heredoc.c \
 	./srcs/exec/exec_utils.c \
 	./srcs/exec/count_command.c \
 	./srcs/handle_sig.c \

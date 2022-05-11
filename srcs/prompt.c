@@ -3,33 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:23:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/10 17:14:43 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/11 16:20:13 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "prompt.h"
 
-/*
-TO DO : 
+char	*ft_strsub(char *str, int to_sub, int len)
+{
+	char	*sub;
+	int		i;
 
-- Create a loop which wait for a command to be entered
-
-- Once something is writen, the function should
-	* Read the line (read_line)
-	* Parse into PROGRAM and ARGUMENTS (lexer)
-	* Execute the parsed command (execve)
-
-- Once the excution is done, it starts again and put a prompt
-*/
+	i = 0;
+	sub = (char *)malloc(sizeof(char) * (len + 1));
+	if (!sub)
+		return (NULL);
+	while (i < len)
+	{
+		sub[i] = str[to_sub + i];
+		i++;
+	}
+	sub[i] = '\0';
+	return (sub);
+}
 
 char	*ft_prompt(t_minishell *g_mshell)
 {
 	char	*ret_line;
 
-	ret_line = readline(BCYN"Minishell $> "CRESET);
+	ret_line = readline(BLU"Minishell$> "CRESET);
 	if (ret_line == NULL)
 	{
 		printf(GRN"exit\n"CRESET);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:06:55 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/11 11:02:20 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/11 16:19:50 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@ int	look_for_next_quote(char *str, char q, int *i)
 	return (0);
 }
 
+static int	missing_quote_condition(char **str,
+	char *quote, int *ret_check, int *i)
+{
+	*ret_check = look_for_next_quote(*str, *quote, i);
+	if (*ret_check == 0)
+	{	
+		ft_putstr("Syntax error missing quote\n");
+		return (0);
+	}
+	return (1);
+}
+
 int	check_quote(char *str)
 {
 	char	quote;
@@ -36,16 +48,14 @@ int	check_quote(char *str)
 		if (str[i] == '\"')
 		{
 			quote = (i++, '\"');
-			ret_check = look_for_next_quote(str, quote, &i);
-			if (ret_check == 0)
-				return (ft_putstr("Syntax error missing quote\n"), 0);
+			if (missing_quote_condition(&str, &quote, &ret_check, &i) == 0)
+				return (0);
 		}
 		else if (str[i] == '\'')
 		{
 			quote = (i++, '\'');
-			ret_check = look_for_next_quote(str, quote, &i);
-			if (ret_check == 0)
-				return (ft_putstr("Syntax error missing quote\n"), 0);
+			if (missing_quote_condition(&str, &quote, &ret_check, &i) == 0)
+				return (0);
 		}
 	}
 	return (1);
@@ -56,24 +66,4 @@ void	init_lexer(t_lexer *lexer, char *str)
 	lexer->text = str;
 	lexer->pos = -1;
 	lexer->current_char = 0;
-}
-
-t_token	*init_token(void)
-{
-	t_token	*token;
-
-	token = malloc(sizeof(t_token));
-	if (!token)
-		return (NULL);
-	token->content = NULL;
-	token->type = NULL;
-	token->quote = NULL;
-	token->space_after = 1;
-	return (token);
-}
-
-void	assign_toks(t_token *token, char *content, char *type)
-{
-	token->content = content;
-	token->type = type;
 }
