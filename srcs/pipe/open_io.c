@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:52:33 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/10 17:48:36 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/11 10:38:42 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,7 @@ int	open_o(t_cmd *cmd, t_pipes *pipes)
 	{
 		while (cmd->outfile[i])
 		{
-			if (cmd->outfile[i][ft_strlen(cmd->outfile[i]) - 1] == ' ')
-				file_name = ft_strndup(cmd->outfile[i],
-						ft_strlen(cmd->outfile[i]) - 1);
-			else
-				file_name = ft_strdup(cmd->outfile[i]);
+			file_name = norm_open(&cmd, i);
 			if (cmd->is_double == false || cmd->outfile[i + 1])
 				fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 			else if (cmd->is_double == true && !cmd->outfile[i + 1])
@@ -73,20 +69,12 @@ int	open_o(t_cmd *cmd, t_pipes *pipes)
 			if (cmd->outfile[i + 1])
 				close(fd);
 			else
-			{
-				pipes->fd_out = fd;
-				cmd->fd_out = fd;
-				return (free(file_name), 1);
-			}
-			free(file_name);
-			i++;
+				return (open_o_norm(&cmd, &pipes, file_name, fd));
+			i += (free(file_name), 1);
 		}
 	}
 	else
-	{
-		pipes->fd_out = 1;
-		return (1);
-	}
+		return (open_o_norm2(&pipes));
 	return (0);
 }
 

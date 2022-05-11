@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:38:47 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/04 13:34:15 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/11 11:15:17 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,7 @@ char	*ft_strnjoin_free(char *s1, char *s2, int size)
 	if (s2 != NULL)
 	{
 		while (s2[++i] && s2 != NULL && size > 0)
-		{
-			strcat[++j] = s2[i];
-			size--;
-		}
+			strcat[++j] = (size--, s2[i]);
 	}
 	strcat[++j] = (free(s1), '\0');
 	return (strcat);

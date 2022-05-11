@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:55 by ngobert           #+#    #+#             */
-/*   Updated: 2022/04/15 11:29:30 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/11 10:55:41 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void	init_cmd(t_cmd *cmd);
 int		count_command(t_tlist *tlst);
 char	**tab_dup(char **tab);
 t_cmd	*cpy_tcmd(t_cmd **cmd);
-int	is_redir(char *content);
+int		is_redir(char *content);
 
 #endif

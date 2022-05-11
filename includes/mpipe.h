@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:53:59 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/10 17:26:21 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/11 10:39:30 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,8 @@ void	sig_norm(t_pipes *pipes, t_cmd **chead);
 void	close_child(int *pfd, int fd_in);
 void	ft_norm(int *status);
 void	close_pfd(int *pfd, int fd_in, t_cmd *cmd);
+int		open_o_norm(t_cmd **cmd, t_pipes **pipes, char *file_name, int fd);
+int		open_o_norm2(t_pipes **pipes);
+char	*norm_open(t_cmd **cmd, int i);
 
 #endif

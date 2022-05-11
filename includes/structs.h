@@ -6,14 +6,14 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:48:57 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/25 15:40:01 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/11 10:57:25 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
-#define STRUCTS_H
+# define STRUCTS_H
 
-#include "minishell.h"
+# include "minishell.h"
 
 # define DIGIT "0123456789"
 # define ALPHA "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$-"
@@ -42,25 +42,25 @@
 
 typedef struct s_token
 {
-	char *content;
-	char *type;
-	char *quote;
-	int space_after;
-} t_token;
+	char	*content;
+	char	*type;
+	char	*quote;
+	int		space_after;
+}	t_token;
 
 typedef struct s_lexer
 {
-	char *text;
-	int pos;
-	char current_char;
-} t_lexer;
+	char	*text;
+	int		pos;
+	char	current_char;
+}	t_lexer;
 
 typedef struct s_tlist
 {
-	t_token *token;
-	struct s_tlist *prev;
-	struct s_tlist *next;
-} t_tlist;
+	t_token			*token;
+	struct s_tlist	*prev;
+	struct s_tlist	*next;
+}	t_tlist;
 
 typedef struct s_cmd
 {
@@ -70,7 +70,7 @@ typedef struct s_cmd
 	bool			is_absolute;
 	bool			is_double;
 	bool			is_builtin;
-	
+
 	char			*bin;
 	char			**infile;
 	char			**outfile;
@@ -79,10 +79,10 @@ typedef struct s_cmd
 	bool			update_i;
 
 	t_tlist			*builtin;
-	
+
 	int				fd_out;
 	int				fd_in;
-	
+
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }					t_cmd;
