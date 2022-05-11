@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 12:20:55 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/10 14:15:16 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/11 11:41:04 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,9 @@ int		count_command(t_tlist *tlst);
 char	**tab_dup(char **tab);
 t_cmd	*cpy_tcmd(t_cmd **cmd);
 int	is_redir(char *content);
+void	make_heredoc(t_cmd *cmd);
+char	*create_tmp(void);
+int	is_absolute(char *cmd);
+void	update_io(t_cmd *cmd, t_tlist *lst, int ret);
 
 #endif
