@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:51:32 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/12 15:26:25 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/12 16:06:10 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,19 @@ static void	launch_cmd2(t_tlist **tlist, char **ret)
 	}
 }
 
+int	check_space(char *ret)
+{
+	int	i;
+
+	i = 0;
+	while (ret[i++])
+	{
+		if (ret[i] != ' ' && ret[i] != '\0')
+			return (1);
+	}
+	return (0);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_tlist	*tlist;
@@ -54,7 +67,7 @@ int	main(int ac, char **av, char **envp)
 		signal(SIGINT, handler_main);
 		signal(SIGQUIT, SIG_IGN);
 		ret = ft_prompt(&g_mshell);
-		if (ft_strlen(ret) != 0)
+		if (ft_strlen(ret) != 0 && check_space(ret) == 1)
 			launch_cmd2(&tlist, &ret);
 		close_fd();
 	}

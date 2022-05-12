@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/12 13:33:20 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/12 16:04:17 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,21 @@
 pid_t	fork_absolute(t_pipes pipes, t_cmd *chead, t_dlist **dupenv)
 {
 	pid_t	pi;
+	char	**tab;
 
 	pi = fork();
 	if (pi == 0)
 	{
+		tab = dlist_to_tab(*dupenv);
 		dup2(pipes.fd_out, STDOUT_FILENO);
 		dup2(pipes.fd_in, STDIN_FILENO);
 		if (execve((chead)->command,
-				(chead)->options, dlist_to_tab(*dupenv)) != 0)
+				(chead)->options, tab) != 0)
+		{
+			ft_putendl_fd(BRED"Command not found\n", 2);
+			ft_free_tab(tab);
 			exit(errno);
+		}
 	}
 	return (pi);
 }
