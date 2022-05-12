@@ -21,7 +21,7 @@ char	*create_tmp(void)
 	while (i < INT_MAX)
 	{
 		str = ft_itoa(i);
-		str = ft_strjoin("/tmp/.", str);
+		str = ft_strjoin_free2("/tmp/.", str);
 		if (access(str, F_OK) != 0)
 			return (str);
 		free(str);
@@ -49,7 +49,7 @@ static void	update_io_cond2(char **file_name, t_tlist **lst, t_cmd **cmd)
 	free(*file_name);
 }
 
-void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
+void	update_io(t_cmd *cmd, t_tlist *lst, int ret, t_dlist **dupenv)
 {
 	char	*file_name;
 
@@ -66,9 +66,11 @@ void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 	}
 	else if (ret == 4)
 	{
+		file_name = create_tmp();
 		cmd->limiter = ft_tab_addback(cmd->limiter, lst->token->content);
-		cmd->infile = ft_tab_addback(cmd->infile, create_tmp());
+		cmd->infile = ft_tab_addback(cmd->infile, file_name);
 		cmd->is_double = true;
-		make_heredoc(cmd);
+		make_heredoc(cmd, dupenv);
+		free(file_name);
 	}
 }

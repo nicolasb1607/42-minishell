@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft_mkcmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:48:08 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/11 17:23:53 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/12 13:35:03 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_cmd
 	while (tlst)
 	{
 		curr = (tlst);
-		cmd = tlst_to_cmd(&tlst);
+		cmd = tlst_to_cmd(&tlst, dupenv);
 		path = get_path_to_cmd(dupenv);
 		if (update_bin(path, cmd, curr) == -1)
 		{
@@ -40,13 +40,13 @@ t_cmd
 	return (cmd);
 }
 
-t_cmd	*mk_built(t_tlist **tlst)
+t_cmd	*mk_built(t_tlist **tlst, t_dlist **dupenv)
 {
 	t_cmd	*cmd;
 	t_tlist	*tmp;
 
 	tmp = (*tlst);
-	cmd = tlst_to_cmd(&tmp);
+	cmd = tlst_to_cmd(&tmp, dupenv);
 	tmp = (*tlst);
 	cmd->builtin = NULL;
 	cpy_till_pipe(tlst, &cmd->builtin);
@@ -59,7 +59,7 @@ t_cmd
 	t_cmd	*cmd;
 	char	**path;
 
-	cmd = tlst_to_cmd(tlst);
+	cmd = tlst_to_cmd(tlst, dupenv);
 	path = get_path_to_cmd(dupenv);
 	if (update_bin(path, cmd, *curr) == -1)
 	{
