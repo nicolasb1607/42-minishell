@@ -12,103 +12,6 @@
 
 #include "exec.h"
 
-#include "exec.h"
-
-char	**tab_dup(char **tab)
-{
-	char	**new;
-	int		i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	new = malloc(sizeof(char *) * (i + 1));
-	i = 0;
-	while (tab[i])
-	{
-		new[i] = ft_strdup(tab[i]);
-		i++;
-	}
-	new[i] = NULL;
-	return (new);
-}
-
-t_cmd	*cpy_tcmd(t_cmd **cmd)
-{
-	t_cmd	*new;
-
-	new = ft_clstnew();
-	new->command = ft_strdup((*cmd)->command);
-	new->options = tab_dup((*cmd)->options);
-	new->bin = ft_strdup((*cmd)->bin);
-	new->type = (*cmd)->type;
-	ft_free_tab((*cmd)->options);
-	free((*cmd));
-	(*cmd) = NULL;
-	return (new);
-}
-
-char	**get_path_to_cmd(t_dlist **dupenv)
-{
-	char	*path;
-	t_dlist	*curr;
-	char	**splitpath;
-
-	curr = *dupenv;
-	path = NULL;
-	while (curr)
-	{
-		if (ft_strncmp(curr->content, "PATH=", 5) == 0)
-		{
-			path = ft_substr(curr->content, 5, ft_strlen(curr->content));
-			if (!path)
-				ft_error("Substr failed :(\n");
-			splitpath = ft_split(path, ':');
-			free(path);
-			return (splitpath);
-		}
-		path = NULL;
-		curr = curr->next;
-	}
-	return (NULL);
-}
-
-int	is_absolute(char *cmd)
-{
-	if (cmd)
-	{
-		if (cmd[0] == '/')
-			return (1);
-		else if (cmd[0] == '.' && cmd[1] == '.' && cmd[2] == '/')
-			return (1);
-		else if (cmd[0] == '.' && cmd[1] == '/')
-			return (1);
-		else
-			return (0);
-	}
-	return (-1);
-}
-
-int	update_bin(char **path, t_cmd *cmd, t_tlist *tlst)
-{
-	if (cmd->command && !is_builtincmd(cmd))
-	{
-		if (is_absolute(cmd->command) == 0)
-		{
-			cmd->bin = get_bin_custom(cmd->command, path, tlst);
-			cmd->is_absolute = 0;
-		}
-		else
-			cmd->is_absolute = 1;
-	}
-	else
-		cmd->is_absolute = 1;
-	if (!cmd->command || (!is_builtincmd(cmd)
-		&& cmd->is_absolute == 0 && cmd->bin == NULL))
-		return (-1);
-	return (0);
-}
-
 char	*create_tmp(void)
 {
 	int		i;
@@ -127,59 +30,15 @@ char	*create_tmp(void)
 	return (NULL);
 }
 
-void	make_heredoc(t_cmd *cmd)
-{
-	pid_t	pid;
-	char	*tmp;
-	int		fd;
-	int		i;
-	int		status;
 
-	i = 0;
-	fd = open(cmd->infile[tab_size(cmd->infile) - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	tmp = NULL;
-	signal(SIGINT, SIG_IGN);
-	pid = fork();
-	if (pid == 0)
-	{
-		signal(SIGINT, handler_heredoc);
-		while (i == 0)
-		{
-			tmp = readline("> ");
-			if (!tmp)
-			{
-				ft_putstr(
-					"minishell: warning: here-document at line 1 delimited by end-of-file (wanted `hd')\n");
-				break ;
-			}
-			if (tmp)
-			{
-				if (ft_strncmp(tmp, cmd->limiter[0], ft_strlen(cmd->limiter[0]) + 1) == 0)
-					i = (1);
-				else
-				{
-					write(fd, tmp, ft_strlen(tmp));
-					write(fd, "\n", 1);
-				}
-			}
-			else
-				write(fd, "\n", 1);
-			free(tmp);
-		}
-		exit (0);
-	}
-	while(waitpid(pid, &status, 0) != -1)
-	{
-			if(WIFEXITED(status))
-				g_mshell.err_exit = WEXITSTATUS(status);
-		}
-	close(fd);
-}
+
+
+
 
 void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 {
 	char	*file_name;
-	
+
 	lst = lst->next;
 	if (ret == 1)
 	{
@@ -216,7 +75,7 @@ void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 t_cmd	*tlst_to_cmd(t_tlist **tlst)
 {
 	char	*opt;
-	t_tlist *curr;
+	t_tlist	*curr;
 	t_cmd	*cmd;
 	int		quote;
 	int		i;
@@ -233,7 +92,7 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 		while (curr && is_redir(curr->token->type) != 0)
 		{
 			update_io(cmd, curr, is_redir(curr->token->type));
-			if(g_mshell.err_exit == 130)
+			if (g_mshell.err_exit == 130)
 				break ;
 			curr = curr->next->next;
 		}
@@ -278,13 +137,4 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 	return (cmd);
 }
 
-void	exit_status_here_doc(int pid)
-{
-	int	status;
 
-	while (waitpid(pid, &status, 0) != -1)
-	{
-		if (WIFEXITED(status))
-			g_mshell.err_exit = WEXITSTATUS(status);
-	}
-}
