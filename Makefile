@@ -51,6 +51,7 @@ SRCS = ./main.c \
 	./srcs/init_ft.c \
 	./srcs/free.c \
 	./srcs/exec/tlst_to_cmd1.c \
+	./srcs/exec/tlst_to_cmd2.c \
 	./srcs/exec/tlst_to_cmd_utils.c \
 	./srcs/exec/heredocs.c \
 	./srcs/exec/exec_utils.c \
