@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:51:32 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/12 14:32:33 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:10:33 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int ac, char **av, char **envp)
 		ret = ft_prompt(&g_mshell);
 		if (ft_strlen(ret) != 0)
 			launch_cmd2(&tlist, &ret);
+		close_fd();
 	}
 	exit (0);
 }

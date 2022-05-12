@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 10:25:44 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/10 16:47:07 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/12 14:22:51 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,34 @@ char	**ft_free_tab(char **tab)
 		free(tab);
 	}
 	return (NULL);
+}
+
+void	close_fd(void)
+{
+	int	i;
+
+	i = 3;
+	while (i++ != FOPEN_MAX)
+		close(i);
+}
+
+void	unlink_hd(void)
+{
+	int		i;
+	char	*num;
+	char	*file;
+
+	i = INT_MIN;
+	while (i != INT_MIN + 1000)
+	{
+		num = ft_itoa(i);
+		file = ft_strjoin_free2("/tmp/.", num);
+		if (access(file, F_OK) == 0)
+			unlink(file);
+		free(file);
+		i++;
+	}
+	close_fd();
 }
 
 void	free_tcmd(t_cmd **cmd)

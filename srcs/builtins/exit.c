@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/12 14:56:47 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:10:56 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	ft_exit(t_tlist *tlst, t_cmd **cmd)
 	free_tcmd(cmd);
 	free_tlist(&tlst);
 	rl_clear_history();
+	unlink_hd();
 	exit_number(error_arg, exit_val);
 }
 
