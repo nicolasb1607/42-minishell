@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 17:11:05 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/12 14:13:01 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:13:38 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static void	print_val1(const char *str, int *i, int *printed, va_list ap)
 		ft_putstr_printf(va_arg(ap, char *), printed);
 	else if (str[*i] == '%' && str[*i + 1] == 'p' && ++*i)
 	{
-		ft_pointer_printf((unsigned long int) va_arg(ap, void *), printed, &init);
+		ft_pointer_printf((unsigned long int) va_arg(ap, void *),
+			printed, &init);
 		init = 0;
 	}
 	else if (str[*i] == '%' && str[*i + 1] == 'd' && ++*i)

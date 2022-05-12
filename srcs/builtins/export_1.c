@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:12 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/12 13:32:58 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:13:02 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int	export_loop1(t_tlist *tlst, t_dlist *currenv, char *varexport)
 
 int	export_loop2(t_tlist *tlst, t_dlist *currenv, char *varexport)
 {
-	
 	while (currenv)
 	{
 		if (ft_strncmp(currenv->content, varexport,
