@@ -118,7 +118,7 @@ char	*create_tmp(void)
 	while (i < INT_MAX)
 	{
 		str = ft_itoa(i);
-		str = ft_strjoin("/tmp/.", str);
+		str = ft_strjoin_free2("/tmp/.", str);
 		if (access(str, F_OK) != 0)
 			return (str);
 		free(str);
@@ -127,7 +127,7 @@ char	*create_tmp(void)
 	return (NULL);
 }
 
-void	make_heredoc(t_cmd *cmd)
+void	make_heredoc(t_cmd *cmd, t_dlist **dupenv)
 {
 	pid_t	pid;
 	char	*tmp;
@@ -166,6 +166,7 @@ void	make_heredoc(t_cmd *cmd)
 				write(fd, "\n", 1);
 			free(tmp);
 		}
+		execve("/bin/true", cmd->options, dlist_to_tab(*dupenv));
 		exit (0);
 	}
 	while(waitpid(pid, &status, 0) != -1)
@@ -176,7 +177,7 @@ void	make_heredoc(t_cmd *cmd)
 	close(fd);
 }
 
-void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
+void	update_io(t_cmd *cmd, t_tlist *lst, int ret, t_dlist **dupenv)
 {
 	char	*file_name;
 	
@@ -206,14 +207,16 @@ void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 	}
 	else if (ret == 4)
 	{
+		file_name = create_tmp();
 		cmd->limiter = ft_tab_addback(cmd->limiter, lst->token->content);
-		cmd->infile = ft_tab_addback(cmd->infile, create_tmp());
+		cmd->infile = ft_tab_addback(cmd->infile, file_name);
 		cmd->is_double = true;
-		make_heredoc(cmd);
+		make_heredoc(cmd, dupenv);
+		free(file_name);
 	}
 }
 
-t_cmd	*tlst_to_cmd(t_tlist **tlst)
+t_cmd	*tlst_to_cmd(t_tlist **tlst, t_dlist **dupenv)
 {
 	char	*opt;
 	t_tlist *curr;
@@ -232,7 +235,7 @@ t_cmd	*tlst_to_cmd(t_tlist **tlst)
 			cmd->command = (i++, ft_strdup(curr->token->content));
 		while (curr && is_redir(curr->token->type) != 0)
 		{
-			update_io(cmd, curr, is_redir(curr->token->type));
+			update_io(cmd, curr, is_redir(curr->token->type), dupenv);
 			if(g_mshell.err_exit == 130)
 				break ;
 			curr = curr->next->next;
