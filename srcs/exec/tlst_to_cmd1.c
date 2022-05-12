@@ -30,11 +30,6 @@ char	*create_tmp(void)
 	return (NULL);
 }
 
-
-
-
-
-
 void	update_io(t_cmd *cmd, t_tlist *lst, int ret)
 {
 	char	*file_name;
