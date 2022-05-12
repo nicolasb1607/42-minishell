@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredocs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 10:26:11 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/12 10:56:14 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/12 13:38:28 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	make_heredoc_loop(int *fd, char **tmp, t_cmd **cmd)
 	}
 }
 
-void	make_heredoc(t_cmd *cmd)
+void	make_heredoc(t_cmd *cmd, t_dlist **dupenv)
 {
 	pid_t	pid;
 	char	*tmp;
@@ -75,6 +75,7 @@ void	make_heredoc(t_cmd *cmd)
 	{
 		signal(SIGINT, handler_heredoc);
 		make_heredoc_loop(&fd, &tmp, &cmd);
+		execve("/bin/true", cmd->options, dlist_to_tab(*dupenv));
 		exit (0);
 	}
 	exit_status_here_doc(pid);
