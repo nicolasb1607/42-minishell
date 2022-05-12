@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:31:35 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/11 16:36:00 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:27:53 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>
 # include <limits.h>
 # include <readline/readline.h>
-
+# include "ft_printf.h"
 # include "libft.h"
 # include "structs.h"
 # include "prompt.h"

@@ -5,11 +5,13 @@ EXEC	= minishell
 
 
 LIBFT 	= ./libft/
+PRINTF	= ./printf/
 RL 		= /usr/local/opt/readline/lib
 
 INCLUDES		= ./includes/
 INCLUDESRL		= /usr/local/opt/readline/include/
 INCLUDESLIBFT	= ./libft/
+INCLUDESPRINTF	= ./printf/
 
 SRCS = ./main.c \
 	./srcs/prompt.c \
@@ -65,25 +67,31 @@ SRCS = ./main.c \
 OBJS = ${SRCS:.c=.o}
 
 
-all : MAKELIBFT $(EXEC)
+all : MAKEPRINTF MAKELIBFT $(EXEC)
 
-
-$(EXEC) : $(OBJS)
-	$(CC) $(CFLAGS)  -L $(LIBFT) -L $(RL) $^ -o $(EXEC) -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT) -lft -lreadline -g
-
-.c.o:
-	$(CC) $(CFLAGS)  -L $(LIBFT) -L $(RL) -c $^ -o $@ -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT) -I $(INCLUDESPRINTF) -lft -lreadline -g
+MAKEPRINTF : 
+	make -C $(PRINTF)
 
 MAKELIBFT : 
 	make -C $(LIBFT)
 
+$(EXEC) : $(OBJS)
+	$(CC) $(CFLAGS)  -L $(LIBFT) -L $(RL) -L $(PRINTF) $^ -o $(EXEC) -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT) -I $(INCLUDESPRINTF) -lftprintf -lft -lreadline -g
+
+.c.o:
+	$(CC) $(CFLAGS)  -L $(LIBFT) -L $(RL) -L $(PRINTF) -c $^ -o $@ -I $(INCLUDES) -I $(INCLUDESRL) -I $(INCLUDESLIBFT)  -I $(INCLUDESPRINTF) -lftprintf -lft -lreadline -g
+
+
+
 clean :
 	rm -rf $(OBJS)
 	make clean -C $(LIBFT)
+	make clean -C $(PRINTF)
 
 fclean : clean
 	rm -rf $(EXEC)
 	make fclean -C $(LIBFT)
+	make fclean -C $(PRINTF)
 
 re : fclean all
 

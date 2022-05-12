@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/10 14:02:19 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:56:47 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,20 @@ void	ft_exit(t_tlist *tlst, t_cmd **cmd)
 			i++;
 		}
 	}
-	ft_putstr("exit\n");
+	ft_printf(RED "exit\n" CRESET);
 	free_dlist(&g_mshell.env);
 	free_tcmd(cmd);
 	free_tlist(&tlst);
-	clear_history();
+	rl_clear_history();
 	exit_number(error_arg, exit_val);
 }
 
 void	disp_synt_erro(char *str)
 {
-	printf("minishell: syntax error near unexpected token \'%s\'\n", str);
+	ft_printf("minishell: syntax error near unexpected token \'%s\'\n", str);
 }
 
 void	ft_error(char *str)
 {
-	printf(RED "%s\n" CRESET, str);
+	ft_printf(RED "%s\n" CRESET, str);
 }

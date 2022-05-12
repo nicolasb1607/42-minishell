@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:23:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/11 16:20:13 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:56:30 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ char	*ft_prompt(t_minishell *g_mshell)
 	ret_line = readline(BLU"Minishell$> "CRESET);
 	if (ret_line == NULL)
 	{
-		printf(GRN"exit\n"CRESET);
+		ft_printf(GRN"exit\n"CRESET);
 		free_dlist(&g_mshell->env);
-		clear_history();
+		rl_clear_history();
 		exit (0);
 	}
 	add_history(ret_line);
