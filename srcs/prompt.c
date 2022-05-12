@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:23:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/11 16:20:13 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:09:33 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*ft_prompt(t_minishell *g_mshell)
 	ret_line = readline(BLU"Minishell$> "CRESET);
 	if (ret_line == NULL)
 	{
+		unlink_hd();
 		printf(GRN"exit\n"CRESET);
 		free_dlist(&g_mshell->env);
 		clear_history();
