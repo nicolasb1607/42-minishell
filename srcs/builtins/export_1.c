@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:12 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/12 15:13:02 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/13 13:10:12 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,25 @@ int	export_loop1(t_tlist *tlst, t_dlist *currenv, char *varexport)
 
 int	export_loop2(t_tlist *tlst, t_dlist *currenv, char *varexport)
 {
+	char	*var;
+
 	while (currenv)
 	{
+		var = get_var(currenv->content);
 		if (ft_strncmp(currenv->content, varexport,
-				ft_strlen(get_var(currenv->content))) == 0)
+				ft_strlen(var)) == 0)
 		{
 			free(currenv->content);
 			currenv->content = ft_strjoin(tlst->token->content,
 					tlst->next->token->content);
-			return (2);
+			return (free(var), 2);
+			var = (free(var), NULL);
 		}
+		if (var)
+			var = (free(var), NULL);
 		currenv = currenv->next;
 	}
+	if (var)
+		free(var);
 	return (0);
 }
