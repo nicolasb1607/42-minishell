@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/12 16:04:17 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/13 11:10:10 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,21 @@ pid_t	fork_absolute(t_pipes pipes, t_cmd *chead, t_dlist **dupenv)
 		tab = dlist_to_tab(*dupenv);
 		dup2(pipes.fd_out, STDOUT_FILENO);
 		dup2(pipes.fd_in, STDIN_FILENO);
-		if (execve((chead)->command,
-				(chead)->options, tab) != 0)
+		if (access(chead->command, F_OK) == 0)
 		{
-			ft_putendl_fd(BRED"Command not found\n", 2);
+			if (execve((chead)->command,
+					(chead)->options, tab) != 0 )
+			{
+				ft_putendl_fd(RED"Command not found\n", 2);
+				ft_free_tab(tab);
+				exit(errno);
+			}
+		}
+		else
+		{
+			ft_putendl_fd(RED"Command not found\n"CRESET, 2);
 			ft_free_tab(tab);
-			exit(errno);
+			exit(127);
 		}
 	}
 	return (pi);

@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 10:27:27 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/12 10:58:28 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/13 11:03:07 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,7 @@ int	update_bin(char **path, t_cmd *cmd, t_tlist *tlst)
 	if (!cmd->command || (!is_builtincmd(cmd)
 			&& cmd->is_absolute == 0 && cmd->bin == NULL))
 		return (-1);
+	// else if (cmd->is_absolute && access(cmd->command, F_OK) != 0 && !is_builtincmd(cmd))
+	// 	return (-1);
 	return (0);
 }
