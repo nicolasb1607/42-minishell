@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/12 15:57:57 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/16 20:05:19 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_pipe(t_cmd *cmd, t_pipes *data)
 		signal(SIGINT, SIG_IGN);
 	else
 		signal(SIGINT, handler_cmd);
-	signal(SIGQUIT, SIG_IGN);
+	//signal(SIGQUIT, SIG_IGN);
 	while (tmp)
 	{
 		tmp->fd_in = data->fd_in;

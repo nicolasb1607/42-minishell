@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:22:54 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/11 17:13:47 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/16 20:27:23 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	free_dlist(t_dlist **dlist)
 	t_dlist	*curr;
 	t_dlist	*tmp;
 
+	if(!dlist)
+		return ;
 	curr = *dlist;
 	while (curr)
 	{

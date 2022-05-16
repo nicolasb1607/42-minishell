@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft_mkcmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:48:08 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/12 13:35:03 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/16 20:05:31 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,5 @@ void	sig_norm(t_pipes *pipes, t_cmd **chead)
 		signal(SIGINT, SIG_IGN);
 	else
 		signal(SIGINT, handler_cmd);
-	signal(SIGQUIT, SIG_IGN);
+	//signal(SIGQUIT, SIG_IGN);
 }

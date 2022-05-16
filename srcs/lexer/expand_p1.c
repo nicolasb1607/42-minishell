@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:02 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/13 12:47:58 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/16 20:44:40 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ char	*get_corresponding_val(char *varenv, t_dlist *curr)
 	char	*val;
 	char	*tmp;
 
+	val = NULL;
+	tmp = NULL;
 	while (curr)
 	{
 		tmp = get_var(curr->content);

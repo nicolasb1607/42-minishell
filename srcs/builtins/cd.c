@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:39:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/04 22:21:50 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/16 20:51:08 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	*ft_cd(char *path_name, t_dlist **dupenv)
 	char	*content;
 	t_dlist	*curr;
 
+	if(*dupenv == NULL)
+		return (NULL);
 	curr = *dupenv;
 	content = curr->content;
 	curr_dir = (save_olddir(dupenv), NULL);
@@ -75,7 +77,12 @@ void	*ft_cd(char *path_name, t_dlist **dupenv)
 void	launch_cd(t_tlist *tlst, t_dlist **dupenv)
 {
 	char	*path_name;
-
+	
+	if (dupenv == NULL)
+	{
+		ft_putstr("NO ENV, NO WORKING\n");
+		return;
+	}
 	path_name = look_for_varenv_value("HOME", dupenv);
 	if (!tlst->next)
 		ft_cd(path_name, dupenv);
