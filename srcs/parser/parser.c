@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 13:46:25 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/13 14:35:50 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/16 11:53:14 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,8 @@ int	check_rdir(t_tlist *lst)
 	return (1);
 }
 
-int	check_empty_list_expand(t_tlist *lst)
-{
-	if (!lst->token->content || lst->token->content[0] == '\0')
-		return(0);
-	else
-		return(1);
-	
-}
 int	parser(t_tlist *lst)
 {
-	// if (check_empty_list_expand(lst) == 0)
-	// 	return (0);
 	while (lst)
 	{
 		if (__is_type(lst, T_PIPE))

@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/13 11:10:10 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/16 11:57:38 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,8 @@ pid_t	fork_absolute(t_pipes pipes, t_cmd *chead, t_dlist **dupenv)
 		if (access(chead->command, F_OK) == 0)
 		{
 			if (execve((chead)->command,
-					(chead)->options, tab) != 0 )
-			{
-				ft_putendl_fd(RED"Command not found\n", 2);
-				ft_free_tab(tab);
-				exit(errno);
-			}
+					(chead)->options, tab) != 0)
+				pi = pi;
 		}
 		else
 		{
