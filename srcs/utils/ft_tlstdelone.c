@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:56:11 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/13 13:34:21 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/17 16:20:58 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_tlstdelone(t_tlist *lst, void (*del)(void*))
 	t_tlist	*tmp;
 	t_tlist	*curr;
 	int		i;
-
+	
 	tmp = lst;
 	curr = lst;
 	if (curr != NULL && del != NULL)
