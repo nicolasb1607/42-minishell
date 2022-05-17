@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:22:54 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/17 10:07:43 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/17 10:22:06 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_dlist(t_dlist **dlist)
 	t_dlist	*curr;
 	t_dlist	*tmp;
 
-	if(!dlist)
+	if (!dlist)
 		return ;
 	curr = *dlist;
 	while (curr)
@@ -63,7 +63,7 @@ void	handler_heredoc(int signum)
 
 void	handle_quit(int signum)
 {
-	if(signum == SIGQUIT)
+	if (signum == SIGQUIT)
 	{
 		ft_putstr_fd("quit (core dumped)\n", 2);
 		rl_on_new_line();

@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:39:30 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/16 20:15:37 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/17 10:21:11 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_dlist	*ft_dupenv(t_dlist *lst, char **envp)
 
 	i = 0;
 	if (envp == NULL)
-		return(NULL);
+		return (NULL);
 	while (envp[i])
 	{
 		new = ft_dlstnew(ft_strdup(envp[i]));
