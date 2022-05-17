@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:51:32 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/16 20:52:05 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/17 15:17:44 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	main(int ac, char **av, char **envp)
 		ret = ft_prompt(&g_mshell);
 		if (ft_strlen(ret) != 0 && check_space(ret) == 1)
 			launch_cmd2(&tlist, &ret);
+		free(ret);
 		close_fd();
 	}
 	exit (0);
