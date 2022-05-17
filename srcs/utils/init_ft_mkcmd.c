@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:48:08 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/16 20:05:31 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/17 10:04:20 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	sig_norm(t_pipes *pipes, t_cmd **chead)
 	if (ft_strcmp((*chead)->command, "./minishell") == 0)
 		signal(SIGINT, SIG_IGN);
 	else
+	{
 		signal(SIGINT, handler_cmd);
-	//signal(SIGQUIT, SIG_IGN);
+		signal(SIGQUIT, handle_quit);
+	}
 }

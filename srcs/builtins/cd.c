@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:39:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/16 20:51:08 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/17 09:31:00 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ void	launch_cd(t_tlist *tlst, t_dlist **dupenv)
 {
 	char	*path_name;
 	
-	if (dupenv == NULL)
+	if (*dupenv == NULL)
 	{
 		ft_putstr("NO ENV, NO WORKING\n");
-		return;
+		return ;
 	}
 	path_name = look_for_varenv_value("HOME", dupenv);
 	if (!tlst->next)

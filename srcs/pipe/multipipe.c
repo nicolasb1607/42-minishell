@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/16 20:05:19 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/17 10:08:58 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ void	check_io(t_cmd *cmd, t_pipes *data)
 
 void	ft_child(int *pfd, t_cmd *cmd, t_pipes *data)
 {
+	//signal(SIGQUIT, handle_quit);
 	check_io(cmd, data);
 	close_pfd(pfd, cmd->fd_in, cmd);
 	if (cmd->builtin)
 	{
+		
 		exec_builtin(cmd->builtin, data->denv, &cmd);
 		execve("/bin/true", cmd->options, dlist_to_tab(*data->denv));
 		exit(EXIT_SUCCESS);
@@ -75,8 +77,10 @@ void	ft_pipe(t_cmd *cmd, t_pipes *data)
 	if (cmd->command && ft_strcmp(cmd->command, "./minishell") == 0)
 		signal(SIGINT, SIG_IGN);
 	else
+	{
 		signal(SIGINT, handler_cmd);
-	//signal(SIGQUIT, SIG_IGN);
+		signal(SIGQUIT, handle_quit);
+	}
 	while (tmp)
 	{
 		tmp->fd_in = data->fd_in;

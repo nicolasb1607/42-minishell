@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:22:54 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/16 20:27:23 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/17 10:07:43 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,16 @@ void	handler_heredoc(int signum)
 	{
 		ft_putchar('\n');
 		exit(130);
+	}
+}
+
+void	handle_quit(int signum)
+{
+	if(signum == SIGQUIT)
+	{
+		ft_putstr_fd("quit (core dumped)\n", 2);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		g_mshell.err_exit = 131;
 	}
 }
