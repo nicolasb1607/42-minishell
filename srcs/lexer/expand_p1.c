@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:02 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/16 20:44:40 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/17 10:55:09 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,27 @@ int	ft_isenv(char c)
 	else if (c == '_')
 		return (1);
 	return (0);
+}
+
+int	is_valid_varenv_expand(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	if (ft_isdigit(str[i++]) == 1)
+		return (0);
+	while (str[i])
+	{
+		if (ft_isenv(str[i]) == 0)
+		{
+			ft_putstr(str);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
 }
 
 int	is_valid_varenv(char *str)
@@ -113,7 +134,7 @@ char	*expand(t_token *token, int i, t_minishell *mshell)
 	}
 	if (ft_strncmp(varenv, "?", 2) == 0)
 		varvalue = ft_itoa(mshell->err_exit);
-	else if (is_valid_varenv(varenv) == 1)
+	else
 		varvalue = look_for_varenv_value(varenv, &mshell->env);
 	free(varenv);
 	return (varvalue);
