@@ -39,6 +39,7 @@ void	ft_unset(char *varenv, t_dlist **dupenv)
 	t_dlist	*curr;
 	char	*content;
 
+
 	curr = *dupenv;
 	content = curr->content;
 	if (is_existing(varenv, dupenv) == 0)
@@ -60,6 +61,8 @@ void	loop_unset(t_tlist *tlst, t_dlist **dupenv)
 	t_tlist	*currtok;
 
 	currtok = tlst->next;
+	if(!*dupenv)
+		return ;
 	while (currtok)
 	{
 		ft_unset(currtok->token->content, dupenv);

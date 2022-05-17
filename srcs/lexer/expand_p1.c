@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:02 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/17 11:09:18 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/17 11:27:24 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ char	*expand(t_token *token, int i, t_minishell *mshell)
 	// while (token->content[i] && token->content[i] != ' '
 	// 	&& token->content[i] != '\'' && token->content[i] != '='
 	// 	&& token->content[i] != '$')
-	while (token->content[i] && ft_isalnum(token->content[i]) == 1)
+	while (token->content[i] && (ft_isalnum(token->content[i]) == 1 || token->content[i] == '?'))
 	{
 		if (token->content[i] == '?')
 		{
