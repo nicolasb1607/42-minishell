@@ -1,6 +1,6 @@
 CC		= gcc
 SAN		= -fsanitize=address
-CFLAGS	= -Wall -Wextra -Werror -g3 ##$(SAN)
+CFLAGS	= -Wall -Wextra -Werror -g3 #$(SAN)
 EXEC	= minishell
 
 
