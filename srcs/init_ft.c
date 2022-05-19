@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_ft.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 20:14:39 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/17 10:00:59 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 13:57:37 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ pid_t	fork_built(t_tlist *curr, t_cmd *cmd, t_pipes pipes, t_dlist **dupenv)
 	pid_t	pi;
 
 	while (ft_strcmp(curr->token->content, cmd->command) != 0)
-	curr = curr->next;
+		curr = curr->next;
 	if (is_forkbuiltin(cmd))
 	{
 		pi = fork();
@@ -125,7 +125,7 @@ void	init_ft(t_tlist *tlst, t_dlist **dupenv, t_cmd *chead)
 			else
 				cmd = mk_built(&tlst, dupenv);
 			if (tlst)
-					tlst = tlst->next;
+				tlst = tlst->next;
 			ft_clstadd_back(&chead, cmd);
 		}
 		piping(nb_cmd, &chead, dupenv, tlst);
