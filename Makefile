@@ -36,6 +36,7 @@ SRCS = ./main.c \
 	./srcs/lexer/lexer_utils2.c \
 	./srcs/lexer/expand_p1.c \
 	./srcs/lexer/expand_p2.c \
+	./srcs/lexer/expand_p3.c \
 	./srcs/lexer/position.c \
 	./srcs/lexer/make_token.c \
 	./srcs/utils/tab_to_list.c \

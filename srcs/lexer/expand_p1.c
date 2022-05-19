@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:02 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/19 11:14:09 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 13:25:37 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,32 +111,4 @@ char	*look_for_varenv_value(char *varenv, t_dlist **env)
 	if (ft_strlen(subval) == 0)
 		return (free(subval), NULL);
 	return (subval);
-}
-
-char	*expand(t_token *token, int i, t_minishell *mshell)
-{
-	char	*varenv;
-	char	*varvalue;
-
-	varenv = NULL;
-	i++;
-	// while (token->content[i] && token->content[i] != ' '
-	// 	&& token->content[i] != '\'' && token->content[i] != '='
-	// 	&& token->content[i] != '$')
-	while (token->content[i] && (ft_isalnum(token->content[i]) == 1 || token->content[i] == '?'))
-	{
-		if (token->content[i] == '?')
-		{
-			varenv = ft_strdup("?");
-			break ;
-		}
-		varenv = ft_charjoin(varenv, token->content[i]);
-		i++;
-	}
-	if (ft_strncmp(varenv, "?", 2) == 0)
-		varvalue = ft_itoa(mshell->err_exit);
-	else
-		varvalue = look_for_varenv_value(varenv, &mshell->env);
-	free(varenv);
-	return (varvalue);
 }

@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:39:30 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/17 15:56:48 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 13:22:24 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ t_dlist	*ft_dupenv(t_dlist *lst, char **envp)
 void	ft_env(t_dlist **dupenv)
 {
 	t_dlist	*curr;
-	
-	if(!*dupenv)
+
+	if (!*dupenv)
 		return ;
 	curr = *dupenv;
 	while (curr != NULL)

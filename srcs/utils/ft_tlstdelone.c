@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:56:11 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/19 11:03:19 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 13:37:04 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,36 @@ void	t_norm(t_tlist **curr, t_tlist **tmp)
 	free((*curr));
 }
 
+void	ft_tlstdelone_cond(t_tlist **curr, int *solo,
+		t_tlist **tmp, t_tlist **lst)
+{
+	int	i;
+
+	if ((*curr)->prev == NULL && (*curr)->next)
+	{
+		*lst = (*curr)->next;
+		(*curr)->next->prev = NULL;
+		i = (free((*curr)->token->content), free((*curr)), 0);
+	}
+	else if (!(*curr)->next && !(*curr)->prev)
+	{
+		i = (free((*curr)->token->content), free((*curr)), 0);
+		if (*solo == 1)
+			*lst = NULL;
+	}
+	else if ((*curr)->next == NULL && (*curr)->prev)
+	{
+		(*curr)->prev->next = (NULL);
+		i = (free((*curr)->token->content), free((*curr)), 0);
+	}
+	else
+		t_norm(curr, tmp);
+	i++;
+}
+
 void	ft_tlstdelone(t_tlist *curr, void (*del)(void*), t_tlist **lst)
 {
 	t_tlist	*tmp;
-	int		i;
 	int		solo;
 
 	solo = 0;
@@ -31,26 +57,5 @@ void	ft_tlstdelone(t_tlist *curr, void (*del)(void*), t_tlist **lst)
 		solo = 1;
 	tmp = *lst;
 	if (curr != NULL && del != NULL)
-	{
-		if (curr->prev == NULL && curr->next)
-		{
-			*lst = curr->next;
-			curr->next->prev = NULL;
-			i = (free(curr->token->content), free(curr), 0);
-		}
-		else if (!curr->next && !curr->prev)
-		{
-			i = (free(curr->token->content), free(curr), 0);
-			if (solo == 1)
-				*lst = NULL;
-		}
-		else if (curr->next == NULL && curr->prev)
-		{
-			curr->prev->next = (NULL);
-			i = (free(curr->token->content), free(curr), 0);
-		}
-		else
-			t_norm(&curr, &tmp);
-	}
-	i++;
+		ft_tlstdelone_cond(&curr, &solo, &tmp, lst);
 }

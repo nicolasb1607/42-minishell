@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:12 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/18 12:51:56 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 13:21:42 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ int	is_all_var_valid(t_tlist *tlst)
 
 int	export_loop1(t_tlist *tlst, t_dlist *currenv, char *varexport)
 {
-	char *get_var_ret;
+	char	*get_var_ret;
 
 	while (currenv)
 	{
 		get_var_ret = NULL;
-		get_var_ret = get_var(currenv->content);		
+		get_var_ret = get_var(currenv->content);
 		if (ft_strncmp(currenv->content, varexport,
 				ft_strlen(get_var_ret)) == 0)
 		{
