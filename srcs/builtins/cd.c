@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:39:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/19 15:05:19 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 15:57:46 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,21 @@ void	save_olddir(t_dlist **dupenv)
 	free(curr_dir);
 }
 
+void	define_def_env(t_dlist **dupenv)
+{
+	char	*currdir;
+	char	*wdir;
+
+	(void)dupenv;
+
+	currdir = NULL;
+	currdir = getcwd(currdir, 2048);
+	wdir = ft_strjoin("PWD=", currdir);
+	free(currdir);
+	*dupenv = ft_dupenv_def(*dupenv, wdir);
+	free(wdir);
+}
+
 void	*ft_cd(char *path_name, t_dlist **dupenv)
 {
 	char	*curr_dir;
@@ -52,7 +67,7 @@ void	*ft_cd(char *path_name, t_dlist **dupenv)
 	t_dlist	*curr;
 
 	if (*dupenv == NULL)
-		return (NULL);
+		define_def_env(dupenv);
 	curr = *dupenv;
 	content = curr->content;
 	curr_dir = (save_olddir(dupenv), NULL);
@@ -78,11 +93,11 @@ void	launch_cd(t_tlist *tlst, t_dlist **dupenv)
 {
 	char	*path_name;
 
-	if (*dupenv == NULL)
-	{
-		ft_putstr("NO ENV, NO WORKING\n");
-		return ;
-	}
+	// if (*dupenv == NULL)
+	// {
+	// 	ft_putstr("NO ENV, NO WORKING\n");
+	// 	return ;
+	// }
 	path_name = look_for_varenv_value("HOME", dupenv);
 	if (!tlst->next)
 		ft_cd(path_name, dupenv);
