@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:32:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/12 14:19:07 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/19 10:55:52 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_tlstiter(
 char	**dlist_to_tab(t_dlist *alst);
 void	print_tab(char **tab);
 void	ft_printalltok(t_tlist *tlist);
-void	ft_tlstdelone(t_tlist *lst, void (*del)(void*));
+void	ft_tlstdelone(t_tlist *lst, void (*del)(void*), t_tlist **tlist);
 char	**ft_split_custom(char *s, char c);
 void	classicsplit(char *s, char **split, int *i, int *j);
 char	**ft_split_custom(char *s, char c);

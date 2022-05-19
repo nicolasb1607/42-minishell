@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:31:41 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/17 16:26:47 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 10:53:08 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int		is_valid_varenv(char *str);
 char	*look_for_varenv_value(char *varenv, t_dlist **env);
 char	*expand(t_token *token, int i, t_minishell *mshell);
 void	expandtok(t_token *token, t_minishell *mshell);
-t_tlist	*init_tlist(char *str, t_tlist *tlist, t_minishell *mshell);
+t_tlist	*init_tlist(char *str, t_tlist **tlist, t_minishell *mshell);
 int		parser(t_tlist *lst);
 int		__is_type(t_tlist *lst, char *type);
 void	recul(t_lexer *lexer);
-void	ft_cleantlist(t_tlist *tlist);
+void	ft_cleantlist(t_tlist **tlist);
 void	tok_operation(t_token *token, t_lexer *lexer);
 
 #endif

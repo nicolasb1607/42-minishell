@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:51:32 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/17 15:17:44 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/19 10:51:27 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	launch_cmd(t_tlist **tlist)
 
 static void	launch_cmd2(t_tlist **tlist, char **ret)
 {
-	(*tlist) = init_tlist(*ret, (*tlist), &g_mshell);
+	(*tlist) = init_tlist(*ret, tlist, &g_mshell);
 	if ((*tlist))
 	{
 		if (parser((*tlist)))

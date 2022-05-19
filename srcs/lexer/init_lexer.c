@@ -6,21 +6,24 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:17 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/17 16:26:41 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 11:02:36 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-void	ft_cleantlist(t_tlist *tlist)
+void	ft_cleantlist(t_tlist **tlist)
 {
-	while (tlist)
+	t_tlist *curr; 
+
+	curr = *tlist;
+	while (curr)
 	{
-		if (!tlist->token->content)
+		if (!curr->token->content)
 		{
-			ft_tlstdelone(tlist, free);
+			ft_tlstdelone(curr, free, tlist);
 		}
-		tlist = tlist->next;
+		curr = curr->next;
 	}
 }
 
@@ -39,7 +42,7 @@ static void	init_tlist_loop(t_lexer *lexer, t_tlist **tlist,
 	}
 }
 
-t_tlist	*init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
+t_tlist	*init_tlist(char *str, t_tlist **tlist, t_minishell *mshell)
 {
 	t_tlist	*new;
 	t_token	*token;
@@ -51,15 +54,15 @@ t_tlist	*init_tlist(char *str, t_tlist *tlist, t_minishell *mshell)
 		return (NULL);
 	init_lexer(&lexer, str);
 	advance(&lexer);
-	init_tlist_loop(&lexer, &tlist, &token, &new);
-	ft_tlstiter(tlist, mshell, expandtok);
+	init_tlist_loop(&lexer, tlist, &token, &new);
+	ft_tlstiter(*tlist, mshell, expandtok);
 	while (i < 15)
 	{
 		ft_cleantlist(tlist);
-		if (tlist && !tlist->token->content && tlist->next)
-			tlist = tlist->next;
+		if (*tlist && !(*tlist)->token->content && (*tlist)->next)
+			(*tlist) = (*tlist)->next;
 		i++;
 	}
 	g_mshell.err_exit = 0;
-	return (tlist);
+	return (*tlist);
 }
