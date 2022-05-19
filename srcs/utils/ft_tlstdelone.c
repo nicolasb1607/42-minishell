@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tlstdelone.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:56:11 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/19 13:37:04 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 14:44:40 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,21 @@ void	ft_tlstdelone_cond(t_tlist **curr, int *solo,
 	{
 		*lst = (*curr)->next;
 		(*curr)->next->prev = NULL;
-		i = (free((*curr)->token->content), free((*curr)), 0);
+		i = (free((*curr)->token->content),
+				free((*curr)->token), free((*curr)), 0);
 	}
 	else if (!(*curr)->next && !(*curr)->prev)
 	{
-		i = (free((*curr)->token->content), free((*curr)), 0);
+		i = (free((*curr)->token->content),
+				free((*curr)->token), free((*curr)), 0);
 		if (*solo == 1)
 			*lst = NULL;
 	}
 	else if ((*curr)->next == NULL && (*curr)->prev)
 	{
 		(*curr)->prev->next = (NULL);
-		i = (free((*curr)->token->content), free((*curr)), 0);
+		i = (free((*curr)->token->content),
+				free((*curr)->token), free((*curr)), 0);
 	}
 	else
 		t_norm(curr, tmp);
