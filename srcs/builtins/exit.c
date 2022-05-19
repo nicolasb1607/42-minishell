@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/12 15:32:06 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 13:57:54 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,22 @@
 
 static int	ft_exit_error_arg(t_tlist **tlst, int *i)
 {
+	int	neg;
+
+	neg = 0;
+	if ((*tlst)->next->token->content[*i] == '-' || (*tlst)->next->token->content[*i] == '+')
+	{
+		if ((*tlst)->next->token->content[*i] == '-')
+			neg = 1;
+		*i = *i + 1;
+	}
 	if (ft_isdigit((*tlst)->next->token->content[*i]) == 0)
 	{
 		ft_putstr("minishell: exit: numeric argument required\n");
 		return (1);
 	}
+	if (neg == 1)
+		return (2);
 	return (0);
 }
 
@@ -26,6 +37,8 @@ static void	exit_number(int error_arg, char *exit_val)
 {
 	if (error_arg == 1)
 		exit(2);
+	if (error_arg == 2)
+		exit(ft_atoi(exit_val) * -1 % 256);
 	if (exit_val == NULL)
 		exit(0);
 	else
