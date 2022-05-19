@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:39:24 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/17 10:21:39 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 15:05:19 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	*ft_cd(char *path_name, t_dlist **dupenv)
 	curr->content = content;
 	free(curr_dir);
 	return (NULL);
-}	
+}
 
 void	launch_cd(t_tlist *tlst, t_dlist **dupenv)
 {

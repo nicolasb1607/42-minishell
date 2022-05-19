@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/19 13:57:54 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/19 14:59:15 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static int	ft_exit_error_arg(t_tlist **tlst, int *i)
 	int	neg;
 
 	neg = 0;
-	if ((*tlst)->next->token->content[*i] == '-' || (*tlst)->next->token->content[*i] == '+')
+	if ((*tlst)->next->token->content[*i] == '-'
+		|| (*tlst)->next->token->content[*i] == '+')
 	{
 		if ((*tlst)->next->token->content[*i] == '-')
 			neg = 1;
