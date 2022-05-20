@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/19 14:59:15 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/20 22:06:50 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,12 @@ void	ft_exit(t_tlist *tlst, t_cmd **cmd)
 	char	*exit_val;
 	int		i;
 	int		error_arg;
+	int		too_many_arg;
 
-	exit_val = NULL;
+	if (g_mshell.err_exit)
+		exit_val = ft_itoa(g_mshell.err_exit);
+	else
+		exit_val = NULL;
 	error_arg = 0;
 	i = 0;
 	if (tlst->next)
@@ -66,12 +70,20 @@ void	ft_exit(t_tlist *tlst, t_cmd **cmd)
 		}
 	}
 	ft_printf(RED "exit\n" CRESET);
+	if (tlst->next && tlst->next->next)
+	{
+		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+		too_many_arg = 1;
+	}
 	free_dlist(&g_mshell.env);
 	free_tcmd(cmd);
 	free_tlist(&tlst);
 	rl_clear_history();
 	unlink_hd();
-	exit_number(error_arg, exit_val);
+	if(too_many_arg == 1)
+		exit (1);
+	else
+		exit_number(error_arg, exit_val);
 }
 
 void	disp_synt_erro(char *str)
