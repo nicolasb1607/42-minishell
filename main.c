@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:51:32 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/20 11:02:49 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/20 12:55:02 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ int	main(int ac, char **av, char **envp)
 	t_tlist	*tlist;
 	char	*ret;
 
+	if (isatty(0) == 0)
+	{
+		ft_putstr_fd("T'as cru quoi\n", 2);
+		exit (0);
+	}
 	(void)ac;
 	(void)av;
 	tlist = NULL;
