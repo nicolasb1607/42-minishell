@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:23:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/16 20:23:37 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:07:18 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_prompt(t_minishell *g_mshell)
 {
 	char	*ret_line;
 
-	ret_line = readline(BLU"Minishell$> "CRESET);
+	ret_line = readline(BCYN"Minishell $> "CRESET);
 	if (!ret_line)
 	{
 		unlink_hd();
