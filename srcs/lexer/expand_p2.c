@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_p2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:07:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/11 16:19:10 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/20 19:08:36 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static void	expandtok_condition1(t_token **token, char **expandedstr,
 				(*expandedstr) = ft_strjoin_free((*expandedstr), (*ret_expand));
 			i = (free((*ret_expand)), i + lenvarenv((*token)->content, i));
 		}
+		else if ((*token)->content[i] == '$')
+			i++;
 		if ((*token)->content[i] && (*token)->content[i] != '$' )
 		{
 			(*expandedstr) = ft_charjoin((*expandedstr), (*token)->content[i]);
