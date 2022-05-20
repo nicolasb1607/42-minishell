@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:59:52 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/02 10:52:06 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:21:44 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*ft_strndup(char *str, int j)
 	char	*finalstr;
 
 	i = 0;
-	finalstr = malloc(sizeof(char) * (j + 1));
+	finalstr = cmalloc(sizeof(char) * (j + 1));
 	if (!finalstr)
 		return (NULL);
 	while (str[i] && i < j)
@@ -90,7 +90,7 @@ char	**ft_split(char const *s, char sep)
 
 	str = (char *)s;
 	size = ft_count_words(str, sep);
-	finalstr = malloc(sizeof(char *) * (ft_count_words(str, sep) + 1));
+	finalstr = cmalloc(sizeof(char *) * (ft_count_words(str, sep) + 1));
 	if (!finalstr)
 		return (NULL);
 	if (ft_count_words(str, sep) == 0)

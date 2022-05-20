@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:59:52 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/31 16:29:48 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/20 11:23:26 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	splitquotted(char **split, char *s, int *j, int *i)
 	quote = s[*i];
 	*i = *i + 1;
 	len = lenquote_cu(s, *i, quote);
-	split[*j] = malloc(sizeof(char) * len + 1);
+	split[*j] = cmalloc(sizeof(char) * len + 1);
 	if (!split[*j])
 	{
 		free_tab_cu(split);

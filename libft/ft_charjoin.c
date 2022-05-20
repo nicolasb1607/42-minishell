@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_charjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 18:01:53 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/02 14:54:25 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:21:19 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*char_to_str(char c)
 {
 	char	*str;
 
-	str = malloc(sizeof(char) * 2);
+	str = cmalloc(sizeof(char) * 2);
 	if (!str)
 		return (NULL);
 	str[0] = c;
@@ -35,7 +35,7 @@ char	*ft_charjoin(char *str, char c)
 		return (NULL);
 	if (str == NULL)
 		return (char_to_str(c));
-	new = malloc(sizeof(char) * (ft_strlen(str) + 2));
+	new = cmalloc(sizeof(char) * (ft_strlen(str) + 2));
 	if (!new)
 		return (free(str), NULL);
 	while (str[i])

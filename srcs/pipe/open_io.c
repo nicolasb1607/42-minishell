@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:52:33 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/11 10:38:42 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/20 11:23:06 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strndup(char *str, int i)
 	int		j;
 
 	j = 0;
-	new = (char *)malloc(sizeof(char) * (i + 1));
+	new = (char *)cmalloc(sizeof(char) * (i + 1));
 	while (j < i)
 	{
 		new[j] = str[j];

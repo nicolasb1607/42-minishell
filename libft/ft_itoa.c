@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 14:21:50 by nburat-d          #+#    #+#             */
-/*   Updated: 2021/12/02 14:03:33 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:21:35 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*ft_itoa(int n)
 	ft_int_len(n, &len);
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
-	itoa_array = malloc((len + 1) * sizeof(char));
+	itoa_array = cmalloc((len + 1) * sizeof(char));
 	if (!itoa_array)
 		return (NULL);
 	while (pos < len)

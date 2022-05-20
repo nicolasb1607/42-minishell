@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:38:43 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/05 10:31:12 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/20 11:21:50 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_strdup_seg(const char *s)
 		return (NULL);
 	len = ft_strlen(s);
 	i = 0;
-	dup = malloc((len + 1) * sizeof(char));
+	dup = cmalloc((len + 1) * sizeof(char));
 	if (!dup)
 		return (NULL);
 	while (s[i] != '\0')
@@ -52,7 +52,7 @@ char	*ft_strdup(const char *s)
 
 	len = ft_strlen(s);
 	i = 0;
-	dup = malloc((len + 1) * sizeof(char));
+	dup = cmalloc((len + 1) * sizeof(char));
 	if (!dup)
 		return (NULL);
 	while (s[i] != '\0')

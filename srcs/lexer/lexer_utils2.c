@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:37:45 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/11 14:50:19 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:23:02 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_token	*init_token(void)
 {
 	t_token	*token;
 
-	token = malloc(sizeof(t_token));
+	token = cmalloc(sizeof(t_token));
 	if (!token)
 		return (NULL);
 	token->content = NULL;

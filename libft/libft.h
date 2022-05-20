@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:37:34 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/12 13:25:59 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/20 11:21:00 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ char	*ft_charjoin_free(char *str, char c);
 char	*ft_strnjoin_free(char *s1, char *s2, int size);
 char	*ft_strdup_seg(const char *s);
 char	*ft_strjoin_free2(char *s1, char *s2);
+void	*cmalloc(size_t size);
 
 #endif

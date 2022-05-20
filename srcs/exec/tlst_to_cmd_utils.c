@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tlst_to_cmd_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 10:27:27 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/16 11:58:32 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:22:57 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**tab_dup(char **tab)
 	i = 0;
 	while (tab[i])
 		i++;
-	new = malloc(sizeof(char *) * (i + 1));
+	new = cmalloc(sizeof(char *) * (i + 1));
 	i = 0;
 	while (tab[i])
 	{

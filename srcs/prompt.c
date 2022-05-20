@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:23:00 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/20 11:07:18 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/20 11:22:53 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strsub(char *str, int to_sub, int len)
 	int		i;
 
 	i = 0;
-	sub = (char *)malloc(sizeof(char) * (len + 1));
+	sub = (char *)cmalloc(sizeof(char) * (len + 1));
 	if (!sub)
 		return (NULL);
 	while (i < len)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dlstnew.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:15:42 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/02/23 14:44:11 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:21:29 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_dlist	*ft_dlstnew(void *content)
 {	
 	t_dlist	*node;
 
-	node = malloc(sizeof(t_dlist));
+	node = cmalloc(sizeof(t_dlist));
 	if (!node)
 		return (NULL);
 	node->content = content;

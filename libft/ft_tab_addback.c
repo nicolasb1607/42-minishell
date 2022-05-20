@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tab_addback.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 13:50:50 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/11 16:15:43 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:22:42 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**ft_tab_new(char *str)
 {
 	char	**tab;
 
-	tab = (char **)malloc(sizeof(char *) * 2);
+	tab = (char **)cmalloc(sizeof(char *) * 2);
 	if (!tab)
 		return (NULL);
 	tab[0] = ft_strdup(str);
@@ -48,7 +48,7 @@ char	**ft_tab_addback(char **tab, char *str)
 		return (ft_tab_new(str));
 	while (tab[i])
 		i++;
-	new = malloc(sizeof(char *) * (i + 2));
+	new = cmalloc(sizeof(char *) * (i + 2));
 	i = 0;
 	while (tab[i])
 	{

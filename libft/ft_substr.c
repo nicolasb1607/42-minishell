@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:39:16 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/04 22:20:48 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/20 11:22:30 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 		return ((char *)ft_calloc(sizeof(char), 1));
 	if (ft_strlen(&s[start]) < len)
 		len = ft_strlen(&s[start]);
-	dest = malloc(sizeof(*s) * (len + 1));
+	dest = cmalloc(sizeof(*s) * (len + 1));
 	if (!dest)
 		return (NULL);
 	while (i < len && s[start])

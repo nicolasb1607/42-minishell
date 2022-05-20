@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 18:22:05 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/04 21:52:40 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/20 11:23:36 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**tlist_to_tab(t_tlist *alst)
 	i = -1;
 	curr = alst;
 	size = ft_tlstsize(curr);
-	tmp = malloc(sizeof(char *) * (size + 1));
+	tmp = cmalloc(sizeof(char *) * (size + 1));
 	while (++i < size)
 	{
 		tmp[i] = ft_strdup(curr->token->content);

@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:38:47 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/12 13:25:37 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/20 11:22:01 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s1)
 		s1 = ft_strdup("");
 	catlen = ft_strlen(s1) + ft_strlen(s2);
-	strcat = malloc((catlen + 1) * sizeof(char));
+	strcat = cmalloc((catlen + 1) * sizeof(char));
 	if (!strcat)
 		return (NULL);
 	if (s1 != NULL)
@@ -60,7 +60,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	if (!s1)
 		s1 = ft_strdup("");
 	catlen = ft_strlen(s1) + ft_strlen(s2);
-	strcat = malloc((catlen + 1) * sizeof(char));
+	strcat = cmalloc((catlen + 1) * sizeof(char));
 	if (!strcat)
 		return (NULL);
 	if (s1 != NULL)
@@ -88,7 +88,7 @@ char	*ft_strnjoin_free(char *s1, char *s2, int size)
 	if (!s1)
 		s1 = ft_strdup("");
 	catlen = ft_strlen(s1) + ft_strlen(s2);
-	strcat = malloc((catlen + 1) * sizeof(char));
+	strcat = cmalloc((catlen + 1) * sizeof(char));
 	if (!strcat)
 		return (NULL);
 	if (s1 != NULL)
@@ -116,7 +116,7 @@ char	*ft_strjoin_free2(char *s1, char *s2)
 	if (!s1)
 		s1 = ft_strdup("");
 	catlen = ft_strlen(s1) + ft_strlen(s2);
-	strcat = malloc((catlen + 1) * sizeof(char));
+	strcat = cmalloc((catlen + 1) * sizeof(char));
 	if (!strcat)
 		return (NULL);
 	if (s1 != NULL)

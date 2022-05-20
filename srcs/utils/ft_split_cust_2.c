@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:22:37 by ngobert           #+#    #+#             */
-/*   Updated: 2022/03/31 16:29:55 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/20 11:23:18 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	**ft_split_custom(char *s, char c)
 	i = 0;
 	if (!s)
 		return (NULL);
-	split = malloc(sizeof(char *) * (ft_wordcount_custom(s, c) + 1));
+	split = cmalloc(sizeof(char *) * (ft_wordcount_custom(s, c) + 1));
 	if (!split)
 		return (NULL);
 	split = ft_cut_cu(s, split, c, i);
@@ -61,7 +61,7 @@ void	classicsplit(char *s, char **split, int *i, int *j)
 	int	l;
 
 	l = 0;
-	split[*j] = malloc(sizeof(char) * ft_wordlen_cu(&s[*i], ' '));
+	split[*j] = cmalloc(sizeof(char) * ft_wordlen_cu(&s[*i], ' '));
 	if (!split[*j])
 	{
 		free_tab_cu(split);

@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:10:32 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/02/28 15:56:03 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/20 11:22:14 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_strncpy(char *str, int n)
 	char	*cpy;
 
 	i = 0;
-	cpy = malloc(sizeof(char) * (n + 1));
+	cpy = cmalloc(sizeof(char) * (n + 1));
 	if (!cpy)
 		return (NULL);
 	while (str[i] && i < n)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tlstnew.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:15:42 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/03/09 17:50:30 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/20 11:23:33 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_tlist	*ft_tlstnew(t_token *token)
 {	
 	t_tlist	*node;
 
-	node = malloc(sizeof(t_tlist));
+	node = cmalloc(sizeof(t_tlist));
 	if (!node)
 		return (NULL);
 	node->token = token;
