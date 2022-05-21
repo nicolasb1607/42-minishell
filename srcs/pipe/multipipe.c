@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/17 10:20:50 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/21 15:01:45 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ void	ft_pipe(t_cmd *cmd, t_pipes *data)
 	if (waitpid(pid, &status, 0) != -1)
 		if (WIFEXITED(status))
 			g_mshell.err_exit = WEXITSTATUS(status);
+	//printf("after wait pid\n");
 	ft_norm(&status);
 }

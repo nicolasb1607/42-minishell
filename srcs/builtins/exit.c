@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/20 22:06:50 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/21 15:46:19 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ static void	exit_number(int error_arg, char *exit_val)
 		exit(ft_atoi(exit_val) % 256);
 }
 
-void	ft_exit(t_tlist *tlst, t_cmd **cmd)
+void	ft_exit(t_tlist *tlst, t_cmd **cmd, int pid)
 {
 	char	*exit_val;
 	int		i;
 	int		error_arg;
 	int		too_many_arg;
-
+	
 	if (g_mshell.err_exit)
 		exit_val = ft_itoa(g_mshell.err_exit);
 	else
@@ -70,18 +70,18 @@ void	ft_exit(t_tlist *tlst, t_cmd **cmd)
 		}
 	}
 	ft_printf(RED "exit\n" CRESET);
-	if (tlst->next && tlst->next->next)
+	if ((*cmd)->options[2])
 	{
 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		too_many_arg = 1;
 	}
 	free_dlist(&g_mshell.env);
 	free_tcmd(cmd);
-	free_tlist(&tlst);
+	//free_tlist(&tlst);
 	rl_clear_history();
 	unlink_hd();
 	if(too_many_arg == 1)
-		exit (1);
+		exit(1);
 	else
 		exit_number(error_arg, exit_val);
 }
