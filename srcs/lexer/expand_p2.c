@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_p2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:07:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/20 19:08:36 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/21 11:19:00 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	expandtok_condition2(t_token **token, char **expandedstr, int *i)
 {
 	if ((*token)->content[*i] == '$' && (!(*token)->content[*i + 1]
 			|| (*token)->content[*i + 1] == '\"'
-			|| (*token)->content[*i + 1] == '$'))
+			|| (*token)->content[*i + 1] == '$' ||  (*token)->content[*i + 1] == ' '))
 	{
 		(*expandedstr) = ft_charjoin((*expandedstr), (*token)->content[*i]);
 		*i = *i + 1;
@@ -59,7 +59,7 @@ static void	expandtok_condition1(t_token **token, char **expandedstr,
 		}
 		else if ((*token)->content[i] == '$')
 			i++;
-		if ((*token)->content[i] && (*token)->content[i] != '$' )
+		if ((*token)->content[i] && (*token)->content[i] != '$')
 		{
 			(*expandedstr) = ft_charjoin((*expandedstr), (*token)->content[i]);
 			i++;
