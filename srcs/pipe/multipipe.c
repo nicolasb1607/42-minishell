@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/21 15:01:45 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/22 11:52:59 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void	exec_builtin(t_tlist *builtin, t_dlist **denv, t_cmd **cmd)
 	else if (!ft_strncmp(builtin->token->content, "export", 7))
 		loop_export(builtin, denv);
 	else if (!ft_strncmp(builtin->token->content, "exit", 5))
-		ft_exit(builtin, cmd);
+	{
+		free_tlist(&builtin);
+		ft_exit(cmd);
+	}
 }
 
 void	check_io(t_cmd *cmd, t_pipes *data)

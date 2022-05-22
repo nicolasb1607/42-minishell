@@ -6,27 +6,27 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/21 15:46:19 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/22 12:46:26 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exit.h"
 
-static int	ft_exit_error_arg(t_tlist **tlst, int *i)
+static int	ft_exit_error_arg(t_cmd **cmd, int *i)
 {
 	int	neg;
 
 	neg = 0;
-	if ((*tlst)->next->token->content[*i] == '-'
-		|| (*tlst)->next->token->content[*i] == '+')
+	if ((*cmd)->options[1][*i] == '-'
+		|| (*cmd)->options[1][*i] == '+')
 	{
-		if ((*tlst)->next->token->content[*i] == '-')
+		if ((*cmd)->options[1][*i] == '-')
 			neg = 1;
 		*i = *i + 1;
 	}
-	if (ft_isdigit((*tlst)->next->token->content[*i]) == 0)
+	if (ft_isdigit((*cmd)->options[1][*i]) == 0)
 	{
-		ft_putstr("minishell: exit: numeric argument required\n");
+		ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
 		return (1);
 	}
 	if (neg == 1)
@@ -39,35 +39,42 @@ static void	exit_number(int error_arg, char *exit_val)
 	if (error_arg == 1)
 		exit(2);
 	if (error_arg == 2)
-		exit(ft_atoi(exit_val) * -1 % 256);
+		exit(ft_atoll(exit_val) * -1 % 256);
 	if (exit_val == NULL)
 		exit(0);
 	else
-		exit(ft_atoi(exit_val) % 256);
+		exit(ft_atoll(exit_val) % 256);
 }
 
-void	ft_exit(t_tlist *tlst, t_cmd **cmd, int pid)
+void	ft_exit(t_cmd **cmd)
 {
 	char	*exit_val;
 	int		i;
 	int		error_arg;
 	int		too_many_arg;
 	
-	if (g_mshell.err_exit)
+	if (g_mshell.err_exit && !(*cmd)->options[1])
 		exit_val = ft_itoa(g_mshell.err_exit);
-	else
-		exit_val = NULL;
-	error_arg = 0;
-	i = 0;
-	if (tlst->next)
+	else if (ft_strlen((*cmd)->options[1]) <= 19)
 	{
-		error_arg = ft_exit_error_arg(&tlst, &i);
-		while (tlst->next->token->content[i]
-			&& ft_isdigit(tlst->next->token->content[i]) == 1)
+		exit_val = NULL;
+		error_arg = 0;
+		i = 0;
+		if ((*cmd)->options[1])
 		{
-			exit_val = ft_charjoin(exit_val, tlst->next->token->content[i]);
-			i++;
+			error_arg = ft_exit_error_arg(cmd, &i);
+			while ((*cmd)->options[1][i]
+				&& ft_isdigit((*cmd)->options[1][i])== 1)
+			{
+				exit_val = ft_charjoin(exit_val, (*cmd)->options[1][i]);
+				i++;
+			}
 		}
+	}
+	else
+	{
+		ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
+		error_arg = 1;
 	}
 	ft_printf(RED "exit\n" CRESET);
 	if ((*cmd)->options[2])
@@ -77,7 +84,6 @@ void	ft_exit(t_tlist *tlst, t_cmd **cmd, int pid)
 	}
 	free_dlist(&g_mshell.env);
 	free_tcmd(cmd);
-	//free_tlist(&tlst);
 	rl_clear_history();
 	unlink_hd();
 	if(too_many_arg == 1)

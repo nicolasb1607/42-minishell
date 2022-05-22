@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+         #
+#    By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 16:20:24 by nburat-d          #+#    #+#              #
-#    Updated: 2022/04/07 13:55:07 by ngobert          ###   ########.fr        #
+#    Updated: 2022/05/22 10:43:54 by nburat-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 EXEC = libft.a
 SRCS = ./ft_atoi.c \
+	./ft_atoll.c \
 	./ft_bzero.c \
 	./ft_calloc.c \
 	./ft_isalnum.c \
