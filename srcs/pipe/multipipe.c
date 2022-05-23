@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/23 11:38:25 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/23 13:51:21 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	exec_builtin(t_tlist *builtin, t_dlist **denv, t_cmd **cmd)
 		if (!check_all_al((*cmd)->options) && ((*cmd)->options[1] && (*cmd)->options[2]))
 		{
 			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+			g_mshell.err_exit = 1;
 			return ;
 		}
 		else
