@@ -6,7 +6,7 @@
 /*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 10:25:44 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/12 14:22:51 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/23 11:15:36 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ char	**ft_free_tab(char **tab)
 		while (tab[i])
 		{
 			free(tab[i]);
+			tab[i] = NULL;
 			i++;
 		}
 		free(tab);
+		tab = NULL;
 	}
 	return (NULL);
 }

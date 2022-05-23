@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multipipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/22 11:52:59 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/23 11:38:25 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,16 @@ void	exec_builtin(t_tlist *builtin, t_dlist **denv, t_cmd **cmd)
 		loop_export(builtin, denv);
 	else if (!ft_strncmp(builtin->token->content, "exit", 5))
 	{
-		free_tlist(&builtin);
-		ft_exit(cmd);
+		if (!check_all_al((*cmd)->options) && ((*cmd)->options[1] && (*cmd)->options[2]))
+		{
+			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+			return ;
+		}
+		else
+		{
+			free_tlist(&builtin);
+			ft_exit(cmd);
+		}
 	}
 }
 
@@ -98,6 +106,5 @@ void	ft_pipe(t_cmd *cmd, t_pipes *data)
 	if (waitpid(pid, &status, 0) != -1)
 		if (WIFEXITED(status))
 			g_mshell.err_exit = WEXITSTATUS(status);
-	//printf("after wait pid\n");
 	ft_norm(&status);
 }

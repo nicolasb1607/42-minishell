@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/22 12:46:26 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:52:43 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,10 @@ void	ft_exit(t_cmd **cmd)
 	char	*exit_val;
 	int		i;
 	int		error_arg;
-	int		too_many_arg;
 	
 	if (g_mshell.err_exit && !(*cmd)->options[1])
 		exit_val = ft_itoa(g_mshell.err_exit);
-	else if (ft_strlen((*cmd)->options[1]) <= 19)
+	else if ((*cmd)->options[1] && ft_strlen((*cmd)->options[1]) <= 19)
 	{
 		exit_val = NULL;
 		error_arg = 0;
@@ -71,25 +70,12 @@ void	ft_exit(t_cmd **cmd)
 			}
 		}
 	}
-	else
-	{
-		ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
-		error_arg = 1;
-	}
 	ft_printf(RED "exit\n" CRESET);
-	if ((*cmd)->options[2])
-	{
-		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-		too_many_arg = 1;
-	}
 	free_dlist(&g_mshell.env);
 	free_tcmd(cmd);
 	rl_clear_history();
 	unlink_hd();
-	if(too_many_arg == 1)
-		exit(1);
-	else
-		exit_number(error_arg, exit_val);
+	exit_number(error_arg, exit_val);
 }
 
 void	disp_synt_erro(char *str)
