@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/23 14:16:24 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/23 14:33:58 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,7 @@ void	exec_builtin(t_tlist *builtin, t_dlist **denv, t_cmd **cmd)
 	else if (!ft_strncmp(builtin->token->content, "export", 7))
 		loop_export(builtin, denv);
 	else if (!ft_strncmp(builtin->token->content, "exit", 5))
-	{
-		if (!check_all_al((*cmd)->options) && ((*cmd)->options[1] && (*cmd)->options[2]))
-		{
-			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-			g_mshell.err_exit = 1;
-			return ;
-		}
-		else
-		{
-			free_tlist(&builtin);
-			ft_exit(cmd);
-		}
-	}
+		exec_builtin_exit(&builtin, cmd);
 }
 
 void	check_io(t_cmd *cmd, t_pipes *data)
@@ -76,12 +64,6 @@ void	ft_child(int *pfd, t_cmd *cmd, t_pipes *data)
 	}
 }
 
-void	set_signal_pipe(void)
-{
-	signal(SIGINT, handler_cmd);
-	signal(SIGQUIT, handle_quit);
-}
-
 int	check_last_exit(t_cmd *cmd)
 {
 	int	i;
@@ -89,7 +71,8 @@ int	check_last_exit(t_cmd *cmd)
 	i = tab_size(cmd->options);
 	while (cmd->next)
 		cmd = cmd->next;
-	if (ft_strncmp(cmd->command, "exit", 5) == 0 && !check_all_al(cmd->options) && i > 1)
+	if (ft_strncmp(cmd->command, "exit", 5) == 0
+		&& !check_all_al(cmd->options) && i > 1)
 		return (ft_atoll(cmd->options[i - 1]) % 256);
 	return (g_mshell.err_exit);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:37:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/23 10:52:43 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/23 14:23:09 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_exit(t_cmd **cmd)
 	char	*exit_val;
 	int		i;
 	int		error_arg;
-	
+
 	if (g_mshell.err_exit && !(*cmd)->options[1])
 		exit_val = ft_itoa(g_mshell.err_exit);
 	else if ((*cmd)->options[1] && ft_strlen((*cmd)->options[1]) <= 19)
@@ -63,18 +63,15 @@ void	ft_exit(t_cmd **cmd)
 		{
 			error_arg = ft_exit_error_arg(cmd, &i);
 			while ((*cmd)->options[1][i]
-				&& ft_isdigit((*cmd)->options[1][i])== 1)
+				&& ft_isdigit((*cmd)->options[1][i]) == 1)
 			{
 				exit_val = ft_charjoin(exit_val, (*cmd)->options[1][i]);
 				i++;
 			}
 		}
 	}
-	ft_printf(RED "exit\n" CRESET);
-	free_dlist(&g_mshell.env);
-	free_tcmd(cmd);
-	rl_clear_history();
-	unlink_hd();
+	i = (ft_printf(RED "exit\n" CRESET), free_dlist(&g_mshell.env),
+			free_tcmd(cmd), rl_clear_history(), unlink_hd(), 0);
 	exit_number(error_arg, exit_val);
 }
 

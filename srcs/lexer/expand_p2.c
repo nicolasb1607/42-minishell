@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:07:08 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/21 11:19:00 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/23 14:32:40 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static void	expandtok_condition2(t_token **token, char **expandedstr, int *i)
 {
 	if ((*token)->content[*i] == '$' && (!(*token)->content[*i + 1]
 			|| (*token)->content[*i + 1] == '\"'
-			|| (*token)->content[*i + 1] == '$' ||  (*token)->content[*i + 1] == ' '))
+			|| (*token)->content[*i + 1] == '$'
+			|| (*token)->content[*i + 1] == ' '))
 	{
 		(*expandedstr) = ft_charjoin((*expandedstr), (*token)->content[*i]);
 		*i = *i + 1;

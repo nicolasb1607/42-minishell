@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:32:13 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/04/15 13:53:12 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/23 14:24:34 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void	run_mid(t_data *data, int i);
 void	run_last(t_data *data);
 char	*get_bin_custom(char *cmd, char **paths, t_tlist *tlst);
 void	pipes(int argc, char **argv, char **envp);
+void	set_signal_pipe(void);
 
 #endif

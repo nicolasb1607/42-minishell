@@ -29,6 +29,7 @@ SRCS = ./main.c \
 	./srcs/pipe/open_io.c \
 	./srcs/pipe/open_io_2.c \
 	./srcs/pipe/multipipe.c \
+	./srcs/pipe/multipipe_2.
 	./srcs/pipe/mpipe_utils.c \
 	./srcs/lexer/lexer.c \
 	./srcs/lexer/init_lexer.c \

@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 13:29:04 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/20 11:23:12 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/05/23 14:24:27 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipe.h"
+
+void	set_signal_pipe(void)
+{
+	signal(SIGINT, handler_cmd);
+	signal(SIGQUIT, handle_quit);
+}
 
 void	pipe_creator(t_data *data)
 {

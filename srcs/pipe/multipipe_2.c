@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoll.c                                         :+:      :+:    :+:   */
+/*   multipipe_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/22 10:42:18 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/23 14:18:16 by nburat-d         ###   ########.fr       */
+/*   Created: 2022/05/23 14:33:17 by nburat-d          #+#    #+#             */
+/*   Updated: 2022/05/23 14:34:03 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mpipe.h"
 
-long long	ft_atoll(char *str)
+void	exec_builtin_exit(t_tlist **builtin, t_cmd **cmd)
 {
-	unsigned long long	atoll;
-	int					neg;
-
-	neg = 1;
-	atoll = 0;
-	while ((*str >= 9 && *str <= 13) || *str == ' ')
-		str++;
-	if (*str == '+' || *str == '-')
+	if (!check_all_al((*cmd)->options)
+		&& ((*cmd)->options[1] && (*cmd)->options[2]))
 	{
-		if (*str == '-')
-			neg *= -1;
-		str++;
+		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+		g_mshell.err_exit = 1;
+		return ;
 	}
-	while (*str >= '0' && *str <= '9' && *str)
+	else
 	{
-		atoll = atoll * 10 + *str - 48;
-		str++;
+		free_tlist(builtin);
+		ft_exit(cmd);
 	}
-	return ((long long)atoll * neg);
 }

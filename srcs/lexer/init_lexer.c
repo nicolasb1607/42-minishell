@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:11:17 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/05/20 21:53:49 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/23 14:32:02 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ static void	init_tlist_loop(t_lexer *lexer, t_tlist **tlist,
 
 void	reset_err_exit(t_tlist **tlist)
 {
-	t_tlist *curr;
-	
+	t_tlist	*curr;
+
 	curr = *tlist;
 	while (curr)
 	{
-		if(ft_strcmp(curr->token->content, "exit") == 0)
+		if (ft_strcmp(curr->token->content, "exit") == 0)
 			return ;
 		curr = curr->next;
 	}
