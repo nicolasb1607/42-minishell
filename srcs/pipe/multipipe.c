@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/23 13:59:25 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/23 14:12:01 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int	check_last_exit(t_cmd *cmd)
 	i = tab_size(cmd->options);
 	while (cmd->next)
 		cmd = cmd->next;
-	if (ft_strncmp(cmd->options[0], "exit", 5) && !check_all_al(cmd->options) && i > 1)
-		return (dprintf(2, "covide\n"), atoi(cmd->options[i - 1]));
+	if (ft_strncmp(cmd->command, "exit", 5) == 0 && !check_all_al(cmd->options) && i > 1)
+		return (ft_atoll(cmd->options[i - 1]) % 256);
 	return (g_mshell.err_exit);
 }
 
