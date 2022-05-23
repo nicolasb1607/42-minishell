@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 13:12:58 by ngobert           #+#    #+#             */
-/*   Updated: 2022/05/23 13:51:21 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/05/23 13:59:25 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,18 @@ void	set_signal_pipe(void)
 	signal(SIGQUIT, handle_quit);
 }
 
+int	check_last_exit(t_cmd *cmd)
+{
+	int	i;
+
+	i = tab_size(cmd->options);
+	while (cmd->next)
+		cmd = cmd->next;
+	if (ft_strncmp(cmd->options[0], "exit", 5) && !check_all_al(cmd->options) && i > 1)
+		return (dprintf(2, "covide\n"), atoi(cmd->options[i - 1]));
+	return (g_mshell.err_exit);
+}
+
 void	ft_pipe(t_cmd *cmd, t_pipes *data)
 {
 	t_cmd	*tmp;
@@ -107,5 +119,6 @@ void	ft_pipe(t_cmd *cmd, t_pipes *data)
 	if (waitpid(pid, &status, 0) != -1)
 		if (WIFEXITED(status))
 			g_mshell.err_exit = WEXITSTATUS(status);
+	g_mshell.err_exit = check_last_exit(cmd);
 	ft_norm(&status);
 }
